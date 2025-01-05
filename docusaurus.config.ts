@@ -138,10 +138,10 @@ const config: Config = {
     },
     algolia: {
       // The application ID provided by Algolia
-      appId: '8Z0QV6V1YJ',
+      appId: 'TGTRZ0HV14',
       // Public API key: it is safe to commit it
-      apiKey: 'dbbbaf5883eb97883707de65857fcc3f',
-      indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
+      apiKey: 'd838c611b48e01b66c6db1a54eaaf4f9',
+      indexName: 'www_jiajiewu_top_tgtrz0hv14_pages',
       // Optional: see doc section below
       contextualSearch: true,
       // Optional: Algolia search parameters
