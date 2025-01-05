@@ -88,6 +88,17 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
+    comments: {
+      utterances: {
+        enabled: true,
+        repo: 'Wjiajie/meme-blog-comments',
+        label: '💬 comments',
+        theme: {
+          light: 'github-light',
+          dark: 'github-dark',
+        },
+      },
+    },
     navbar: {
       title: 'My Site',
       logo: {

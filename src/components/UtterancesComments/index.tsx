@@ -1,20 +1,34 @@
 import React, { useEffect, useRef } from 'react';
-import { useColorMode } from '@docusaurus/theme-common';
+import { useColorMode } from '@docusaurus/theme-common/internal';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 
 export default function UtterancesComments(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const utterancesRef = useRef<HTMLScriptElement | null>(null);
   const { colorMode } = useColorMode();
+  const { siteConfig } = useDocusaurusContext();
+  
+  const utterancesConfig = (siteConfig.themeConfig?.comments as any)?.utterances;
+
+  // 如果评论系统被禁用，返回空组件
+  if (!utterancesConfig?.enabled) {
+    return null;
+  }
 
   useEffect(() => {
     const createUtterancesEl = () => {
       const script = document.createElement('script');
       script.src = 'https://utteranc.es/client.js';
-      script.setAttribute('repo', 'Wjiajie/meme-blog-comments'); // 替换为你的 GitHub 仓库
+      script.setAttribute('repo', utterancesConfig.repo);
       script.setAttribute('issue-term', 'pathname');
-      script.setAttribute('label', '💬 comments');
-      script.setAttribute('theme', colorMode === 'dark' ? 'github-dark' : 'github-light');
+      script.setAttribute('label', utterancesConfig.label);
+      script.setAttribute(
+        'theme',
+        colorMode === 'dark' 
+          ? utterancesConfig.theme.dark 
+          : utterancesConfig.theme.light
+      );
       script.crossOrigin = 'anonymous';
       script.async = true;
       
@@ -38,7 +52,7 @@ export default function UtterancesComments(): JSX.Element {
         utterancesRef.current.remove();
       }
     };
-  }, [colorMode]);
+  }, [colorMode, utterancesConfig]);
 
   return (
     <div className={styles.commentsContainer} ref={containerRef}>
