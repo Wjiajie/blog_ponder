@@ -15,6 +15,20 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* 搜索框样式 */
+  --search-local-modal-width: 600px;
+  --search-local-modal-background: #ffffff;
+  --search-local-modal-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
+  --search-local-spacing: 12px;
+  --search-local-hit-background: #f8f9fa;
+  --search-local-hit-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
+  --search-local-hit-color: #444950;
+  --search-local-hit-height: 56px;
+  --search-local-highlight-color: var(--ifm-color-primary);
+  --search-local-muted-color: #969faf;
+  --search-local-icon-stroke-width: 1.6;
+  --search-local-hit-active-color: #ffffff;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -27,4 +41,56 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  
+  /* 暗色主题搜索样式 */
+  --search-local-modal-background: var(--ifm-background-color);
+  --search-local-modal-shadow: inset 1px 1px 0 0 #2c2e40, 0 3px 8px 0 #000309;
+  --search-local-hit-background: var(--ifm-color-emphasis-100);
+  --search-local-hit-shadow: none;
+  --search-local-hit-color: var(--ifm-font-color-base);
+  --search-local-highlight-color: var(--ifm-color-primary);
+  --search-local-muted-color: var(--ifm-color-secondary-darkest);
+}
+
+/* 搜索框样式 */
+.navbar__search {
+  padding: 0 var(--search-local-spacing);
+}
+
+.navbar__search-input {
+  transition: width 0.2s ease, background-color 0.2s ease;
+  width: 180px;
+  border-radius: 4px;
+}
+
+.navbar__search-input:focus {
+  width: 240px;
+  background-color: var(--search-local-modal-background);
+}
+
+/* 搜索结果样式 */
+.search-result-match {
+  color: var(--search-local-highlight-color);
+  font-weight: bold;
+}
+
+.search-result-item {
+  padding: var(--search-local-spacing);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: var(--search-local-highlight-color);
+  color: var(--search-local-hit-active-color);
+  transform: translateY(-1px);
+}
+
+/* 搜索快捷键提示 */
+.search-bar-shortcut {
+  background-color: var(--ifm-color-emphasis-200);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  opacity: 0.8;
 }

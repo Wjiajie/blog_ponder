@@ -63,6 +63,26 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  themes: [
+    // ... Your other themes.
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      ({
+        hashed: true,
+        language: ["zh", "en"],
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+        searchResultLimits: 8,
+        highlightSearchTermsOnTargetPage: true,
+        searchBarPosition: "right",
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+        searchContextByPaths: ["docs", "blog"],
+      }),
+    ],
+  ],
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -136,34 +156,6 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    algolia: {
-      // The application ID provided by Algolia
-      appId: 'TGTRZ0HV14',
-      // Public API key: it is safe to commit it
-      apiKey: 'd838c611b48e01b66c6db1a54eaaf4f9',
-      indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
-      // Optional: see doc section below
-      contextualSearch: true,
-      // Optional: Algolia search parameters
-      searchParameters: {},
-      // Optional: path for search page that enabled by default (`false` to disable it)
-      searchPagePath: 'search',
-      //... other Algolia params
-    },
-    // algolia: {
-    //   appId: '8Z0QV6V1YJ',
-    //   apiKey: '77f7a693a92b14d4a9b21aeb12aa6fb6',
-    //   indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
-    //   contextualSearch: false,
-    //   searchParameters: {
-    //     facetFilters: [],
-    //     responseFields: ['*'],
-    //     attributesToRetrieve: ['*'],
-    //     getRankingInfo: true
-    //   },
-    //   searchPagePath: 'search',
-    //   placeholder: '搜索全站内容',
-    // },
   } satisfies Preset.ThemeConfig,
 };
 
