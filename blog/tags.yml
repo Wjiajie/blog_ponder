@@ -17,3 +17,19 @@ hola:
   label: Hola
   permalink: /hola
   description: Hola tag description
+
+markdown:
+  label: Markdown
+  description: Markdown 语法和使用技巧
+
+tutorial:
+  label: 教程
+  description: 详细的指导性文章
+
+documentation:
+  label: 文档
+  description: 文档编写和最佳实践
+
+greetings:
+  label: 问候
+  description: 问候和欢迎文章
