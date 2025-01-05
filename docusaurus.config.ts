@@ -142,7 +142,7 @@ const config: Config = {
       indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
       contextualSearch: true,
       searchPagePath: 'search',
-      placeholder: '搜索文档',
+      placeholder: '搜索全站内容',
       insights: true,
     },
   } satisfies Preset.ThemeConfig,
