@@ -141,7 +141,7 @@ const config: Config = {
       appId: 'TGTRZ0HV14',
       // Public API key: it is safe to commit it
       apiKey: 'd838c611b48e01b66c6db1a54eaaf4f9',
-      indexName: 'www_jiajiewu_top_tgtrz0hv14_pages',
+      indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
       // Optional: see doc section below
       contextualSearch: true,
       // Optional: Algolia search parameters
