@@ -65,6 +65,7 @@ const config: Config = {
   ],
   themes: [
     // ... Your other themes.
+    '@docusaurus/theme-live-codeblock',
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */

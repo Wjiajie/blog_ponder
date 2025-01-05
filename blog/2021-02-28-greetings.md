@@ -36,3 +36,7 @@ Use this awesome feature option
 This action is dangerous
 
 :::
+
+```python
+print("Hello, World!")
+```
