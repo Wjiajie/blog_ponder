@@ -27,8 +27,8 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans'],
   },
 
   presets: [
@@ -142,6 +142,8 @@ const config: Config = {
       indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
       contextualSearch: true,
       searchPagePath: 'search',
+      placeholder: '搜索文档',
+      insights: true,
     },
   } satisfies Preset.ThemeConfig,
 };
