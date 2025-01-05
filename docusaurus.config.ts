@@ -144,6 +144,19 @@ const config: Config = {
       searchPagePath: 'search',
       placeholder: '搜索全站内容',
       insights: true,
+      searchParameters: {
+        distinct: 1,
+        attributesToRetrieve: [
+          'title',
+          'content',
+          'hierarchy',
+          'url'
+        ],
+        attributesToSnippet: ['content:50'],
+        snippetEllipsisText: '...',
+        responseFields: ['hits', 'nbHits', 'processingTimeMS'],
+        hitsPerPage: 20
+      },
     },
   } satisfies Preset.ThemeConfig,
 };
