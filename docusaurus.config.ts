@@ -63,7 +63,6 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -138,10 +137,11 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
     algolia: {
-      appId: 'YOUR_APP_ID',
-      apiKey: 'YOUR_SEARCH_API_KEY',
-      indexName: 'YOUR_INDEX_NAME',
+      appId: '8Z0QV6V1YJ',
+      apiKey: '77f7a693a92b14d4a9b21aeb12aa6fb6',
+      indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
       contextualSearch: true,
+      searchPagePath: 'search',
     },
   } satisfies Preset.ThemeConfig,
 };
