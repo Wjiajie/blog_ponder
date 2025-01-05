@@ -137,30 +137,33 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
     algolia: {
+      // The application ID provided by Algolia
       appId: '8Z0QV6V1YJ',
-      apiKey: '77f7a693a92b14d4a9b21aeb12aa6fb6',
+      // Public API key: it is safe to commit it
+      apiKey: 'dbbbaf5883eb97883707de65857fcc3f',
       indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
       // Optional: see doc section below
       contextualSearch: true,
-
-      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-      externalUrlRegex: 'external\\.com|domain\\.com',
-
-      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-      replaceSearchResultPathname: {
-        from: '/docs/', // or as RegExp: /\/docs\//
-        to: '/',
-      },
-
       // Optional: Algolia search parameters
       searchParameters: {},
-
       // Optional: path for search page that enabled by default (`false` to disable it)
       searchPagePath: 'search',
-
-      // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
-      insights: false,
+      //... other Algolia params
     },
+    // algolia: {
+    //   appId: '8Z0QV6V1YJ',
+    //   apiKey: '77f7a693a92b14d4a9b21aeb12aa6fb6',
+    //   indexName: 'www_jiajiewu_top_8z0qv6v1yj_pages',
+    //   contextualSearch: false,
+    //   searchParameters: {
+    //     facetFilters: [],
+    //     responseFields: ['*'],
+    //     attributesToRetrieve: ['*'],
+    //     getRankingInfo: true
+    //   },
+    //   searchPagePath: 'search',
+    //   placeholder: '搜索全站内容',
+    // },
   } satisfies Preset.ThemeConfig,
 };
 
