@@ -1,7 +1,7 @@
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * work well for content-first websites.
  */
 
 /* You can override the default Infima variables here. */
@@ -15,20 +15,6 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-
-  /* 搜索框样式 */
-  --search-local-modal-width: 600px;
-  --search-local-modal-background: #ffffff;
-  --search-local-modal-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
-  --search-local-spacing: 12px;
-  --search-local-hit-background: #f8f9fa;
-  --search-local-hit-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
-  --search-local-hit-color: #444950;
-  --search-local-hit-height: 56px;
-  --search-local-highlight-color: var(--ifm-color-primary);
-  --search-local-muted-color: #969faf;
-  --search-local-icon-stroke-width: 1.6;
-  --search-local-hit-active-color: #ffffff;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -41,56 +27,64 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  
-  /* 暗色主题搜索样式 */
-  --search-local-modal-background: var(--ifm-background-color);
-  --search-local-modal-shadow: inset 1px 1px 0 0 #2c2e40, 0 3px 8px 0 #000309;
-  --search-local-hit-background: var(--ifm-color-emphasis-100);
-  --search-local-hit-shadow: none;
-  --search-local-hit-color: var(--ifm-font-color-base);
-  --search-local-highlight-color: var(--ifm-color-primary);
-  --search-local-muted-color: var(--ifm-color-secondary-darkest);
 }
 
-/* 搜索框样式 */
-.navbar__search {
-  padding: 0 var(--search-local-spacing);
+/* 禅意风格的自定义样式 */
+.hero {
+  background: linear-gradient(135deg, rgba(46, 133, 85, 0.9), rgba(37, 194, 160, 0.9));
+  position: relative;
+  overflow: hidden;
 }
 
-.navbar__search-input {
-  transition: width 0.2s ease, background-color 0.2s ease;
-  width: 180px;
-  border-radius: 4px;
+.hero__title {
+  font-size: 4rem;
+  font-weight: 300;
+  letter-spacing: 4px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
-.navbar__search-input:focus {
-  width: 240px;
-  background-color: var(--search-local-modal-background);
+.hero__subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
 }
 
-/* 搜索结果样式 */
-.search-result-match {
-  color: var(--search-local-highlight-color);
-  font-weight: bold;
+.button.button--secondary {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.search-result-item {
-  padding: var(--search-local-spacing);
-  border-radius: 4px;
-  transition: all 0.2s ease;
+.button.button--secondary:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.search-result-item:hover {
-  background-color: var(--search-local-highlight-color);
-  color: var(--search-local-hit-active-color);
-  transform: translateY(-1px);
+/* 特性部分的样式 */
+.features {
+  padding: 4rem 0;
+  background: rgba(246, 247, 248, 0.7);
 }
 
-/* 搜索快捷键提示 */
-.search-bar-shortcut {
-  background-color: var(--ifm-color-emphasis-200);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 0.8em;
-  opacity: 0.8;
+[data-theme='dark'] .features {
+  background: rgba(27, 27, 29, 0.7);
+}
+
+.featureImage {
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.featureImage:hover {
+  opacity: 1;
+  transform: scale(1.05);
 }
