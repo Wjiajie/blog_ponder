@@ -29,3 +29,22 @@
 .col:hover {
   transform: translateY(-5px);
 }
+
+/* 确保每列有合适的间距 */
+:global(.col) {
+  padding: 1rem;
+}
+
+/* 在小屏幕上调整布局 */
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 2rem 0;
+  }
+  
+  /* 在小屏幕上每个列占满宽度 */
+  :global(.col.col--4) {
+    width: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}

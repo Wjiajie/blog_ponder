@@ -13,6 +13,8 @@ authors:
 tags: [greetings]
 description: My document description
 id: my-doc-id
+views: 10
+date: 2021-02-28
 ---
 
 Congratulations, you have made your first post!
