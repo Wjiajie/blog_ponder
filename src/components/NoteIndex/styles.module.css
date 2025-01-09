@@ -27,11 +27,13 @@
 
 .noteLink {
   text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .noteLink:hover {
+  transform: translateX(5px);
+  color: var(--ifm-color-primary-dark);
   text-decoration: none;
-  opacity: 0.8;
 }
 
 /* 缩进级别和样式 */
