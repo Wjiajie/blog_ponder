@@ -65,7 +65,7 @@
 }
 
 .indent-level-2 {
-  margin-left: 1.5rem;
+  margin-left: 2rem;
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--ifm-color-primary-darker);
@@ -95,7 +95,7 @@
 }
 
 .indent-level-3 {
-  margin-left: 3rem;
+  margin-left: 4rem;
   font-size: 1.4rem;
   font-weight: 500;
   color: var(--ifm-color-primary-light);
@@ -125,7 +125,7 @@
 }
 
 .indent-level-4 {
-  margin-left: 4.5rem;
+  margin-left: 6rem;
   font-size: 1.3rem;
   font-weight: 400;
   color: var(--ifm-color-primary-lighter);
@@ -155,7 +155,7 @@
 }
 
 .indent-level-5 {
-  margin-left: 6rem;
+  margin-left: 8rem;
   font-size: 1.2rem;
   font-weight: 400;
   color: var(--ifm-color-primary-lightest);
@@ -185,7 +185,7 @@
 }
 
 .indent-level-6 {
-  margin-left: 7.5rem;
+  margin-left: 10rem;
   font-size: 1.1rem;
   font-weight: 400;
   color: var(--ifm-color-emphasis-400);

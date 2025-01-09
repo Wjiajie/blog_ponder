@@ -7,7 +7,7 @@ export default function HomepageFeatures(): JSX.Element {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          <div className="col col--8 col--offset-2">
+          <div className="col col--8 col--offset-4">
             <NoteIndex />
           </div>
         </div>
