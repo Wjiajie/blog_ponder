@@ -33,3 +33,15 @@ documentation:
 greetings:
   label: 问候
   description: 问候和欢迎文章
+
+译文:
+  label: 译文
+  description: 翻译的文章和内容
+
+设计:
+  label: 设计
+  description: 关于设计、用户体验和创意的文章
+
+guide:
+  label: 指南
+  description: 使用指南和教程文档
