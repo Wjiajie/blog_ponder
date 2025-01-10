@@ -171,7 +171,7 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
   customFields: {
     isProduction: process.env.NODE_ENV === 'production',
-    githubToken: process.env.GITHUB_TOKEN,
+    githubToken: process.env.GITHUB_TOKEN || '',
   },
 };
 

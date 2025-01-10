@@ -124,6 +124,12 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
         
         try {
           if (isProduction) {
+            // 检查 GitHub Token
+            if (!githubToken) {
+              showToast('错误：GitHub Token 未配置，请检查环境变量');
+              return;
+            }
+            
             // 生产环境：使用 GitHub API
             await createOrUpdateFile(`blog/${newSlug}.md`, updatedContent, githubToken);
             showToast('文章保存成功！即将跳转到文章页面...');
