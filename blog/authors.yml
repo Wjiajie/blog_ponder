@@ -1,9 +1,24 @@
 jiajiewu:
   name: Jiajie Wu
-  title: 一名水手
+  title: 一名崭新水手
   url: https://github.com/Wjiajie
   image_url: https://github.com/Wjiajie.png
   email: jiajiewu233@gmail.com
   page: true
+  description: |
+    一名图形图像工程师，对编码，软件构建，心智模型感兴趣。长期爱好是阅读和写作。
   socials:
     github: Wjiajie
+    website: https://jiajiewu.top
+
+paulgraham:
+  name: Paul Graham
+  title: Y Combinator 创始人
+  url: http://www.paulgraham.com
+  image_url: https://s2.loli.net/2025/01/10/Yw7xtXLPQJBRKnm.jpg
+  page: true
+  description: |
+    保罗·格雷厄姆（Paul Graham）是著名程序员、风险投资家、博客作者。他是 Viaweb（后被雅虎收购）的联合创始人，也是风险投资公司 Y Combinator 的联合创始人。
+    他的文章涉及编程语言、创业、投资等多个领域，著有《黑客与画家》、《ANSI Common Lisp》等书籍。他的博客文章被广泛传播，对科技创业领域产生了深远影响。
+  socials:
+    website: http://www.paulgraham.com
