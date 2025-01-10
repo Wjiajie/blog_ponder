@@ -3,8 +3,9 @@ slug: markdown-syntax-guide
 title: Markdown 语法指南
 authors: [jiajiewu]
 tags: [markdown, guide]
-date: 2025-01-05
-views: 80
+keywords: ["markdown", "docusaurus"]
+description: "Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的 HTML 文档。本文将系统地总结 Markdown 的各种语法用法，帮助你更好地掌握这个强大的文档编写工具。"
+draft: false
 ---
 
 Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的 HTML 文档。本文将系统地总结 Markdown 的各种语法用法，帮助你更好地掌握这个强大的文档编写工具。
