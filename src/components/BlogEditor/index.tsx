@@ -4,6 +4,7 @@ import 'vditor/dist/index.css';
 import styles from './styles.module.css';
 import { useColorMode } from '@docusaurus/theme-common';
 import { useHistory } from '@docusaurus/router';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 interface BlogEditorProps {
   onSave: (content: string) => void;
@@ -46,16 +47,13 @@ function showToast(message: string, duration = 2000) {
   }, duration);
 }
 
-// 判断是否是生产环境
-const isProduction = process.env.NODE_ENV === 'production';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO_OWNER = 'Wjiajie';
 const REPO_NAME = 'blog_ponder';
 const BRANCH = 'main';
 
 // GitHub API 相关函数
-async function createOrUpdateFile(path: string, content: string) {
-  if (!GITHUB_TOKEN) {
+async function createOrUpdateFile(path: string, content: string, token: string) {
+  if (!token) {
     throw new Error('GitHub token is not configured');
   }
 
@@ -66,7 +64,7 @@ async function createOrUpdateFile(path: string, content: string) {
       `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`,
       {
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
+          Authorization: `token ${token}`,
           Accept: 'application/vnd.github.v3+json',
         },
       }
@@ -85,7 +83,7 @@ async function createOrUpdateFile(path: string, content: string) {
     {
       method: 'PUT',
       headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
+        Authorization: `token ${token}`,
         Accept: 'application/vnd.github.v3+json',
         'Content-Type': 'application/json',
       },
@@ -109,6 +107,9 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
   const editorRef = useRef<Vditor | null>(null);
   const { colorMode } = useColorMode();
   const history = useHistory();
+  const {siteConfig} = useDocusaurusContext();
+  const isProduction = siteConfig.customFields?.isProduction as boolean;
+  const githubToken = siteConfig.customFields?.githubToken as string;
 
   const handleSave = async () => {
     if (editorRef.current) {
@@ -124,7 +125,7 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
         try {
           if (isProduction) {
             // 生产环境：使用 GitHub API
-            await createOrUpdateFile(`blog/${newSlug}.md`, updatedContent);
+            await createOrUpdateFile(`blog/${newSlug}.md`, updatedContent, githubToken);
             showToast('文章保存成功！即将跳转到文章页面...');
             setTimeout(() => {
               window.location.href = `/blog/${newSlug}`;

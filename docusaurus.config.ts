@@ -169,6 +169,10 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  customFields: {
+    isProduction: process.env.NODE_ENV === 'production',
+    githubToken: process.env.GITHUB_TOKEN,
+  },
 };
 
 export default config;
