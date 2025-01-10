@@ -46,6 +46,65 @@ function showToast(message: string, duration = 2000) {
   }, duration);
 }
 
+// 判断是否是生产环境
+const isProduction = process.env.NODE_ENV === 'production';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const REPO_OWNER = 'Wjiajie';
+const REPO_NAME = 'blog_ponder';
+const BRANCH = 'main';
+
+// GitHub API 相关函数
+async function createOrUpdateFile(path: string, content: string) {
+  if (!GITHUB_TOKEN) {
+    throw new Error('GitHub token is not configured');
+  }
+
+  // 首先获取文件的 SHA（如果文件存在）
+  let fileSha = '';
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`,
+      {
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    );
+    if (response.ok) {
+      const data = await response.json();
+      fileSha = data.sha;
+    }
+  } catch (error) {
+    console.log('File does not exist yet');
+  }
+
+  // 创建或更新文件
+  const response = await fetch(
+    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`,
+    {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: 'Update blog post via editor',
+        content: Buffer.from(content).toString('base64'),
+        branch: BRANCH,
+        ...(fileSha && { sha: fileSha }),
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to save file to GitHub');
+  }
+
+  return response.json();
+}
+
 export default function BlogEditor({ onSave }: BlogEditorProps) {
   const editorRef = useRef<Vditor | null>(null);
   const { colorMode } = useColorMode();
@@ -63,22 +122,31 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
         const updatedContent = content.replace(/slug:\s*.*/, `slug: ${newSlug}`);
         
         try {
-          const response = await fetch('http://localhost:3001/api/save-blog', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ content: updatedContent }),
-          });
-          
-          if (response.ok) {
+          if (isProduction) {
+            // 生产环境：使用 GitHub API
+            await createOrUpdateFile(`blog/${newSlug}.md`, updatedContent);
             showToast('文章保存成功！即将跳转到文章页面...');
-            // 延迟 2 秒后跳转，给 Docusaurus 时间处理新文件
             setTimeout(() => {
               window.location.href = `/blog/${newSlug}`;
             }, 2000);
           } else {
-            showToast('保存失败，请重试');
+            // 开发环境：使用本地服务器
+            const response = await fetch('http://localhost:3001/api/save-blog', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ content: updatedContent }),
+            });
+            
+            if (response.ok) {
+              showToast('文章保存成功！即将跳转到文章页面...');
+              setTimeout(() => {
+                window.location.href = `/blog/${newSlug}`;
+              }, 2000);
+            } else {
+              showToast('保存失败，请重试');
+            }
           }
         } catch (error) {
           console.error('Error saving blog post:', error);
