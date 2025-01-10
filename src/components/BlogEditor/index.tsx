@@ -123,9 +123,17 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
         const updatedContent = content.replace(/slug:\s*.*/, `slug: ${newSlug}`);
         
         try {
+          console.log('Environment:', {
+            isProduction,
+            githubToken: githubToken ? '存在' : '未设置',
+            NODE_ENV: process.env.NODE_ENV
+          });
+          
           if (isProduction) {
+            console.log('正在使用生产环境保存逻辑');
             // 检查 GitHub Token
             if (!githubToken) {
+              console.log('GitHub Token 未配置');
               showToast('错误：GitHub Token 未配置，请检查环境变量');
               return;
             }
