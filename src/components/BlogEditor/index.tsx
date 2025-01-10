@@ -89,7 +89,7 @@ async function createOrUpdateFile(path: string, content: string, token: string) 
       },
       body: JSON.stringify({
         message: 'Update blog post via editor',
-        content: Buffer.from(content).toString('base64'),
+        content: btoa(unescape(encodeURIComponent(content))),
         branch: BRANCH,
         ...(fileSha && { sha: fileSha }),
       }),
@@ -97,7 +97,9 @@ async function createOrUpdateFile(path: string, content: string, token: string) 
   );
 
   if (!response.ok) {
-    throw new Error('Failed to save file to GitHub');
+    const errorData = await response.json();
+    console.error('GitHub API Error:', errorData);
+    throw new Error(`Failed to save file to GitHub: ${errorData.message}`);
   }
 
   return response.json();
