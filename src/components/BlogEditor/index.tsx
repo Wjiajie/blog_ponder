@@ -1,0 +1,171 @@
+import React, { useEffect, useRef } from 'react';
+import Vditor from 'vditor';
+import 'vditor/dist/index.css';
+import styles from './styles.module.css';
+import { useColorMode } from '@docusaurus/theme-common';
+import { useHistory } from '@docusaurus/router';
+
+interface BlogEditorProps {
+  onSave: (content: string) => void;
+}
+
+const DEFAULT_CONTENT = `---
+title: 
+slug: 
+authors: [jiajiewu]
+tags: []
+keywords: ["blog"]
+description: ""
+draft: true
+---
+
+`;
+
+// 创建一个简单的 Toast 组件
+function showToast(message: string, duration = 2000) {
+  const toast = document.createElement('div');
+  toast.style.position = 'fixed';
+  toast.style.top = '20px';
+  toast.style.left = '50%';
+  toast.style.transform = 'translateX(-50%)';
+  toast.style.backgroundColor = '#333';
+  toast.style.color = 'white';
+  toast.style.padding = '10px 20px';
+  toast.style.borderRadius = '4px';
+  toast.style.zIndex = '10000';
+  toast.textContent = message;
+  
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => {
+      document.body.removeChild(toast);
+    }, 500);
+  }, duration);
+}
+
+export default function BlogEditor({ onSave }: BlogEditorProps) {
+  const editorRef = useRef<Vditor | null>(null);
+  const { colorMode } = useColorMode();
+  const history = useHistory();
+
+  const handleSave = async () => {
+    if (editorRef.current) {
+      const content = editorRef.current.getValue();
+      const titleMatch = content.match(/title:\s*(.+)/);
+      if (titleMatch) {
+        const title = titleMatch[1].trim();
+        const date = new Date().toISOString().split('T')[0];
+        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const newSlug = `${date}-${slug}`;
+        const updatedContent = content.replace(/slug:\s*.*/, `slug: ${newSlug}`);
+        
+        try {
+          const response = await fetch('http://localhost:3001/api/save-blog', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content: updatedContent }),
+          });
+          
+          if (response.ok) {
+            showToast('文章保存成功！即将跳转到文章页面...');
+            // 延迟 2 秒后跳转，给 Docusaurus 时间处理新文件
+            setTimeout(() => {
+              window.location.href = `/blog/${newSlug}`;
+            }, 2000);
+          } else {
+            showToast('保存失败，请重试');
+          }
+        } catch (error) {
+          console.error('Error saving blog post:', error);
+          showToast('保存失败，请重试');
+        }
+      } else {
+        showToast('请先输入文章标题');
+      }
+    }
+  };
+
+  useEffect(() => {
+    const initEditor = async () => {
+      if (!editorRef.current) {
+        editorRef.current = new Vditor('vditor', {
+          height: '100%',
+          theme: colorMode === 'dark' ? 'dark' : 'classic',
+          mode: 'wysiwyg',
+          value: DEFAULT_CONTENT,
+          placeholder: '开始写作...',
+          cache: {
+            enable: true,
+          },
+          toolbar: [
+            'emoji',
+            'headings',
+            'bold',
+            'italic',
+            'strike',
+            'link',
+            '|',
+            'list',
+            'ordered-list',
+            'check',
+            'outdent',
+            'indent',
+            '|',
+            'quote',
+            'line',
+            'code',
+            'inline-code',
+            'insert-before',
+            'insert-after',
+            '|',
+            'upload',
+            'table',
+            '|',
+            'undo',
+            'redo',
+            '|',
+            'fullscreen',
+            'preview',
+            'outline',
+            'export',
+            {
+              name: 'save',
+              tip: '保存',
+              icon: '<svg t="1704899549426" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4231" width="16" height="16"><path d="M960 166.4L857.6 64H160c-52.8 0-96 43.2-96 96v704c0 52.8 43.2 96 96 96h704c52.8 0 96-43.2 96-96V166.4zM512 832c-105.6 0-192-86.4-192-192s86.4-192 192-192 192 86.4 192 192-86.4 192-192 192z m192-512H192V192h512v128z" p-id="4232"></path></svg>',
+              click: handleSave,
+            },
+          ],
+          after: () => {
+            console.log('Vditor initialized');
+            editorRef.current?.focus();
+          },
+          preview: {
+            markdown: {
+              toc: true,
+              mark: true,
+              footnotes: true,
+              autoSpace: true,
+            },
+          },
+        });
+      }
+    };
+
+    initEditor();
+
+    return () => {
+      editorRef.current?.destroy();
+    };
+  }, [colorMode]);
+
+  return (
+    <div className={styles.editorContainer}>
+      <div id="vditor" className={styles.editor} />
+    </div>
+  );
+} 

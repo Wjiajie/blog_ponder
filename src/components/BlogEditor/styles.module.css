@@ -1,0 +1,22 @@
+.editorContainer {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: calc(100vh - 60px);
+}
+
+.editor {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  height: 100%;
+}
+
+/* 适配暗色主题 */
+[data-theme='dark'] .editor {
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+/* 确保 Vditor 编辑器在容器中正确显示 */
+:global(.vditor) {
+  height: 100% !important;
+} 

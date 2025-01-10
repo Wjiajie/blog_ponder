@@ -12,7 +12,9 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "server": "node server/index.js",
+    "dev": "concurrently \"npm run start\" \"npm run server\""
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",
@@ -23,6 +25,8 @@
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "hast-util-is-element": "^3.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
@@ -31,13 +35,16 @@
     "react-slick": "^0.30.3",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "slugify": "^1.6.6",
+    "vditor": "^3.10.8"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
     "@types/node": "^22.10.5",
+    "concurrently": "^9.1.2",
     "typescript": "~5.6.2"
   },
   "browserslist": {
