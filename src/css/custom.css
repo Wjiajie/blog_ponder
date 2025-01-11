@@ -108,15 +108,23 @@ html body .navbar {
   transform: translateY(0) !important;
   transition: var(--navbar-transition) !important;
   z-index: var(--ifm-z-index-fixed) !important;
-  background-color: var(--ifm-background-color) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border-bottom: 1px solid var(--ifm-color-emphasis-100) !important;
 }
 
-[data-theme='dark'] html body .navbar {
-  background-color: rgba(36, 37, 38, 0.8) !important;
-  border-bottom-color: var(--ifm-color-emphasis-200) !important;
+/* 亮色模式下的导航栏样式 */
+html[data-theme='light'] body .navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* 暗色模式下的导航栏和侧边栏样式 - 提高优先级 */
+html[data-theme='dark'] body .navbar,
+html[data-theme='dark'] body .navbar-sidebar {
+  background-color: #1b1b1d !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* 调整导航栏内部元素的布局 */
@@ -194,7 +202,7 @@ html body .navbar-hidden + #__docusaurus main {
   font-weight: 500;
 }
 
-/* 移动端侧边栏样式 */
+/* 移动端侧边栏基础样式 */
 @media screen and (max-width: 996px) {
   .navbar-sidebar {
     position: fixed;
@@ -209,6 +217,16 @@ html body .navbar-hidden + #__docusaurus main {
     z-index: var(--ifm-z-index-fixed);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* 亮色模式下的侧边栏样式 */
+  html[data-theme='light'] body .navbar-sidebar {
+    background-color: #ffffff !important;
+  }
+
+  /* 暗色模式下的侧边栏样式 */
+  html[data-theme='dark'] body .navbar-sidebar {
+    background-color: #1b1b1d !important;
   }
 
   .navbar-sidebar__backdrop {
@@ -264,17 +282,40 @@ html body .homepage {
 
 /* 主页背景图样式 */
 .homepage .hero {
-  min-height: 100vh;  /* 设置最小高度为视口高度 */
-  margin-top: calc(-1 * var(--ifm-navbar-height));  /* 抵消导航栏的高度 */
-  padding-top: calc(var(--ifm-navbar-height) + 2rem);  /* 为内容添加适当的顶部内边距 */
+  min-height: 100vh;
+  margin-top: calc(-1 * var(--ifm-navbar-height));
+  padding-top: calc(var(--ifm-navbar-height) + 2rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url('https://s2.loli.net/2025/01/11/FmGaWUwTCOlNLXg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+}
+
+/* 添加暗色遮罩，提高文字可读性 */
+.homepage .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);  /* 轻微的暗色遮罩 */
+  z-index: 1;
+}
+
+/* 确保内容在遮罩层之上 */
+.homepage .hero__title,
+.homepage .hero__subtitle,
+.homepage .hero .button {
+  position: relative;
+  z-index: 2;
+  color: white;  /* 确保文字在背景图上清晰可见 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);  /* 添加文字阴影提高可读性 */
 }
 
 /* 主页内容样式 */
@@ -295,4 +336,46 @@ html body .homepage {
 /* 确保主页的其他部分也正确显示 */
 .homepage main {
   padding-top: 0;
+}
+
+/* 暗色模式下的顶栏和侧边栏样式 */
+:global(html[data-theme='dark']) :global(.navbar),
+:global(html[data-theme='dark']) :global(.navbar-sidebar) {
+  background: #1b1b1d !important;  /* 完全不透明的深色背景 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 暗色模式下的侧边栏背景遮罩 */
+:global(html[data-theme='dark']) :global(.navbar-sidebar__backdrop) {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 暗色模式下的顶栏和侧边栏文字颜色 */
+:global(html[data-theme='dark']) :global(.navbar__brand),
+:global(html[data-theme='dark']) :global(.navbar__link),
+:global(html[data-theme='dark']) :global(.navbar__toggle),
+:global(html[data-theme='dark']) :global(.navbar-sidebar__brand),
+:global(html[data-theme='dark']) :global(.clean-btn),
+:global(html[data-theme='dark']) :global(.navbar-sidebar__close) {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* 暗色模式下的搜索框样式 */
+:global(html[data-theme='dark']) :global(.navbar__search-input) {
+  color: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+:global(html[data-theme='dark']) :global(.navbar__search-input::placeholder) {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 暗色模式下的导航项悬停效果 */
+:global(html[data-theme='dark']) :global(.navbar__link:hover),
+:global(html[data-theme='dark']) :global(.navbar__brand:hover),
+:global(html[data-theme='dark']) :global(.clean-btn:hover) {
+  color: var(--ifm-color-primary-lighter) !important;
+  opacity: 1;
 }
