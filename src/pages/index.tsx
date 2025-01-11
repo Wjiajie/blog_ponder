@@ -1,42 +1,24 @@
 import React from 'react';
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import Heading from '@theme/Heading';
-
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/blog">
-            开始阅读 ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 export default function Home(): JSX.Element {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-      </main>
+      noFooter={true}
+      description="A simple blog for thoughts and ideas">
+      <div className={styles.pageContainer}>
+        <main className={styles.heroBanner}>
+          <h1 className={styles.title}>ponder</h1>
+          <p className={styles.subtitle}>keep thinking, keep simple.</p>
+          <Link
+            to="/blog"
+            className={styles.enterButton}>
+            Enter
+          </Link>
+        </main>
+      </div>
     </Layout>
   );
 }
