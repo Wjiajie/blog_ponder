@@ -22,8 +22,8 @@ draft: true
 
 `;
 
-// 创建一个简单的 Toast 组件
-function showToast(message: string, duration = 2000) {
+// 创建一个带链接的 Toast 组件
+function showToastWithLink(message: string, link?: string, duration = 5000) {
   const toast = document.createElement('div');
   toast.style.position = 'fixed';
   toast.style.top = '20px';
@@ -31,10 +31,27 @@ function showToast(message: string, duration = 2000) {
   toast.style.transform = 'translateX(-50%)';
   toast.style.backgroundColor = '#333';
   toast.style.color = 'white';
-  toast.style.padding = '10px 20px';
+  toast.style.padding = '15px 20px';
   toast.style.borderRadius = '4px';
   toast.style.zIndex = '10000';
-  toast.textContent = message;
+  toast.style.display = 'flex';
+  toast.style.flexDirection = 'column';
+  toast.style.alignItems = 'center';
+  toast.style.gap = '10px';
+  
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  toast.appendChild(messageDiv);
+  
+  if (link) {
+    const linkDiv = document.createElement('a');
+    linkDiv.href = link;
+    linkDiv.textContent = '点击查看博客列表';
+    linkDiv.style.color = '#4CAF50';
+    linkDiv.style.textDecoration = 'underline';
+    linkDiv.style.cursor = 'pointer';
+    toast.appendChild(linkDiv);
+  }
   
   document.body.appendChild(toast);
   
@@ -116,61 +133,74 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
   const handleSave = async () => {
     if (editorRef.current) {
       const content = editorRef.current.getValue();
-      const titleMatch = content.match(/title:\s*(.+)/);
-      if (titleMatch) {
-        const title = titleMatch[1].trim();
-        const date = new Date().toISOString().split('T')[0];
-        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        const newSlug = `${date}-${slug}`;
-        const updatedContent = content.replace(/slug:\s*.*/, `slug: ${newSlug}`);
+      
+      // 首先解析整个 frontmatter
+      const frontmatterMatch = content.match(/^---([\s\S]*?)---/);
+      if (!frontmatterMatch) {
+        showToastWithLink('无效的文章格式，请确保包含 frontmatter');
+        return;
+      }
+
+      const frontmatter = frontmatterMatch[1];
+      const titleMatch = frontmatter.match(/\ntitle:\s*(.+)/);
+      const slugLine = frontmatter.split('\n').find(line => line.trim().startsWith('slug:'));
+      
+      if (!titleMatch) {
+        showToastWithLink('请先输入文章标题');
+        return;
+      }
+
+      const date = new Date().toISOString().split('T')[0];
+      
+      // 从 slug 行中提取值，如果没有或为空则使用 undefined
+      const currentSlug = slugLine 
+        ? slugLine.replace(/^slug:\s*/, '').trim() 
+        : '';
+      const fileSlug = currentSlug || 'undefined';
+      const fileName = `${date}-${fileSlug}.md`;
+
+      // 更新文章内容中的 slug，确保包含日期
+      const newSlug = `${date}-${fileSlug}`;
+      const updatedContent = content.replace(
+        /^(slug:\s*).*$/m,
+        `slug: ${newSlug}`
+      );
+      
+      try {
+        console.log('Environment:', {
+          isProduction,
+          githubToken: githubToken ? '存在' : '未设置',
+          NODE_ENV: process.env.NODE_ENV
+        });
         
-        try {
-          console.log('Environment:', {
-            isProduction,
-            githubToken: githubToken ? '存在' : '未设置',
-            NODE_ENV: process.env.NODE_ENV
+        if (isProduction) {
+          console.log('正在使用生产环境保存逻辑');
+          if (!githubToken) {
+            console.log('GitHub Token 未配置');
+            showToastWithLink('错误：GitHub Token 未配置，请检查环境变量');
+            return;
+          }
+          
+          await createOrUpdateFile(`blog/${fileName}`, updatedContent, githubToken);
+          showToastWithLink('✨ 文章保存成功！', '/blog');
+        } else {
+          const response = await fetch('http://localhost:3001/api/save-blog', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content: updatedContent }),
           });
           
-          if (isProduction) {
-            console.log('正在使用生产环境保存逻辑');
-            // 检查 GitHub Token
-            if (!githubToken) {
-              console.log('GitHub Token 未配置');
-              showToast('错误：GitHub Token 未配置，请检查环境变量');
-              return;
-            }
-            
-            // 生产环境：使用 GitHub API
-            await createOrUpdateFile(`blog/${newSlug}.md`, updatedContent, githubToken);
-            showToast('文章保存成功！即将跳转到文章页面...');
-            setTimeout(() => {
-              window.location.href = `/blog/${newSlug}`;
-            }, 2000);
+          if (response.ok) {
+            showToastWithLink('✨ 文章保存成功！', '/blog');
           } else {
-            // 开发环境：使用本地服务器
-            const response = await fetch('http://localhost:3001/api/save-blog', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ content: updatedContent }),
-            });
-            
-            if (response.ok) {
-              showToast('文章保存成功！即将跳转到文章页面...');
-              setTimeout(() => {
-                window.location.href = `/blog/${newSlug}`;
-              }, 2000);
-            } else {
-              showToast('保存失败，请重试');
-            }
+            showToastWithLink('保存失败，请重试');
           }
-        } catch (error) {
-          console.error('Error saving blog post:', error);
-          showToast('保存失败，请重试');
         }
-      } else {
-        showToast('请先输入文章标题');
+      } catch (error) {
+        console.error('Error saving blog post:', error);
+        showToastWithLink('保存失败，请重试');
       }
     }
   };
