@@ -175,6 +175,7 @@ const config: Config = {
     githubToken: process.env.GITHUB_TOKEN || '',
     editorPassword: process.env.EDITOR_PASSWORD,
   },
+  staticDirectories: ['static'],
 };
 
 export default config;
