@@ -16,6 +16,7 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ifm-navbar-height: 4rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -93,6 +94,7 @@
 /* 导航栏基础样式 */
 :root {
   --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ifm-navbar-height: 4rem;
 }
 
 /* 提高选择器优先级 */
@@ -102,9 +104,42 @@ html body .navbar {
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
+  height: var(--ifm-navbar-height) !important;
   transform: translateY(0) !important;
   transition: var(--navbar-transition) !important;
   z-index: var(--ifm-z-index-fixed) !important;
+  background-color: var(--ifm-background-color) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100) !important;
+}
+
+[data-theme='dark'] html body .navbar {
+  background-color: rgba(36, 37, 38, 0.8) !important;
+  border-bottom-color: var(--ifm-color-emphasis-200) !important;
+}
+
+/* 调整导航栏内部元素的布局 */
+html body .navbar__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+  width: 100%;
+}
+
+html body .navbar__items {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+html body .navbar-sidebar__brand {
+  height: var(--ifm-navbar-height);
+  display: flex;
+  align-items: center;
 }
 
 /* 提高选择器优先级 */
@@ -112,9 +147,21 @@ html body .navbar.navbar-hidden {
   transform: translateY(-100%) !important;
 }
 
-/* 为内容添加顶部内边距，避免被固定导航栏遮挡 */
-main {
+/* 为内容添加顶部内边距和过渡效果 */
+html body #__docusaurus {
   padding-top: var(--ifm-navbar-height);
+}
+
+/* 内容区域动态调整 */
+html body main {
+  transition: transform var(--navbar-transition);
+  will-change: transform;
+  transform: translateY(0);
+}
+
+/* 当导航栏隐藏时，内容区域上移 */
+html body .navbar-hidden + #__docusaurus main {
+  transform: translateY(calc(-1 * var(--ifm-navbar-height)));
 }
 
 /* 全局页脚样式 */
@@ -145,4 +192,107 @@ main {
   color: var(--ifm-footer-copyright-color);
   opacity: 0.9;
   font-weight: 500;
+}
+
+/* 移动端侧边栏样式 */
+@media screen and (max-width: 996px) {
+  .navbar-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 300px;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+    z-index: var(--ifm-z-index-fixed);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navbar-sidebar__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: calc(var(--ifm-z-index-fixed) - 1);
+  }
+
+  .navbar-sidebar__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .navbar-sidebar__items {
+    padding: 0.5rem;
+    padding-top: 3.5rem;
+  }
+
+  .navbar-sidebar .menu__list {
+    margin-top: 0;
+  }
+
+  .navbar-sidebar .menu__link {
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* 确保内容不会被顶栏遮挡 */
+  html body #__docusaurus {
+    padding-top: var(--ifm-navbar-height);
+  }
+  
+  /* 侧边栏内容位置调整 */
+  .navbar-sidebar {
+    padding-top: var(--ifm-navbar-height);
+    background-color: var(--ifm-background-color);
+  }
+}
+
+/* 主页样式 */
+html body .homepage {
+  padding-top: 0 !important;  /* 移除顶部内边距 */
+}
+
+/* 主页背景图样式 */
+.homepage .hero {
+  min-height: 100vh;  /* 设置最小高度为视口高度 */
+  margin-top: calc(-1 * var(--ifm-navbar-height));  /* 抵消导航栏的高度 */
+  padding-top: calc(var(--ifm-navbar-height) + 2rem);  /* 为内容添加适当的顶部内边距 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* 主页内容样式 */
+.homepage .hero__title {
+  font-size: clamp(2.5rem, 8vw, 4rem);  /* 响应式字体大小 */
+  text-align: center;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+.homepage .hero__subtitle {
+  font-size: clamp(1rem, 4vw, 1.5rem);  /* 响应式字体大小 */
+  text-align: center;
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+
+/* 确保主页的其他部分也正确显示 */
+.homepage main {
+  padding-top: 0;
 }
