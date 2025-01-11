@@ -120,7 +120,7 @@ const config: Config = {
       },
       items: [
         {to: '/blog', label: 'Blog', position: 'left'},
-        {to: '/editor', label: '写文章', position: 'left'},
+        {to: '/editor', label: 'Write', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',

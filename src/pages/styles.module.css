@@ -1,0 +1,51 @@
+.passwordContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.passwordForm {
+  background: var(--ifm-background-surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.passwordForm h2 {
+  margin-bottom: 1.5rem;
+  color: var(--ifm-heading-color);
+}
+
+.passwordInput {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.submitButton {
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background: var(--ifm-color-primary-darker);
+}
+
+.errorMessage {
+  color: #ff4d4f;
+  margin-bottom: 1rem;
+} 
