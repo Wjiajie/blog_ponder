@@ -1,17 +1,16 @@
 import React from 'react';
+import clsx from 'clsx';
 import styles from './styles.module.css';
 import NoteIndex from '../NoteIndex';
 
-export default function HomepageFeatures(): JSX.Element {
+export default function BlogPageIndex(): JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          <div className="col col--8 col--offset-4">
-            <NoteIndex />
-          </div>
+          <NoteIndex />
         </div>
       </div>
     </section>
   );
-}
+} 

@@ -119,6 +119,7 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
+        {to: '/index', label: 'Index', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/editor', label: 'Write', position: 'left'},
         {
