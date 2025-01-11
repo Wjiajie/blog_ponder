@@ -48,4 +48,40 @@
 .errorMessage {
   color: #ff4d4f;
   margin-bottom: 1rem;
+}
+
+.inputWrapper {
+  margin-bottom: 1.5rem;
+}
+
+.errorCard {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+[data-theme='dark'] .errorCard {
+  background-color: #2a1f1f;
+  border-color: #842c2c;
+}
+
+.errorIcon {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+.errorText {
+  color: #cf1322;
+  font-size: 0.9rem;
+  text-align: left;
+  line-height: 1.5;
+}
+
+[data-theme='dark'] .errorText {
+  color: #ff7875;
 } 

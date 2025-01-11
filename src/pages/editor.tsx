@@ -8,14 +8,31 @@ import styles from './styles.module.css';
 function PasswordForm({ onSuccess }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const {siteConfig} = useDocusaurusContext();
+  const editorPassword = siteConfig.customFields?.editorPassword as string;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const correctPassword = process.env.EDITOR_PASSWORD;
-    if (password === correctPassword) {
+    console.log('验证信息:', {
+      输入密码: password,
+      是否配置密码: !!editorPassword,
+    });
+
+    if (!editorPassword) {
+      setError('系统错误：未配置密码，请联系管理员配置 EDITOR_PASSWORD 环境变量');
+      return;
+    }
+
+    if (!password) {
+      setError('请输入密码');
+      return;
+    }
+
+    if (password === editorPassword) {
+      setError('');
       onSuccess();
     } else {
-      setError('密码错误');
+      setError(`密码错误，请重试。如有疑问请联系管理员。`);
     }
   };
 
@@ -23,14 +40,21 @@ function PasswordForm({ onSuccess }) {
     <div className={styles.passwordContainer}>
       <form onSubmit={handleSubmit} className={styles.passwordForm}>
         <h2>需要密码才能访问编辑器</h2>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="请输入密码"
-          className={styles.passwordInput}
-        />
-        {error && <p className={styles.errorMessage}>{error}</p>}
+        <div className={styles.inputWrapper}>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="请输入密码"
+            className={styles.passwordInput}
+          />
+          {error && (
+            <div className={styles.errorCard}>
+              <div className={styles.errorIcon}>⚠️</div>
+              <div className={styles.errorText}>{error}</div>
+            </div>
+          )}
+        </div>
         <button type="submit" className={styles.submitButton}>
           确认
         </button>
