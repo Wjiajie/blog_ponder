@@ -41,6 +41,11 @@ const config: Config = {
         'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
       crossorigin: 'anonymous',
     },
+    {
+      href: 'https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700&family=Linden+Hill:wght@400&family=Noto+Serif+SC:wght@300;400;500;700&display=swap',
+      type: 'text/css',
+      crossorigin: 'anonymous',
+    },
   ],
 
   presets: [

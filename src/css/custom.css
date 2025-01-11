@@ -17,6 +17,10 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --ifm-navbar-height: 4rem;
+  --font-family-title-en: 'Comfortaa', sans-serif;
+  --font-family-title-zh: 'Noto Serif SC', serif;
+  --font-family-text-en: 'Linden Hill', serif;
+  --font-family-text-zh: 'Noto Serif SC', serif;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -45,6 +49,7 @@
   margin-bottom: 1rem;
   position: relative;
   z-index: 1;
+  font-family: var(--font-family-title-en), var(--font-family-title-zh);
 }
 
 .hero__subtitle {
@@ -54,6 +59,7 @@
   opacity: 0.9;
   position: relative;
   z-index: 1;
+  font-family: var(--font-family-text-en), var(--font-family-text-zh);
 }
 
 .button.button--secondary {
@@ -177,6 +183,7 @@ html body .navbar-hidden + #__docusaurus main {
   --ifm-footer-title-color: var(--ifm-color-emphasis-900);
   --ifm-footer-link-color: var(--ifm-color-emphasis-800);
   --ifm-footer-copyright-color: var(--ifm-color-emphasis-800);
+  font-family: var(--font-family-text-en), var(--font-family-text-zh);
 }
 
 .footer__title {
@@ -378,4 +385,53 @@ html body .homepage {
 :global(html[data-theme='dark']) :global(.clean-btn:hover) {
   color: var(--ifm-color-primary-lighter) !important;
   opacity: 1;
+}
+
+/* 基础字体设置 */
+body {
+  font-family: var(--font-family-text-en), var(--font-family-text-zh);
+}
+
+/* 标题字体设置 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-title-en), var(--font-family-title-zh);
+  font-weight: 700;
+}
+
+/* 导航栏标题字体 */
+.navbar__brand {
+  font-family: var(--font-family-title-en), var(--font-family-title-zh);
+}
+
+/* 主页标题特殊字体设置 */
+.hero__title {
+  font-family: var(--font-family-title-en), var(--font-family-title-zh);
+  font-weight: 700;
+}
+
+.hero__subtitle {
+  font-family: var(--font-family-text-en), var(--font-family-text-zh);
+  font-weight: 400;
+}
+
+/* 博客文章标题 */
+.blog-post-title {
+  font-family: var(--font-family-title-en), var(--font-family-title-zh);
+  font-weight: 700;
+}
+
+/* 博客文章内容 */
+.blog-post article {
+  font-family: var(--font-family-text-en), var(--font-family-text-zh);
+  font-weight: 400;
+}
+
+/* 侧边栏 */
+.menu__link {
+  font-family: var(--font-family-text-en), var(--font-family-text-zh);
+}
+
+/* 页脚 */
+.footer {
+  font-family: var(--font-family-text-en), var(--font-family-text-zh);
 }
