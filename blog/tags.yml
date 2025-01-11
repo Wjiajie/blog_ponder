@@ -1,38 +1,6 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
-
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
-
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
-
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
-
 markdown:
   label: Markdown
   description: Markdown 语法和使用技巧
-
-tutorial:
-  label: 教程
-  description: 详细的指导性文章
-
-documentation:
-  label: 文档
-  description: 文档编写和最佳实践
-
-greetings:
-  label: 问候
-  description: 问候和欢迎文章
 
 译文:
   label: 译文
@@ -45,3 +13,15 @@ greetings:
 guide:
   label: 指南
   description: 使用指南和教程文档
+
+品味:
+  label: 品味
+  description: 关于审美、品位和鉴赏力的讨论
+
+通用价值:
+  label: 通用价值
+  description: 探讨跨领域的普遍性原则和价值观
+
+写作:
+  label: 写作
+  description: 关于写作技巧、写作方法和写作经验的文章

@@ -3,10 +3,12 @@ title: 我的阅读、笔记、写作流程构建记录
 slug: 2025-01-11-my-read-note-write_pipeline
 authors: [jiajiewu]
 tags: [通用价值, 写作]
-keywords: ["blog", "写作", "写作流程"]
+keywords: ["blog", "写作", "写作流程", "卡片笔记写作法"]
 description: "这篇文章主要受到最近两个月的一本地铁读物—《卡片笔记写作法》的影响而诞生，我想记录阅读这本书的一些收获，以及参考它的做法搭建的一套写作流程。"
 draft: false
 ---
+
+import ZoomImage from '@site/src/components/ZoomImage';
 
 这篇文章主要受到最近两个月的一本地铁读物—《卡片笔记写作法》的影响而诞生，我想记录阅读这本书的一些收获，以及参考它的做法搭建的一套写作流程。
 
@@ -30,23 +32,25 @@ draft: false
 
 1. 构建单一的卡片笔记
 
-   ![anatomy-3-reference.png](https://s2.loli.net/2024/08/25/PGF6lsZOEo9Y5Xp.png)
+   <ZoomImage src="https://s2.loli.net/2024/08/25/PGF6lsZOEo9Y5Xp.png" alt="单一的卡片笔记结构" />
 
    单一的卡片笔记至少包含一个独立的标识符（Unique Identifier）以及正文内容（Body）。标签（Tags）、引用（Citation）和参考文档（References）是可选的。
 2. 关联卡片笔记（创建双链笔记）
 
    这是最重要的一步，也是卡片笔记写作法区别于其他写作方法的最大不同，关联卡片笔记不仅是为当前卡片插入另外的卡片的引用，而且还需要为引用卡片插入一段信息，告知哪些文档引用了它，即建立反向引用。幸运的是，现在挺多软件支持自动创建反向引用，不需要用户花额外的精力去构建双链。
 
-   ![2020-08-13-note-link.png](https://s2.loli.net/2024/08/25/E2KCDjq3wVnHILm.png)
+   <ZoomImage src="https://s2.loli.net/2024/08/25/E2KCDjq3wVnHILm.png" alt="关联卡片笔记" />
+
 
    加入了双链的卡片笔记结构如下：
 
-   ![complete-zettel.png](https://s2.loli.net/2024/08/25/w7YMfGxvAO53mnt.png)
+   <ZoomImage src="https://s2.loli.net/2024/08/25/w7YMfGxvAO53mnt.png" alt="加入了双链的卡片笔记结构" />
+
 3. 为关键卡片建立索引
 
    上面的步骤1和2是自下而上的卡片笔记构建，在卡片笔记成一定规模后，把比较重要（比较多的笔记链接到该笔记）的卡片笔记添加到索引入口中，能方便使用者寻找到主题相关的笔记，快速切换浏览卡片内容。
 
-   ![struktur-20240825-130013.png](https://s2.loli.net/2024/08/25/8rkdvHUL2wDVgY5.png)
+   <ZoomImage src="https://s2.loli.net/2024/08/25/8rkdvHUL2wDVgY5.png" alt="为关键卡片建立索引" />
 
    需要注意的是，一个卡片盒系统的结构，最好不要在积累了一定规模的卡片笔记之前就预设好，如果你这样做，就违背了卡片盒系统自下而上的构建原则，正如一个好的（适合你）架构不能提前规划，这个索引结构也是随着你的兴趣的发展渐进的扩展出来的。
 
@@ -93,13 +97,13 @@ draft: false
 
 ## 我的阅读、笔记、写作流程
 
-![image.png](https://s2.loli.net/2024/08/25/wvrc9YNtU3qKMaL.png)
+<ZoomImage src="https://s2.loli.net/2024/08/25/wvrc9YNtU3qKMaL.png" alt="我的阅读、笔记、写作流程" />
 
 上图可以概括我当前的阅读、笔记、写作流程，里面也提及了一些软件和插件的使用。从设备类型上分类，我会把常用的软件分为移动端和桌面端两部分。移动端会常用**微信读书**和**omnivore**，微信读书大家都熟悉，非常方便利用碎片化时间阅读，多设备同步足够好用，支持导入外部书籍（但是非会员限制导入数量，以及即使是会员也不能导入超过200MB的pdf文件…）以及秀微信好友阅读时长用于装逼。omnivore是一个开源的强大的稍后阅读软件，还支持导入RSS源，我在对比了一系列稍后读和网络划线的软件和应用后，终究还是回归omnivore怀抱，真的很香。平时在闲逛[兔子洞](https://www.jiajiewu.top/about)时，我会把感兴趣的文章先保存到omnivore，在omnivore中阅读，划线和评论，非常类似在微信读书的操作。
 
-![微信读书划线](https://s2.loli.net/2024/08/25/5Y2xBVCXNSFm6lQ.jpg "微信读书划线")
+<ZoomImage src="https://s2.loli.net/2024/08/25/5Y2xBVCXNSFm6lQ.jpg" alt="微信读书划线" />
 
-![   omnivore划线划线](https://s2.loli.net/2024/08/25/rKJveL729USRlix.jpg "omnivore划线")
+<ZoomImage src="https://s2.loli.net/2024/08/25/rKJveL729USRlix.jpg" alt="omnivore划线" />
 
 单是划线远远不够，随手一划并不会带来太多的心智负担，在微信读书或者omnivore下记录的笔记，后面不一定能检索到，即使能检索到，在时隔很长一段时间后再看这些划线内容，无疑是梦里看花，丢失了上下文的独立片段价值并不大。为了解决这个问题，我们需要记录闪念笔记，并且及时整理闪念笔记。
 
@@ -116,11 +120,11 @@ draft: false
 
 我会使用obsidian的一个叫thino的插件来记录闪念笔记，在手机端我会给obsidian设置一个超大的图标入口，并且调整了thino的设置，一打开移动端的obsidian就会切换到thino。我会在微信读书或者omnivore批注时，顺手把批注和引用文章这些闪念粘贴到thino。
 
-![20240825-164547.jpg](https://s2.loli.net/2024/08/25/DSgPCNyc5Hep7Kv.jpg)
+<ZoomImage src="https://s2.loli.net/2024/08/25/DSgPCNyc5Hep7Kv.jpg" alt="thino闪念笔记" />
 
-![20240825-154514.jpg](https://s2.loli.net/2024/08/25/y4LJ3igUZj7psH5.jpg)
+<ZoomImage src="https://s2.loli.net/2024/08/25/y4LJ3igUZj7psH5.jpg" alt="thino闪念笔记" />
 
-![20240825-155124.jpg](https://s2.loli.net/2024/08/25/d68f9Sz7k4hnacI.jpg)
+<ZoomImage src="https://s2.loli.net/2024/08/25/d68f9Sz7k4hnacI.jpg" alt="thino闪念笔记" />
 
 上面只是记录了闪念，每隔一段时间（几天或者一周），我会把这些闪念整理到obsidan的临时项目文件夹中，这时候就不能只对闪念笔记做文件搬移操作了，我们需要把它们整理归纳，尽量让这些小的记录嵌入到更大的上下文中，来为一次写作积累素材。
 
@@ -132,9 +136,9 @@ draft: false
 
 我会在桌面端利用notion来写作，并后续通过github的一个叫react-notion-x的项目来把notion的文章解析到我的个人博客中，最终文章的写作工具和发表平台并不重要，而且属于另外一个话题，这里就不展开了。
 
-![ notion工作区](https://s2.loli.net/2024/08/25/kjW3QdSbLoKlw9s.png "notion工作区")
+<ZoomImage src="https://s2.loli.net/2024/08/25/kjW3QdSbLoKlw9s.png" alt="notion工作区" />
 
-![我的个人博客](https://s2.loli.net/2024/08/25/imEBIvjNyFVMOwU.png "我的个人博客")
+<ZoomImage src="https://s2.loli.net/2024/08/25/imEBIvjNyFVMOwU.png" alt="我的个人博客" />
 
 <aside>
 💡 但是notion搭建的静态博客更新真的很方便，强推！
