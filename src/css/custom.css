@@ -6,13 +6,13 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #4A90E2;  /* 柔和的天空蓝 */
+  --ifm-color-primary-dark: #357ABD;
+  --ifm-color-primary-darker: #2D6CAA;
+  --ifm-color-primary-darkest: #245C96;
+  --ifm-color-primary-light: #6BA5E7;
+  --ifm-color-primary-lighter: #82B3EC;
+  --ifm-color-primary-lightest: #A8CAF2;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -25,19 +25,19 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #6BA5E7;  /* 更亮的蓝色 */
+  --ifm-color-primary-dark: #5691D3;
+  --ifm-color-primary-darker: #4A90E2;
+  --ifm-color-primary-darkest: #357ABD;
+  --ifm-color-primary-light: #82B3EC;
+  --ifm-color-primary-lighter: #A8CAF2;
+  --ifm-color-primary-lightest: #C4DBF5;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
 /* 禅意风格的自定义样式 */
 .hero {
-  background: linear-gradient(135deg, rgba(46, 133, 85, 0.9), rgba(37, 194, 160, 0.9));
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.8), rgba(168, 202, 242, 0.8));
   position: relative;
   overflow: hidden;
 }
@@ -211,55 +211,110 @@ html body .navbar-hidden + #__docusaurus main {
 
 /* 移动端侧边栏基础样式 */
 @media screen and (max-width: 996px) {
+  /* 导航栏布局固定 */
+  .navbar__toggle {
+    position: relative;
+    z-index: 102;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  /* 侧边栏中的图标和文案间距 */
+  .navbar-sidebar .navbar-icon-item::before {
+    margin-right: 12px;  /* 增加图标和文案的间距 */
+    display: inline-block;
+    width: 20px;  /* 固定图标宽度 */
+    text-align: center;  /* 图标居中对齐 */
+  }
+
+  /* 隐藏默认的汉堡图标和关闭按钮 */
+  .navbar__toggle svg,
+  .navbar-sidebar__close {
+    display: none !important;
+  }
+
+  /* 自定义汉堡菜单图标 */
+  .navbar__toggle::before,
+  .navbar__toggle::after,
+  .navbar__toggle .navbar__toggle-line {
+    content: '';
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    height: 2px;
+    background-color: currentColor;
+    transition: all 0.3s ease;
+  }
+
+  .navbar__toggle::before {
+    top: 6px;
+  }
+
+  .navbar__toggle::after {
+    bottom: 6px;
+  }
+
+  .navbar__toggle .navbar__toggle-line {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* 展开状态的图标动画 */
+  .navbar-sidebar--show .navbar__toggle::before {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .navbar-sidebar--show .navbar__toggle::after {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+  }
+
+  .navbar-sidebar--show .navbar__toggle .navbar__toggle-line {
+    opacity: 0;
+  }
+
+  /* 隐藏"回到主菜单"按钮 */
+  .navbar-sidebar__back {
+    display: none !important;
+  }
+
+  /* 侧边栏样式 */
   .navbar-sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    max-width: 300px;
-    width: 100%;
+    width: 85%;  /* 限制侧边栏宽度为屏幕的85% */
+    max-width: 400px;  /* 设置最大宽度 */
     height: 100vh;
-    transform: translateX(0);
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
-    z-index: var(--ifm-z-index-fixed);
+    z-index: 101;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    padding-top: var(--ifm-navbar-height);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);  /* 添加阴影效果 */
   }
 
-  /* 亮色模式下的侧边栏样式 */
-  html[data-theme='light'] body .navbar-sidebar {
-    background-color: #ffffff !important;
+  /* 侧边栏展开状态 */
+  .navbar-sidebar--show {
+    transform: translateX(0);
   }
 
-  /* 暗色模式下的侧边栏样式 */
-  html[data-theme='dark'] body .navbar-sidebar {
-    background-color: #1b1b1d !important;
+  /* 侧边栏顶部布局 */
+  .navbar-sidebar__brand {
+    display: none !important;
   }
 
-  .navbar-sidebar__backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: calc(var(--ifm-z-index-fixed) - 1);
-  }
-
-  .navbar-sidebar__close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 30px;
-    height: 30px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-  }
-
+  /* 侧边栏内容布局 */
   .navbar-sidebar__items {
-    padding: 0.5rem;
-    padding-top: 3.5rem;
+    padding: 1rem;
   }
 
   .navbar-sidebar .menu__list {
@@ -267,18 +322,33 @@ html body .navbar-hidden + #__docusaurus main {
   }
 
   .navbar-sidebar .menu__link {
-    padding: 0.5rem 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
   }
 
-  /* 确保内容不会被顶栏遮挡 */
-  html body #__docusaurus {
-    padding-top: var(--ifm-navbar-height);
+  /* 背景遮罩 */
+  .navbar-sidebar__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);  /* 更轻的背景色 */
+    z-index: 100;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
   }
-  
-  /* 侧边栏内容位置调整 */
-  .navbar-sidebar {
-    padding-top: var(--ifm-navbar-height);
-    background-color: var(--ifm-background-color);
+
+  /* 展开时显示遮罩 */
+  .navbar-sidebar--show + .navbar-sidebar__backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* 暗色模式下的遮罩样式 */
+  html[data-theme='dark'] .navbar-sidebar__backdrop {
+    background-color: rgba(0, 0, 0, 0.4);  /* 暗色模式下稍微深一点的背景 */
   }
 }
 
@@ -434,4 +504,57 @@ h1, h2, h3, h4, h5, h6 {
 /* 页脚 */
 .footer {
   font-family: var(--font-family-text-en), var(--font-family-text-zh);
+}
+
+/* 导航栏文字样式 */
+html body .navbar__brand {
+  font-size: 1.45rem;  /* 增大品牌名称字体 */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  align-items: center;
+}
+
+html body .navbar__link {
+  font-size: 1.4rem;  /* 增大导航链接字体 */
+  font-weight: 500;
+  padding: 0.0rem 1.3rem;  /* 增加点击区域 */
+  transition: color 0.2s ease;
+  align-items: center;
+}
+
+html body .navbar__link:hover {
+  opacity: 0.8;
+}
+
+
+/* 主题切换按钮大小调整 */
+.clean-btn {
+  font-size: 1.1rem;
+  padding: 0.0rem;
+}
+
+/* 导航栏图标样式 */
+.navbar-icon-item {
+  position: relative;
+}
+
+.navbar-icon-item::before {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  margin-right: 4px;
+}
+
+/* Index 图标 */
+.navbar-icon-item[href="/index"]::before {
+  content: "\f02e";  /* 书签图标 */
+}
+
+/* Blog 图标 */
+.navbar-icon-item[href="/blog"]::before {
+  content: "\f781";  /* 博客图标 */
+}
+
+/* Write 图标 */
+.navbar-icon-item[href="/editor"]::before {
+  content: "\f304";  /* 编辑图标 */
 }

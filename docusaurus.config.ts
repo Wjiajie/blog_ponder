@@ -46,6 +46,11 @@ const config: Config = {
       type: 'text/css',
       crossorigin: 'anonymous',
     },
+    {
+      href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+      type: 'text/css',
+      crossorigin: 'anonymous',
+    },
   ],
 
   presets: [
@@ -118,61 +123,35 @@ const config: Config = {
       },
     },
     navbar: {
-      title: 'My Site',
-      logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
-      },
+      title: 'Ponder',
       items: [
-        {to: '/index', label: 'Index', position: 'left'},
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {to: '/editor', label: 'Write', position: 'left'},
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
-        },
+        {to: '/index', label: ' Index', position: 'left', className: 'navbar-icon-item'},
+        {to: '/blog', label: ' Blog', position: 'left', className: 'navbar-icon-item'},
+        {to: '/editor', label: ' Write', position: 'left', className: 'navbar-icon-item'},
       ],
     },
     footer: {
       style: 'dark',
       links: [
         {
-          title: 'Community',
+          title: 'Social',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Jike',
+              href: 'https://jike.city/jiajiewu_ponder',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Github',
+              href: 'https://github.com/Wjiajie',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Ponder, Inc. Built with Docusaurus.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.oneLight,
+      darkTheme: prismThemes.oneDark,
     },
   } satisfies Preset.ThemeConfig,
   customFields: {
