@@ -30,7 +30,10 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 这里继续添加文章剩余内容
 
-
+图片添加的方式是：
+、、、、md
+<ZoomImage src="https://s2.loli.net/2025/01/10/9Pgh1T8ZHaeVKCD.jpg" alt='图　洛克希德公司的SR-71"黑鸟"超音速侦察机，1964年' />
+、、、、
 `;
 
 // 创建一个带链接的 Toast 组件

@@ -61,7 +61,7 @@ const config: Config = {
         docs: false,
         blog: {
           path: 'blog',
-          blogTitle: 'Blog title',
+          blogTitle: 'Blog',
           showReadingTime: true,
           remarkPlugins: [remarkMath, remarkReferenceNotes],
           rehypePlugins: [rehypeKatex],
