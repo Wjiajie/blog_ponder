@@ -10,15 +10,26 @@ interface BlogEditorProps {
   onSave: (content: string) => void;
 }
 
-const DEFAULT_CONTENT = `---
+const DEFAULT_CONTENT = 
+`
+---
 title: 
 slug: 
 authors: [jiajiewu]
 tags: []
 keywords: ["blog"]
 description: ""
-draft: true
+draft: false
 ---
+
+import ZoomImage from '@site/src/components/ZoomImage';
+
+这里添加文章展示内容
+
+<!-- truncate -->
+
+这里继续添加文章剩余内容
+
 
 `;
 
