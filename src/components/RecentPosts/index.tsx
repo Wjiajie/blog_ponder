@@ -39,7 +39,7 @@ export default function RecentPosts(): JSX.Element | null {
         const dateB = new Date(b.metadata.date);
         return dateB.getTime() - dateA.getTime();
       })
-      .slice(0, 5);
+      .slice(0, 10);
 
     console.log('RecentPosts - Recent posts:', recentPosts);
 

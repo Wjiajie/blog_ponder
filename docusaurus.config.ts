@@ -65,6 +65,8 @@ const config: Config = {
           showReadingTime: true,
           remarkPlugins: [remarkMath, remarkReferenceNotes],
           rehypePlugins: [rehypeKatex],
+          postsPerPage: 20,
+          blogSidebarCount: 'ALL',
           feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
