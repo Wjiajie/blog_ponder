@@ -29,3 +29,19 @@ guide:
 创业:
   label: 创业
   description: 关于创业、创业思维和创业经验的文章
+
+神经网络:
+  label: 神经网络
+  description: 神经网络相关文章
+
+transformer:
+  label: transformer
+  description: transformer相关文章
+
+编程语言:
+  label: 编程语言
+  description: 编程语言相关文章
+
+架构:
+  label: 架构
+  description: 编码架构相关文章 
