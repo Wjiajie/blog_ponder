@@ -42,6 +42,14 @@ transformer:
   label: 编程语言
   description: 编程语言相关文章
 
-架构:
-  label: 架构
+编码架构:
+  label: 编码架构
   description: 编码架构相关文章 
+
+C++:
+  label: C++
+  description: C++相关文章
+
+金钱观:
+  label: 金钱观
+  description: 关于金钱观和财富积累的文章
