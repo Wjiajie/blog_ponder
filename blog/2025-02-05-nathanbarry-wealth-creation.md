@@ -10,7 +10,7 @@ draft: false
 
 import ZoomImage from '@site/src/components/ZoomImage';
 
-<ZoomImage src="https://nathanbarry.com/wp-content/uploads/2019/12/ladders-cover.jpg" />
+<ZoomImage src="https://nathanbarry.com/wp-content/uploads/2019/12/ladders-cover.jpg" alt="财富创造的阶梯" />
 
 这篇文章是关于个人如何通过不同的阶段和策略来增加收入和积累财富。作者通过分享自己的经历和一些原则，为读者提供了一个积累财富的路线图。以下是文章的主要内容总结：
 
@@ -40,7 +40,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 任何人都可以采取一种可靠的进步来赚取更多和积累财富。事实上，我喜欢把它想象成一系列并排的梯子。每一个都可以在业务质量和潜在收益方面爬上不同的高度。
 
-<ZoomImage src="https://lh3.googleusercontent.com/qWcgH_BoOwaDJ3f5lo9YG5f4WCKaLRwWYQZCb4aEJWA41Fm1KDVjLu5B9LudqY_1W6NwI0eSTtb5R8F1FmD2fcmSg-UcnhebLyh2dDyCQ_f1WpoWGna3WyuM1txea36M2T54v_T5" />
+<ZoomImage src="https://lh3.googleusercontent.com/qWcgH_BoOwaDJ3f5lo9YG5f4WCKaLRwWYQZCb4aEJWA41Fm1KDVjLu5B9LudqY_1W6NwI0eSTtb5R8F1FmD2fcmSg-UcnhebLyh2dDyCQ_f1WpoWGna3WyuM1txea36M2T54v_T5" alt="财富创造的阶梯" />
 
 在这个模型中，你爬的梯子越高，潜在收入就会增加。当你从左到右移动到更高级的梯子时，它们也会增加。但是每次移动的难度也会增加。
 
