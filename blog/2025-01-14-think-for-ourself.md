@@ -1,5 +1,5 @@
 ---
-title: 如何为自己思考
+title: 【译】如何为自己思考
 slug: 2025-01-14-think-for-ourself
 authors: [jiajiewu]
 tags: [通用价值, 译文]
