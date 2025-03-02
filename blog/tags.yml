@@ -53,3 +53,12 @@ C++:
 金钱观:
   label: 金钱观
   description: 关于金钱观和财富积累的文章
+
+工具:
+  label: 工具
+  description: 工具相关文章
+
+电子书:
+  label: 电子书
+  description: 电子书相关文章
+
