@@ -1,15 +1,151 @@
+/* 笔记索引容器样式 */
+.noteIndexContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 40px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.noteIndexSidebar {
+  flex: 0 0 350px;
+  max-width: 350px;
+}
+
+.knowledgeGraphContainer {
+  flex: 1 1 auto;
+  min-width: 500px;
+  max-width: calc(100% - 390px);
+  display: flex;
+  justify-content: center;
+}
+
+.indexTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* 加载状态和错误提示 */
+.loading, .graphError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  width: 100%;
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.loading i, .graphError i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.graphError i {
+  color: var(--ifm-color-danger);
+}
+
+.graphErrorHint {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.graphErrorHint code {
+  background-color: var(--ifm-color-emphasis-200);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* 笔记索引树样式 */
 .noteIndex {
-  padding: 2rem 0;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .noteItem {
   display: flex;
   align-items: center;
+  padding: 0.5rem 0;
   position: relative;
-  margin: 0.8rem 0;
+  margin: 0.4rem 0;
   transition: all 0.3s ease;
+}
+
+.noteIcon {
+  margin-right: 0.8rem;
+  width: 1.5rem;
+  text-align: center;
+  color: var(--ifm-color-primary);
+}
+
+.noteLink {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.noteLink:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+/* 缩进样式 */
+.indent-level-1 {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.indent-level-2 {
+  padding-left: 1.5rem;
+  font-size: 1rem;
+}
+
+.indent-level-3 {
+  padding-left: 3rem;
+  font-size: 0.95rem;
+}
+
+/* 分类分隔线 */
+.categorySeparator {
+  height: 1px;
+  background-color: var(--ifm-color-emphasis-200);
+  margin: 1rem 0;
+}
+
+/* 响应式布局 */
+@media (max-width: 996px) {
+  .noteIndexContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .noteIndexSidebar {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .knowledgeGraphContainer {
+    margin-top: 1rem;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.noteIndex {
+  padding: 2rem 0;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .noteTitle, .noteLink {
@@ -91,11 +227,4 @@
   color: var(--ifm-color-emphasis-400);
   border-left: 1px solid var(--ifm-color-emphasis-400);
   padding-left: 1rem;
-}
-
-.noteIcon {
-  margin-right: 0.8rem;
-  width: 1.5rem;
-  text-align: center;
-  color: var(--ifm-color-primary);
 } 

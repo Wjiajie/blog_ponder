@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import KnowledgeGraph from '../KnowledgeGraph';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 // NoteItem 类型定义
 interface NoteItem {
@@ -9,6 +11,12 @@ interface NoteItem {
   link: string;
   level: number;
   icon?: string;
+}
+
+// 图谱数据结构
+interface GraphData {
+  nodes: any[];
+  links: any[];
 }
 
 // 笔记项目数据
@@ -80,11 +88,158 @@ const NoteItemComponent = ({ item, index }: { item: NoteItem, index: number }) =
 };
 
 export default function NoteIndex(): JSX.Element {
+  const [graphData, setGraphData] = useState<GraphData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [errorType, setErrorType] = useState<'none' | 'network' | 'parse' | 'notFound'>('none');
+  const graphUrl = useBaseUrl('/graph.json');
+
+  // 加载知识图谱数据
+  useEffect(() => {
+    async function loadGraphData() {
+      try {
+        setLoading(true);
+        setErrorType('none');
+        console.log('尝试加载知识图谱数据...');
+        console.log('请求URL:', graphUrl);
+        
+        const response = await fetch(graphUrl);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('成功加载知识图谱数据:', data ? `${data.nodes?.length || 0}个节点，${data.links?.length || 0}条连接` : '无数据');
+          setGraphData(data);
+        } else {
+          console.error('加载知识图谱数据失败，HTTP状态码:', response.status);
+          const isVercel = typeof window !== 'undefined' && window.location.hostname.includes('vercel.app');
+          
+          // 针对Vercel环境提供更详细的错误信息
+          if (isVercel) {
+            console.error('在Vercel环境中发现问题，可能是部署时未正确包含graph.json文件');
+            console.error('请确保在部署前运行 npm run generate-graph 并提交生成的graph.json文件到仓库');
+          }
+          
+          setErrorType(response.status === 404 ? 'notFound' : 'network');
+          // 尝试解析错误消息
+          try {
+            const errorText = await response.text();
+            console.error('错误详情:', errorText);
+          } catch (parseError) {
+            console.error('无法解析错误详情');
+          }
+        }
+      } catch (error) {
+        console.error('加载知识图谱数据时发生异常:', error);
+        setErrorType('network');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadGraphData();
+  }, [graphUrl]);
+
+  // 获取错误提示信息
+  const getErrorMessage = () => {
+    const isVercel = typeof window !== 'undefined' && window.location.hostname.includes('vercel.app');
+    
+    switch (errorType) {
+      case 'notFound':
+        return (
+          <>
+            <p>找不到知识图谱数据文件</p>
+            {isVercel ? (
+              <>
+                <p className={styles.graphErrorHint}>
+                  在Vercel部署环境中，请确保：
+                </p>
+                <p className={styles.graphErrorHint}>
+                  1. 在本地运行 <code>npm run generate-graph</code> 生成图谱数据
+                </p>
+                <p className={styles.graphErrorHint}>
+                  2. 将生成的 <code>static/graph.json</code> 文件提交到仓库
+                </p>
+                <p className={styles.graphErrorHint}>
+                  3. 重新部署到Vercel
+                </p>
+              </>
+            ) : (
+              <>
+                <p className={styles.graphErrorHint}>
+                  请确保已运行 <code>node server/generateGraph.js</code> 生成图谱数据
+                </p>
+                <p className={styles.graphErrorHint}>
+                  并确认 <code>static/graph.json</code> 文件存在
+                </p>
+              </>
+            )}
+          </>
+        );
+      case 'parse':
+        return (
+          <>
+            <p>知识图谱数据格式不正确</p>
+            <p className={styles.graphErrorHint}>
+              请重新运行 <code>node server/generateGraph.js</code> 生成图谱数据
+            </p>
+          </>
+        );
+      case 'network':
+      default:
+        return (
+          <>
+            <p>加载知识图谱数据失败</p>
+            {isVercel ? (
+              <>
+                <p className={styles.graphErrorHint}>
+                  在Vercel部署环境中，请确保：
+                </p>
+                <p className={styles.graphErrorHint}>
+                  1. <code>static/graph.json</code> 已提交到仓库
+                </p>
+                <p className={styles.graphErrorHint}>
+                  2. Vercel构建配置正确
+                </p>
+              </>
+            ) : (
+              <p className={styles.graphErrorHint}>
+                请检查网络连接，或重新运行 <code>node server/generateGraph.js</code> 生成图谱数据
+              </p>
+            )}
+          </>
+        );
+    }
+  };
+
   return (
-    <div className={styles.noteIndex}>
-      {noteItems.map((item, index) => (
-        <NoteItemComponent key={index} item={item} index={index} />
-      ))}
+    <div className={styles.noteIndexContainer}>
+      <div className={styles.noteIndexSidebar}>
+        <h2 className={styles.indexTitle}>笔记索引</h2>
+        <div className={styles.noteIndex}>
+          {noteItems.map((item, index) => (
+            <NoteItemComponent key={index} item={item} index={index} />
+          ))}
+        </div>
+      </div>
+      
+      <div className={styles.knowledgeGraphContainer}>
+        {loading ? (
+          <div className={styles.loading}>
+            <i className="fas fa-spinner fa-spin"></i>
+            <p>正在加载知识图谱...</p>
+          </div>
+        ) : graphData ? (
+          <KnowledgeGraph 
+            data={graphData} 
+            width={650} 
+            height={750} 
+            noteItems={noteItems}
+          />
+        ) : (
+          <div className={styles.graphError}>
+            <i className="fas fa-exclamation-triangle"></i>
+            {getErrorMessage()}
+          </div>
+        )}
+      </div>
     </div>
   );
 } 

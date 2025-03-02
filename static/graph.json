@@ -1,0 +1,393 @@
+{
+  "nodes": [
+    {
+      "id": "index",
+      "name": "笔记索引",
+      "type": "note",
+      "group": 0
+    },
+    {
+      "id": "computer-science",
+      "name": "计算机科学",
+      "type": "note",
+      "group": 1
+    },
+    {
+      "id": "software-architecture",
+      "name": "软件架构",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "programming-languages",
+      "name": "编程语言",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "tools-usage",
+      "name": "工具使用",
+      "type": "note",
+      "group": 1
+    },
+    {
+      "id": "rag",
+      "name": "RAG",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "data-format-conversion",
+      "name": "数据格式转换",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "universal-values",
+      "name": "通用价值",
+      "type": "note",
+      "group": 1
+    },
+    {
+      "id": "mental-models",
+      "name": "思维模型",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "money-philosophy",
+      "name": "金钱观",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "entrepreneurship",
+      "name": "创业",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "life",
+      "name": "生活随笔",
+      "type": "note",
+      "group": 1
+    },
+    {
+      "id": "reading-notes",
+      "name": "读书杂谈",
+      "type": "note",
+      "group": 2
+    },
+    {
+      "id": "wepub-covert-web-to-book",
+      "name": "wepub-covert-web-to-book",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "wepub-add-rss",
+      "name": "wepub-add-rss",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "how-to-start-google",
+      "name": "how-to-start-google",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "how-to-pick-a-career",
+      "name": "how-to-pick-a-career",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "2025-01-14-think-for-ourself",
+      "name": "【译】如何为自己思考",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "designers-taste",
+      "name": "designers-taste",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "the-map-is-not-the-territory",
+      "name": "the-map-is-not-the-territory",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "money-psychology",
+      "name": "money-psychology",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "relationship-with-money-trans",
+      "name": "relationship-with-money-trans",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "nathanbarry-wealth-creation",
+      "name": "nathanbarry-wealth-creation",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "lvalue-rvalue-move-semantics",
+      "name": "lvalue-rvalue-move-semantics",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "cpp-smart-pointer",
+      "name": "cpp-smart-pointer",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "my-read-note-write_pipeline",
+      "name": "my-read-note-write_pipeline",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "information-cocoon-self-rescue-guide",
+      "name": "information-cocoon-self-rescue-guide",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "markdown-syntax-guide",
+      "name": "markdown-syntax-guide",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "solid-intro",
+      "name": "solid-intro",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "cpp-design-pattern",
+      "name": "cpp-design-pattern",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "transformer-intro",
+      "name": "transformer-intro",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "swin-transformer-sum",
+      "name": "swin-transformer-sum",
+      "type": "blog",
+      "group": 4
+    }
+  ],
+  "links": [
+    {
+      "source": "index",
+      "target": "computer-science",
+      "value": 3
+    },
+    {
+      "source": "computer-science",
+      "target": "software-architecture",
+      "value": 2
+    },
+    {
+      "source": "computer-science",
+      "target": "programming-languages",
+      "value": 2
+    },
+    {
+      "source": "index",
+      "target": "tools-usage",
+      "value": 3
+    },
+    {
+      "source": "tools-usage",
+      "target": "rag",
+      "value": 2
+    },
+    {
+      "source": "tools-usage",
+      "target": "data-format-conversion",
+      "value": 2
+    },
+    {
+      "source": "index",
+      "target": "universal-values",
+      "value": 3
+    },
+    {
+      "source": "universal-values",
+      "target": "mental-models",
+      "value": 2
+    },
+    {
+      "source": "universal-values",
+      "target": "money-philosophy",
+      "value": 2
+    },
+    {
+      "source": "universal-values",
+      "target": "entrepreneurship",
+      "value": 2
+    },
+    {
+      "source": "index",
+      "target": "life",
+      "value": 3
+    },
+    {
+      "source": "life",
+      "target": "reading-notes",
+      "value": 2
+    },
+    {
+      "source": "data-format-conversion",
+      "target": "tools-usage",
+      "value": 2
+    },
+    {
+      "source": "data-format-conversion",
+      "target": "wepub-covert-web-to-book",
+      "value": 1
+    },
+    {
+      "source": "data-format-conversion",
+      "target": "wepub-add-rss",
+      "value": 1
+    },
+    {
+      "source": "entrepreneurship",
+      "target": "universal-values",
+      "value": 2
+    },
+    {
+      "source": "entrepreneurship",
+      "target": "how-to-start-google",
+      "value": 1
+    },
+    {
+      "source": "entrepreneurship",
+      "target": "how-to-pick-a-career",
+      "value": 1
+    },
+    {
+      "source": "entrepreneurship",
+      "target": "2025-01-14-think-for-ourself",
+      "value": 1
+    },
+    {
+      "source": "entrepreneurship",
+      "target": "designers-taste",
+      "value": 1
+    },
+    {
+      "source": "mental-models",
+      "target": "universal-values",
+      "value": 2
+    },
+    {
+      "source": "mental-models",
+      "target": "the-map-is-not-the-territory",
+      "value": 1
+    },
+    {
+      "source": "money-philosophy",
+      "target": "universal-values",
+      "value": 2
+    },
+    {
+      "source": "money-philosophy",
+      "target": "money-psychology",
+      "value": 1
+    },
+    {
+      "source": "money-philosophy",
+      "target": "relationship-with-money-trans",
+      "value": 1
+    },
+    {
+      "source": "money-philosophy",
+      "target": "nathanbarry-wealth-creation",
+      "value": 1
+    },
+    {
+      "source": "programming-languages",
+      "target": "computer-science",
+      "value": 2
+    },
+    {
+      "source": "programming-languages",
+      "target": "lvalue-rvalue-move-semantics",
+      "value": 1
+    },
+    {
+      "source": "programming-languages",
+      "target": "cpp-smart-pointer",
+      "value": 1
+    },
+    {
+      "source": "rag",
+      "target": "tools-usage",
+      "value": 2
+    },
+    {
+      "source": "reading-notes",
+      "target": "life",
+      "value": 2
+    },
+    {
+      "source": "reading-notes",
+      "target": "my-read-note-write_pipeline",
+      "value": 1
+    },
+    {
+      "source": "reading-notes",
+      "target": "information-cocoon-self-rescue-guide",
+      "value": 1
+    },
+    {
+      "source": "reading-notes",
+      "target": "markdown-syntax-guide",
+      "value": 1
+    },
+    {
+      "source": "software-architecture",
+      "target": "computer-science",
+      "value": 2
+    },
+    {
+      "source": "software-architecture",
+      "target": "solid-intro",
+      "value": 1
+    },
+    {
+      "source": "software-architecture",
+      "target": "cpp-design-pattern",
+      "value": 1
+    },
+    {
+      "source": "software-architecture",
+      "target": "transformer-intro",
+      "value": 1
+    },
+    {
+      "source": "software-architecture",
+      "target": "swin-transformer-sum",
+      "value": 1
+    }
+  ]
+}

@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "prestart": "node server/generateGraph.js",
     "start": "docusaurus start",
+    "prebuild": "node -e \"if(process.env.VERCEL !== 'true') { require('./server/generateGraph.js'); } else { console.log('Vercel部署中，跳过图谱生成'); }\"",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -14,7 +16,9 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "server": "node server/index.js",
-    "dev": "concurrently \"npm run start\" \"npm run server\""
+    "predev": "node server/generateGraph.js",
+    "dev": "concurrently \"npm run start\" \"npm run server\"",
+    "generate-graph": "node server/generateGraph.js"
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",
@@ -25,8 +29,10 @@
     "@easyops-cn/docusaurus-search-local": "^0.46.1",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@mdx-js/react": "^3.0.0",
+    "@types/d3": "^7.4.3",
     "clsx": "^2.0.0",
     "cors": "^2.8.5",
+    "d3": "^7.9.0",
     "express": "^4.21.2",
     "hast-util-is-element": "^3.0.0",
     "mermaid": "^11.4.1",

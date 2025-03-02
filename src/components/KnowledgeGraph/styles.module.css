@@ -1,0 +1,188 @@
+.graphContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: all 0.3s ease;
+  width: 100%;
+  align-items: center;
+}
+
+.graphHeader {
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.graphHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legendDot.note {
+  background-color: #3b82f6;
+}
+
+.legendDot.blog {
+  background-color: #10b981;
+}
+
+.graph {
+  cursor: move;
+  background-color: #f9fafb;
+  width: 100%;
+  display: block;
+}
+
+.tooltip {
+  position: absolute;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 100;
+  max-width: 220px;
+  top: 20px;
+  right: 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.tooltipTitle {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.tooltipType {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.tooltipLink {
+  display: block;
+  font-size: 12px;
+  text-decoration: none;
+  color: #3b82f6;
+}
+
+.nodeDetails {
+  border-top: 1px solid #e5e7eb;
+  padding: 16px;
+  background-color: #f9fafb;
+}
+
+.nodeDetails h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.nodeDetails p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.nodeLink {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.nodeLink:hover {
+  background-color: #2563eb;
+  text-decoration: none;
+  color: white;
+}
+
+.fullscreenButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  transition: background-color 0.2s;
+}
+
+.fullscreenButton:hover {
+  background-color: #e5e7eb;
+}
+
+.fullscreenButton i {
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  z-index: 9999;
+  border-radius: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen .graph {
+  height: calc(100vh - 120px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullscreen .graphHeader {
+  padding: 20px;
+  width: 100%;
+} 
