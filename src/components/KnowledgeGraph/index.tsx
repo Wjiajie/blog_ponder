@@ -14,22 +14,49 @@ interface GraphNode extends d3.SimulationNodeDatum {
   y?: number;
 }
 
+// 图谱连接接口
 interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
   source: string | GraphNode;
   target: string | GraphNode;
   value: number;
 }
 
+// 图谱数据接口
 interface GraphData {
   nodes: GraphNode[];
   links: GraphLink[];
 }
 
+// 组件属性接口
 interface KnowledgeGraphProps {
   data?: GraphData;
   width?: number;
   height?: number;
   noteItems?: any[];
+}
+
+// 获取节点的链接URL
+function getNodeUrl(node: GraphNode | null) {
+  if (!node) return '#';
+  return node.type === 'note' ? `/notes/${node.id}` : `/blog/${node.id}`;
+}
+
+// 添加模态窗口组件
+function NodeModal({ node, onClose }: { node: GraphNode; onClose: () => void }) {
+  return (
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+        <button className={styles.modalClose} onClick={onClose}>
+          <i className="fas fa-times"></i>
+        </button>
+        <h4>{node.name}</h4>
+        <p>类型: {node.type === 'note' ? '笔记页面' : '博客文章'}</p>
+        <Link to={getNodeUrl(node)} className={styles.modalLink}>
+          打开页面
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default function KnowledgeGraph({
@@ -39,12 +66,34 @@ export default function KnowledgeGraph({
   noteItems
 }: KnowledgeGraphProps): JSX.Element {
   const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [graphData, setGraphData] = useState<GraphData | null>(null);
-  const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const graphJsonUrl = useBaseUrl('/graph.json');
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [dimensions, setDimensions] = useState({ width, height });
+  const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+
+  // 监听主题变化
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          // 主题变化时，重新渲染图谱
+          if (graphData) {
+            setGraphData({ ...graphData });
+          }
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+
+    return () => observer.disconnect();
+  }, [graphData]);
 
   // 切换全屏模式
   const toggleFullscreen = () => {
@@ -56,16 +105,24 @@ export default function KnowledgeGraph({
     function updateSize() {
       if (isFullscreen) {
         setDimensions({
-          width: window.innerWidth * 0.9,
-          height: window.innerHeight - 150
+          width: window.innerWidth,
+          height: window.innerHeight
         });
       } else {
-        // 在非全屏模式下，使宽度自适应容器
-        const containerWidth = svgRef.current?.parentElement?.clientWidth || width;
-        setDimensions({ 
-          width: Math.min(containerWidth * 0.95, width), 
-          height 
-        });
+        // 在非全屏模式下，使尺寸自适应容器
+        const container = containerRef.current;
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          setDimensions({ 
+            width: rect.width,
+            height: rect.height
+          });
+        } else {
+          setDimensions({ 
+            width: Math.min(window.innerWidth * 0.95, width),
+            height: Math.min(window.innerHeight * 0.8, height)
+          });
+        }
       }
     }
     
@@ -99,6 +156,95 @@ export default function KnowledgeGraph({
     loadData();
   }, [data, graphJsonUrl]);
 
+  // 高亮连接的函数
+  const highlightConnections = React.useCallback((node: GraphNode, highlight: boolean, isSelected = false) => {
+    if (!graphData || !svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    const link = svg.selectAll<SVGLineElement, GraphLink>('line');
+    
+    // 找到与节点连接的所有链接和节点
+    const connectedNodeIds = new Set<string>();
+    const connectedLinks = graphData.links.filter(link => {
+      const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
+      const targetId = typeof link.target === 'string' ? link.target : link.target.id;
+      
+      if (sourceId === node.id) {
+        connectedNodeIds.add(targetId);
+        return true;
+      }
+      if (targetId === node.id) {
+        connectedNodeIds.add(sourceId);
+        return true;
+      }
+      return false;
+    });
+
+    // 更新链接样式
+    link
+      .transition()
+      .duration(200)
+      .attr('stroke-opacity', (d: GraphLink) => {
+        if (!highlight && !isSelected) return 0.6;
+        const sourceId = typeof d.source === 'string' ? d.source : d.source.id;
+        const targetId = typeof d.target === 'string' ? d.target : d.target.id;
+        return (sourceId === node.id || targetId === node.id) ? 1 : 0.1;
+      })
+      .attr('stroke-width', (d: GraphLink) => {
+        if (!highlight && !isSelected) return Math.sqrt(d.value);
+        const sourceId = typeof d.source === 'string' ? d.source : d.source.id;
+        const targetId = typeof d.target === 'string' ? d.target : d.target.id;
+        return (sourceId === node.id || targetId === node.id) ? Math.sqrt(d.value) * 2 : Math.sqrt(d.value) * 0.5;
+      });
+
+    // 更新节点样式
+    d3.selectAll('circle')
+      .transition()
+      .duration(200)
+      .attr('r', d => {
+        const currentNode = d as unknown as GraphNode;
+        if (!highlight && !isSelected) return (currentNode.type === 'note' ? 10 : 7);
+        if (currentNode.id === node.id) return (currentNode.type === 'note' ? 14 : 10);
+        return connectedNodeIds.has(currentNode.id) ? (currentNode.type === 'note' ? 12 : 9) : (currentNode.type === 'note' ? 8 : 5);
+      })
+      .attr('fill-opacity', d => {
+        const currentNode = d as unknown as GraphNode;
+        if (!highlight && !isSelected) return 1;
+        return currentNode.id === node.id || connectedNodeIds.has(currentNode.id) ? 1 : 0.3;
+      });
+
+    // 更新文本样式
+    d3.selectAll('text')
+      .transition()
+      .duration(200)
+      .style('font-size', d => {
+        const currentNode = d as unknown as GraphNode;
+        if (!highlight && !isSelected) return '10px';
+        return currentNode.id === node.id ? '12px' : (connectedNodeIds.has(currentNode.id) ? '11px' : '9px');
+      })
+      .style('font-weight', d => {
+        const currentNode = d as unknown as GraphNode;
+        if (!highlight && !isSelected) return 'normal';
+        return currentNode.id === node.id ? 'bold' : 'normal';
+      })
+      .style('fill-opacity', d => {
+        const currentNode = d as unknown as GraphNode;
+        if (!highlight && !isSelected) return 1;
+        return currentNode.id === node.id || connectedNodeIds.has(currentNode.id) ? 1 : 0.3;
+      });
+  }, [graphData]);
+
+  // 重置图谱位置
+  const resetGraph = () => {
+    if (svgRef.current && zoomRef.current) {
+      const initialScale = 0.8;
+      zoomRef.current.transform(
+        d3.select(svgRef.current),
+        d3.zoomIdentity.translate(dimensions.width / 2, dimensions.height / 2).scale(initialScale)
+      );
+    }
+  };
+
   // 渲染力导向图
   useEffect(() => {
     if (!graphData || !svgRef.current) return;
@@ -122,7 +268,7 @@ export default function KnowledgeGraph({
         .distance(link => 100 / (link.value || 1))
       )
       .force('charge', d3.forceManyBody().strength(-150))
-      .force('center', d3.forceCenter(0, 0)) // 使用相对坐标原点
+      .force('center', d3.forceCenter(0, 0))
       .force('collision', d3.forceCollide().radius(30));
 
     // 创建连接线
@@ -160,19 +306,26 @@ export default function KnowledgeGraph({
       .attr('dy', '.35em')
       .text(d => d.name)
       .style('font-size', '10px')
-      .style('fill', '#333');
+      .style('fill', () => {
+        // 检查是否处于暗色模式
+        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+        return isDarkMode ? '#ffffff' : '#333';
+      });
 
     // 添加交互事件
     node
       .on('mouseover', (event, d) => {
-        setHoveredNode(d);
         highlightConnections(d, true);
       })
       .on('mouseout', (event, d) => {
-        setHoveredNode(null);
         highlightConnections(d, false);
       })
       .on('click', (event, d) => {
+        event.stopPropagation();
+        setSelectedNode(d);
+        highlightConnections(d, true, true);
+      })
+      .on('dblclick', (event, d) => {
         event.stopPropagation();
         setSelectedNode(d);
         highlightConnections(d, true, true);
@@ -184,79 +337,6 @@ export default function KnowledgeGraph({
         setSelectedNode(null);
       }
     });
-
-    // 高亮连接的函数
-    function highlightConnections(node: GraphNode, highlight: boolean, isSelected = false) {
-      // 找到与节点连接的所有链接和节点
-      const connectedNodeIds = new Set<string>();
-      const connectedLinks = graphData.links.filter(link => {
-        const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
-        const targetId = typeof link.target === 'string' ? link.target : link.target.id;
-        
-        if (sourceId === node.id) {
-          connectedNodeIds.add(targetId);
-          return true;
-        }
-        if (targetId === node.id) {
-          connectedNodeIds.add(sourceId);
-          return true;
-        }
-        return false;
-      });
-
-      // 更新链接样式
-      link
-        .transition()
-        .duration(200)
-        .attr('stroke-opacity', l => {
-          if (!highlight && !isSelected) return 0.6;
-          const sourceId = typeof l.source === 'string' ? l.source : l.source.id;
-          const targetId = typeof l.target === 'string' ? l.target : l.target.id;
-          return (sourceId === node.id || targetId === node.id) ? 1 : 0.1;
-        })
-        .attr('stroke-width', l => {
-          if (!highlight && !isSelected) return Math.sqrt(l.value);
-          const sourceId = typeof l.source === 'string' ? l.source : l.source.id;
-          const targetId = typeof l.target === 'string' ? l.target : l.target.id;
-          return (sourceId === node.id || targetId === node.id) ? Math.sqrt(l.value) * 2 : Math.sqrt(l.value) * 0.5;
-        });
-
-      // 更新节点样式
-      d3.selectAll('circle')
-        .transition()
-        .duration(200)
-        .attr('r', d => {
-          const currentNode = d as unknown as GraphNode;
-          if (!highlight && !isSelected) return (currentNode.type === 'note' ? 10 : 7);
-          if (currentNode.id === node.id) return (currentNode.type === 'note' ? 14 : 10);
-          return connectedNodeIds.has(currentNode.id) ? (currentNode.type === 'note' ? 12 : 9) : (currentNode.type === 'note' ? 8 : 5);
-        })
-        .attr('fill-opacity', d => {
-          const currentNode = d as unknown as GraphNode;
-          if (!highlight && !isSelected) return 1;
-          return currentNode.id === node.id || connectedNodeIds.has(currentNode.id) ? 1 : 0.3;
-        });
-
-      // 更新文本样式
-      d3.selectAll('text')
-        .transition()
-        .duration(200)
-        .style('font-size', d => {
-          const currentNode = d as unknown as GraphNode;
-          if (!highlight && !isSelected) return '10px';
-          return currentNode.id === node.id ? '12px' : (connectedNodeIds.has(currentNode.id) ? '11px' : '9px');
-        })
-        .style('font-weight', d => {
-          const currentNode = d as unknown as GraphNode;
-          if (!highlight && !isSelected) return 'normal';
-          return currentNode.id === node.id ? 'bold' : 'normal';
-        })
-        .style('fill-opacity', d => {
-          const currentNode = d as unknown as GraphNode;
-          if (!highlight && !isSelected) return 1;
-          return currentNode.id === node.id || connectedNodeIds.has(currentNode.id) ? 1 : 0.3;
-        });
-    }
 
     // 模拟更新
     simulation.on('tick', () => {
@@ -289,6 +369,7 @@ export default function KnowledgeGraph({
       });
 
     svg.call(zoom);
+    zoomRef.current = zoom;
     
     // 初始缩放设置，使图表居中
     setTimeout(() => {
@@ -319,37 +400,32 @@ export default function KnowledgeGraph({
     return () => {
       simulation.stop();
     };
-  }, [graphData, dimensions]);
-
-  // 获取节点的链接URL
-  const getNodeUrl = (node: GraphNode | null) => {
-    if (!node) return '#';
-    return node.type === 'note' ? `/notes/${node.id}` : `/blog/${node.id}`;
-  };
+  }, [graphData, dimensions, highlightConnections]);
 
   return (
-    <div className={`${styles.graphContainer} ${isFullscreen ? styles.fullscreen : ''}`}>
+    <div 
+      ref={containerRef}
+      className={`${styles.graphContainer} ${isFullscreen ? styles.fullscreen : ''}`}
+    >
       <div className={styles.graphHeader}>
         <h3>知识图谱</h3>
-        <div className={styles.legend}>
-          <div className={styles.legendItem}>
-            <span className={`${styles.legendDot} ${styles.note}`}></span>
-            <span>笔记页面</span>
-          </div>
-          <div className={styles.legendItem}>
-            <span className={`${styles.legendDot} ${styles.blog}`}></span>
-            <span>博客文章</span>
-          </div>
+        <div className={styles.graphControls}>
+          <button 
+            className={styles.resetButton}
+            onClick={resetGraph}
+            title="重置视图"
+          >
+            <i className="fas fa-undo"></i>
+          </button>
+          <button 
+            className={styles.fullscreenButton}
+            onClick={toggleFullscreen}
+            title={isFullscreen ? "退出全屏" : "全屏查看"}
+          >
+            <i className={`fas ${isFullscreen ? 'fa-compress-alt' : 'fa-expand-alt'}`}></i>
+          </button>
         </div>
       </div>
-      
-      <button 
-        className={styles.fullscreenButton}
-        onClick={toggleFullscreen}
-        title={isFullscreen ? "退出全屏" : "全屏查看"}
-      >
-        <i className={`fas ${isFullscreen ? 'fa-compress-alt' : 'fa-expand-alt'}`}></i>
-      </button>
       
       <svg 
         ref={svgRef} 
@@ -358,28 +434,14 @@ export default function KnowledgeGraph({
         className={styles.graph}
       />
       
-      {hoveredNode && (
-        <div className={styles.tooltip}>
-          <div className={styles.tooltipTitle}>
-            {hoveredNode.name}
-          </div>
-          <div className={styles.tooltipType}>
-            类型: {hoveredNode.type === 'note' ? '笔记页面' : '博客文章'}
-          </div>
-          <Link to={getNodeUrl(hoveredNode)} className={styles.tooltipLink}>
-            查看详情
-          </Link>
-        </div>
-      )}
-      
       {selectedNode && (
-        <div className={styles.nodeDetails}>
-          <h4>{selectedNode.name}</h4>
-          <p>类型: {selectedNode.type === 'note' ? '笔记页面' : '博客文章'}</p>
-          <Link to={getNodeUrl(selectedNode)} className={styles.nodeLink}>
-            打开页面
-          </Link>
-        </div>
+        <NodeModal 
+          node={selectedNode} 
+          onClose={() => {
+            setSelectedNode(null);
+            highlightConnections(selectedNode, false, true);
+          }} 
+        />
       )}
     </div>
   );

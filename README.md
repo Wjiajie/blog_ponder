@@ -3,10 +3,11 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0-brightgreen.svg)
 
-Ponder 是一个基于 Docusaurus v3 构建的现代化个人博客系统，专注于提供清晰、优雅的阅读体验。
+Ponder 是一个基于 Docusaurus v3 构建的现代化个人博客系统，专注于提供清晰、优雅的阅读体验和知识管理功能。
 
 ## ✨ 特性
 
+### 核心功能
 - 📝 支持 Markdown 和 MDX 写作
 - 🧮 内置 KaTeX 数学公式支持
 - 🔍 集成中英文全文搜索功能
@@ -15,7 +16,20 @@ Ponder 是一个基于 Docusaurus v3 构建的现代化个人博客系统，专�
 - 🎨 优雅的排版和自定义主题
 - ⚡️ 快速的页面加载速度
 - 🖼️ 支持图片优化和懒加载
-- ✏️ 在线编辑器支持
+
+### 知识管理
+- 📚 知识图谱可视化
+- 🏷️ 标签系统
+- 📂 分类管理
+- 🔗 文章关联
+- 📊 知识统计
+
+### 开发体验
+- 🔄 热重载开发
+- 📦 模块化架构
+- 🛠️ 丰富的插件系统
+- 🔧 自定义主题支持
+- 📝 在线编辑器支持
 
 ## 🚀 快速开始
 
@@ -44,9 +58,14 @@ npm run dev
 blog_ponder/
 ├── blog/                # 博客文章目录
 ├── src/                 # 源代码
+│   ├── components/      # 可复用组件
 │   ├── css/            # 自定义样式
+│   ├── hooks/          # 自定义 Hooks
 │   ├── pages/          # 页面组件
-│   └── plugins/        # 自定义插件
+│   ├── plugins/        # 自定义插件
+│   ├── theme/          # 主题相关
+│   ├── types/          # TypeScript 类型定义
+│   └── utils/          # 工具函数
 ├── static/             # 静态资源
 ├── docusaurus.config.ts # Docusaurus 配置
 └── server/             # 后端服务
@@ -62,6 +81,8 @@ blog_ponder/
    - 代码高亮
    - 图片优化
    - 自定义标签
+   - 文章关联
+   - 知识图谱
 
 ## 🛠 配置
 
@@ -73,6 +94,7 @@ blog_ponder/
 - 插件配置
 - 搜索设置
 - 评论系统
+- 知识图谱配置
 
 ## 🌐 部署
 

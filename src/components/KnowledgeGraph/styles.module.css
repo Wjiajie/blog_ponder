@@ -10,7 +10,8 @@
   position: relative;
   transition: all 0.3s ease;
   width: 100%;
-  align-items: center;
+  height: 100%;
+  min-height: 600px;
 }
 
 .graphHeader {
@@ -19,6 +20,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .graphHeader h3 {
@@ -28,71 +30,63 @@
   color: #333;
 }
 
-.legend {
+.graphControls {
   display: flex;
-  gap: 16px;
+  gap: 8px;
+  align-items: center;
 }
 
-.legendItem {
+.resetButton {
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  color: #666;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.legendDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+.resetButton:hover {
+  background-color: #e5e7eb;
 }
 
-.legendDot.note {
-  background-color: #3b82f6;
-}
-
-.legendDot.blog {
-  background-color: #10b981;
+.resetButton i {
+  font-size: 18px;
+  color: #6b7280;
 }
 
 .graph {
   cursor: move;
-  background-color: #f9fafb;
   width: 100%;
-  display: block;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
-.tooltip {
-  position: absolute;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  pointer-events: none;
-  z-index: 100;
-  max-width: 220px;
-  top: 20px;
-  right: 20px;
-  border: 1px solid #e5e7eb;
+/* 暗色模式支持 */
+:global([data-theme='dark']) .graph {
+  background-color: transparent;
 }
 
-.tooltipTitle {
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: #333;
+:global([data-theme='dark']) .graphContainer {
+  background-color: var(--ifm-background-color);
+  border-color: var(--ifm-color-emphasis-200);
 }
 
-.tooltipType {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 8px;
+:global([data-theme='dark']) .graphHeader {
+  border-color: var(--ifm-color-emphasis-200);
 }
 
-.tooltipLink {
-  display: block;
-  font-size: 12px;
-  text-decoration: none;
-  color: #3b82f6;
+:global([data-theme='dark']) .graphHeader h3 {
+  color: var(--ifm-font-color-base);
+}
+
+:global([data-theme='dark']) .modalContent {
+  background-color: var(--ifm-background-color);
+  border-color: var(--ifm-color-emphasis-200);
 }
 
 .nodeDetails {
@@ -131,9 +125,6 @@
 }
 
 .fullscreenButton {
-  position: absolute;
-  top: 16px;
-  right: 16px;
   background-color: #f3f4f6;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
@@ -143,7 +134,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 50;
   transition: background-color 0.2s;
 }
 
@@ -170,19 +160,90 @@
   border: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .fullscreen .graph {
-  height: calc(100vh - 120px);
+  flex: 1;
+  min-height: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
 }
 
 .fullscreen .graphHeader {
   padding: 20px;
   width: 100%;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  min-width: 300px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.modalClose:hover {
+  background-color: #f3f4f6;
+  color: #333;
+}
+
+.modalContent h4 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #333;
+}
+
+.modalContent p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.modalLink {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.modalLink:hover {
+  background-color: #2563eb;
+  text-decoration: none;
+  color: white;
 } 
