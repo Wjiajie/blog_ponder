@@ -10,6 +10,7 @@ interface GraphNode extends d3.SimulationNodeDatum {
   name: string;
   type: 'note' | 'blog';
   group: number;
+  description?: string;
   x?: number;
   y?: number;
 }
@@ -51,6 +52,9 @@ function NodeModal({ node, onClose }: { node: GraphNode; onClose: () => void }) 
         </button>
         <h4>{node.name}</h4>
         <p>类型: {node.type === 'note' ? '笔记页面' : '博客文章'}</p>
+        {node.description && (
+          <p className={styles.modalDescription}>{node.description}</p>
+        )}
         <Link to={getNodeUrl(node)} className={styles.modalLink}>
           打开页面
         </Link>

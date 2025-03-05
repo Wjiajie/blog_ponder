@@ -246,4 +246,15 @@
   background-color: #2563eb;
   text-decoration: none;
   color: white;
+}
+
+.modalDescription {
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+:global([data-theme='dark']) .modalDescription {
+  color: var(--ifm-color-emphasis-300);
 } 

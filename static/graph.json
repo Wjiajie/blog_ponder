@@ -80,115 +80,134 @@
     },
     {
       "id": "wepub-covert-web-to-book",
-      "name": "wepub-covert-web-to-book",
+      "name": "使用Wepub将网页优雅地转换为电子书",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "wepub-add-rss",
-      "name": "wepub-add-rss",
+      "name": "wepub增加RSS源模式",
+      "description": "wepub新增的RSS源模式功能，支持从RSS源批量抓取文章并转换为电子书，同时优化了导出功能和抓取限制。",
       "type": "blog",
       "group": 4
     },
     {
       "id": "how-to-start-google",
-      "name": "how-to-start-google",
+      "name": "【译】如何启动google",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "how-to-pick-a-career",
-      "name": "how-to-pick-a-career",
+      "name": "【译】Tim Urban：如何选择真正适合你的职业？",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
-      "id": "2025-01-14-think-for-ourself",
+      "id": "think-for-ourself",
       "name": "【译】如何为自己思考",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "designers-taste",
-      "name": "designers-taste",
+      "name": "【译】设计者的品味",
+      "description": "Paul Graham 深入探讨设计者的品味：什么是好的设计？为什么简单的设计往往是最好的？如何培养设计品味？本文将揭示跨越数学、艺术、建筑等领域的通用设计原则。",
       "type": "blog",
       "group": 4
     },
     {
       "id": "the-map-is-not-the-territory",
-      "name": "the-map-is-not-the-territory",
+      "name": "思维模型-地图不是领土",
+      "description": "本文介绍了'地图不是领土'这一思维模型的核心概念，探讨了认知模型与现实之间的差异，以及如何正确理解和应用思维模型来更好地理解复杂的现实世界。",
       "type": "blog",
       "group": 4
     },
     {
       "id": "money-psychology",
-      "name": "money-psychology",
+      "name": "读《金钱心理学》",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "relationship-with-money-trans",
-      "name": "relationship-with-money-trans",
+      "name": "【译】金钱是身份的放大器",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "nathanbarry-wealth-creation",
-      "name": "nathanbarry-wealth-creation",
+      "name": "【译】财富创造的阶梯：逐步积累财富的路线图",
+      "description": "本文是一篇关于个人如何通过不同的阶段和策略来增加收入和积累财富的文章。作者通过分享自己的经历和一些原则，为读者提供了一个积累财富的路线图。",
       "type": "blog",
       "group": 4
     },
     {
       "id": "lvalue-rvalue-move-semantics",
-      "name": "lvalue-rvalue-move-semantics",
+      "name": "一文简介C++左/右值引用以及移动语义",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "cpp-smart-pointer",
-      "name": "cpp-smart-pointer",
+      "name": "一文简介C++智能指针",
+      "description": "C++中的智能指针是自动化内存管理的一种方式。本文介绍C++智能指针的类型，以及每种类型的使用场景。",
       "type": "blog",
       "group": 4
     },
     {
       "id": "my-read-note-write_pipeline",
-      "name": "my-read-note-write_pipeline",
+      "name": "我的阅读、笔记、写作流程构建记录",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "information-cocoon-self-rescue-guide",
-      "name": "information-cocoon-self-rescue-guide",
+      "name": "【译】信息茧房自救指南",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "markdown-syntax-guide",
-      "name": "markdown-syntax-guide",
+      "name": "Markdown 语法指南",
+      "description": "Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的 HTML 文档。本文将系统地总结 Markdown 的各种语法用法，帮助你更好地掌握这个强大的文档编写工具。",
       "type": "blog",
       "group": 4
     },
     {
       "id": "solid-intro",
-      "name": "solid-intro",
+      "name": "软件构建中层结构的设计原则--SOLID",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "cpp-design-pattern",
-      "name": "cpp-design-pattern",
+      "name": "C++常用设计模式",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "transformer-intro",
-      "name": "transformer-intro",
+      "name": "Transformer简介",
+      "description": "",
       "type": "blog",
       "group": 4
     },
     {
       "id": "swin-transformer-sum",
-      "name": "swin-transformer-sum",
+      "name": "Swin Transformer总结",
+      "description": "Swin Transformer是一种针对计算机视觉任务优化的Transformer变体，解决了传统Transformer在处理图像时面临的尺度问题和计算复杂度问题。",
       "type": "blog",
       "group": 4
     }
@@ -286,7 +305,7 @@
     },
     {
       "source": "entrepreneurship",
-      "target": "2025-01-14-think-for-ourself",
+      "target": "think-for-ourself",
       "value": 1
     },
     {

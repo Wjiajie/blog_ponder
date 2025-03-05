@@ -106,6 +106,43 @@ function extractLinksFromMd(filePath) {
   }
 }
 
+// 从TSX文件中提取博客文章的标题和描述
+function extractBlogInfoFromTsx(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const blogInfo = new Map();
+    
+    // 匹配博客链接和标题
+    const linkRegex = /<Link\s+to=["']\/blog\/([^"']+)["']>([^<]+)<\/Link>/g;
+    // 匹配描述
+    const descRegex = /<p\s+className={styles\.description}>([^<]+)<\/p>/g;
+    
+    let linkMatch;
+    let descMatch;
+    let currentBlogId = null;
+    
+    // 提取链接和标题
+    while ((linkMatch = linkRegex.exec(content)) !== null) {
+      const [, blogId, title] = linkMatch;
+      currentBlogId = blogId;
+      blogInfo.set(blogId, { title });
+    }
+    
+    // 提取描述
+    while ((descMatch = descRegex.exec(content)) !== null) {
+      const [, description] = descMatch;
+      if (currentBlogId && blogInfo.has(currentBlogId)) {
+        blogInfo.get(currentBlogId).description = description;
+      }
+    }
+    
+    return blogInfo;
+  } catch (error) {
+    console.error(`Error extracting blog info from ${filePath}:`, error);
+    return new Map();
+  }
+}
+
 // 构建图谱
 function buildGraph() {
   const workspaceRoot = process.cwd();
@@ -165,6 +202,18 @@ function buildGraph() {
   try {
     const noteFiles = fs.readdirSync(notesDir).filter(f => f.endsWith('.tsx'));
     
+    // 创建一个Map来存储所有博客文章的信息
+    const blogInfoMap = new Map();
+    
+    // 首先收集所有博客文章的信息
+    for (const file of noteFiles) {
+      const filePath = path.join(notesDir, file);
+      const blogInfo = extractBlogInfoFromTsx(filePath);
+      blogInfo.forEach((info, blogId) => {
+        blogInfoMap.set(blogId, info);
+      });
+    }
+    
     for (const file of noteFiles) {
       const filePath = path.join(notesDir, file);
       const sourceId = getIdFromPath(filePath);
@@ -196,15 +245,11 @@ function buildGraph() {
           
           // 确保博客节点存在
           if (!nodeMap.has(targetId)) {
-            const blogFilePath = path.join(blogDir, targetId + '.md');
-            const altBlogFilePath = path.join(blogDir, targetId + '.mdx');
-            
-            let blogPath = fs.existsSync(blogFilePath) ? blogFilePath : 
-                          (fs.existsSync(altBlogFilePath) ? altBlogFilePath : null);
-            
+            const blogInfo = blogInfoMap.get(targetId) || {};
             const node = {
               id: targetId,
-              name: blogPath ? getNameFromPath(blogPath, targetId) : targetId,
+              name: blogInfo.title || targetId,
+              description: blogInfo.description || '',
               type: 'blog',
               group: 4 // 博客组
             };
@@ -231,9 +276,6 @@ function buildGraph() {
         }
       }
     }
-    
-    // 处理博客文件中的链接（如果需要）
-    // 这部分可以根据需要添加
     
   } catch (error) {
     console.error('Error processing files:', error);
