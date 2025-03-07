@@ -127,6 +127,40 @@ app.post('/api/fetch', async (req, res) => {
   }
 });
 
+// 获取博客文章列表
+app.get('/api/list-blogs', async (req, res) => {
+  try {
+    const blogDir = path.join(__dirname, '../blog');
+    const files = await fs.readdir(blogDir);
+    
+    const blogFiles = files
+      .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
+      .map(file => ({
+        name: file,
+        path: path.join(blogDir, file)
+      }));
+    
+    res.json({ files: blogFiles });
+  } catch (error) {
+    console.error('获取博客列表失败:', error);
+    res.status(500).json({ error: '获取博客列表失败' });
+  }
+});
+
+// 获取博客文章内容
+app.get('/api/get-blog/:fileName', async (req, res) => {
+  try {
+    const { fileName } = req.params;
+    const filePath = path.join(__dirname, '../blog', fileName);
+    
+    const content = await fs.readFile(filePath, 'utf8');
+    res.json({ content });
+  } catch (error) {
+    console.error('获取博客内容失败:', error);
+    res.status(500).json({ error: '获取博客内容失败' });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

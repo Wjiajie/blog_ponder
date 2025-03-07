@@ -6,6 +6,7 @@ import { useColorMode } from '@docusaurus/theme-common';
 import { useHistory } from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import SaveDialog from './SaveDialog';
+import BlogSelector from './BlogSelector';
 
 interface BlogEditorProps {
   onSave: (content: string) => void;
@@ -42,8 +43,8 @@ function showToastWithLink(message: string, link?: string, duration = 5000) {
   toast.style.top = '20px';
   toast.style.left = '50%';
   toast.style.transform = 'translateX(-50%)';
-  toast.style.backgroundColor = '#333';
-  toast.style.color = 'white';
+  toast.style.backgroundColor = 'var(--ifm-background-surface-color)';
+  toast.style.color = 'var(--ifm-color-emphasis-100)';
   toast.style.padding = '15px 20px';
   toast.style.borderRadius = '4px';
   toast.style.zIndex = '10000';
@@ -51,6 +52,8 @@ function showToastWithLink(message: string, link?: string, duration = 5000) {
   toast.style.flexDirection = 'column';
   toast.style.alignItems = 'center';
   toast.style.gap = '10px';
+  toast.style.border = '1px solid var(--ifm-color-emphasis-300)';
+  toast.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.15)';
   
   const messageDiv = document.createElement('div');
   messageDiv.textContent = message;
@@ -60,7 +63,7 @@ function showToastWithLink(message: string, link?: string, duration = 5000) {
     const linkDiv = document.createElement('a');
     linkDiv.href = link;
     linkDiv.textContent = '点击查看博客列表';
-    linkDiv.style.color = '#4CAF50';
+    linkDiv.style.color = 'var(--ifm-color-primary)';
     linkDiv.style.textDecoration = 'underline';
     linkDiv.style.cursor = 'pointer';
     toast.appendChild(linkDiv);
@@ -148,6 +151,34 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
   const isFirstMount = useRef(true);
   const previousColorMode = useRef(colorMode);
   const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [currentFileName, setCurrentFileName] = useState('');
+
+  // 加载已有文章
+  const loadBlogContent = async (fileName: string) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/get-blog/${fileName}`);
+      if (response.ok) {
+        const { content } = await response.json();
+        setEditorContent(content);
+        setCurrentFileName(fileName);
+        if (editorRef.current) {
+          editorRef.current.setValue(content);
+        }
+      } else {
+        showToastWithLink('加载文章失败');
+      }
+    } catch (error) {
+      console.error('加载文章失败:', error);
+      showToastWithLink('加载文章失败');
+    }
+  };
+
+  // 处理文章选择
+  const handleBlogSelect = (fileName: string) => {
+    if (fileName) {
+      loadBlogContent(fileName);
+    }
+  };
 
   // 保存编辑器内容
   const saveEditorContent = () => {
@@ -419,11 +450,13 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
 
   return (
     <div className={styles.editorContainer}>
+      <BlogSelector onSelect={handleBlogSelect} />
       <div id="vditor" className={styles.editor} />
       {showSaveDialog && (
         <SaveDialog
           onSave={handleSaveConfirm}
           onCancel={handleSaveCancel}
+          defaultFileName={currentFileName}
         />
       )}
     </div>

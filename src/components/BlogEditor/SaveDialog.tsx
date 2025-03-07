@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 
 interface SaveDialogProps {
   onSave: (fileName: string) => void;
   onCancel: () => void;
+  defaultFileName?: string;
 }
 
-export default function SaveDialog({ onSave, onCancel }: SaveDialogProps) {
-  const [fileName, setFileName] = useState('');
+export default function SaveDialog({ onSave, onCancel, defaultFileName = '' }: SaveDialogProps) {
+  const [fileName, setFileName] = useState(defaultFileName);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    setFileName(defaultFileName);
+  }, [defaultFileName]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
