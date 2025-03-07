@@ -66,3 +66,7 @@ C++:
   label: 思维模型
   description: 思维模型相关文章
 
+rag:
+  label: rag
+  description: 介绍检索增强生成（RAG）的相关文章
+

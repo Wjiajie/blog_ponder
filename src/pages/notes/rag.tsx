@@ -14,6 +14,12 @@ export default function RAG(): JSX.Element {
         </Link>
         <h1>RAG</h1>
         <div className={styles.content}>
+        <ul>
+            <li>
+              <Link to="/blog/my-rag-learning-road-map">我的RAG学习路线图</Link>
+              <p className={styles.description}>这篇文章主要记录了我在学习RAG的过程中，从零开始搭建RAG系统的历程。</p>
+            </li>
+          </ul>
         </div>
       </main>
     </Layout>

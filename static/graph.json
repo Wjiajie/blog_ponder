@@ -163,6 +163,13 @@
       "group": 4
     },
     {
+      "id": "my-rag-learning-road-map",
+      "name": "我的RAG学习路线图",
+      "description": "这篇文章主要记录了我在学习RAG的过程中，从零开始搭建RAG系统的历程。",
+      "type": "blog",
+      "group": 4
+    },
+    {
       "id": "my-read-note-write_pipeline",
       "name": "我的阅读、笔记、写作流程构建记录",
       "description": "",
@@ -362,6 +369,11 @@
       "source": "rag",
       "target": "tools-usage",
       "value": 2
+    },
+    {
+      "source": "rag",
+      "target": "my-rag-learning-road-map",
+      "value": 1
     },
     {
       "source": "reading-notes",

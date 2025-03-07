@@ -23,9 +23,6 @@ export default function ReadingNotes(): JSX.Element {
               <Link to="/blog/information-cocoon-self-rescue-guide">【译】信息茧房自救指南</Link>
               <p className={styles.description}>在信息爆炸的时代，如何突破信息茧房的束缚？本文从内容冲击、信息茧房、注意力分散和FOMO等四个维度剖析信息末日的挑战，并提供三个实用的解决方案：识别突破性知识、寻找高价值信息格式以及掌握学习方法，帮助读者在信息洪流中找到真正有价值的知识。</p>
             </li>
-          </ul>
-
-          <ul>
             <li>
               <Link to="/blog/markdown-syntax-guide">Markdown 语法指南</Link>
               <p className={styles.description}>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的 HTML 文档。本文将系统地总结 Markdown 的各种语法用法，帮助你更好地掌握这个强大的文档编写工具。</p>
