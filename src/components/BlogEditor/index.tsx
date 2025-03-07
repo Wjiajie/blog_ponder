@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
 import styles from './styles.module.css';
 import { useColorMode } from '@docusaurus/theme-common';
 import { useHistory } from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import SaveDialog from './SaveDialog';
 
 interface BlogEditorProps {
   onSave: (content: string) => void;
@@ -13,27 +14,25 @@ interface BlogEditorProps {
 const DEFAULT_CONTENT = 
 `
 ---
-title: 
-slug: 
+title: 新文章
+slug: new-post
 authors: [jiajiewu]
 tags: []
 keywords: ["blog"]
-description: ""
+description: "这是一篇新文章"
 draft: false
 ---
 
 import ZoomImage from '@site/src/components/ZoomImage';
 
-这里添加文章展示内容
+这里添加文章内容...
 
 <!-- truncate -->
 
-这里继续添加文章剩余内容
+这里继续添加文章剩余内容...
 
-图片添加的方式是：
-、、、、md
-<ZoomImage src="https://s2.loli.net/2025/01/10/9Pgh1T8ZHaeVKCD.jpg" alt='图　洛克希德公司的SR-71"黑鸟"超音速侦察机，1964年' />
-、、、、
+图片添加示例：
+<ZoomImage src="https://example.com/image.jpg" alt="图片描述" />
 `;
 
 // 创建一个带链接的 Toast 组件
@@ -143,45 +142,50 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
   const {siteConfig} = useDocusaurusContext();
   const isProduction = siteConfig.customFields?.isProduction as boolean;
   const githubToken = siteConfig.customFields?.githubToken as string;
+  const [editorMode, setEditorMode] = useState<'wysiwyg' | 'ir'>('wysiwyg');
+  const [editorContent, setEditorContent] = useState(DEFAULT_CONTENT);
+  const autoSaveTimer = useRef<NodeJS.Timeout>();
+  const isFirstMount = useRef(true);
+  const previousColorMode = useRef(colorMode);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+
+  // 保存编辑器内容
+  const saveEditorContent = () => {
+    try {
+      if (editorRef.current) {
+        const content = editorRef.current.getValue();
+        setEditorContent(content);
+        localStorage.setItem('editor_draft', content);
+      }
+    } catch (error) {
+      console.error('Error saving content:', error);
+    }
+  };
+
+  // 自动保存
+  const startAutoSave = () => {
+    try {
+      if (autoSaveTimer.current) {
+        clearInterval(autoSaveTimer.current);
+      }
+      autoSaveTimer.current = setInterval(saveEditorContent, 30000);
+    } catch (error) {
+      console.error('Error starting auto save:', error);
+    }
+  };
 
   const handleSave = async () => {
+    setShowSaveDialog(true);
+  };
+
+  const handleSaveConfirm = async (fileName: string) => {
     if (editorRef.current) {
       const content = editorRef.current.getValue();
       
-      // 首先解析整个 frontmatter
-      const frontmatterMatch = content.match(/^---([\s\S]*?)---/);
-      if (!frontmatterMatch) {
-        showToastWithLink('无效的文章格式，请确保包含 frontmatter');
-        return;
-      }
-
-      const frontmatter = frontmatterMatch[1];
-      const titleMatch = frontmatter.match(/\ntitle:\s*(.+)/);
-      const slugLine = frontmatter.split('\n').find(line => line.trim().startsWith('slug:'));
-      
-      if (!titleMatch) {
-        showToastWithLink('请先输入文章标题');
-        return;
-      }
-
-      const date = new Date().toISOString().split('T')[0];
-      
-      // 从 slug 行中提取值，如果没有或为空则使用 undefined
-      const currentSlug = slugLine 
-        ? slugLine.replace(/^slug:\s*/, '').trim() 
-        : '';
-      const fileSlug = currentSlug || 'undefined';
-      const fileName = `${date}-${fileSlug}.md`;
-
-      // 更新文章内容中的 slug，确保包含日期
-      const newSlug = `${date}-${fileSlug}`;
-      const updatedContent = content.replace(
-        /^(slug:\s*).*$/m,
-        `slug: ${newSlug}`
-      );
-      
       try {
-        console.log('Environment:', {
+        console.log('开始保存文章:', {
+          fileName,
+          contentLength: content.length,
           isProduction,
           githubToken: githubToken ? '存在' : '未设置',
           NODE_ENV: process.env.NODE_ENV
@@ -195,106 +199,233 @@ export default function BlogEditor({ onSave }: BlogEditorProps) {
             return;
           }
           
-          await createOrUpdateFile(`blog/${fileName}`, updatedContent, githubToken);
-          showToastWithLink('✨ 文章保存成功！', '/blog');
-        } else {
-          const response = await fetch('http://localhost:3001/api/save-blog', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ content: updatedContent }),
-          });
-          
-          if (response.ok) {
+          try {
+            const result = await createOrUpdateFile(`blog/${fileName}`, content, githubToken);
+            console.log('GitHub API 响应:', result);
             showToastWithLink('✨ 文章保存成功！', '/blog');
-          } else {
-            showToastWithLink('保存失败，请重试');
+          } catch (githubError) {
+            console.error('GitHub API 错误:', githubError);
+            showToastWithLink(`保存失败: ${githubError.message}`);
+          }
+        } else {
+          console.log('正在使用本地环境保存逻辑');
+          try {
+            const response = await fetch('http://localhost:3001/api/save-blog', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ 
+                fileName,
+                content 
+              }),
+            });
+            
+            if (response.ok) {
+              const result = await response.json();
+              console.log('本地保存响应:', result);
+              showToastWithLink('✨ 文章保存成功！', '/blog');
+            } else {
+              const errorData = await response.json();
+              console.error('本地保存错误:', errorData);
+              showToastWithLink(`保存失败: ${errorData.message || '未知错误'}`);
+            }
+          } catch (localError) {
+            console.error('本地保存请求错误:', localError);
+            showToastWithLink('保存失败：无法连接到本地服务器');
           }
         }
       } catch (error) {
-        console.error('Error saving blog post:', error);
-        showToastWithLink('保存失败，请重试');
+        console.error('保存过程中的错误:', error);
+        showToastWithLink(`保存失败: ${error.message || '未知错误'}`);
       }
+    }
+    setShowSaveDialog(false);
+  };
+
+  const handleSaveCancel = () => {
+    setShowSaveDialog(false);
+  };
+
+  // 初始化编辑器
+  const initEditor = async (content: string) => {
+    try {
+      if (editorRef.current) {
+        editorRef.current.destroy();
+        editorRef.current = null;
+      }
+
+      editorRef.current = new Vditor('vditor', {
+        height: '100%',
+        theme: colorMode === 'dark' ? 'dark' : 'classic',
+        mode: editorMode,
+        value: content,
+        placeholder: '开始写作...',
+        cache: {
+          enable: true,
+        },
+        toolbar: [
+          'emoji',
+          'headings',
+          'bold',
+          'italic',
+          'strike',
+          'link',
+          '|',
+          'list',
+          'ordered-list',
+          'check',
+          'outdent',
+          'indent',
+          '|',
+          'quote',
+          'line',
+          'code',
+          'inline-code',
+          'insert-before',
+          'insert-after',
+          '|',
+          'upload',
+          'table',
+          '|',
+          'undo',
+          'redo',
+          '|',
+          'fullscreen',
+          'preview',
+          'outline',
+          'export',
+          '|',
+          'edit-mode',
+          '|',
+          'more',
+          {
+            name: 'save',
+            tip: '保存',
+            icon: '<svg t="1704899549426" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4231" width="16" height="16"><path d="M960 166.4L857.6 64H160c-52.8 0-96 43.2-96 96v704c0 52.8 43.2 96 96 96h704c52.8 0 96-43.2 96-96V166.4zM512 832c-105.6 0-192-86.4-192-192s86.4-192 192-192 192 86.4 192 192-86.4 192-192 192z m192-512H192V192h512v128z" p-id="4232"></path></svg>',
+            click: handleSave,
+          },
+        ],
+        after: () => {
+          console.log('Vditor initialized');
+          editorRef.current?.focus();
+          startAutoSave();
+          // 移除 logo
+          const logoElement = document.querySelector('.vditor-toolbar__logo');
+          if (logoElement) {
+            logoElement.remove();
+          }
+        },
+        preview: {
+          markdown: {
+            toc: true,
+            mark: true,
+            footnotes: true,
+            autoSpace: true,
+          },
+          hljs: {
+            enable: true,
+            style: 'github',
+          },
+          math: {
+            engine: 'KaTeX',
+            inlineDigit: true,
+            macros: {},
+          },
+          mermaid: {
+            enable: true,
+            theme: colorMode === 'dark' ? 'dark' : 'default',
+          },
+          echarts: {
+            enable: true,
+          },
+          graphviz: {
+            enable: true,
+          },
+          plantuml: {
+            enable: true,
+            server: 'https://www.plantuml.com/plantuml',
+          },
+          mindmap: {
+            enable: true,
+          },
+          gantt: {
+            enable: true,
+          },
+          speech: {
+            enable: true,
+          },
+        } as any,
+        upload: {
+          url: '/api/upload',
+          accept: 'image/*',
+          linkToImgUrl: '/api/fetch',
+          max: 10 * 1024 * 1024,
+          linkToImgFormat: (response: string) => {
+            try {
+              const json = JSON.parse(response);
+              return json.url;
+            } catch (error) {
+              console.error('Error parsing upload response:', error);
+              return '';
+            }
+          },
+        },
+      });
+    } catch (error) {
+      console.error('Error initializing editor:', error);
     }
   };
 
+  // 初始化和主题变化处理
   useEffect(() => {
-    const initEditor = async () => {
-      if (!editorRef.current) {
-        editorRef.current = new Vditor('vditor', {
-          height: '100%',
-          theme: colorMode === 'dark' ? 'dark' : 'classic',
-          mode: 'wysiwyg',
-          value: DEFAULT_CONTENT,
-          placeholder: '开始写作...',
-          cache: {
-            enable: true,
-          },
-          toolbar: [
-            'emoji',
-            'headings',
-            'bold',
-            'italic',
-            'strike',
-            'link',
-            '|',
-            'list',
-            'ordered-list',
-            'check',
-            'outdent',
-            'indent',
-            '|',
-            'quote',
-            'line',
-            'code',
-            'inline-code',
-            'insert-before',
-            'insert-after',
-            '|',
-            'upload',
-            'table',
-            '|',
-            'undo',
-            'redo',
-            '|',
-            'fullscreen',
-            'preview',
-            'outline',
-            'export',
-            {
-              name: 'save',
-              tip: '保存',
-              icon: '<svg t="1704899549426" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4231" width="16" height="16"><path d="M960 166.4L857.6 64H160c-52.8 0-96 43.2-96 96v704c0 52.8 43.2 96 96 96h704c52.8 0 96-43.2 96-96V166.4zM512 832c-105.6 0-192-86.4-192-192s86.4-192 192-192 192 86.4 192 192-86.4 192-192 192z m192-512H192V192h512v128z" p-id="4232"></path></svg>',
-              click: handleSave,
-            },
-          ],
-          after: () => {
-            console.log('Vditor initialized');
-            editorRef.current?.focus();
-          },
-          preview: {
-            markdown: {
-              toc: true,
-              mark: true,
-              footnotes: true,
-              autoSpace: true,
-            },
-          },
-        });
+    let isMounted = true;
+
+    const setupEditor = async () => {
+      if (isMounted) {
+        // 首次挂载时，清除并重置 localStorage
+        if (isFirstMount.current) {
+          localStorage.removeItem('editor_draft');
+          localStorage.setItem('editor_draft', DEFAULT_CONTENT);
+          isFirstMount.current = false;
+        }
+
+        // 主题切换时，保存当前内容
+        if (previousColorMode.current !== colorMode) {
+          saveEditorContent();
+          previousColorMode.current = colorMode;
+        }
+
+        // 从 localStorage 获取内容
+        const savedContent = localStorage.getItem('editor_draft') || DEFAULT_CONTENT;
+        await initEditor(savedContent);
       }
     };
 
-    initEditor();
+    setupEditor();
 
     return () => {
-      editorRef.current?.destroy();
+      isMounted = false;
+      saveEditorContent();
+      if (autoSaveTimer.current) {
+        clearInterval(autoSaveTimer.current);
+      }
+      if (editorRef.current) {
+        editorRef.current.destroy();
+        editorRef.current = null;
+      }
     };
-  }, [colorMode]);
+  }, [colorMode, editorMode]);
 
   return (
     <div className={styles.editorContainer}>
       <div id="vditor" className={styles.editor} />
+      {showSaveDialog && (
+        <SaveDialog
+          onSave={handleSaveConfirm}
+          onCancel={handleSaveCancel}
+        />
+      )}
     </div>
   );
 } 
