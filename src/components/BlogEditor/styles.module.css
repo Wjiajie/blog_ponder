@@ -329,6 +329,14 @@
   background-color: var(--ifm-background-color);
   color: var(--ifm-color-emphasis-900);
   font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 32px;
 }
 
 .selector:focus {
@@ -353,6 +361,7 @@
   background-color: var(--ifm-background-color);
   color: var(--ifm-color-emphasis-100);
   border-color: var(--ifm-color-emphasis-300);
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
 }
 
 [data-theme='dark'] .selector:focus {
@@ -363,7 +372,85 @@
   color: var(--ifm-color-emphasis-400);
 }
 
+/* 下拉列表选项样式 */
+.selector option {
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-900);
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* 暗色主题下拉列表选项样式 */
 [data-theme='dark'] .selector option {
   background-color: var(--ifm-background-color);
+  color: white;
+}
+
+/* 下拉列表悬停样式 */
+.selector option:hover,
+.selector option:focus {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .selector option:hover,
+[data-theme='dark'] .selector option:focus {
+  background-color: var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-primary);
+}
+
+/* 下拉列表打开时的样式 */
+.selector:focus option:checked {
+  background-color: var(--ifm-color-primary);
+  color: white;
+}
+
+[data-theme='dark'] .selector:focus option:checked {
+  background-color: var(--ifm-color-primary);
+  color: white;
+}
+
+/* 下拉列表样式 */
+:global(.vditor-toolbar__menu) {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+:global(.vditor-toolbar__menu .vditor-toolbar__item) {
+  color: var(--ifm-color-emphasis-900);
+}
+
+[data-theme='dark'] :global(.vditor-toolbar__menu) {
+  background-color: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] :global(.vditor-toolbar__menu .vditor-toolbar__item) {
   color: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] :global(.vditor-toolbar__menu .vditor-toolbar__item:hover) {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-primary);
+}
+
+/* 有序列表样式 */
+:global(.vditor-reset ol) {
+  color: var(--ifm-color-emphasis-900);
+}
+
+/* 引用样式 */
+:global(.vditor-reset blockquote) {
+  color: var(--ifm-color-emphasis-900);
+  border-left-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] :global(.vditor-reset ol) {
+  color: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] :global(.vditor-reset blockquote) {
+  color: var(--ifm-color-emphasis-100);
+  border-left-color: var(--ifm-color-emphasis-300);
 } 
