@@ -191,6 +191,13 @@
     {
       "id": "my-rag-learning-road-map",
       "name": "我的RAG学习路线图",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "how-to-start-learn-rag-with-llmware",
+      "name": "如何使用llmware开始学习RAG",
       "description": "这篇文章主要记录了我在学习RAG的过程中，从零开始搭建RAG系统的历程。",
       "type": "blog",
       "group": 4
@@ -424,6 +431,11 @@
     {
       "source": "rag",
       "target": "my-rag-learning-road-map",
+      "value": 1
+    },
+    {
+      "source": "rag",
+      "target": "how-to-start-learn-rag-with-llmware",
       "value": 1
     },
     {

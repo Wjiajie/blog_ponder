@@ -20,6 +20,8 @@ draft: false
 
 ## [用llmware从0到1搭建一个RAG系统](https://github.com/llmware-ai/llmware)
 
+* [如何使用LLMware开始学习RAG](/blog/how-to-start-learn-rag-with-llmware)
+
 ## 企业级RAG框架解析
 
 ## RAG论文阅读

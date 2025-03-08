@@ -78,3 +78,7 @@ rag:
   label: 论文阅读
   description: 论文阅读相关文章
 
+LLM:
+  label: LLM
+  description: LLM相关文章
+
