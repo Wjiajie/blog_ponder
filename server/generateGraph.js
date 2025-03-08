@@ -1,24 +1,54 @@
 const fs = require('fs');
 const path = require('path');
 
-// 笔记项目数据 - 直接从源文件复制
-const noteItems = [
-  { title: '计算机科学', link: '/notes/computer-science', level: 1, icon: 'fas fa-laptop-code' },
-  { title: '软件架构', link: '/notes/software-architecture', level: 2, icon: 'fas fa-sitemap' },
-  { title: '编程语言', link: '/notes/programming-languages', level: 2, icon: 'fas fa-code' },
-  
-  { title: '工具使用', link: '/notes/tools-usage', level: 1, icon: 'fas fa-tools' },
-  { title: 'RAG', link: '/notes/rag', level: 2, icon: 'fas fa-database' },
-  { title: '数据格式转换', link: '/notes/data-format-conversion', level: 2, icon: 'fas fa-exchange-alt' },
-  
-  { title: '通用价值', link: '/notes/universal-values', level: 1, icon: 'fas fa-globe' },
-  { title: '思维模型', link: '/notes/mental-models', level: 2, icon: 'fas fa-brain' },
-  { title: '金钱观', link: '/notes/money-philosophy', level: 2, icon: 'fas fa-money-bill-wave' },
-  { title: '创业', link: '/notes/entrepreneurship', level: 2, icon: 'fas fa-rocket' },
-  
-  { title: '生活随笔', link: '/notes/life', level: 1, icon: 'fas fa-pen-fancy' },
-  { title: '读书杂谈', link: '/notes/reading-notes', level: 2, icon: 'fas fa-book-reader' },
-];
+// 从NoteIndex组件中读取noteItems数据
+function getNoteItemsFromComponent() {
+  try {
+    const noteIndexPath = path.join(process.cwd(), 'src', 'components', 'NoteIndex', 'index.tsx');
+    const content = fs.readFileSync(noteIndexPath, 'utf8');
+    
+    // 提取noteItems数组
+    const noteItemsMatch = content.match(/const\s+noteItems\s*:\s*NoteItem\[\]\s*=\s*\[([\s\S]*?)\];/);
+    
+    if (!noteItemsMatch || !noteItemsMatch[1]) {
+      console.error('无法从NoteIndex组件中提取noteItems数据');
+      process.exit(1);
+    }
+    
+    // 解析noteItems数据
+    const noteItemsStr = noteItemsMatch[1];
+    // 更新正则表达式，支持单引号和双引号
+    const itemRegex = /{\s*title:\s*['"]([^'"]+)['"]\s*,\s*link:\s*['"]([^'"]+)['"]\s*,\s*level:\s*(\d+)(?:\s*,\s*icon:\s*['"]([^'"]+)['"])?\s*}/g;
+    
+    const noteItems = [];
+    let match;
+    
+    while ((match = itemRegex.exec(noteItemsStr)) !== null) {
+      const [, title, link, level, icon] = match;
+      noteItems.push({
+        title,
+        link,
+        level: parseInt(level, 10),
+        ...(icon ? { icon } : {})
+      });
+    }
+    
+    if (noteItems.length === 0) {
+      console.error('未能从NoteIndex组件中提取到任何笔记项目，请检查正则表达式是否匹配');
+      console.log('提取到的noteItems字符串:', noteItemsStr);
+      process.exit(1);
+    }
+    
+    console.log(`从NoteIndex组件中成功提取了 ${noteItems.length} 个笔记项目`);
+    return noteItems;
+  } catch (error) {
+    console.error('读取NoteIndex组件数据时出错:', error);
+    process.exit(1);
+  }
+}
+
+// 获取noteItems数据
+const noteItems = getNoteItemsFromComponent();
 
 // 图谱数据结构
 const graphData = {

@@ -16,7 +16,11 @@ function remarkReferenceNotes() {
           const match = firstChild.value.match(/^\^(\d+):\s*(.+)$/);
           if (match) {
             const [, num, content] = match;
-            notes.set(num, content);
+            // 存储原始内容，稍后会解析其中的链接
+            notes.set(num, {
+              content,
+              node: node.children.slice(1) // 保存除了第一个文本节点外的所有节点
+            });
             if (notesStartIndex === -1) {
               notesStartIndex = i;
             }
@@ -85,54 +89,97 @@ function remarkReferenceNotes() {
     // 创建处理后的引用列表
     const processedNotes = Array.from(notes.entries())
       .sort(([a], [b]) => Number(a) - Number(b))
-      .map(([num, content]) => ({
-        type: 'paragraph',
-        children: [
-          // 注释编号
-          {
-            type: 'link',
-            url: '',
-            children: [{
+      .map(([num, noteData]) => {
+        // 解析引用内容中的Markdown链接
+        const contentText = noteData.content;
+        const contentNodes = [];
+        
+        // 检查内容中是否有Markdown链接 [text](url)
+        const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+        let lastIndex = 0;
+        let match;
+        
+        while ((match = linkRegex.exec(contentText)) !== null) {
+          // 添加链接前的文本
+          if (match.index > lastIndex) {
+            contentNodes.push({
               type: 'text',
-              value: `[${num}]`
-            }],
-            data: {
-              hProperties: {
-                id: `note${num}`
-              }
-            }
-          },
-          // 空格
-          {
-            type: 'text',
-            value: ' '
-          },
-          // 注释内容
-          {
-            type: 'text',
-            value: content
-          },
-          // 空格
-          {
-            type: 'text',
-            value: ' '
-          },
-          // 返回链接
-          {
-            type: 'link',
-            url: `#ref${num}`,
-            children: [{
-              type: 'text',
-              value: '↩'
-            }],
-            data: {
-              hProperties: {
-                className: ['back-to-ref']
-              }
-            }
+              value: contentText.substring(lastIndex, match.index)
+            });
           }
-        ]
-      }));
+          
+          // 添加链接
+          contentNodes.push({
+            type: 'link',
+            url: match[2],
+            children: [{
+              type: 'text',
+              value: match[1]
+            }]
+          });
+          
+          lastIndex = match.index + match[0].length;
+        }
+        
+        // 添加剩余文本
+        if (lastIndex < contentText.length) {
+          contentNodes.push({
+            type: 'text',
+            value: contentText.substring(lastIndex)
+          });
+        }
+        
+        // 添加原始节点中的其他内容（如果有）
+        if (noteData.node && noteData.node.length > 0) {
+          contentNodes.push(...noteData.node);
+        }
+
+        return {
+          type: 'paragraph',
+          children: [
+            // 注释编号
+            {
+              type: 'link',
+              url: '',
+              children: [{
+                type: 'text',
+                value: `[${num}]`
+              }],
+              data: {
+                hProperties: {
+                  id: `note${num}`
+                }
+              }
+            },
+            // 空格
+            {
+              type: 'text',
+              value: ' '
+            },
+            // 注释内容（现在包含解析后的链接）
+            ...contentNodes,
+            // 空格
+            {
+              type: 'text',
+              value: ' '
+            },
+            // 返回链接
+            {
+              type: 'link',
+              url: `#ref${num}`,
+              children: [{
+                type: 'text',
+                value: '↩'
+              }],
+              data: {
+                hProperties: {
+                  className: ['back-to-ref']
+                }
+              }
+            }
+          ]
+        };
+      });
 
     // 在原位置替换引用段落
     tree.children.splice(notesStartIndex, notesEndIndex - notesStartIndex, ...processedNotes);

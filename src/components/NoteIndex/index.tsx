@@ -25,7 +25,11 @@ const noteItems: NoteItem[] = [
   { title: '计算机科学', link: '/notes/computer-science', level: 1, icon: 'fas fa-laptop-code' },
   { title: '软件架构', link: '/notes/software-architecture', level: 2, icon: 'fas fa-sitemap' },
   { title: '编程语言', link: '/notes/programming-languages', level: 2, icon: 'fas fa-code' },
-  
+
+  // 泛领域知识
+  { title: '泛领域知识', link: '/notes/general-knowledge', level: 1, icon: 'fas fa-book-open' },
+  { title: '脑科学', link: '/notes/brain-science', level: 2, icon: 'fas fa-brain' },
+
   // 工具与技术
   { title: '工具使用', link: '/notes/tools-usage', level: 1, icon: 'fas fa-tools' },
   { title: 'RAG', link: '/notes/rag', level: 2, icon: 'fas fa-database' },

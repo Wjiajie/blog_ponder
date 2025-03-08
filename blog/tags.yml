@@ -70,3 +70,11 @@ rag:
   label: rag
   description: 介绍检索增强生成（RAG）的相关文章
 
+脑科学:
+  label: 脑科学
+  description: 脑科学相关文章
+
+论文阅读:
+  label: 论文阅读
+  description: 论文阅读相关文章
+
