@@ -90,6 +90,10 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        gtag: {
+          trackingID: 'G-JF1XWR8SWM', // 替换为您的Google Analytics 4测量ID
+          anonymizeIP: true,
+        },
       } satisfies Preset.Options,
     ],
   ],
