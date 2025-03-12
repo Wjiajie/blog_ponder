@@ -27,6 +27,10 @@ export default function ReadingNotes(): JSX.Element {
               <Link to="/blog/markdown-syntax-guide">Markdown 语法指南</Link>
               <p className={styles.description}>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的 HTML 文档。本文将系统地总结 Markdown 的各种语法用法，帮助你更好地掌握这个强大的文档编写工具。</p>
             </li>
+            <li>
+              <Link to="/blog/intro-fs-blog">高质量信息源推荐-Farnam Street</Link>
+              <p className={styles.description}>介绍一个高质量的信息源Farnam Street博客，包括其播客、实体书和文章板块的内容介绍。</p>
+            </li>
           </ul>
         </div>
       </main>
