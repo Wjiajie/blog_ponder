@@ -39,13 +39,13 @@ import ZoomImage from '@site/src/components/ZoomImage';
 **收听方式**  
 🔗 **平台**：Apple Podcasts、Spotify、YouTube
 
-### 实体书
+## 实体书
 <ZoomImage src="https://cdn.sa.net/2025/03/12/3HYVP4eoRT9Mq5S.png" alt="screenshot-20250312-224821.png" />
 
 - **畅销书《清晰思考》**：纽约时报榜单作品，提供应对复杂问题的 6 步行动框架。
 - **《思维模型》系列丛书**：四卷本跨学科巨著，将物理、生物等领域原理转化为商业武器。
 
-### 博客文章板块
+## 博客文章板块
 
 <ZoomImage src="https://cdn.sa.net/2025/03/12/Aqx7kb4ZWzNPI9C.png" alt="screenshot-20250312-224907.png" />
 
