@@ -31,6 +31,10 @@ export default function ReadingNotes(): JSX.Element {
               <Link to="/blog/intro-fs-blog">高质量信息源推荐-Farnam Street</Link>
               <p className={styles.description}>介绍一个高质量的信息源Farnam Street博客，包括其播客、实体书和文章板块的内容介绍。</p>
             </li>
+            <li>
+              <Link to="/blog/writes-and-write-nots">【译】好作家和不会写作的人</Link>
+              <p className={styles.description}>本文探讨了写作在未来的变化，特别是随着AI的发展，写作技能的分化以及其对思维能力的影响。</p>
+            </li>
           </ul>
         </div>
       </main>

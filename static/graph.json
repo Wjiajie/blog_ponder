@@ -226,7 +226,14 @@
     {
       "id": "intro-fs-blog",
       "name": "高质量信息源推荐-Farnam Street",
-      "description": "介绍一个高质量的信息源Farnam Street博客，包括其播客、实体书和文章板块的内容介绍。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "writes-and-write-nots",
+      "name": "【译】好作家和不会写作的人",
+      "description": "本文探讨了写作在未来的变化，特别是随着AI的发展，写作技能的分化以及其对思维能力的影响。",
       "type": "blog",
       "group": 4
     },
@@ -468,6 +475,11 @@
     {
       "source": "reading-notes",
       "target": "intro-fs-blog",
+      "value": 1
+    },
+    {
+      "source": "reading-notes",
+      "target": "writes-and-write-nots",
       "value": 1
     },
     {
