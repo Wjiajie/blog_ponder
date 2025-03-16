@@ -23,6 +23,10 @@ export default function RAG(): JSX.Element {
               <Link to="/blog/how-to-start-learn-rag-with-llmware">如何使用llmware开始学习RAG</Link>
               <p className={styles.description}>这篇文章主要记录了我在学习RAG的过程中，从零开始搭建RAG系统的历程。</p>
             </li>
+            <li>
+              <Link to="/blog/llmware-create-first-library">使用llmware创建第一个知识库</Link>
+              <p className={styles.description}>本文介绍了如何使用llmware库创建第一个知识库，包括文档解析、分块、索引和基本查询的步骤。</p>
+            </li>
           </ul>
         </div>
       </main>

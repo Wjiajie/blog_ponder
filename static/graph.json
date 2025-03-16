@@ -198,7 +198,14 @@
     {
       "id": "how-to-start-learn-rag-with-llmware",
       "name": "如何使用llmware开始学习RAG",
-      "description": "这篇文章主要记录了我在学习RAG的过程中，从零开始搭建RAG系统的历程。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "llmware-create-first-library",
+      "name": "使用llmware创建第一个知识库",
+      "description": "本文介绍了如何使用llmware库创建第一个知识库，包括文档解析、分块、索引和基本查询的步骤。",
       "type": "blog",
       "group": 4
     },
@@ -450,6 +457,11 @@
     {
       "source": "rag",
       "target": "how-to-start-learn-rag-with-llmware",
+      "value": 1
+    },
+    {
+      "source": "rag",
+      "target": "llmware-create-first-library",
       "value": 1
     },
     {
