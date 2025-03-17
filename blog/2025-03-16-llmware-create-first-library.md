@@ -9,6 +9,10 @@ draft: false
 ---
 import ZoomImage from '@site/src/components/ZoomImage';
 
+**系列文章**
+* [我的RAG学习路线图](/blog/my-rag-learning-road-map)
+* [如何使用LLMware开始学习RAG](/blog/how-to-start-learn-rag-with-llmware)
+
 这个小结我们会先从一个简单的例子：*example-1-create_first_library.py* 开始llmware系列的学习，这个示例会调用llmware的库函数完成以下的几个基础步骤：
 
 1. 创建一个库作为您的知识库的组织结构。
