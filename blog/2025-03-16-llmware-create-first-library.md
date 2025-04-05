@@ -2,7 +2,7 @@
 title: '使用llmware创建第一个知识库'
 slug: llmware-create-first-library
 authors: [jiajiewu]
-tags: [RAG]
+tags: [rag]
 keywords: ["RAG", "LLM", "个人博客", "技术实现"]
 description: "本文介绍了如何使用llmware库创建第一个知识库，包括文档解析、分块、索引和基本查询的步骤。"
 draft: false

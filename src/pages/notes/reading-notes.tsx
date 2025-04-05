@@ -35,6 +35,10 @@ export default function ReadingNotes(): JSX.Element {
               <Link to="/blog/writes-and-write-nots">【译】好作家和不会写作的人</Link>
               <p className={styles.description}>本文探讨了写作在未来的变化，特别是随着AI的发展，写作技能的分化以及其对思维能力的影响。</p>
             </li>
+            <li>
+                <Link to="/blog/you-and-your-research">【译】你和你的研究</Link>
+                <p className={styles.description}>本文是理查德·汉明（Richard Hamming）在1986年的一次演讲，他分享了关于科研的七个条件，以及如何成为一个优秀的科研工作者。</p>
+            </li>
           </ul>
         </div>
       </main>

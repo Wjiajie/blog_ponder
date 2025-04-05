@@ -1,4 +1,9 @@
 ---
+description: 
+globs: .md,.mdx
+alwaysApply: false
+---
+---
 description: help we to write perfect blog contents
 globs: .md, .mdx
 ---

@@ -240,7 +240,14 @@
     {
       "id": "writes-and-write-nots",
       "name": "【译】好作家和不会写作的人",
-      "description": "本文探讨了写作在未来的变化，特别是随着AI的发展，写作技能的分化以及其对思维能力的影响。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "you-and-your-research",
+      "name": "【译】你和你的研究",
+      "description": "本文是理查德·汉明（Richard Hamming）在1986年的一次演讲，他分享了关于科研的七个条件，以及如何成为一个优秀的科研工作者。",
       "type": "blog",
       "group": 4
     },
@@ -492,6 +499,11 @@
     {
       "source": "reading-notes",
       "target": "writes-and-write-nots",
+      "value": 1
+    },
+    {
+      "source": "reading-notes",
+      "target": "you-and-your-research",
       "value": 1
     },
     {
