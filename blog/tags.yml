@@ -86,4 +86,8 @@ LLM:
   label: 信息源
   description: 分享高质量信息源相关文章
 
+读书笔记:
+  label: 读书笔记
+  description: 读书笔记相关文章
+
 

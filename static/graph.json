@@ -247,7 +247,14 @@
     {
       "id": "you-and-your-research",
       "name": "【译】你和你的研究",
-      "description": "本文是理查德·汉明（Richard Hamming）在1986年的一次演讲，他分享了关于科研的七个条件，以及如何成为一个优秀的科研工作者。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "atomic-habits-reading-notes",
+      "name": "《原子习惯》读书笔记",
+      "description": "《原子习惯》是一本教你通过积累微小习惯实现个人蜕变的实用指南。作者詹姆斯・克利尔提出，习惯是自我提升的复利，通过 “四大定律”—— 让习惯显而易见、有吸引力、简便易行、令人愉悦，能系统地建立好习惯、破除坏习惯。书中结合大量案例（如英国自行车队通过 1% 的边际改进夺冠、普通人通过身份认同重塑习惯等），阐明习惯如何塑造身份，以及如何通过环境设计、社会影响、即时反馈等策略让习惯自然发生。这本书适用于个人成长、职场提升、健康管理等多个领域，适合所有希望通过持续微小改变实现长期目标的读者，尤其适合那些厌倦了 “三分钟热度”、想找到科学方法坚持习惯的人。",
       "type": "blog",
       "group": 4
     },
@@ -504,6 +511,11 @@
     {
       "source": "reading-notes",
       "target": "you-and-your-research",
+      "value": 1
+    },
+    {
+      "source": "reading-notes",
+      "target": "atomic-habits-reading-notes",
       "value": 1
     },
     {
