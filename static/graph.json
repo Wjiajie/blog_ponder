@@ -261,7 +261,14 @@
     {
       "id": "clear-thinking-reading-notes",
       "name": "《清晰思考》读书笔记",
-      "description": "《清晰思考》是一本教你如何通过克服生物本能带来的 “默认值”（如情绪、自我、社会、惯性反应），培养清晰思考的能力，从而将平凡时刻转化为非凡成就的实用指南。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "goals-and-systems",
+      "name": "《目标与系统》读书笔记",
+      "description": "本文主要讲述了作者 21 岁飞往加州的经历和感悟。作者从纽约小镇飞往加州寻找成功，在飞机上与螺丝制造公司 CEO 交流后得到职业建议。文中通过多个例子阐述了目标与系统的区别，目标是未来可能实现也可能不实现的具体目的，而系统是定期要做的事，能增加幸福指数。如减肥、运动、商界及奥运选手、扎克伯格、巴菲特、作者的朋友等例子都被用来区分目标和系统。作者强调研究成功者会发现他们多追随系统，且系统应能让人合理期望到达更好的地方。",
       "type": "blog",
       "group": 4
     },
@@ -528,6 +535,11 @@
     {
       "source": "reading-notes",
       "target": "clear-thinking-reading-notes",
+      "value": 1
+    },
+    {
+      "source": "reading-notes",
+      "target": "goals-and-systems",
       "value": 1
     },
     {
