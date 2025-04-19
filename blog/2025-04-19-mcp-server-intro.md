@@ -68,11 +68,11 @@ MCP 是一种开放协议，它规范了应用程序如何向大语言模型提�
 	- 值: "天气查询服务，提供天气预报和警报信息"
 	- 作用: 提供服务的功能描述
 	- 说明: 中文描述让用户清楚了解这个服务提供的功能
-4. displayName
+4. displayName（可选）
 	- 值: "Weather Service"
 	- 作用: 在用户界面中显示的友好名称
 	- 说明: 通常在UI界面上显示这个名称，而不是技术性的标识符
-5. args
+5. args（可选）
 	- 值: []（空数组）
 	- 作用: 传递给command的额外命令行参数
 	- 说明: 当前配置没有提供额外参数，但可以根据需要添加
@@ -83,7 +83,7 @@ MCP 是一种开放协议，它规范了应用程序如何向大语言模型提�
 了解如何在 Cursor 的 Composer 功能中添加和使用自定义 MCP 工具
 [模型上下文协议 (MCP)](https://modelcontextprotocol.io/introduction) 是一个开放协议，允许你在 Cursor 中为 Agentic LLM 提供自定义工具。
 MCP 工具可能不适用于所有模型。MCP 工具仅在 Composer 的 Agent 中可用。
-Cursor 实现了 MCP 客户端，该客户端支持任意数量的 MCP 服务器。Cursor 的 MCP 客户端支持 `stdio` 和 `sse` 传输。下面介绍`stdio`传输的方式，它能允许你
+Cursor 实现了 MCP 客户端，该客户端支持任意数量的 MCP 服务器。Cursor 的 MCP 客户端支持 `stdio` 和 `sse` 传输。下面介绍`stdio`传输的方式，它能允许你调用本地运行的mcp服务器。
 ### 向 Cursor 添加 MCP 服务器
 
 要向 Cursor 添加 MCP 服务器，请转到 `Cursor 设置` > `功能` > `MCP` ，然后单击 `+ 添加新的 MCP 服务器` 按钮。
@@ -331,9 +331,9 @@ async function main() {
 
 
 ## 参考链接
-[modelcontextprotocol.io](https://modelcontextprotocol.io/introduction)
-[cursor](https://cursordocs.com/docs/context/model-context-protocol)
-[awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers)
-[modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)
-[modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk)
+* [modelcontextprotocol.io](https://modelcontextprotocol.io/introduction)
+* [cursor](https://cursordocs.com/docs/context/model-context-protocol)
+* [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers)
+* [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)
+* [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk)
 
