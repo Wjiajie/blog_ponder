@@ -296,7 +296,14 @@
     {
       "id": "swin-transformer-sum",
       "name": "Swin Transformer总结",
-      "description": "Swin Transformer是一种针对计算机视觉任务优化的Transformer变体，解决了传统Transformer在处理图像时面临的尺度问题和计算复杂度问题。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "mcp-server-intro",
+      "name": "MCP简介",
+      "description": "MCP是一种用于AI应用的上下文提供协议，本文介绍了MCP协议的基本概念、架构设计以及服务器端开发指南。",
       "type": "blog",
       "group": 4
     }
@@ -565,6 +572,11 @@
     {
       "source": "software-architecture",
       "target": "swin-transformer-sum",
+      "value": 1
+    },
+    {
+      "source": "software-architecture",
+      "target": "mcp-server-intro",
       "value": 1
     }
   ]

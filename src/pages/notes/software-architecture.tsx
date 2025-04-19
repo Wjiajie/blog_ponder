@@ -37,6 +37,13 @@ export default function SoftwareArchitecture(): JSX.Element {
               <p className={styles.description}>Swin Transformer是一种针对计算机视觉任务优化的Transformer变体，解决了传统Transformer在处理图像时面临的尺度问题和计算复杂度问题。</p>
             </li>
           </ul>
+          <h2>MCP</h2>
+          <ul>
+            <li>
+              <Link to="/blog/mcp-server-intro">MCP简介</Link>
+              <p className={styles.description}>MCP是一种用于AI应用的上下文提供协议，本文介绍了MCP协议的基本概念、架构设计以及服务器端开发指南。</p>
+            </li>
+          </ul>
         </div>
       </main>
     </Layout>
