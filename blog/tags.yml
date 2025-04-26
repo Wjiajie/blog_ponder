@@ -94,4 +94,13 @@ LLM:
   label: 决策能力
   description: 决策能力相关文章
 
+mcp:
+  label: mcp
+  description: 介绍mcp相关文章
+
+技术栈:
+  label: 技术栈
+  description: 介绍各种技术栈和编程技术的文章
+
+
 
