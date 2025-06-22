@@ -60,6 +60,13 @@ export default function decision(): JSX.Element {
             </li>
           </ul>
 
+          <ul>
+            <li>
+              <Link to="/blog/recommendations-for-some-tools-and-suggestions">一些工具推荐以及建议</Link>
+              <p className={styles.description}>本文是一些实用的工具和前路人建议的分享，希望对你在踏入一个人生新阶段有所帮助。</p>
+            </li>
+          </ul>
+
         </div>
       </main>
     </Layout>

@@ -163,7 +163,14 @@
     {
       "id": "learn-to-learn",
       "name": "【译】学会学习",
-      "description": "这篇文章是汉明关于 “学会学习” 的课程内容分享，旨在为技术职业生涯奠定基础。文章围绕工作方式的重要性展开，汉明结合自身在洛斯阿拉莫斯和贝尔实验室的经历，指出杰出科学家与普通人的最大区别在于工作方式。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "recommendations-for-some-tools-and-suggestions",
+      "name": "一些工具推荐以及建议",
+      "description": "本文是一些实用的工具和前路人建议的分享，希望对你在踏入一个人生新阶段有所帮助。",
       "type": "blog",
       "group": 4
     },
@@ -461,6 +468,11 @@
     {
       "source": "decision",
       "target": "learn-to-learn",
+      "value": 1
+    },
+    {
+      "source": "decision",
+      "target": "recommendations-for-some-tools-and-suggestions",
       "value": 1
     },
     {
