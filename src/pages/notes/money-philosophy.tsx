@@ -16,10 +16,6 @@ export default function MoneyPhilosophy(): JSX.Element {
         <div className={styles.content}>
           <ul>
             <li>
-              <Link to="/blog/money-psychology">读《金钱心理学》</Link>
-              <p className={styles.description}>金钱心理学这本书不讲投资建议和公式计算，作者投资的目的不是追求最佳受益，而是追求自主性，对作者来说，自主性并不意味着不再工作，而是意味着可以在自己喜欢的时间里和喜欢的人做喜欢的工作，想做多久就做多久。</p>
-            </li>
-            <li>
               <Link to="/blog/relationship-with-money-trans">【译】金钱是身份的放大器</Link>
               <p className={styles.description}>本文探讨了我们与金钱的复杂关系。作者通过个人经历和对金钱光谱的分析，揭示了金钱如何放大我们的身份认同和价值观。文章指出，我们对金钱的态度会随着人生阶段的变化而改变，从生存需求到追求安全感，再到实现更高层次的目标。</p>
             </li>

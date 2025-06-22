@@ -3,16 +3,16 @@ import Layout from '@theme/Layout';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
 
-export default function Entrepreneurship(): JSX.Element {
+export default function decision(): JSX.Element {
   return (
     <Layout
-      title="创业"
-      description="创业经验、思考与实践指南">
+      title="决策"
+      description="思考如何做出更优的决策，以及分享前路人如何做出优秀的决策">
       <main className="container margin-vert--lg">
         <Link to="/notes/universal-values" className={styles.backLink}>
           <i className="fas fa-arrow-left"></i> 返回通用价值
         </Link>
-        <h1>创业</h1>
+        <h1>决策</h1>
         <div className={styles.content}>
           <ul>
             <li>
@@ -38,6 +38,28 @@ export default function Entrepreneurship(): JSX.Element {
               <p className={styles.description}>Paul Graham 深入探讨设计者的品味：什么是好的设计？为什么简单的设计往往是最好的？如何培养设计品味？本文将揭示跨越数学、艺术、建筑等领域的通用设计原则。</p>
             </li>
           </ul>
+
+          <ul>
+            <li>
+              <Link to="/blog/do-yourself-life-the-ceo">【译】做自己人生的CEO</Link>
+              <p className={styles.description}>Peter Drucker 介绍了如何在知识经济时代，成为自己的首席执行官，实现职业成就与人生价值。</p>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/blog/four-suggestions-for-a-miserable-life">【译】痛苦人生的四个建议</Link>
+              <p className={styles.description}>这是查理・芒格 1986 年 6 月 13 日在哈佛学校的演讲，介绍了如何保证痛苦人生的四个建议。通过引入卡森的痛苦处方，结合查理・芒格的新增处方，分享了如何避免痛苦和获得成功。</p>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/blog/learn-to-learn">【译】学会学习</Link>
+              <p className={styles.description}>这篇文章是汉明关于 “学会学习” 的课程内容分享，旨在为技术职业生涯奠定基础。文章围绕工作方式的重要性展开，汉明结合自身在洛斯阿拉莫斯和贝尔实验室的经历，指出杰出科学家与普通人的最大区别在于工作方式。</p>
+            </li>
+          </ul>
+
         </div>
       </main>
     </Layout>

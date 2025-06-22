@@ -39,7 +39,7 @@ const noteItems: NoteItem[] = [
   { title: '通用价值', link: '/notes/universal-values', level: 1, icon: 'fas fa-globe' },
   { title: '思维模型', link: '/notes/mental-models', level: 2, icon: 'fas fa-brain' },
   { title: '金钱观', link: '/notes/money-philosophy', level: 2, icon: 'fas fa-money-bill-wave' },
-  { title: '创业', link: '/notes/entrepreneurship', level: 2, icon: 'fas fa-rocket' },
+  { title: '决策', link: '/notes/decision', level: 2, icon: 'fas fa-rocket' },
   
   // 生活与阅读
   { title: '生活随笔', link: '/notes/life', level: 1, icon: 'fas fa-pen-fancy' },

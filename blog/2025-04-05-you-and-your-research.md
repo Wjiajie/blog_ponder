@@ -1,5 +1,5 @@
 ---
-title: '【译】Richard W. Hamming-你和你的研究'
+title: '【译】你和你的研究'
 slug: you-and-your-research
 authors: [Richard W. Hamming, jiajiewu]
 tags: [译文, 通用价值]

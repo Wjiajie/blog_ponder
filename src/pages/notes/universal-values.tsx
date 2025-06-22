@@ -32,11 +32,11 @@ export default function UniversalValues(): JSX.Element {
             </div>
             
             <div className={styles.subCategory}>
-              <Link to="/notes/entrepreneurship" className={styles.subCategoryLink}>
+              <Link to="/notes/decision" className={styles.subCategoryLink}>
                 <i className="fas fa-rocket"></i>
-                <span>创业</span>
+                <span>决策</span>
               </Link>
-              <p>分享创业经验、思考与实践指南，包括商业模式、团队建设、产品开发等创业全过程的关键环节。</p>
+              <p>思考如何做出更优的决策，以及分享前路人如何做出优秀的决策。</p>
             </div>
           </div>
         </div>

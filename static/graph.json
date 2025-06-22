@@ -73,8 +73,8 @@
       "group": 2
     },
     {
-      "id": "entrepreneurship",
-      "name": "创业",
+      "id": "decision",
+      "name": "决策",
       "type": "note",
       "group": 2
     },
@@ -142,7 +142,28 @@
     {
       "id": "designers-taste",
       "name": "【译】设计者的品味",
-      "description": "Paul Graham 深入探讨设计者的品味：什么是好的设计？为什么简单的设计往往是最好的？如何培养设计品味？本文将揭示跨越数学、艺术、建筑等领域的通用设计原则。",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "do-yourself-life-the-ceo",
+      "name": "【译】做自己人生的CEO",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "four-suggestions-for-a-miserable-life",
+      "name": "【译】痛苦人生的四个建议",
+      "description": "",
+      "type": "blog",
+      "group": 4
+    },
+    {
+      "id": "learn-to-learn",
+      "name": "【译】学会学习",
+      "description": "这篇文章是汉明关于 “学会学习” 的课程内容分享，旨在为技术职业生涯奠定基础。文章围绕工作方式的重要性展开，汉明结合自身在洛斯阿拉莫斯和贝尔实验室的经历，指出杰出科学家与普通人的最大区别在于工作方式。",
       "type": "blog",
       "group": 4
     },
@@ -150,13 +171,6 @@
       "id": "the-map-is-not-the-territory",
       "name": "思维模型-地图不是领土",
       "description": "本文介绍了'地图不是领土'这一思维模型的核心概念，探讨了认知模型与现实之间的差异，以及如何正确理解和应用思维模型来更好地理解复杂的现实世界。",
-      "type": "blog",
-      "group": 4
-    },
-    {
-      "id": "money-psychology",
-      "name": "读《金钱心理学》",
-      "description": "",
       "type": "blog",
       "group": 4
     },
@@ -366,7 +380,7 @@
     },
     {
       "source": "universal-values",
-      "target": "entrepreneurship",
+      "target": "decision",
       "value": 2
     },
     {
@@ -410,28 +424,43 @@
       "value": 1
     },
     {
-      "source": "entrepreneurship",
+      "source": "decision",
       "target": "universal-values",
       "value": 2
     },
     {
-      "source": "entrepreneurship",
+      "source": "decision",
       "target": "how-to-start-google",
       "value": 1
     },
     {
-      "source": "entrepreneurship",
+      "source": "decision",
       "target": "how-to-pick-a-career",
       "value": 1
     },
     {
-      "source": "entrepreneurship",
+      "source": "decision",
       "target": "think-for-ourself",
       "value": 1
     },
     {
-      "source": "entrepreneurship",
+      "source": "decision",
       "target": "designers-taste",
+      "value": 1
+    },
+    {
+      "source": "decision",
+      "target": "do-yourself-life-the-ceo",
+      "value": 1
+    },
+    {
+      "source": "decision",
+      "target": "four-suggestions-for-a-miserable-life",
+      "value": 1
+    },
+    {
+      "source": "decision",
+      "target": "learn-to-learn",
       "value": 1
     },
     {
@@ -448,11 +477,6 @@
       "source": "money-philosophy",
       "target": "universal-values",
       "value": 2
-    },
-    {
-      "source": "money-philosophy",
-      "target": "money-psychology",
-      "value": 1
     },
     {
       "source": "money-philosophy",

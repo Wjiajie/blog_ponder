@@ -93,8 +93,30 @@ Shane Parrish:
   socials:
     twitter: https://twitter.com/shaneaparrish
     website: https://fs.blog/
-  
 
+
+Charlie Munger:
+  name: Charlie Munger
+  title: Charlie Munger
+  url: https://zh.wikipedia.org/wiki/%E6%9F%A5%E7%90%86%C2%B7%E8%8A%92%E6%A0%BC
+  image_url: https://cdn.sa.net/2025/06/22/k5OSres2g78AxP6.png
+  page: true
+  description: |
+    查理·芒格是一位集智慧、品格和成就于一身的投资大师。他与巴菲特的合作创造了投资史上的传奇，他的投资思想和人生哲学影响深远。
+    他的核心成就不仅体现在伯克希尔的巨大成功上，更在于他为投资者和普通人提供了宝贵的智慧财富。芒格的主要思想与观点，如多元思维模型、
+    Lollapalooza效应、诚实原则、纪律与耐心等，为人们在复杂的世界中做出正确决策提供了有力的工具。他的代表作品，如《穷查理宝典》《芒格之道》等，
+    是人们学习和借鉴他智慧的重要途径。在社会活动方面，他通过慈善和商业参与，为社会的发展做出了积极贡献。他对中国市场的看好，也体现了他的全球视野和前瞻性。
+    尽管芒格已经离我们而去，但他的智慧和精神将永远流传。他的故事和思想激励着我们在投资和生活中不断追求卓越，坚守原则，用智慧和品格书写属于自己的成功人生。
+    正如巴菲特所说：“没有查理的灵感、智慧和参与，伯克希尔不可能达到今天的地位。”查理·芒格的传奇将继续在投资界和思想界闪耀光芒。
+
+Peter Drucker:
+  name: Peter Drucker
+  title: Peter Drucker
+  url: https://zh.wikipedia.org/wiki/%E5%BD%BC%E5%BE%97%C2%B7%E5%BE%B7%E9%B2%81%E5%85%8B
+  image_url: https://cdn.sa.net/2025/06/22/LAhM5loEskB14ue.png
+  page: true
+  description:
+    管理学科开创者，他被尊为“大师中的大师”​、​“现代管理学之父”​，他的思想传播影响了130多个国家；他称自己是“社会生态学家”​，他对社会学和经济学的影响深远，他的著作架起了从工业时代到知识时代的桥梁。
 
 
 
