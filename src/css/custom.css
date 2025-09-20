@@ -6,17 +6,17 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #4A90E2;  /* 柔和的天空蓝 */
-  --ifm-color-primary-dark: #357ABD;
-  --ifm-color-primary-darker: #2D6CAA;
-  --ifm-color-primary-darkest: #245C96;
-  --ifm-color-primary-light: #6BA5E7;
-  --ifm-color-primary-lighter: #82B3EC;
-  --ifm-color-primary-lightest: #A8CAF2;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-primary: #8EA8BD;  /* 淡雅青灰色 */
+  --ifm-color-primary-dark: #7B95A9;
+  --ifm-color-primary-darker: #6A889D;
+  --ifm-color-primary-darkest: #5A778A;
+  --ifm-color-primary-light: #A3B8C9;
+  --ifm-color-primary-lighter: #B8C9D7;
+  --ifm-color-primary-lightest: #CEDAE6;
+  --ifm-code-font-size: 92%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
   --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --ifm-navbar-height: 4rem;
+  --ifm-navbar-height: 3.5rem; /* 减小导航栏高度 */
   --font-family-title-en: 'Comfortaa', sans-serif;
   --font-family-title-zh: 'Noto Serif SC', serif;
   --font-family-text-en: 'Comfortaa', sans-serif;
@@ -37,7 +37,7 @@
 
 /* 禅意风格的自定义样式 */
 .hero {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.8), rgba(168, 202, 242, 0.8));
+  background: linear-gradient(135deg, rgba(142, 168, 189, 0.8), rgba(190, 208, 223, 0.8));
   position: relative;
   overflow: hidden;
 }
@@ -100,7 +100,7 @@
 /* 导航栏基础样式 */
 :root {
   --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --ifm-navbar-height: 4rem;
+  --ifm-navbar-height: 3.5rem;
 }
 
 /* 提高选择器优先级 */
@@ -114,6 +114,7 @@ html body .navbar {
   transform: translateY(0) !important;
   transition: var(--navbar-transition) !important;
   z-index: var(--ifm-z-index-fixed) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* 更轻微的阴影 */
 }
 
 /* 亮色模式下的导航栏样式 */
@@ -461,37 +462,23 @@ html body .homepage {
 
 /* 主页背景图样式 */
 .homepage .hero {
-  min-height: 100vh;
+  min-height: 90vh; /* 略微减小高度 */
   margin-top: calc(-1 * var(--ifm-navbar-height));
   padding-top: calc(var(--ifm-navbar-height) + 2rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('https://s2.loli.net/2025/01/11/FmGaWUwTCOlNLXg.jpg');
+  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%); /* 使用简约渐变替代图片 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  background-attachment: scroll;  /* 确保背景图片不会固定 */
-  transform: translateZ(0);  /* 启用硬件加速 */
-  -webkit-transform: translateZ(0);  /* Safari 支持 */
-  backface-visibility: hidden;  /* 标准属性 */
-  -webkit-backface-visibility: hidden;  /* Safari 支持 */
-  perspective: 1000;  /* 标准属性 */
-  -webkit-perspective: 1000;  /* Safari 支持 */
 }
 
 /* 添加暗色遮罩，提高文字可读性 */
 .homepage .hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2);  /* 轻微的暗色遮罩 */
-  z-index: 1;
+  content: none;
 }
 
 /* 确保内容在遮罩层之上 */
@@ -500,23 +487,25 @@ html body .homepage {
 .homepage .hero .button {
   position: relative;
   z-index: 2;
-  color: white;  /* 确保文字在背景图上清晰可见 */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);  /* 添加文字阴影提高可读性 */
+  color: var(--ifm-color-emphasis-800);  /* 确保文字清晰可见 */
+  text-shadow: none;  /* 移除文字阴影 */
 }
 
 /* 主页内容样式 */
 .homepage .hero__title {
-  font-size: clamp(2.5rem, 8vw, 4rem);  /* 响应式字体大小 */
+  font-size: clamp(2rem, 6vw, 3rem); /* 响应式字体大小 */
   text-align: center;
   margin: 0;
   padding: 0 1rem;
+  font-weight: 600;
 }
 
 .homepage .hero__subtitle {
-  font-size: clamp(1rem, 4vw, 1.5rem);  /* 响应式字体大小 */
+  font-size: clamp(1rem, 3vw, 1.3rem); /* 响应式字体大小 */
   text-align: center;
-  margin: 1rem 0;
+  margin: 1rem 0 2rem 0;
   padding: 0 1rem;
+  color: var(--ifm-color-emphasis-600);
 }
 
 /* 确保主页的其他部分也正确显示 */
@@ -596,13 +585,41 @@ h1, h2, h3, h4, h5, h6 {
 /* 博客文章标题 */
 .blog-post-title {
   font-family: var(--font-family-title-en), var(--font-family-title-zh);
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 2rem; /* 减小文章标题字体大小 */
+  line-height: 1.4; /* 优化行高 */
+  margin-bottom: 1.5rem;
+  color: var(--ifm-color-emphasis-800);
 }
 
 /* 博客文章内容 */
 .blog-post article {
   font-family: var(--font-family-text-en), var(--font-family-text-zh);
   font-weight: 400;
+  line-height: 1.8; /* 增加行高以提升阅读体验 */
+  font-size: 1.05rem;
+  max-width: 900px; /* 限制最大宽度，保持阅读舒适度 */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 优化文章标题层级 */
+.blog-post article h1 {
+  font-size: 1.8rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.blog-post article h2 {
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blog-post article h3 {
+  font-size: 1.4rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.8rem;
 }
 
 /* 侧边栏 */
@@ -617,16 +634,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 导航栏文字样式 */
 html body .navbar__brand {
-  font-size: 1.45rem;  /* 增大品牌名称字体 */
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 1.3rem; /* 减小品牌名称字体 */
+  font-weight: 500;
+  letter-spacing: 0.3px;
   align-items: center;
 }
 
 html body .navbar__link {
-  font-size: 1.4rem;  /* 增大导航链接字体 */
-  font-weight: 500;
-  padding: 0.0rem 1.3rem;  /* 增加点击区域 */
+  font-size: 1.1rem; /* 减小导航链接字体 */
+  font-weight: 400;
+  padding: 0.0rem 1.2rem;  /* 增加点击区域 */
   transition: color 0.2s ease;
   align-items: center;
 }
@@ -671,65 +688,41 @@ html body .navbar__link:hover {
 /* 添加平滑滚动效果 */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 40vh; /* 控制跳转位置，使目标在屏幕中间偏上位置 */
+  scroll-padding-top: 30vh; /* 控制跳转位置，使目标在屏幕中间偏上位置 */
 }
 
 /* 锚点跳转动画效果 */
 :target {
-  animation: highlight 2s ease-out;
-  scroll-margin-top: 40vh;
+  scroll-margin-top: 30vh;
   position: relative;
-  background-color: transparent;
 }
 
 :target::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -8px;
-  right: -8px;
-  bottom: -2px;
-  background-color: #ffeb3b;
-  opacity: 0;
-  border-radius: 4px;
-  z-index: -1;
-  animation: highlight 1s ease-out;
-}
-
-[data-theme='dark'] :target::before {
-  background-color: #ffd700;
+  content: none;
 }
 
 @keyframes highlight {
-  0% {
-    opacity: 0.2;
-  }
-  10% {
-    opacity: 0.4;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0.8;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 0; }
 }
 
 /* 引用链接样式 */
 .reference-link {
   text-decoration: none;
-  padding: 2px 4px;
-  border-radius: 4px;
+  padding: 1px 3px;
+  border-radius: 3px;
   transition: all 0.3s ease;
   position: relative;
   color: var(--ifm-color-primary);
-  font-weight: 500;
+  font-weight: 400;
+  border-bottom: 1px solid var(--ifm-color-primary-light);
 }
 
 .reference-link:hover {
-  background-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-light);
   color: white;
   text-decoration: none;
+  border-bottom: 1px solid var(--ifm-color-primary-light);
 }
 
 /* 返回链接样式 */
@@ -737,17 +730,19 @@ html {
   display: inline-block;
   margin-left: 0.5em;
   text-decoration: none;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 1px 3px;
+  border-radius: 3px;
   color: var(--ifm-color-primary);
   transition: all 0.3s ease;
-  font-weight: 500;
+  font-weight: 400;
+  border-bottom: 1px solid var(--ifm-color-primary-light);
 }
 
 .back-to-ref:hover {
-  background-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-light);
   color: white;
   text-decoration: none;
+  border-bottom: 1px solid var(--ifm-color-primary-light);
 }
 
 [data-theme='dark'] .reference-link:hover,
