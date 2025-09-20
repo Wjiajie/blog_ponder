@@ -3,7 +3,7 @@
  * and scoped locally.
  */
 
-/* 预加载背景图片 */
+/* 基础样式重置 */
 :root {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
@@ -11,17 +11,6 @@
 
 :root::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
-}
-
-/* 预加载背景图片 */
-:root::before {
-  content: '';
-  position: fixed;
-  width: 1px;
-  height: 1px;
-  background-image: url('https://s2.loli.net/2025/01/11/FmGaWUwTCOlNLXg.jpg');
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* 主页容器样式 */
@@ -34,49 +23,13 @@
   right: 0;
   bottom: 0;
   padding-top: var(--ifm-navbar-height);
-  background-color: var(--ifm-background-color);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  transition: background 0.5s ease;
 }
 
-/* 使用伪元素加载背景图片 */
-.pageContainer::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('https://s2.loli.net/2025/01/11/FmGaWUwTCOlNLXg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 0;
-}
-
-/* 当图片加载完成后显示 */
-.pageContainer.loaded::before {
-  opacity: 1;
-}
-
-/* 内容区域的渐变遮罩 */
-.pageContainer::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-/* 当图片加载完成后显示遮罩 */
-.pageContainer.loaded::after {
-  opacity: 1;
+/* 暗色模式背景 */
+:global(html[data-theme='dark']) .pageContainer {
+  background: linear-gradient(135deg, #1e1e2f 0%, #1e3c72 100%);
 }
 
 /* 内容区域样式 */
@@ -177,88 +130,42 @@
   opacity: 0.6;
 }
 
-/* 主页特定的导航栏样式 */
-.pageContainer :global(.navbar__brand),
-.pageContainer :global(.navbar__link),
-.pageContainer :global(.navbar__toggle),
-.pageContainer :global(.navbar-sidebar__brand),
-.pageContainer :global(.clean-btn),
-.pageContainer :global(.navbar-sidebar__close) {
+/* 主页特定的导航栏样式 - 亮色模式 */
+:global(html[data-theme='light']) .pageContainer :global(.navbar__brand),
+:global(html[data-theme='light']) .pageContainer :global(.navbar__link),
+:global(html[data-theme='light']) .pageContainer :global(.navbar__toggle),
+:global(html[data-theme='light']) .pageContainer :global(.navbar-sidebar__brand),
+:global(html[data-theme='light']) .pageContainer :global(.clean-btn),
+:global(html[data-theme='light']) .pageContainer :global(.navbar-sidebar__close) {
+  color: #1c1e21 !important;
+}
+
+/* 亮色模式搜索图标颜色 */
+:global(html[data-theme='light']) .pageContainer :global(.navbar__search-input) {
+  color: #1c1e21 !important;
+}
+
+:global(html[data-theme='light']) .pageContainer :global(.navbar__search-input::placeholder) {
+  color: rgba(28, 30, 33, 0.7) !important;
+}
+
+/* 主页特定的导航栏样式 - 暗色模式 */
+:global(html[data-theme='dark']) .pageContainer :global(.navbar__brand),
+:global(html[data-theme='dark']) .pageContainer :global(.navbar__link),
+:global(html[data-theme='dark']) .pageContainer :global(.navbar__toggle),
+:global(html[data-theme='dark']) .pageContainer :global(.navbar-sidebar__brand),
+:global(html[data-theme='dark']) .pageContainer :global(.clean-btn),
+:global(html[data-theme='dark']) .pageContainer :global(.navbar-sidebar__close) {
   color: #ffffff !important;
 }
 
-/* 搜索图标颜色 */
-.pageContainer :global(.navbar__search-input) {
+/* 暗色模式搜索图标颜色 */
+:global(html[data-theme='dark']) .pageContainer :global(.navbar__search-input) {
   color: #ffffff !important;
 }
 
-.pageContainer :global(.navbar__search-input::placeholder) {
+:global(html[data-theme='dark']) .pageContainer :global(.navbar__search-input::placeholder) {
   color: rgba(255, 255, 255, 0.7) !important;
-}
-
-/* 移除之前的日间模式导航栏样式 */
-:global(html[data-theme='light']) :global(.navbar__brand),
-:global(html[data-theme='light']) :global(.navbar__link),
-:global(html[data-theme='light']) :global(.navbar__toggle),
-:global(html[data-theme='light']) :global(.navbar-sidebar__brand),
-:global(html[data-theme='light']) :global(.clean-btn),
-:global(html[data-theme='light']) :global(.navbar-sidebar__close) {
-  color: initial;  /* 让其他页面保持默认颜色 */
-}
-
-/* 标题样式 */
-.title {
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  font-weight: 200;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  letter-spacing: 0.2em;
-  text-align: center;
-  width: 100%;
-}
-
-.subtitle {
-  font-size: clamp(1rem, 4vw, 1.5rem);
-  font-weight: 300;
-  color: #ffffff;
-  margin-bottom: 3rem;
-  max-width: 600px;
-  letter-spacing: 0.1em;
-  text-align: center;
-  width: 100%;
-}
-
-.enterButton {
-  display: inline-block;
-  padding: 0.8rem 3rem;
-  font-size: 0.9rem;
-  color: #ffffff;
-  background: transparent;
-  border: 1px solid #ffffff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin: 0 auto;
-}
-
-.enterButton:hover {
-  background: rgba(255, 255, 255, 0.1);
-  text-decoration: none;
-  color: #ffffff;
-}
-
-/* 移除夜间模式的特殊样式，因为现在所有模式都使用白色 */
-:global(html[data-theme='dark']) .title,
-:global(html[data-theme='dark']) .subtitle,
-:global(html[data-theme='dark']) .enterButton {
-  color: #ffffff;
-  border-color: #ffffff;
-}
-
-:global(html[data-theme='dark']) .enterButton:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
 }
 
 /* 亮色模式下的顶栏和侧边栏样式 */
@@ -268,25 +175,6 @@
   border-bottom: 1px solid var(--ifm-color-emphasis-100) !important;
 }
 
-/* 亮色模式下的顶栏和侧边栏文字颜色 */
-:global(html[data-theme='light']) :global(.navbar__brand),
-:global(html[data-theme='light']) :global(.navbar__link),
-:global(html[data-theme='light']) :global(.navbar__toggle),
-:global(html[data-theme='light']) :global(.navbar-sidebar__brand),
-:global(html[data-theme='light']) :global(.clean-btn),
-:global(html[data-theme='light']) :global(.navbar-sidebar__close) {
-  color: var(--ifm-color-emphasis-900) !important;
-}
-
-/* 亮色模式下的搜索框样式 */
-:global(html[data-theme='light']) :global(.navbar__search-input) {
-  color: var(--ifm-color-emphasis-900) !important;
-}
-
-:global(html[data-theme='light']) :global(.navbar__search-input::placeholder) {
-  color: var(--ifm-color-emphasis-600) !important;
-}
-
 /* 暗色模式下的顶栏和侧边栏样式 */
 :global(html[data-theme='dark']) :global(.navbar),
 :global(html[data-theme='dark']) :global(.navbar-sidebar) {
@@ -294,21 +182,99 @@
   border-bottom: none !important;
 }
 
-/* 暗色模式下的顶栏和侧边栏文字颜色 */
-:global(html[data-theme='dark']) :global(.navbar__brand),
-:global(html[data-theme='dark']) :global(.navbar__link),
-:global(html[data-theme='dark']) :global(.navbar__toggle),
-:global(html[data-theme='dark']) :global(.navbar-sidebar__brand),
-:global(html[data-theme='dark']) :global(.clean-btn),
-:global(html[data-theme='dark']) :global(.navbar-sidebar__close) {
-  color: #ffffff !important;
+/* 标题样式 */
+.title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 200;
+  color: #1c1e21;
+  margin-bottom: 1rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+  width: 100%;
 }
 
-/* 暗色模式下的搜索框样式 */
-:global(html[data-theme='dark']) :global(.navbar__search-input) {
-  color: #ffffff !important;
+/* 艺术字风格 */
+.artisticTitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
 }
 
-:global(html[data-theme='dark']) :global(.navbar__search-input::placeholder) {
-  color: rgba(255, 255, 255, 0.7) !important;
+.artisticTitle::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: -1;
+}
+
+/* 暗色模式标题样式 */
+:global(html[data-theme='dark']) .title {
+  color: #ffffff;
+}
+
+:global(html[data-theme='dark']) .artisticTitle {
+  background: none;
+  color: #ffffff;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+}
+
+/* 副标题样式 */
+.subtitle {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  font-weight: 300;
+  color: #1c1e21;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  width: 100%;
+  font-style: italic;
+}
+
+/* 暗色模式副标题样式 */
+:global(html[data-theme='dark']) .subtitle {
+  color: #ffffff;
+}
+
+/* 按钮样式 */
+.enterButton {
+  display: inline-block;
+  padding: 0.8rem 3rem;
+  font-size: 0.9rem;
+  color: #1c1e21;
+  background: transparent;
+  border: 1px solid #1c1e21;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 auto;
+}
+
+.enterButton:hover {
+  background: rgba(28, 30, 33, 0.1);
+  text-decoration: none;
+  color: #1c1e21;
+  transform: translateY(-2px);
+}
+
+/* 暗色模式按钮样式 */
+:global(html[data-theme='dark']) .enterButton {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+:global(html[data-theme='dark']) .enterButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }

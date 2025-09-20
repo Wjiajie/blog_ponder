@@ -7,12 +7,8 @@ export default function Home(): JSX.Element {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // 预加载背景图片
-    const img = new Image();
-    img.src = 'https://s2.loli.net/2025/01/11/FmGaWUwTCOlNLXg.jpg';
-    img.onload = () => {
-      setIsLoaded(true);
-    };
+    // 设置加载完成状态，因为不再需要预加载背景图片
+    setIsLoaded(true);
   }, []);
 
   return (
@@ -21,8 +17,8 @@ export default function Home(): JSX.Element {
       description="A simple blog for thoughts and ideas">
       <div className={clsx(styles.pageContainer, isLoaded && styles.loaded)}>
         <main className={styles.heroBanner}>
-          <h1 className={styles.title}>ponder</h1>
-          <p className={styles.subtitle}>keep thinking, keep simple.</p>
+          <h1 className={clsx(styles.title, styles.artisticTitle)}>ponder</h1>
+          <p className={styles.subtitle}>You become what you believe.</p>
           <a href="/blog" className={styles.enterButton}>
             ENTER
           </a>

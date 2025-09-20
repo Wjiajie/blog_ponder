@@ -139,7 +139,6 @@ const config: Config = {
       items: [
         {to: '/index', label: ' Index', position: 'left', className: 'navbar-icon-item'},
         {to: '/blog', label: ' Blog', position: 'left', className: 'navbar-icon-item'},
-        {to: '/editor', label: ' Write', position: 'left', className: 'navbar-icon-item'},
       ],
     },
     footer: {

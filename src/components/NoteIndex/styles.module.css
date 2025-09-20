@@ -6,6 +6,8 @@
   margin-top: 40px;
   width: 100%;
   justify-content: space-between;
+  min-height: calc(100vh - 200px); /* 确保容器高度足够 */
+  overflow-x: hidden; /* 防止水平滚动 */
 }
 
 .noteIndexSidebar {
@@ -19,6 +21,7 @@
   max-width: calc(100% - 390px);
   display: flex;
   justify-content: center;
+  overflow-x: hidden; /* 防止水平滚动 */
 }
 
 .indexTitle {
@@ -126,6 +129,7 @@
   .noteIndexContainer {
     flex-direction: column;
     gap: 20px;
+    padding: 0 16px; /* 添加内边距 */
   }
   
   .noteIndexSidebar {
@@ -138,6 +142,43 @@
     margin-top: 1rem;
     min-width: 0;
     width: 100%;
+    max-width: 100%;
+  }
+  
+  /* 移动端缩进调整 */
+  .indent-level-1 {
+    margin-left: 0;
+    padding-left: 1rem;
+  }
+  
+  .indent-level-2 {
+    margin-left: 1rem;
+    padding-left: 0.8rem;
+  }
+  
+  .indent-level-3 {
+    margin-left: 1.8rem;
+    padding-left: 0.8rem;
+  }
+  
+  .indent-level-4 {
+    margin-left: 2.6rem;
+    padding-left: 0.8rem;
+  }
+  
+  .indent-level-5 {
+    margin-left: 3.4rem;
+    padding-left: 0.8rem;
+  }
+  
+  .indent-level-6 {
+    margin-left: 4.2rem;
+    padding-left: 0.8rem;
+  }
+  
+  /* 移动端笔记索引容器调整 */
+  .noteIndex {
+    padding: 1rem 0;
     max-width: 100%;
   }
 }
@@ -227,4 +268,4 @@
   color: var(--ifm-color-emphasis-400);
   border-left: 1px solid var(--ifm-color-emphasis-400);
   padding-left: 1rem;
-} 
+}
