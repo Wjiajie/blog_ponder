@@ -197,35 +197,16 @@
 .artisticTitle {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: inherit; /* 使用父元素的文字颜色 */
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
 }
 
-.artisticTitle::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  top: 2px;
-  color: rgba(255, 255, 255, 0.7);
-  z-index: -1;
-}
-
 /* 暗色模式标题样式 */
 :global(html[data-theme='dark']) .title {
   color: #ffffff;
-}
-
-:global(html[data-theme='dark']) .artisticTitle {
-  background: none;
-  color: #ffffff;
-  -webkit-background-clip: initial;
-  background-clip: initial;
 }
 
 /* 副标题样式 */
