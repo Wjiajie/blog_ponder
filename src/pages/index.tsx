@@ -9,6 +9,12 @@ export default function Home(): JSX.Element {
   useEffect(() => {
     // 设置加载完成状态，因为不再需要预加载背景图片
     setIsLoaded(true);
+
+    // Zen Mode: Hide Navbar only on homepage
+    document.body.classList.add('zen-homepage');
+    return () => {
+      document.body.classList.remove('zen-homepage');
+    };
   }, []);
 
   return (

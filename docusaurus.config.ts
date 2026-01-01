@@ -1,7 +1,7 @@
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import type {Config} from '@docusaurus/types';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import remarkReferenceNotes from './src/plugins/remark-reference-notes';
 
@@ -75,7 +75,7 @@ const config: Config = {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
             createFeedItems: async (params) => {
-              const {blogPosts, defaultCreateFeedItems, ...rest} = params;
+              const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
                 // keep only the 10 most recent blog posts in the feed
                 blogPosts: blogPosts.filter((item, index) => index < 10),
@@ -137,8 +137,8 @@ const config: Config = {
     navbar: {
       title: 'Ponder',
       items: [
-        {to: '/index', label: ' Index', position: 'left', className: 'navbar-icon-item'},
-        {to: '/blog', label: ' Blog', position: 'left', className: 'navbar-icon-item'},
+        { to: '/index', label: ' Index', position: 'left', className: 'navbar-icon-item' },
+        { to: '/blog', label: ' Blog', position: 'left', className: 'navbar-icon-item' },
       ],
     },
     footer: {
@@ -163,6 +163,10 @@ const config: Config = {
     prism: {
       theme: prismThemes.oneLight,
       darkTheme: prismThemes.oneDark,
+    },
+    tableOfContents: {
+      minHeadingLevel: 2,
+      maxHeadingLevel: 3,
     },
   } satisfies Preset.ThemeConfig,
   customFields: {

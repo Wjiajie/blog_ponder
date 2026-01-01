@@ -6,32 +6,125 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #8EA8BD;  /* 淡雅青灰色 */
+  /* Zen Guide: Paper & Ink Palette */
+
+  /* Primary Brand Color: Muted Slate (Ink-like) */
+  --ifm-color-primary: #5D707F;
+  --ifm-color-primary-dark: #546572;
+  --ifm-color-primary-darker: #4F5F6C;
+  --ifm-color-primary-darkest: #414E59;
+  --ifm-color-primary-light: #708595;
+  --ifm-color-primary-lighter: #8598A6;
+  --ifm-color-primary-lightest: #C3CED6;
+
+  /* Global Colors */
+  --ifm-background-color: #fdfbf7;
+  /* Warm Paper White */
+  --ifm-font-color-base: #2c3e50;
+  /* Deep Ink Grey */
+  --ifm-link-color: var(--ifm-color-primary);
+
+  /* Typography */
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-family-title-en: 'Noto Serif SC', serif;
+  --font-family-title-zh: 'Noto Serif SC', serif;
+  --font-family-text-en: var(--ifm-font-family-base);
+  --font-family-text-zh: var(--ifm-font-family-base);
+
+  /* Layout & Spacing */
+  --ifm-code-font-size: 90%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
+  --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ifm-navbar-height: 3.5rem;
+  --ifm-line-height-base: 1.8;
+  /* Airier reading experience */
+}
+
+/* Zen Blog Styles - De-carding */
+
+/* Remove Card Styles from Blog Posts */
+article.margin-bottom--xl,
+.card {
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  margin-bottom: 4rem !important;
+}
+
+/* Blog List Typography */
+.blog-list-page article h2 {
+  font-family: var(--font-family-title-en), serif;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-list-page article header {
+  margin-bottom: 1rem;
+}
+
+/* Metadata (Date/Authors) - Subtle */
+.container .row .col .margin-vert--xl {
+  opacity: 0.6;
+  font-size: 0.9rem;
+  font-family: var(--font-family-text-en), sans-serif;
+}
+
+/* Clean up the "Read More" button */
+.blog-list-page article .margin-top--lg .button {
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.5rem 1.5rem;
+  border-radius: 2px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.blog-list-page article .margin-top--lg .button:hover {
+  border-color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+/* Blog Post Page - Centered & Focus */
+.blog-post-page .markdown {
+  font-size: 1.1rem;
+  max-width: 800px;
+  /* Optimal reading width */
+  margin: 0 auto;
+}
+
+.blog-post-page article header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.blog-post-page h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Remove Sidebar visual noise if present */
+.pagination-nav {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Zen Dark Mode: Deep Charcoal & Soft Light */
+[data-theme='dark'] {
+  --ifm-color-primary: #8EA8BD;
   --ifm-color-primary-dark: #7B95A9;
   --ifm-color-primary-darker: #6A889D;
   --ifm-color-primary-darkest: #5A778A;
   --ifm-color-primary-light: #A3B8C9;
   --ifm-color-primary-lighter: #B8C9D7;
   --ifm-color-primary-lightest: #CEDAE6;
-  --ifm-code-font-size: 92%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
-  --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --ifm-navbar-height: 3.5rem; /* 减小导航栏高度 */
-  --font-family-title-en: 'Comfortaa', sans-serif;
-  --font-family-title-zh: 'Noto Serif SC', serif;
-  --font-family-text-en: 'Comfortaa', sans-serif;
-  --font-family-text-zh: 'Noto Serif SC', serif;
-}
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #6BA5E7;  /* 更亮的蓝色 */
-  --ifm-color-primary-dark: #5691D3;
-  --ifm-color-primary-darker: #4A90E2;
-  --ifm-color-primary-darkest: #357ABD;
-  --ifm-color-primary-light: #82B3EC;
-  --ifm-color-primary-lighter: #A8CAF2;
-  --ifm-color-primary-lightest: #C4DBF5;
+  --ifm-background-color: #1a1a1a;
+  /* Soft Dark, not pitch black */
+  --ifm-font-color-base: #e0e0e0;
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
@@ -114,7 +207,8 @@ html body .navbar {
   transform: translateY(0) !important;
   transition: var(--navbar-transition) !important;
   z-index: var(--ifm-z-index-fixed) !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* 更轻微的阴影 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  /* 更轻微的阴影 */
 }
 
 /* 亮色模式下的导航栏样式 */
@@ -175,7 +269,7 @@ html body main {
 }
 
 /* 当导航栏隐藏时，内容区域上移 */
-html body .navbar-hidden + #__docusaurus main {
+html body .navbar-hidden+#__docusaurus main {
   transform: translateY(calc(-1 * var(--ifm-navbar-height)));
 }
 
@@ -212,12 +306,13 @@ html body .navbar-hidden + #__docusaurus main {
 
 /* 移动端侧边栏基础样式 */
 @media screen and (max-width: 996px) {
+
   /* 导航栏布局固定 */
   .navbar__toggle {
     position: relative;
     z-index: 102;
-    left: -1rem; 
-    margin-left: 0rem; 
+    left: -1rem;
+    margin-left: 0rem;
     width: 24px;
     height: 24px;
     padding: 0;
@@ -229,10 +324,13 @@ html body .navbar-hidden + #__docusaurus main {
 
   /* 侧边栏中的图标和文案间距 */
   .navbar-sidebar .navbar-icon-item::before {
-    margin-right: 12px;  /* 增加图标和文案的间距 */
+    margin-right: 12px;
+    /* 增加图标和文案的间距 */
     display: inline-block;
-    width: 20px;  /* 固定图标宽度 */
-    text-align: center;  /* 图标居中对齐 */
+    width: 20px;
+    /* 固定图标宽度 */
+    text-align: center;
+    /* 图标居中对齐 */
   }
 
   /* 隐藏默认的汉堡图标和关闭按钮 */
@@ -359,7 +457,8 @@ html body .navbar-hidden + #__docusaurus main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.2);  /* 更轻的背景色 */
+    background-color: rgba(0, 0, 0, 0.2);
+    /* 更轻的背景色 */
     z-index: 100;
     opacity: 0;
     transition: all 0.3s ease;
@@ -367,14 +466,15 @@ html body .navbar-hidden + #__docusaurus main {
   }
 
   /* 展开时显示遮罩 */
-  .navbar-sidebar--show + .navbar-sidebar__backdrop {
+  .navbar-sidebar--show+.navbar-sidebar__backdrop {
     opacity: 1;
     pointer-events: auto;
   }
 
   /* 暗色模式下的遮罩样式 */
   html[data-theme='dark'] .navbar-sidebar__backdrop {
-    background-color: rgba(0, 0, 0, 0.4);  /* 暗色模式下稍微深一点的背景 */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* 暗色模式下稍微深一点的背景 */
   }
 
   /* 移动端导航栏右侧项目处理 */
@@ -397,8 +497,8 @@ html body .navbar-hidden + #__docusaurus main {
   }
 
   /* 确保主题切换按钮在移动端可见 */
-  .navbar__items--right > .clean-btn,
-  .navbar__items--right > div > .clean-btn {
+  .navbar__items--right>.clean-btn,
+  .navbar__items--right>div>.clean-btn {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -428,7 +528,8 @@ html body .navbar-hidden + #__docusaurus main {
   .navbar-sidebar__brand .navbar__brand {
     display: flex !important;
     align-items: center !important;
-    margin: 0 auto 0 3rem !important;  /* 增加左边距，避免与汉堡菜单重叠 */
+    margin: 0 auto 0 3rem !important;
+    /* 增加左边距，避免与汉堡菜单重叠 */
     font-size: 1.4rem !important;
     white-space: nowrap !important;
   }
@@ -457,19 +558,22 @@ html body .navbar-hidden + #__docusaurus main {
 
 /* 主页样式 */
 html body .homepage {
-  padding-top: 0 !important;  /* 移除顶部内边距 */
+  padding-top: 0 !important;
+  /* 移除顶部内边距 */
 }
 
 /* 主页背景图样式 */
 .homepage .hero {
-  min-height: 90vh; /* 略微减小高度 */
+  min-height: 90vh;
+  /* 略微减小高度 */
   margin-top: calc(-1 * var(--ifm-navbar-height));
   padding-top: calc(var(--ifm-navbar-height) + 2rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%); /* 使用简约渐变替代图片 */
+  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+  /* 使用简约渐变替代图片 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -487,13 +591,16 @@ html body .homepage {
 .homepage .hero .button {
   position: relative;
   z-index: 2;
-  color: var(--ifm-color-emphasis-800);  /* 确保文字清晰可见 */
-  text-shadow: none;  /* 移除文字阴影 */
+  color: var(--ifm-color-emphasis-800);
+  /* 确保文字清晰可见 */
+  text-shadow: none;
+  /* 移除文字阴影 */
 }
 
 /* 主页内容样式 */
 .homepage .hero__title {
-  font-size: clamp(2rem, 6vw, 3rem); /* 响应式字体大小 */
+  font-size: clamp(2rem, 6vw, 3rem);
+  /* 响应式字体大小 */
   text-align: center;
   margin: 0;
   padding: 0 1rem;
@@ -501,7 +608,8 @@ html body .homepage {
 }
 
 .homepage .hero__subtitle {
-  font-size: clamp(1rem, 3vw, 1.3rem); /* 响应式字体大小 */
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  /* 响应式字体大小 */
   text-align: center;
   margin: 1rem 0 2rem 0;
   padding: 0 1rem;
@@ -516,7 +624,8 @@ html body .homepage {
 /* 暗色模式下的顶栏和侧边栏样式 */
 :global(html[data-theme='dark']) :global(.navbar),
 :global(html[data-theme='dark']) :global(.navbar-sidebar) {
-  background: #1b1b1d !important;  /* 完全不透明的深色背景 */
+  background: #1b1b1d !important;
+  /* 完全不透明的深色背景 */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -561,7 +670,12 @@ body {
 }
 
 /* 标题字体设置 */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-family-title-en), var(--font-family-title-zh);
   font-weight: 700;
 }
@@ -586,8 +700,10 @@ h1, h2, h3, h4, h5, h6 {
 .blog-post-title {
   font-family: var(--font-family-title-en), var(--font-family-title-zh);
   font-weight: 600;
-  font-size: 2rem; /* 减小文章标题字体大小 */
-  line-height: 1.4; /* 优化行高 */
+  font-size: 2rem;
+  /* 减小文章标题字体大小 */
+  line-height: 1.4;
+  /* 优化行高 */
   margin-bottom: 1.5rem;
   color: var(--ifm-color-emphasis-800);
 }
@@ -596,9 +712,11 @@ h1, h2, h3, h4, h5, h6 {
 .blog-post article {
   font-family: var(--font-family-text-en), var(--font-family-text-zh);
   font-weight: 400;
-  line-height: 1.8; /* 增加行高以提升阅读体验 */
+  line-height: 1.8;
+  /* 增加行高以提升阅读体验 */
   font-size: 1.05rem;
-  max-width: 900px; /* 限制最大宽度，保持阅读舒适度 */
+  max-width: 900px;
+  /* 限制最大宽度，保持阅读舒适度 */
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -634,16 +752,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 导航栏文字样式 */
 html body .navbar__brand {
-  font-size: 1.3rem; /* 减小品牌名称字体 */
+  font-size: 1.3rem;
+  /* 减小品牌名称字体 */
   font-weight: 500;
   letter-spacing: 0.3px;
   align-items: center;
 }
 
 html body .navbar__link {
-  font-size: 1.1rem; /* 减小导航链接字体 */
+  font-size: 1.1rem;
+  /* 减小导航链接字体 */
   font-weight: 400;
-  padding: 0.0rem 1.2rem;  /* 增加点击区域 */
+  padding: 0.0rem 1.2rem;
+  /* 增加点击区域 */
   transition: color 0.2s ease;
   align-items: center;
 }
@@ -672,23 +793,27 @@ html body .navbar__link:hover {
 
 /* Index 图标 */
 .navbar-icon-item[href="/index"]::before {
-  content: "\f02e";  /* 书签图标 */
+  content: "\f02e";
+  /* 书签图标 */
 }
 
 /* Blog 图标 */
 .navbar-icon-item[href="/blog"]::before {
-  content: "\f781";  /* 博客图标 */
+  content: "\f781";
+  /* 博客图标 */
 }
 
 /* Write 图标 */
 .navbar-icon-item[href="/editor"]::before {
-  content: "\f304";  /* 编辑图标 */
+  content: "\f304";
+  /* 编辑图标 */
 }
 
 /* 添加平滑滚动效果 */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 30vh; /* 控制跳转位置，使目标在屏幕中间偏上位置 */
+  scroll-padding-top: 30vh;
+  /* 控制跳转位置，使目标在屏幕中间偏上位置 */
 }
 
 /* 锚点跳转动画效果 */
@@ -702,8 +827,13 @@ html {
 }
 
 @keyframes highlight {
-  0% { opacity: 0; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 /* 引用链接样式 */
@@ -748,4 +878,34 @@ html {
 [data-theme='dark'] .reference-link:hover,
 [data-theme='dark'] .back-to-ref:hover {
   background-color: var(--ifm-color-primary-darker);
+}
+
+/* Zen Sidebar Style */
+.theme-doc-sidebar-container {
+  border-right: none !important;
+}
+
+.theme-doc-sidebar-item-link-level-1 {
+  font-family: var(--font-family-text-en), sans-serif;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.menu__list-item-collapsible {
+  background: transparent !important;
+}
+
+.menu__link--active {
+  color: var(--ifm-color-primary-dark) !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Zen Mode: Hide Navbar only on Homepage */
+body.zen-homepage .navbar {
+  display: none !important;
+}
+
+/* Ensure Navbar is visible elsewhere (default flex, but safety net) */
+.navbar {
+  display: flex;
 }
