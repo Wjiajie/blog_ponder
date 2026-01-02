@@ -102,5 +102,21 @@ mcp:
   label: 技术栈
   description: 介绍各种技术栈和编程技术的文章
 
+读书杂谈:
+  label: 读书杂谈
+  description: 关于读书心得、书评与阅读方法的杂谈
+
+决策:
+  label: 决策
+  description: 关于决策理论、方法与实践的文章
+
+软件架构:
+  label: 软件架构
+  description: 关于软件架构设计原则、模式与最佳实践
+
+数据格式转换:
+  label: 数据格式转换
+  description: 各种数据格式之间的转换方法与工具
+
 
 

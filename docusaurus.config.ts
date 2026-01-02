@@ -8,6 +8,14 @@ import remarkReferenceNotes from './src/plugins/remark-reference-notes';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
+  future: {
+    experimental_faster: {
+      swcJsLoader: true,
+      swcJsMinimizer: true,
+      rspackBundler: true, // Enable Rspack
+      lightningCssMinimizer: true,
+    },
+  },
   title: 'ponder',
   tagline: 'keep thinking, keep simple.',
   favicon: 'img/favicon.ico',
@@ -24,11 +32,13 @@ const config: Config = {
   projectName: 'blog_ponder', // Usually your repo name.
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+
 
   markdown: {
     mermaid: true,
   },
+
+
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -103,22 +113,22 @@ const config: Config = {
   ],
   plugins: [
     require.resolve('./server/watchGraphPlugin.js'),
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
-      ({
-        hashed: true,
-        language: ["zh", "en"],
-        indexDocs: false,
-        indexBlog: true,
-        indexPages: true,
-        searchResultLimits: 8,
-        highlightSearchTermsOnTargetPage: true,
-        searchBarPosition: "right",
-        searchBarShortcut: true,
-        searchBarShortcutHint: true,
-      }),
-    ],
+    // [
+    //   require.resolve("@easyops-cn/docusaurus-search-local"),
+    //   /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+    //   ({
+    //     hashed: true,
+    //     language: ["zh", "en"],
+    //     indexDocs: false,
+    //     indexBlog: true,
+    //     indexPages: true,
+    //     searchResultLimits: 8,
+    //     highlightSearchTermsOnTargetPage: true,
+    //     searchBarPosition: "right",
+    //     searchBarShortcut: true,
+    //     searchBarShortcutHint: true,
+    //   }),
+    // ],
     '@docusaurus/plugin-ideal-image',
   ],
   themeConfig: {
@@ -134,6 +144,20 @@ const config: Config = {
           dark: 'github-dark',
         },
       },
+    },
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'S8HXB7K7M5',
+      // Public API key: it is safe to commit it
+      apiKey: '0e5fd5a34225c593e35f46491046d9b9',
+      indexName: 'jiajiewu',
+      // Optional: see doc section below
+      contextualSearch: true,
+      // Optional: Algolia search parameters
+      searchParameters: {},
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
+      //... other Algolia params
     },
     navbar: {
       title: 'Ponder',
