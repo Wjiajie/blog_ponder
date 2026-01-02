@@ -2,7 +2,7 @@
 title: C++常用设计模式
 slug: cpp-design-pattern
 authors: [jiajiewu]
-tags: [C++, 编码架构]
+tags: [软件架构]
 keywords: ["blog", "C++", "设计模式"]
 description: "本文介绍了C++设计模式的六大原则，包括单一职责、里氏替换、依赖倒置、接口隔离、迪米特法则和开放封闭原则，并对常用的设计模式进行分类讲解。"
 draft: false

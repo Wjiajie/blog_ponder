@@ -2,7 +2,7 @@
 title: '【译】学会学习'
 slug: learn-to-learn
 authors: [Richard W. Hamming, jiajiewu]
-tags: [决策能力, 译文]
+tags: [决策]
 keywords: ["决策能力", "翻译"]
 description: "这篇文章是关于 “学会学习” 的课程内容分享，旨在为技术职业生涯奠定基础。文章围绕工作方式的重要性展开，汉明结合自身在洛斯阿拉莫斯和贝尔实验室的经历，指出杰出科学家与普通人的最大区别在于工作方式。"
 draft: false

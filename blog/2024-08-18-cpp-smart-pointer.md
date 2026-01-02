@@ -2,7 +2,7 @@
 title: 一文简介C++智能指针
 slug: cpp-smart-pointer
 authors: [jiajiewu]
-tags: [C++, 编码架构]
+tags: [编程语言]
 keywords: ["blog", "C++", "智能指针"]
 description: "C++中的智能指针是自动化内存管理的一种方式。本文会介绍C++智能指针的类型，以及每种类型的使用场景。"
 draft: false

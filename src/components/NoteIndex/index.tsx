@@ -20,31 +20,17 @@ interface GraphData {
 }
 
 // 笔记项目数据
-const noteItems: NoteItem[] = [
-  // 计算机与编程相关
-  { title: '计算机科学', link: '/notes/computer-science', level: 1, icon: 'fas fa-laptop-code' },
-  { title: '软件架构', link: '/notes/software-architecture', level: 2, icon: 'fas fa-sitemap' },
-  { title: '编程语言', link: '/notes/programming-languages', level: 2, icon: 'fas fa-code' },
+import skeletonData from '../../../static/graph-skeleton.json';
 
-  // 泛领域知识
-  { title: '泛领域知识', link: '/notes/general-knowledge', level: 1, icon: 'fas fa-book-open' },
-  { title: '脑科学', link: '/notes/brain-science', level: 2, icon: 'fas fa-brain' },
-
-  // 工具与技术
-  { title: '工具使用', link: '/notes/tools-usage', level: 1, icon: 'fas fa-tools' },
-  { title: 'RAG', link: '/notes/rag', level: 2, icon: 'fas fa-database' },
-  { title: '数据格式转换', link: '/notes/data-format-conversion', level: 2, icon: 'fas fa-exchange-alt' },
-  
-  // 思想与价值观
-  { title: '通用价值', link: '/notes/universal-values', level: 1, icon: 'fas fa-globe' },
-  { title: '思维模型', link: '/notes/mental-models', level: 2, icon: 'fas fa-brain' },
-  { title: '金钱观', link: '/notes/money-philosophy', level: 2, icon: 'fas fa-money-bill-wave' },
-  { title: '决策', link: '/notes/decision', level: 2, icon: 'fas fa-rocket' },
-  
-  // 生活与阅读
-  { title: '生活随笔', link: '/notes/life', level: 1, icon: 'fas fa-pen-fancy' },
-  { title: '读书杂谈', link: '/notes/reading-notes', level: 2, icon: 'fas fa-book-reader' },
-];
+// 笔记项目数据
+const noteItems: NoteItem[] = skeletonData.nodes
+  .filter(node => node.group !== 0) // 过滤掉root节点
+  .map(node => ({
+    title: node.name,
+    link: `/blog/tags/${node.id}`,
+    level: node.group,
+    icon: node.icon
+  }));
 
 // 判断是否是分类标题（一级标题）
 const isCategoryTitle = (index: number): boolean => {
@@ -75,8 +61,8 @@ const NoteItemComponent = ({ item, index }: { item: NoteItem, index: number }) =
 
   return (
     <>
-      <div 
-        className={`${styles.noteItem} ${styles[indentClass]}`} 
+      <div
+        className={`${styles.noteItem} ${styles[indentClass]}`}
         style={{ '--child-height': `${childHeight}rem` } as React.CSSProperties}
       >
         {item.icon && <i className={`${item.icon} ${styles.noteIcon}`}></i>}
@@ -105,7 +91,7 @@ export default function NoteIndex(): JSX.Element {
         setErrorType('none');
         console.log('尝试加载知识图谱数据...');
         console.log('请求URL:', graphUrl);
-        
+
         const response = await fetch(graphUrl);
         if (response.ok) {
           const data = await response.json();
@@ -114,13 +100,13 @@ export default function NoteIndex(): JSX.Element {
         } else {
           console.error('加载知识图谱数据失败，HTTP状态码:', response.status);
           const isVercel = typeof window !== 'undefined' && window.location.hostname.includes('vercel.app');
-          
+
           // 针对Vercel环境提供更详细的错误信息
           if (isVercel) {
             console.error('在Vercel环境中发现问题，可能是部署时未正确包含graph.json文件');
             console.error('请确保在部署前运行 npm run generate-graph 并提交生成的graph.json文件到仓库');
           }
-          
+
           setErrorType(response.status === 404 ? 'notFound' : 'network');
           // 尝试解析错误消息
           try {
@@ -144,7 +130,7 @@ export default function NoteIndex(): JSX.Element {
   // 获取错误提示信息
   const getErrorMessage = () => {
     const isVercel = typeof window !== 'undefined' && window.location.hostname.includes('vercel.app');
-    
+
     switch (errorType) {
       case 'notFound':
         return (
@@ -223,7 +209,7 @@ export default function NoteIndex(): JSX.Element {
           ))}
         </div>
       </div>
-      
+
       <div className={styles.knowledgeGraphContainer}>
         {loading ? (
           <div className={styles.loading}>
@@ -231,10 +217,10 @@ export default function NoteIndex(): JSX.Element {
             <p>正在加载知识图谱...</p>
           </div>
         ) : graphData ? (
-          <KnowledgeGraph 
-            data={graphData} 
-            width={650} 
-            height={750} 
+          <KnowledgeGraph
+            data={graphData}
+            width={650}
+            height={750}
             noteItems={noteItems}
           />
         ) : (

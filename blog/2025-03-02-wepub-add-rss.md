@@ -2,7 +2,7 @@
 title: 'wepub增加RSS源模式'
 slug: wepub-add-rss
 authors: [jiajiewu]
-tags: [工具, 电子书]
+tags: [数据格式转换]
 keywords: ["blog", "网页转电子书", "Wepub"]
 description: "介绍wepub新增的RSS源模式功能，支持从RSS源批量抓取文章并转换为电子书，同时优化了导出功能和抓取限制。"
 draft: false

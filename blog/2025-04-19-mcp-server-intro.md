@@ -2,7 +2,7 @@
 title: '一文简介MCP'
 slug: mcp-server-intro
 authors: [jiajiewu]
-tags: [mcp, 技术栈]
+tags: [软件架构]
 keywords: ["mcp", "技术栈"]
 description: "本文介绍了MCP(Model Context Protocol)协议的基本概念、架构设计以及服务器端开发指南。MCP作为一种开放协议，为AI应用提供了标准化的上下文提供方式，本文将帮助读者理解如何利用MCP协议开发服务器并在Cursor等IDE中使用它。"
 draft: false

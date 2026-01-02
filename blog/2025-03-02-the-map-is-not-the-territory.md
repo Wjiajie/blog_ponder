@@ -2,7 +2,7 @@
 title: 思维模型-地图不是领土
 slug: the-map-is-not-the-territory
 authors: [jiajiewu]
-tags: [通用价值, 思维模型]
+tags: [思维模型]
 keywords: ["通用价值", "思维模型"]
 description: "本文介绍了'地图不是领土'这一思维模型的核心概念，探讨了认知模型与现实之间的差异，以及如何正确理解和应用思维模型来更好地理解复杂的现实世界。"
 draft: false

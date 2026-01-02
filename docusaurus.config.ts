@@ -102,6 +102,7 @@ const config: Config = {
     '@docusaurus/theme-mermaid',
   ],
   plugins: [
+    require.resolve('./server/watchGraphPlugin.js'),
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */

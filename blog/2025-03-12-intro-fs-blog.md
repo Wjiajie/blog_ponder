@@ -2,7 +2,7 @@
 title: '高质量信息源推荐-Farnam Street'
 slug: intro-fs-blog
 authors: [jiajiewu]
-tags: [信息源, 思维模型]
+tags: [思维模型]
 keywords: ["思维模型", "信息源", "个人博客"]
 description: "介绍一个高质量的信息源Farnam Street博客，包括其播客、实体书和文章板块的内容介绍。"
 draft: false

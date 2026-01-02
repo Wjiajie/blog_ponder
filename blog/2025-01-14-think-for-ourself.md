@@ -2,7 +2,7 @@
 title: 【译】如何为自己思考
 slug: think-for-ourself
 authors: [jiajiewu]
-tags: [通用价值, 译文]
+tags: [决策]
 keywords: ["blog"]
 description: ""
 draft: false

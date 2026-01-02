@@ -2,7 +2,7 @@
 title: 一文简介C++左/右值引用以及移动语义
 slug: lvalue-rvalue-move-semantics
 authors: [jiajiewu]
-tags: [C++, 编码架构]
+tags: [编程语言]
 keywords: ["blog", "C++", "左值", "右值", "移动语义"]
 description: "C++中的左值引用（lvalue reference）和右值引用（rvalue reference），以及移动语义（move semantics），都是为了提高程序性能和效率而设计的语言特性。本文会介绍左值引用和右值引用的使用形式，以及基于右值引用的移动语义的使用样例。"
 draft: false

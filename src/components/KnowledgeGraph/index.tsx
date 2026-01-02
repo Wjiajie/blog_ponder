@@ -39,7 +39,8 @@ interface KnowledgeGraphProps {
 // 获取节点的链接URL
 function getNodeUrl(node: GraphNode | null) {
   if (!node) return '#';
-  return node.type === 'note' ? `/notes/${node.id}` : `/blog/${node.id}`;
+  // 对于note类型节点，链接到对应的标签页面
+  return node.type === 'note' ? `/blog/tags/${node.id}` : `/blog/${node.id}`;
 }
 
 // 添加模态窗口组件
@@ -51,12 +52,12 @@ function NodeModal({ node, onClose }: { node: GraphNode; onClose: () => void }) 
           <i className="fas fa-times"></i>
         </button>
         <h4>{node.name}</h4>
-        <p>类型: {node.type === 'note' ? '笔记页面' : '博客文章'}</p>
+        <p>类型: {node.type === 'note' ? '标签页面' : '博客文章'}</p>
         {node.description && (
           <p className={styles.modalDescription}>{node.description}</p>
         )}
         <Link to={getNodeUrl(node)} className={styles.modalLink}>
-          打开页面
+          查看标签
         </Link>
       </div>
     </div>
@@ -117,22 +118,22 @@ export default function KnowledgeGraph({
         const container = containerRef.current;
         if (container) {
           const rect = container.getBoundingClientRect();
-          setDimensions({ 
+          setDimensions({
             width: rect.width,
             height: rect.height
           });
         } else {
-          setDimensions({ 
+          setDimensions({
             width: Math.min(window.innerWidth * 0.95, width),
             height: Math.min(window.innerHeight * 0.8, height)
           });
         }
       }
     }
-    
+
     window.addEventListener('resize', updateSize);
     updateSize();
-    
+
     return () => window.removeEventListener('resize', updateSize);
   }, [isFullscreen, width, height]);
 
@@ -166,13 +167,13 @@ export default function KnowledgeGraph({
 
     const svg = d3.select(svgRef.current);
     const link = svg.selectAll<SVGLineElement, GraphLink>('line');
-    
+
     // 找到与节点连接的所有链接和节点
     const connectedNodeIds = new Set<string>();
     const connectedLinks = graphData.links.filter(link => {
       const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
       const targetId = typeof link.target === 'string' ? link.target : link.target.id;
-      
+
       if (sourceId === node.id) {
         connectedNodeIds.add(targetId);
         return true;
@@ -258,7 +259,7 @@ export default function KnowledgeGraph({
 
     const svg = d3.select(svgRef.current);
     const container = svg.append('g');
-    
+
     // 初始化缩放级别和位置
     const initialScale = 0.8;
 
@@ -374,11 +375,11 @@ export default function KnowledgeGraph({
 
     svg.call(zoom);
     zoomRef.current = zoom;
-    
+
     // 初始缩放设置，使图表居中
     setTimeout(() => {
       zoom.transform(
-        svg, 
+        svg,
         d3.zoomIdentity.translate(dimensions.width / 2, dimensions.height / 2).scale(initialScale)
       );
     }, 100);
@@ -407,21 +408,21 @@ export default function KnowledgeGraph({
   }, [graphData, dimensions, highlightConnections]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`${styles.graphContainer} ${isFullscreen ? styles.fullscreen : ''}`}
     >
       <div className={styles.graphHeader}>
         <h3>知识图谱</h3>
         <div className={styles.graphControls}>
-          <button 
+          <button
             className={styles.resetButton}
             onClick={resetGraph}
             title="重置视图"
           >
             <i className="fas fa-undo"></i>
           </button>
-          <button 
+          <button
             className={styles.fullscreenButton}
             onClick={toggleFullscreen}
             title={isFullscreen ? "退出全屏" : "全屏查看"}
@@ -430,21 +431,21 @@ export default function KnowledgeGraph({
           </button>
         </div>
       </div>
-      
-      <svg 
-        ref={svgRef} 
-        width={dimensions.width} 
-        height={dimensions.height} 
+
+      <svg
+        ref={svgRef}
+        width={dimensions.width}
+        height={dimensions.height}
         className={styles.graph}
       />
-      
+
       {selectedNode && (
-        <NodeModal 
-          node={selectedNode} 
+        <NodeModal
+          node={selectedNode}
           onClose={() => {
             setSelectedNode(null);
             highlightConnections(selectedNode, false, true);
-          }} 
+          }}
         />
       )}
     </div>

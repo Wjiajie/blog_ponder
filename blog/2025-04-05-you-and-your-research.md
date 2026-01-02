@@ -2,7 +2,7 @@
 title: '【译】你和你的研究'
 slug: you-and-your-research
 authors: [Richard W. Hamming, jiajiewu]
-tags: [译文, 通用价值]
+tags: [决策]
 keywords: ["blog", "通用价值", "职业规划", "译文"]
 description: ""
 draft: false

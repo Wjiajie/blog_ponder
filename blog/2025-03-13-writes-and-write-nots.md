@@ -2,7 +2,7 @@
 title: '【译】好作家和不会写作的人'
 slug: writes-and-write-nots
 authors: [jiajiewu, paulgraham]
-tags: [译文, 通用价值]
+tags: [决策]
 keywords: ["通用价值", "写作", "个人博客", "AI"]
 description: "本文探讨了写作在未来的变化，特别是随着AI的发展，写作技能的分化以及其对思维能力的影响。"
 draft: false

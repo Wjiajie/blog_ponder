@@ -2,7 +2,7 @@
 title: '【译】做自己人生的CEO'
 slug: do-yourself-life-the-ceo
 authors: [Peter Drucker, jiajiewu]
-tags: [决策能力, 译文]
+tags: [决策]
 keywords: ["决策能力", "翻译"]
 description: "本文介绍了如何在知识经济时代，成为自己的首席执行官，实现职业成就与人生价值。"
 draft: false

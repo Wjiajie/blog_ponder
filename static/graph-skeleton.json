@@ -1,0 +1,228 @@
+{
+    "nodes": [
+        {
+            "id": "index",
+            "name": "笔记索引",
+            "type": "note",
+            "group": 0,
+            "description": "思维花园的入口，所有笔记的索引页",
+            "icon": "fas fa-home"
+        },
+        {
+            "id": "computer-science",
+            "name": "计算机科学",
+            "type": "note",
+            "group": 1,
+            "description": "计算机科学基础知识、理论与实践",
+            "icon": "fas fa-laptop-code"
+        },
+        {
+            "id": "neural-networks",
+            "name": "神经网络",
+            "type": "note",
+            "group": 2,
+            "description": "神经网络基础、架构与深度学习应用",
+            "icon": "fas fa-network-wired"
+        },
+        {
+            "id": "software-architecture",
+            "name": "软件架构",
+            "type": "note",
+            "group": 2,
+            "description": "软件架构设计原则、模式与最佳实践",
+            "icon": "fas fa-sitemap"
+        },
+        {
+            "id": "programming-languages",
+            "name": "编程语言",
+            "type": "note",
+            "group": 2,
+            "description": "各种编程语言的特性、用法与最佳实践",
+            "icon": "fas fa-code"
+        },
+        {
+            "id": "tools-usage",
+            "name": "工具使用",
+            "type": "note",
+            "group": 1,
+            "description": "各类工具的使用技巧与最佳实践",
+            "icon": "fas fa-tools"
+        },
+        {
+            "id": "rag",
+            "name": "RAG",
+            "type": "note",
+            "group": 2,
+            "description": "检索增强生成技术的原理与应用",
+            "icon": "fas fa-database"
+        },
+        {
+            "id": "data-format-conversion",
+            "name": "数据格式转换",
+            "type": "note",
+            "group": 2,
+            "description": "各种数据格式之间的转换方法与工具",
+            "icon": "fas fa-exchange-alt"
+        },
+        {
+            "id": "universal-values",
+            "name": "通用价值",
+            "type": "note",
+            "group": 1,
+            "description": "跨领域的通用价值观念与思想",
+            "icon": "fas fa-globe"
+        },
+        {
+            "id": "mental-models",
+            "name": "思维模型",
+            "type": "note",
+            "group": 2,
+            "description": "各种思维模型、决策框架与认知工具",
+            "icon": "fas fa-brain"
+        },
+        {
+            "id": "money-philosophy",
+            "name": "金钱观",
+            "type": "note",
+            "group": 2,
+            "description": "关于金钱的哲学思考、理财原则与投资理念",
+            "icon": "fas fa-money-bill-wave"
+        },
+        {
+            "id": "decision",
+            "name": "决策",
+            "type": "note",
+            "group": 2,
+            "description": "思考如何做出更优的决策，以及分享前路人如何做出优秀的决策",
+            "icon": "fas fa-rocket"
+        },
+        {
+            "id": "life",
+            "name": "生活随笔",
+            "type": "note",
+            "group": 1,
+            "description": "日常感悟、记录的生活随笔",
+            "icon": "fas fa-pen-fancy"
+        },
+        {
+            "id": "reading-notes",
+            "name": "读书杂谈",
+            "type": "note",
+            "group": 2,
+            "description": "读书心得、书评与阅读方法",
+            "icon": "fas fa-book-reader"
+        }
+    ],
+    "links": [
+        {
+            "source": "index",
+            "target": "computer-science",
+            "value": 3
+        },
+        {
+            "source": "computer-science",
+            "target": "software-architecture",
+            "value": 2
+        },
+        {
+            "source": "computer-science",
+            "target": "programming-languages",
+            "value": 2
+        },
+        {
+            "source": "computer-science",
+            "target": "neural-networks",
+            "value": 2
+        },
+        {
+            "source": "index",
+            "target": "tools-usage",
+            "value": 3
+        },
+        {
+            "source": "tools-usage",
+            "target": "rag",
+            "value": 2
+        },
+        {
+            "source": "tools-usage",
+            "target": "data-format-conversion",
+            "value": 2
+        },
+        {
+            "source": "index",
+            "target": "universal-values",
+            "value": 3
+        },
+        {
+            "source": "universal-values",
+            "target": "mental-models",
+            "value": 2
+        },
+        {
+            "source": "universal-values",
+            "target": "money-philosophy",
+            "value": 2
+        },
+        {
+            "source": "universal-values",
+            "target": "decision",
+            "value": 2
+        },
+        {
+            "source": "index",
+            "target": "life",
+            "value": 3
+        },
+        {
+            "source": "life",
+            "target": "reading-notes",
+            "value": 2
+        },
+        {
+            "source": "data-format-conversion",
+            "target": "tools-usage",
+            "value": 2
+        },
+        {
+            "source": "decision",
+            "target": "universal-values",
+            "value": 2
+        },
+        {
+            "source": "mental-models",
+            "target": "universal-values",
+            "value": 2
+        },
+        {
+            "source": "money-philosophy",
+            "target": "universal-values",
+            "value": 2
+        },
+        {
+            "source": "programming-languages",
+            "target": "computer-science",
+            "value": 2
+        },
+        {
+            "source": "rag",
+            "target": "tools-usage",
+            "value": 2
+        },
+        {
+            "source": "reading-notes",
+            "target": "life",
+            "value": 2
+        },
+        {
+            "source": "software-architecture",
+            "target": "computer-science",
+            "value": 2
+        },
+        {
+            "source": "neural-networks",
+            "target": "computer-science",
+            "value": 2
+        }
+    ]
+}

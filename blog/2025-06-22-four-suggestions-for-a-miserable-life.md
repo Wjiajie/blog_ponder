@@ -2,7 +2,7 @@
 title: '【译】痛苦人生的四个建议'
 slug: four-suggestions-for-a-miserable-life
 authors: [Charlie Munger, jiajiewu]
-tags: [决策能力, 译文]
+tags: [决策]
 keywords: ["决策能力", "翻译"]
 description: "本文介绍了如何保证痛苦人生的四个建议。通过引入卡森的痛苦处方，结合查理・芒格的新增处方，分享了如何避免痛苦和获得成功。"
 draft: false

@@ -2,7 +2,7 @@
 title: '【译】你的个人董事会'
 slug: your-personal-board
 authors: [Shane Parrish, jiajiewu]
-tags: [决策能力, 译文]
+tags: [决策]
 keywords: ["决策能力", "个人智库", "翻译"]
 description: "本文介绍了如何建立个人董事会的概念和方法。通过选择在某些方面优于自己的榜样，从历史伟人到当代大师，构建专属的学习与成长坐标系。文章强调了向他人学习的开放心态，以及如何通过各种渠道获取榜样的智慧，最终实现自我超越。"
 draft: false
