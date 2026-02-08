@@ -8,6 +8,12 @@ description: 深入解析 Nanobot 的核心引擎 AgentLoop，探讨其消息处
 draft: false
 ---
 
+# Agent 核心引擎解析：nanobot 的智慧中枢
+
+> **系列导读**：在上一篇《架构总览与模块划分》中，我们从宏观视角认识了 nanobot 的四层架构。现在，让我们深入核心引擎层——`agent/` 模块，揭开 nanobot "智能"的神秘面纱。这里是 AI 助手真正"思考"的地方。
+
+<!-- truncate -->
+
 > **Nanobot 系列导航**
 >
 > 01. [项目概览与设计哲学：为什么我们需要另一个 Bot 框架？](./2026-01-29-nanobot-01-overview.md)
@@ -22,11 +28,7 @@ draft: false
 > 10. [LLMServiceAdapter与模型接入：打造 AI 的"通用翻译官"](./2026-02-07-nanobot-10-llm-provider.md)
 > 11. [未来展望与生态建设：通往 AGI 的星辰大海](./2026-02-08-nanobot-11-future-outlook.md)
 
-# Agent 核心引擎解析：nanobot 的智慧中枢
 
-> **系列导读**：在上一篇《架构总览与模块划分》中，我们从宏观视角认识了 nanobot 的四层架构。现在，让我们深入核心引擎层——`agent/` 模块，揭开 nanobot "智能"的神秘面纱。这里是 AI 助手真正"思考"的地方。
-
-<!-- truncate -->
 
 ---
 

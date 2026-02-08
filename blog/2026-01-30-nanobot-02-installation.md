@@ -8,6 +8,12 @@ description: 从零开始搭建 Nanobot 的完整指南。涵盖环境准备、�
 draft: false
 ---
 
+# 安装配置完全指南：从零开始的 nanobot 之旅
+
+> **系列导读**：在上一篇文章中，我们认识了 nanobot——一个仅用 3400 行代码实现的超轻量级 AI 助手。现在，让我们卷起袖子，一步步把它跑起来！本文将从环境准备到第一次成功对话，手把手带你完成整个配置过程。
+
+<!-- truncate -->
+
 > **Nanobot 系列导航**
 >
 > 01. [项目概览与设计哲学：为什么我们需要另一个 Bot 框架？](./2026-01-29-nanobot-01-overview.md)
@@ -22,13 +28,7 @@ draft: false
 > 10. [LLMServiceAdapter与模型接入：打造 AI 的"通用翻译官"](./2026-02-07-nanobot-10-llm-provider.md)
 > 11. [未来展望与生态建设：通往 AGI 的星辰大海](./2026-02-08-nanobot-11-future-outlook.md)
 
-# 安装配置完全指南：从零开始的 nanobot 之旅
 
-> **系列导读**：在上一篇文章中，我们认识了 nanobot——一个仅用 3400 行代码实现的超轻量级 AI 助手。现在，让我们卷起袖子，一步步把它跑起来！本文将从环境准备到第一次成功对话，手把手带你完成整个配置过程。
-
-<!-- truncate -->
-
----<!-- truncate -->
 
 ---
 
@@ -526,5 +526,4 @@ docker run -v ~/.nanobot:/root/.nanobot -p 18790:18790 nanobot gateway
 ---
 
 *本文是 nanobot 深度解析系列的第 2 篇，共 11 篇。*
-
 

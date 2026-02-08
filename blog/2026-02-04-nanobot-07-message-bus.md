@@ -8,6 +8,13 @@ description: 详解 Nanobot 的消息总线架构，剖析 Inbound/Outbound 消�
 draft: false
 ---
 
+# 消息总线与事件系统：nanobot 的"神经网络"
+
+> **系列导读**：在前面的文章中，我们介绍了 Agent 核心引擎和工具系统。那么，各个组件之间是如何通信的？如何确保系统的高内聚低耦合？答案就是 **Message Bus（消息总线）**。
+
+
+<!-- truncate -->
+
 > **Nanobot 系列导航**
 >
 > 01. [项目概览与设计哲学：为什么我们需要另一个 Bot 框架？](./2026-01-29-nanobot-01-overview.md)
@@ -22,11 +29,6 @@ draft: false
 > 10. [LLMServiceAdapter与模型接入：打造 AI 的"通用翻译官"](./2026-02-07-nanobot-10-llm-provider.md)
 > 11. [未来展望与生态建设：通往 AGI 的星辰大海](./2026-02-08-nanobot-11-future-outlook.md)
 
-# 消息总线与事件系统：nanobot 的"神经网络"
-
-> **系列导读**：在前面的文章中，我们介绍了 Agent 核心引擎和工具系统。那么，各个组件之间是如何通信的？如何确保系统的高内聚低耦合？答案就是 **Message Bus（消息总线）**。
-
----<!-- truncate -->
 
 ---
 
@@ -259,5 +261,4 @@ nanobot 的消息总线系统展示了如何用最简单的代码实现高效的
 ---
 
 *本文是 nanobot 深度解析系列的第 7 篇，共 11 篇。*
-
 

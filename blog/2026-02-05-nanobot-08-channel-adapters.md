@@ -8,6 +8,13 @@ description: 深入讲解 Nanobot Channel 层的设计模式，通过 Telgram、
 draft: false
 ---
 
+# Channel 适配器实现：让 AI 连接世界
+
+> **系列导读**：在上一篇《消息总线与事件系统》中，我们构建了 nanobot 的通信骨干。现在，我们要把这个骨干连接到真实世界——Telegram、Discord、WhatsApp 和飞书。这就是 **Channel Adapter（渠道适配器）** 的工作。
+
+
+<!-- truncate -->
+
 > **Nanobot 系列导航**
 >
 > 01. [项目概览与设计哲学：为什么我们需要另一个 Bot 框架？](./2026-01-29-nanobot-01-overview.md)
@@ -22,11 +29,6 @@ draft: false
 > 10. [LLMServiceAdapter与模型接入：打造 AI 的"通用翻译官"](./2026-02-07-nanobot-10-llm-provider.md)
 > 11. [未来展望与生态建设：通往 AGI 的星辰大海](./2026-02-08-nanobot-11-future-outlook.md)
 
-# Channel 适配器实现：让 AI 连接世界
-
-> **系列导读**：在上一篇《消息总线与事件系统》中，我们构建了 nanobot 的通信骨干。现在，我们要把这个骨干连接到真实世界——Telegram、Discord、WhatsApp 和飞书。这就是 **Channel Adapter（渠道适配器）** 的工作。
-
----<!-- truncate -->
 
 ---
 
@@ -328,5 +330,4 @@ Channel 适配器是 nanobot 的感官，让它能够"听"和"说"。
 ---
 
 *本文是 nanobot 深度解析系列的第 8 篇，共 11 篇。*
-
 

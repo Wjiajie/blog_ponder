@@ -8,6 +8,13 @@ description: 详解 Nanobot 的各类 LLM 服务接入方案，涵盖 OpenAI 兼
 draft: false
 ---
 
+# LLM 服务适配与模型接入：打造 AI 的"通用翻译官"
+
+> **系列导读**：在上一篇，我们解决了记忆持久化的问题。现在，我们来到整个系统的"心脏"——大语言模型（LLM）。OpenAI, Anthropic, Gemini, DeepSeek, Groq... 新模型层出不穷，API 各有千秋。nanobot 如何从容应对？答案就是 **Provider 层**。
+
+
+<!-- truncate -->
+
 > **Nanobot 系列导航**
 >
 > 01. [项目概览与设计哲学：为什么我们需要另一个 Bot 框架？](./2026-01-29-nanobot-01-overview.md)
@@ -22,11 +29,6 @@ draft: false
 > 10. [LLMServiceAdapter与模型接入：打造 AI 的"通用翻译官"](./2026-02-07-nanobot-10-llm-provider.md)
 > 11. [未来展望与生态建设：通往 AGI 的星辰大海](./2026-02-08-nanobot-11-future-outlook.md)
 
-# LLM 服务适配与模型接入：打造 AI 的"通用翻译官"
-
-> **系列导读**：在上一篇，我们解决了记忆持久化的问题。现在，我们来到整个系统的"心脏"——大语言模型（LLM）。OpenAI, Anthropic, Gemini, DeepSeek, Groq... 新模型层出不穷，API 各有千秋。nanobot 如何从容应对？答案就是 **Provider 层**。
-
----<!-- truncate -->
 
 ---
 
@@ -240,5 +242,4 @@ nanobot 的 Provider 层设计体现了"依赖倒置"原则：
 ---
 
 *本文是 nanobot 深度解析系列的第 10 篇，共 11 篇。*
-
 

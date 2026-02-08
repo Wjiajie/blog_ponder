@@ -8,6 +8,13 @@ description: 详细介绍如何将 Nanobot 接入主流聊天平台。包括 Tel
 draft: false
 ---
 
+# 多渠道接入配置详解：让 nanobot 无处不在
+
+> **系列导读**：在上一篇文章中，我们完成了 nanobot 的基础安装和配置，实现了命令行对话。但真正的 AI 助手应该能在你常用的聊天工具中随时待命——Telegram、Discord、WhatsApp、飞书……本文将手把手教你配置每个渠道，让 nanobot 真正"无处不在"。
+
+
+<!-- truncate -->
+
 > **Nanobot 系列导航**
 >
 > 01. [项目概览与设计哲学：为什么我们需要另一个 Bot 框架？](./2026-01-29-nanobot-01-overview.md)
@@ -22,11 +29,6 @@ draft: false
 > 10. [LLMServiceAdapter与模型接入：打造 AI 的"通用翻译官"](./2026-02-07-nanobot-10-llm-provider.md)
 > 11. [未来展望与生态建设：通往 AGI 的星辰大海](./2026-02-08-nanobot-11-future-outlook.md)
 
-# 多渠道接入配置详解：让 nanobot 无处不在
-
-> **系列导读**：在上一篇文章中，我们完成了 nanobot 的基础安装和配置，实现了命令行对话。但真正的 AI 助手应该能在你常用的聊天工具中随时待命——Telegram、Discord、WhatsApp、飞书……本文将手把手教你配置每个渠道，让 nanobot 真正"无处不在"。
-
----<!-- truncate -->
 
 ---
 
@@ -616,5 +618,4 @@ export NANOBOT_CHANNELS__TELEGRAM__TOKEN="your_token"
 ---
 
 *本文是 nanobot 深度解析系列的第 3 篇，共 11 篇。*
-
 

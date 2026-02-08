@@ -8,6 +8,12 @@ description: 展望 Nanobot 的未来发展 roadmap，探讨多模态交互、�
 draft: false
 ---
 
+# 未来展望与生态建设：通往 AGI 的星辰大海
+
+> **系列终章**：至此，我们已经完成了 nanobot 基础架构的 10 篇深度解析。从仅仅 3400 行代码的极简内核，到能够连接四大主流平台的通用 Agent，我们见证了一个 AI 助手的诞生。但这仅仅是开始。
+
+<!-- truncate -->
+
 > **Nanobot 系列导航**
 >
 > 01. [项目概览与设计哲学：为什么我们需要另一个 Bot 框架？](./2026-01-29-nanobot-01-overview.md)
@@ -22,11 +28,7 @@ draft: false
 > 10. [LLMServiceAdapter与模型接入：打造 AI 的"通用翻译官"](./2026-02-07-nanobot-10-llm-provider.md)
 > 11. [未来展望与生态建设：通往 AGI 的星辰大海](./2026-02-08-nanobot-11-future-outlook.md)
 
-# 未来展望与生态建设：通往 AGI 的星辰大海
 
-> **系列终章**：至此，我们已经完成了 nanobot 基础架构的 10 篇深度解析。从仅仅 3400 行代码的极简内核，到能够连接四大主流平台的通用 Agent，我们见证了一个 AI 助手的诞生。但这仅仅是开始。
-
-<!-- truncate -->
 
 ---
 
@@ -120,5 +122,4 @@ Happy Coding! 🚀
 
 ---
 *本文是 nanobot 深度解析系列的最后一篇。感谢阅读！*
-
 
