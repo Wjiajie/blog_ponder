@@ -118,5 +118,41 @@ mcp:
   label: 数据格式转换
   description: 各种数据格式之间的转换方法与工具
 
+Nanobot:
+  label: Nanobot
+  description: Nanobot 项目相关文章
+
+Tools:
+  label: Tools
+  description: 工具系统相关文章
+
+Agent:
+  label: Agent
+  description: Agent 核心相关文章
+
+EventBus:
+  label: EventBus
+  description: 消息总线相关文章
+
+Channels:
+  label: Channels
+  description: 渠道适配器相关文章
+
+Session:
+  label: Session
+  description: 会话管理相关文章
+
+Future:
+  label: Future
+  description: 未来展望相关文章
+
+生活随笔:
+  label: 生活随笔
+  description: 日常感悟、记录的生活随笔
+
+计算机科学:
+  label: 计算机科学
+  description: 计算机科学基础知识、理论与实践
+
 
 

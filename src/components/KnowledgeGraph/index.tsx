@@ -203,7 +203,7 @@ export default function KnowledgeGraph({
       });
 
     // 更新节点样式
-    d3.selectAll('circle')
+    svg.selectAll('circle')
       .transition()
       .duration(200)
       .attr('r', d => {
@@ -219,7 +219,7 @@ export default function KnowledgeGraph({
       });
 
     // 更新文本样式
-    d3.selectAll('text')
+    svg.selectAll('text')
       .transition()
       .duration(200)
       .style('font-size', d => {

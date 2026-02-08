@@ -9,7 +9,7 @@
             "icon": "fas fa-home"
         },
         {
-            "id": "computer-science",
+            "id": "计算机科学",
             "name": "计算机科学",
             "type": "note",
             "group": 1,
@@ -17,7 +17,7 @@
             "icon": "fas fa-laptop-code"
         },
         {
-            "id": "neural-networks",
+            "id": "神经网络",
             "name": "神经网络",
             "type": "note",
             "group": 2,
@@ -25,7 +25,7 @@
             "icon": "fas fa-network-wired"
         },
         {
-            "id": "software-architecture",
+            "id": "软件架构",
             "name": "软件架构",
             "type": "note",
             "group": 2,
@@ -33,7 +33,7 @@
             "icon": "fas fa-sitemap"
         },
         {
-            "id": "programming-languages",
+            "id": "编程语言",
             "name": "编程语言",
             "type": "note",
             "group": 2,
@@ -41,8 +41,8 @@
             "icon": "fas fa-code"
         },
         {
-            "id": "tools-usage",
-            "name": "工具使用",
+            "id": "tools",
+            "name": "Tools",
             "type": "note",
             "group": 1,
             "description": "各类工具的使用技巧与最佳实践",
@@ -57,7 +57,7 @@
             "icon": "fas fa-database"
         },
         {
-            "id": "data-format-conversion",
+            "id": "数据格式转换",
             "name": "数据格式转换",
             "type": "note",
             "group": 2,
@@ -65,7 +65,7 @@
             "icon": "fas fa-exchange-alt"
         },
         {
-            "id": "universal-values",
+            "id": "通用价值",
             "name": "通用价值",
             "type": "note",
             "group": 1,
@@ -73,7 +73,7 @@
             "icon": "fas fa-globe"
         },
         {
-            "id": "mental-models",
+            "id": "思维模型",
             "name": "思维模型",
             "type": "note",
             "group": 2,
@@ -81,7 +81,7 @@
             "icon": "fas fa-brain"
         },
         {
-            "id": "money-philosophy",
+            "id": "金钱观",
             "name": "金钱观",
             "type": "note",
             "group": 2,
@@ -89,7 +89,7 @@
             "icon": "fas fa-money-bill-wave"
         },
         {
-            "id": "decision",
+            "id": "决策",
             "name": "决策",
             "type": "note",
             "group": 2,
@@ -97,7 +97,7 @@
             "icon": "fas fa-rocket"
         },
         {
-            "id": "life",
+            "id": "生活随笔",
             "name": "生活随笔",
             "type": "note",
             "group": 1,
@@ -105,7 +105,7 @@
             "icon": "fas fa-pen-fancy"
         },
         {
-            "id": "reading-notes",
+            "id": "读书杂谈",
             "name": "读书杂谈",
             "type": "note",
             "group": 2,
@@ -116,112 +116,112 @@
     "links": [
         {
             "source": "index",
-            "target": "computer-science",
+            "target": "计算机科学",
             "value": 3
         },
         {
-            "source": "computer-science",
-            "target": "software-architecture",
+            "source": "计算机科学",
+            "target": "软件架构",
             "value": 2
         },
         {
-            "source": "computer-science",
-            "target": "programming-languages",
+            "source": "计算机科学",
+            "target": "编程语言",
             "value": 2
         },
         {
-            "source": "computer-science",
-            "target": "neural-networks",
+            "source": "计算机科学",
+            "target": "神经网络",
             "value": 2
         },
         {
             "source": "index",
-            "target": "tools-usage",
+            "target": "tools",
             "value": 3
         },
         {
-            "source": "tools-usage",
+            "source": "tools",
             "target": "rag",
             "value": 2
         },
         {
-            "source": "tools-usage",
-            "target": "data-format-conversion",
+            "source": "tools",
+            "target": "数据格式转换",
             "value": 2
         },
         {
             "source": "index",
-            "target": "universal-values",
+            "target": "通用价值",
             "value": 3
         },
         {
-            "source": "universal-values",
-            "target": "mental-models",
+            "source": "通用价值",
+            "target": "思维模型",
             "value": 2
         },
         {
-            "source": "universal-values",
-            "target": "money-philosophy",
+            "source": "通用价值",
+            "target": "金钱观",
             "value": 2
         },
         {
-            "source": "universal-values",
-            "target": "decision",
+            "source": "通用价值",
+            "target": "决策",
             "value": 2
         },
         {
             "source": "index",
-            "target": "life",
+            "target": "生活随笔",
             "value": 3
         },
         {
-            "source": "life",
-            "target": "reading-notes",
+            "source": "生活随笔",
+            "target": "读书杂谈",
             "value": 2
         },
         {
-            "source": "data-format-conversion",
-            "target": "tools-usage",
+            "source": "数据格式转换",
+            "target": "tools",
             "value": 2
         },
         {
-            "source": "decision",
-            "target": "universal-values",
+            "source": "决策",
+            "target": "通用价值",
             "value": 2
         },
         {
-            "source": "mental-models",
-            "target": "universal-values",
+            "source": "思维模型",
+            "target": "通用价值",
             "value": 2
         },
         {
-            "source": "money-philosophy",
-            "target": "universal-values",
+            "source": "金钱观",
+            "target": "通用价值",
             "value": 2
         },
         {
-            "source": "programming-languages",
-            "target": "computer-science",
+            "source": "编程语言",
+            "target": "计算机科学",
             "value": 2
         },
         {
             "source": "rag",
-            "target": "tools-usage",
+            "target": "tools",
             "value": 2
         },
         {
-            "source": "reading-notes",
-            "target": "life",
+            "source": "读书杂谈",
+            "target": "生活随笔",
             "value": 2
         },
         {
-            "source": "software-architecture",
-            "target": "computer-science",
+            "source": "软件架构",
+            "target": "计算机科学",
             "value": 2
         },
         {
-            "source": "neural-networks",
-            "target": "computer-science",
+            "source": "神经网络",
+            "target": "计算机科学",
             "value": 2
         }
     ]
