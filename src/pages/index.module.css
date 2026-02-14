@@ -1,8 +1,9 @@
 /**
- * Zen Design Homepage Styles
+ * Zen Minimalist Homepage Styles
+ * 
+ * Design: Clean, spacious, focused on typography
  */
 
-/* Container: Solid Paper Background */
 .pageContainer {
   height: 100vh;
   width: 100vw;
@@ -18,7 +19,6 @@
   z-index: 1;
 }
 
-/* Content Area: Centered & Clean */
 .heroBanner {
   display: flex;
   flex-direction: column;
@@ -26,65 +26,84 @@
   justify-content: center;
   text-align: center;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
   padding: 2rem;
   z-index: 2;
+  max-width: 600px;
 }
 
-/* Fade In Effect */
 .pageContainer.loaded .heroBanner {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Title: Noto Serif, Elegant */
+/* Title: Elegant Serif */
 .title {
-  font-family: var(--font-family-title-en), serif;
-  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-family: var(--font-family-title), Georgia, serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 400;
-  /* Regular weight for elegance */
   color: var(--ifm-font-color-base);
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  letter-spacing: 6px;
   line-height: 1.2;
+  text-transform: lowercase;
 }
 
-/* Subtitle: Clean Sans-serif/Serif mix */
+/* Subtitle: Light & Airy */
 .subtitle {
-  font-family: var(--font-family-text-en), sans-serif;
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-family: var(--font-family-text), sans-serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
   font-weight: 300;
-  color: var(--ifm-color-primary-dark);
-  /* Muted slate */
-  margin-bottom: 3rem;
-  letter-spacing: 0.1em;
-  opacity: 0.8;
+  color: var(--ifm-color-primary);
+  margin-bottom: 3.5rem;
+  letter-spacing: 1px;
+  opacity: 0.75;
+  line-height: 1.6;
 }
 
-/* Button: Minimal Text Link style */
+/* Button: Minimal Outline */
 .enterButton {
   display: inline-block;
-  padding: 0.8rem 2rem;
-  font-size: 0.85rem;
+  padding: 0.75rem 2rem;
+  font-size: 0.8rem;
+  font-weight: 400;
   color: var(--ifm-font-color-base);
   background: transparent;
-  border: 1px solid var(--ifm-font-color-base);
-  /* Thin border */
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 2px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  letter-spacing: 0.15em;
+  transition: all 0.25s ease;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  opacity: 0.7;
+}
+
+[data-theme='dark'] .enterButton {
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .enterButton:hover {
-  opacity: 1;
-  background-color: var(--ifm-font-color-base);
-  color: var(--ifm-background-color);
+  border-color: var(--ifm-font-color-base);
   text-decoration: none;
-  transform: translateY(-1px);
 }
 
-/* Navbar/Footer visibility handled via body class in index.tsx + custom.css */
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .heroBanner {
+    padding: 1.5rem;
+  }
+
+  .title {
+    letter-spacing: 4px;
+  }
+
+  .subtitle {
+    margin-bottom: 2.5rem;
+  }
+
+  .enterButton {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+}

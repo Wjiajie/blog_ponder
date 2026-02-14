@@ -26,7 +26,7 @@ C++中的左值引用（lvalue reference）和右值引用（rvalue reference）
 ```cpp
 #include <iostream>
 
-int main
+int main()
 {
 	int i = 10;
 	

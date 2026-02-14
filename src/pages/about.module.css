@@ -1,0 +1,190 @@
+/**
+ * About Page - Zen Minimalist Styles
+ */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+  min-height: calc(100vh - 200px);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] .header {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.title {
+  font-family: var(--font-family-title), Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 0.75rem;
+  letter-spacing: 2px;
+}
+
+.tagline {
+  font-family: var(--font-family-text), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--ifm-color-primary);
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+.content {
+  font-size: 1.05rem;
+  line-height: 2;
+}
+
+.section {
+  margin-bottom: 3.5rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-family-title), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.5px;
+}
+
+.paragraph {
+  margin-bottom: 1.25rem;
+  color: var(--ifm-font-color-base);
+  line-height: 2;
+}
+
+.paragraph a {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-thickness 0.2s ease;
+}
+
+.paragraph a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Interest Grid */
+.interests {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.interestItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='dark'] .interestItem {
+  border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+.interestItem:last-child {
+  border-bottom: none;
+}
+
+.interestIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.interestContent h3 {
+  font-family: var(--font-family-title), Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  margin: 0 0 0.35rem 0;
+}
+
+.interestContent p {
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Links */
+.links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.link {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--ifm-font-color-base);
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+[data-theme='dark'] .link {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.link:hover {
+  border-color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+  }
+
+  .interestItem {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .link {
+    text-align: center;
+  }
+}

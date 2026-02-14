@@ -1,202 +1,90 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-first websites.
+ * Ponder Blog - Zen Minimalist Design
+ * 
+ * Design Philosophy:
+ * - More whitespace, less clutter
+ * - Soft, muted color palette
+ * - Typography-focused
+ * - Content-first approach
  */
 
-/* You can override the default Infima variables here. */
+/* ============================================
+   CSS Variables - Zen Color Palette
+   ============================================ */
+
 :root {
-  /* Zen Guide: Paper & Ink Palette */
+  /* Primary Brand Color: Soft Sage */
+  --ifm-color-primary: #7a8b8c;
+  --ifm-color-primary-dark: #6a7b7c;
+  --ifm-color-primary-darker: #5a6b6c;
+  --ifm-color-primary-darkest: #4a5b5c;
+  --ifm-color-primary-light: #8a9b9c;
+  --ifm-color-primary-lighter: #9aabac;
+  --ifm-color-primary-lightest: #aabcbd;
 
-  /* Primary Brand Color: Muted Slate (Ink-like) */
-  --ifm-color-primary: #5D707F;
-  --ifm-color-primary-dark: #546572;
-  --ifm-color-primary-darker: #4F5F6C;
-  --ifm-color-primary-darkest: #414E59;
-  --ifm-color-primary-light: #708595;
-  --ifm-color-primary-lighter: #8598A6;
-  --ifm-color-primary-lightest: #C3CED6;
-
-  /* Global Colors */
-  --ifm-background-color: #fdfbf7;
-  /* Warm Paper White */
-  --ifm-font-color-base: #2c3e50;
-  /* Deep Ink Grey */
+  /* Global Colors - Soft & Warm */
+  --ifm-background-color: #faf9f6;
+  --ifm-font-color-base: #3a3a3a;
   --ifm-link-color: var(--ifm-color-primary);
 
   /* Typography */
-  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --font-family-title-en: 'Noto Serif SC', serif;
-  --font-family-title-zh: 'Noto Serif SC', serif;
-  --font-family-text-en: var(--ifm-font-family-base);
-  --font-family-text-zh: var(--ifm-font-family-base);
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-title: 'Noto Serif SC', Georgia, serif;
+  --font-family-text: var(--ifm-font-family-base);
 
-  /* Layout & Spacing */
-  --ifm-code-font-size: 90%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
-  --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Spacing - Generous Whitespace */
+  --ifm-line-height-base: 2.0;
+  --ifm-spacing-vertical: 1.5rem;
   --ifm-navbar-height: 3.5rem;
-  --ifm-line-height-base: 1.8;
-  /* Airier reading experience */
+  --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Code */
+  --ifm-code-font-size: 90%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.04);
 }
 
-/* Zen Blog Styles - De-carding */
+/* ============================================
+   Dark Mode - Soft Charcoal
+   ============================================ */
 
-/* Remove Card Styles from Blog Posts */
-article.margin-bottom--xl,
-.card {
-  box-shadow: none !important;
-  border: none !important;
-  background: transparent !important;
-  margin-bottom: 4rem !important;
-}
-
-/* Blog List Typography */
-.blog-list-page article h2 {
-  font-family: var(--font-family-title-en), serif;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.blog-list-page article header {
-  margin-bottom: 1rem;
-}
-
-/* Metadata (Date/Authors) - Subtle */
-.container .row .col .margin-vert--xl {
-  opacity: 0.6;
-  font-size: 0.9rem;
-  font-family: var(--font-family-text-en), sans-serif;
-}
-
-/* Clean up the "Read More" button */
-.blog-list-page article .margin-top--lg .button {
-  background: transparent;
-  color: var(--ifm-font-color-base);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  padding: 0.5rem 1.5rem;
-  border-radius: 2px;
-  font-weight: 400;
-  transition: all 0.2s ease;
-}
-
-.blog-list-page article .margin-top--lg .button:hover {
-  border-color: var(--ifm-font-color-base);
-  text-decoration: none;
-}
-
-/* Blog Post Page - Centered & Focus */
-.blog-post-page .markdown {
-  font-size: 1.1rem;
-  max-width: 800px;
-  /* Optimal reading width */
-  margin: 0 auto;
-}
-
-.blog-post-page article header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.blog-post-page h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-/* Remove Sidebar visual noise if present */
-.pagination-nav {
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* Zen Dark Mode: Deep Charcoal & Soft Light */
 [data-theme='dark'] {
-  --ifm-color-primary: #8EA8BD;
-  --ifm-color-primary-dark: #7B95A9;
-  --ifm-color-primary-darker: #6A889D;
-  --ifm-color-primary-darkest: #5A778A;
-  --ifm-color-primary-light: #A3B8C9;
-  --ifm-color-primary-lighter: #B8C9D7;
-  --ifm-color-primary-lightest: #CEDAE6;
+  --ifm-color-primary: #9abfc0;
+  --ifm-color-primary-dark: #8aafaf;
+  --ifm-color-primary-darker: #7a9f9f;
+  --ifm-color-primary-darkest: #6a8f8f;
+  --ifm-color-primary-light: #aacfd0;
+  --ifm-color-primary-lighter: #badfe0;
+  --ifm-color-primary-lightest: #caeff0;
 
   --ifm-background-color: #1a1a1a;
-  /* Soft Dark, not pitch black */
-  --ifm-font-color-base: #e0e0e0;
+  --ifm-font-color-base: #d4d4d4;
 
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.06);
 }
 
-/* 禅意风格的自定义样式 */
-.hero {
-  background: linear-gradient(135deg, rgba(142, 168, 189, 0.8), rgba(190, 208, 223, 0.8));
-  position: relative;
-  overflow: hidden;
+/* ============================================
+   Base Typography
+   ============================================ */
+
+body {
+  font-family: var(--font-family-text);
+  color: var(--ifm-font-color-base);
+  background-color: var(--ifm-background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.hero__title {
-  font-size: 4rem;
-  font-weight: 300;
-  letter-spacing: 4px;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-family-title-en), var(--font-family-title-zh);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-title);
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  line-height: 1.4;
 }
 
-.hero__subtitle {
-  font-size: 1.5rem;
-  font-weight: 300;
-  letter-spacing: 2px;
-  opacity: 0.9;
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-family-text-en), var(--font-family-text-zh);
-}
+/* ============================================
+   Navigation Bar - Minimal
+   ============================================ */
 
-.button.button--secondary {
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  color: white;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.button.button--secondary:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* 特性部分的样式 */
-.features {
-  padding: 4rem 0;
-  background: rgba(246, 247, 248, 0.7);
-}
-
-[data-theme='dark'] .features {
-  background: rgba(27, 27, 29, 0.7);
-}
-
-.featureImage {
-  opacity: 0.9;
-  transition: all 0.3s ease;
-}
-
-.featureImage:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-/* 导航栏基础样式 */
-:root {
-  --navbar-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --ifm-navbar-height: 3.5rem;
-}
-
-/* 提高选择器优先级 */
 html body .navbar {
   position: fixed !important;
   top: 0 !important;
@@ -207,133 +95,349 @@ html body .navbar {
   transform: translateY(0) !important;
   transition: var(--navbar-transition) !important;
   z-index: var(--ifm-z-index-fixed) !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  /* 更轻微的阴影 */
+  background-color: var(--ifm-background-color) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
 }
 
-/* 亮色模式下的导航栏样式 */
-html[data-theme='light'] body .navbar {
-  background-color: #ffffff !important;
-  border-bottom: 1px solid var(--ifm-color-emphasis-100) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+html[data-theme='dark'] body .navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-/* 暗色模式下的导航栏和侧边栏样式 - 提高优先级 */
-html[data-theme='dark'] body .navbar,
-html[data-theme='dark'] body .navbar-sidebar {
-  background-color: #1b1b1d !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* 调整导航栏内部元素的布局 */
-html body .navbar__inner {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  max-width: var(--ifm-container-width);
-  margin: 0 auto;
-  padding: 0 var(--ifm-spacing-horizontal);
-  width: 100%;
-}
-
-html body .navbar__items {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-html body .navbar-sidebar__brand {
-  height: var(--ifm-navbar-height);
-  display: flex;
-  align-items: center;
-}
-
-/* 提高选择器优先级 */
 html body .navbar.navbar-hidden {
   transform: translateY(-100%) !important;
 }
 
-/* 为内容添加顶部内边距和过渡效果 */
 html body #__docusaurus {
   padding-top: var(--ifm-navbar-height);
 }
 
-/* 内容区域动态调整 */
-html body main {
-  transition: transform var(--navbar-transition);
-  will-change: transform;
-  transform: translateY(0);
+/* Navbar Brand */
+html body .navbar__brand {
+  font-family: var(--font-family-title);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
-/* 当导航栏隐藏时，内容区域上移 */
-html body .navbar-hidden+#__docusaurus main {
-  transform: translateY(calc(-1 * var(--ifm-navbar-height)));
+html body .navbar__link {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0 1rem;
+  transition: opacity 0.2s ease;
 }
 
-/* 全局页脚样式 */
+html body .navbar__link:hover {
+  opacity: 0.6;
+}
+
+/* Navbar Icons */
+.navbar-icon-item {
+  position: relative;
+}
+
+.navbar-icon-item::before {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  margin-right: 6px;
+  font-size: 0.9rem;
+}
+
+.navbar-icon-item[href="/index"]::before {
+  content: "\f02e";
+}
+
+.navbar-icon-item[href="/blog"]::before {
+  content: "\f781";
+}
+
+.navbar-icon-item[href="/about"]::before {
+  content: "\f007";
+}
+
+/* ============================================
+   Blog List Page - Clean & Airy
+   ============================================ */
+
+article.margin-bottom--xl,
+.card {
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  margin-bottom: 5rem !important;
+}
+
+.blog-list-page article h2 {
+  font-family: var(--font-family-title);
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.blog-list-page article h2 a {
+  color: var(--ifm-font-color-base);
+}
+
+.blog-list-page article h2 a:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.blog-list-page article header {
+  margin-bottom: 1.25rem;
+}
+
+/* Metadata - Subtle */
+.container .row .col .margin-vert--xl {
+  opacity: 0.5;
+  font-size: 0.875rem;
+  font-family: var(--font-family-text);
+}
+
+/* Read More Button - Minimal */
+.blog-list-page article .margin-top--lg .button {
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0.5rem 1.25rem;
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] .blog-list-page article .margin-top--lg .button {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.blog-list-page article .margin-top--lg .button:hover {
+  border-color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+/* ============================================
+   Blog Post Page - Focused Reading
+   ============================================ */
+
+.blog-post-page .markdown {
+  font-size: 1.1rem;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 2;
+}
+
+.blog-post-page article header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] .blog-post-page article header {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.blog-post-page h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+/* Article Headings */
+.blog-post article h1 {
+  font-size: 1.75rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.blog-post article h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.blog-post article h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.875rem;
+  font-weight: 600;
+}
+
+.blog-post article {
+  font-family: var(--font-family-text);
+  font-weight: 400;
+  line-height: 2;
+  font-size: 1.1rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Paragraphs */
+.blog-post article p {
+  margin-bottom: 1.5rem;
+}
+
+/* Links in articles */
+.blog-post article a {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.blog-post article a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Pagination - Minimal */
+.pagination-nav {
+  border: none !important;
+  box-shadow: none !important;
+  margin-top: 4rem;
+}
+
+/* ============================================
+   Homepage - Zen Entry
+   ============================================ */
+
+html body .homepage {
+  padding-top: 0 !important;
+}
+
+.homepage .hero {
+  min-height: 100vh;
+  margin-top: calc(-1 * var(--ifm-navbar-height));
+  padding-top: calc(var(--ifm-navbar-height) + 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--ifm-background-color);
+  position: relative;
+}
+
+.homepage .hero__title {
+  font-family: var(--font-family-title);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 8px;
+  text-transform: lowercase;
+  margin: 0;
+  padding: 0 1rem;
+  color: var(--ifm-font-color-base);
+  text-align: center;
+}
+
+.homepage .hero__subtitle {
+  font-family: var(--font-family-text);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 2rem 0 3rem 0;
+  padding: 0 1rem;
+  color: var(--ifm-color-primary);
+  opacity: 0.8;
+}
+
+.homepage .enter-button {
+  font-family: var(--font-family-text);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  color: var(--ifm-font-color-base);
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+[data-theme='dark'] .homepage .enter-button {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.homepage .enter-button:hover {
+  border-color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.homepage main {
+  padding-top: 0;
+}
+
+/* Zen Mode: Hide Navbar on Homepage */
+body.zen-homepage .navbar {
+  display: none !important;
+}
+
+.navbar {
+  display: flex;
+}
+
+/* ============================================
+   Footer - Subtle
+   ============================================ */
+
 .footer {
-  --ifm-footer-title-color: var(--ifm-color-emphasis-900);
-  --ifm-footer-link-color: var(--ifm-color-emphasis-800);
-  --ifm-footer-copyright-color: var(--ifm-color-emphasis-800);
-  font-family: var(--font-family-text-en), var(--font-family-text-zh);
+  --ifm-footer-title-color: var(--ifm-color-emphasis-700);
+  --ifm-footer-link-color: var(--ifm-color-emphasis-600);
+  --ifm-footer-copyright-color: var(--ifm-color-emphasis-500);
+  font-family: var(--font-family-text);
+  background: var(--ifm-background-color) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 3rem 0;
+}
+
+[data-theme='dark'] .footer {
+  border-top-color: rgba(255, 255, 255, 0.06);
 }
 
 .footer__title {
   color: var(--ifm-footer-title-color);
   font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
 }
 
 .footer__link-item {
   color: var(--ifm-footer-link-color);
-  opacity: 0.9;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 0.9rem;
 }
 
 .footer__link-item:hover {
   color: var(--ifm-color-primary);
   text-decoration: none;
-  opacity: 1;
 }
 
 .footer__copyright {
   color: var(--ifm-footer-copyright-color);
-  opacity: 0.9;
-  font-weight: 500;
+  font-size: 0.85rem;
 }
 
-/* 移动端侧边栏基础样式 */
-@media screen and (max-width: 996px) {
+/* ============================================
+   Mobile Sidebar - Clean
+   ============================================ */
 
-  /* 导航栏布局固定 */
+@media screen and (max-width: 996px) {
   .navbar__toggle {
     position: relative;
     z-index: 102;
     left: -1rem;
-    margin-left: 0rem;
     width: 24px;
     height: 24px;
     padding: 0;
     border: none;
     background: none;
     cursor: pointer;
-    transition: all 0.3s ease;
   }
 
-  /* 侧边栏中的图标和文案间距 */
-  .navbar-sidebar .navbar-icon-item::before {
-    margin-right: 12px;
-    /* 增加图标和文案的间距 */
-    display: inline-block;
-    width: 20px;
-    /* 固定图标宽度 */
-    text-align: center;
-    /* 图标居中对齐 */
-  }
-
-  /* 隐藏默认的汉堡图标和关闭按钮 */
   .navbar__toggle svg,
   .navbar-sidebar__close,
   .navbar-sidebar__close svg,
@@ -341,7 +445,6 @@ html body .navbar-hidden+#__docusaurus main {
     display: none !important;
   }
 
-  /* 自定义汉堡菜单图标 */
   .navbar__toggle::before,
   .navbar__toggle::after,
   .navbar__toggle .navbar__toggle-line {
@@ -349,25 +452,18 @@ html body .navbar-hidden+#__docusaurus main {
     position: absolute;
     left: 2px;
     right: 2px;
-    height: 2px;
+    height: 1.5px;
     background-color: currentColor;
     transition: all 0.3s ease;
   }
 
-  .navbar__toggle::before {
-    top: 6px;
-  }
-
-  .navbar__toggle::after {
-    bottom: 6px;
-  }
-
+  .navbar__toggle::before { top: 6px; }
+  .navbar__toggle::after { bottom: 6px; }
   .navbar__toggle .navbar__toggle-line {
     top: 50%;
     transform: translateY(-50%);
   }
 
-  /* 展开状态的图标动画 */
   .navbar-sidebar--show .navbar__toggle::before {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
@@ -382,102 +478,82 @@ html body .navbar-hidden+#__docusaurus main {
     opacity: 0;
   }
 
-  /* 隐藏"回到主菜单"按钮 */
   .navbar-sidebar__back {
     display: none !important;
   }
 
-  /* 侧边栏样式 */
   .navbar-sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    width: 85%;
-    max-width: 400px;
+    width: 80%;
+    max-width: 320px;
     height: 100vh;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 101;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     padding-top: var(--ifm-navbar-height);
-    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+    background: var(--ifm-background-color) !important;
+  }
+
+  .navbar-sidebar .navbar-icon-item::before {
+    margin-right: 12px;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+  }
+
+  .navbar-sidebar__brand {
+    height: var(--ifm-navbar-height);
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
-  /* 确保右侧项目容器在侧边栏中可见 */
-  .navbar-sidebar .navbar__items--right {
-    display: flex !important;
-    position: absolute !important;
-    top: 0.5rem !important;
-    right: 0.5rem !important;
-    padding: 0.5rem !important;
-    z-index: 102 !important;
+  [data-theme='dark'] .navbar-sidebar__brand {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
   }
 
-  /* 主题切换按钮样式 */
-  .navbar-sidebar .navbar__items--right [class*="colorModeToggle"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 2rem !important;
-    height: 2rem !important;
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-    opacity: 0.8 !important;
+  .navbar-sidebar__brand .navbar__brand {
+    margin: 0 auto 0 2.5rem;
+    font-size: 1.25rem;
+    white-space: nowrap;
   }
 
-  .navbar-sidebar .navbar__items--right [class*="colorModeToggle"]:hover {
-    opacity: 1 !important;
-  }
-
-  /* 侧边栏内容布局 */
   .navbar-sidebar__items {
-    padding: 0.5rem !important;
-    margin-top: 0 !important;
-  }
-
-  .navbar-sidebar .menu__list {
-    margin-top: 0;
+    padding: 1rem !important;
   }
 
   .navbar-sidebar .menu__link {
-    padding: 0.75rem 1rem;
-    font-size: 1.1rem;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
   }
 
-  /* 背景遮罩 */
   .navbar-sidebar__backdrop {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    /* 更轻的背景色 */
+    background-color: rgba(0, 0, 0, 0.15);
     z-index: 100;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
     pointer-events: none;
   }
 
-  /* 展开时显示遮罩 */
-  .navbar-sidebar--show+.navbar-sidebar__backdrop {
+  .navbar-sidebar--show + .navbar-sidebar__backdrop {
     opacity: 1;
     pointer-events: auto;
   }
 
-  /* 暗色模式下的遮罩样式 */
-  html[data-theme='dark'] .navbar-sidebar__backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    /* 暗色模式下稍微深一点的背景 */
+  [data-theme='dark'] .navbar-sidebar__backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 
-  /* 移动端导航栏右侧项目处理 */
   .navbar__items--right {
     position: absolute !important;
     right: 0 !important;
@@ -488,7 +564,6 @@ html body .navbar-hidden+#__docusaurus main {
     align-items: center !important;
   }
 
-  /* 移动端主题切换按钮的特殊处理 */
   .navbar-sidebar .navbar__items--right {
     position: fixed !important;
     top: 0.5rem !important;
@@ -496,397 +571,51 @@ html body .navbar-hidden+#__docusaurus main {
     height: auto !important;
   }
 
-  /* 确保主题切换按钮在移动端可见 */
-  .navbar__items--right>.clean-btn,
-  .navbar__items--right>div>.clean-btn {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+  .navbar__items--right > .clean-btn,
+  .navbar__items--right > div > .clean-btn {
     width: 2rem !important;
     height: 2rem !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* 侧边栏顶部容器 */
-  .navbar-sidebar__brand {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    padding: 0.5rem 1rem !important;
-    height: var(--ifm-navbar-height) !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    background: inherit !important;
-    z-index: 102 !important;
-    border-bottom: 1px solid var(--ifm-color-emphasis-100) !important;
-  }
-
-  /* 品牌名称容器 */
-  .navbar-sidebar__brand .navbar__brand {
-    display: flex !important;
-    align-items: center !important;
-    margin: 0 auto 0 3rem !important;
-    /* 增加左边距，避免与汉堡菜单重叠 */
-    font-size: 1.4rem !important;
-    white-space: nowrap !important;
-  }
-
-  /* 主题切换按钮容器 */
-  .navbar-sidebar .navbar__items--right {
-    display: flex !important;
-    align-items: center !important;
-    margin-left: auto !important;
-    padding-right: 1rem !important;
-  }
-
-  /* 主题切换按钮样式 */
-  .navbar-sidebar .navbar__items--right [class*="colorModeToggle"] {
-    width: 2rem !important;
-    height: 2rem !important;
-    margin: 0 !important;
-  }
-
-  /* 侧边栏内容区域调整 */
-  .navbar-sidebar__items {
-    padding: 0.5rem !important;
-    margin-top: 0 !important;
   }
 }
 
-/* 主页样式 */
-html body .homepage {
-  padding-top: 0 !important;
-  /* 移除顶部内边距 */
-}
+/* ============================================
+   Reference Links - Subtle
+   ============================================ */
 
-/* 主页背景图样式 */
-.homepage .hero {
-  min-height: 90vh;
-  /* 略微减小高度 */
-  margin-top: calc(-1 * var(--ifm-navbar-height));
-  padding-top: calc(var(--ifm-navbar-height) + 2rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
-  /* 使用简约渐变替代图片 */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-}
-
-/* 添加暗色遮罩，提高文字可读性 */
-.homepage .hero::before {
-  content: none;
-}
-
-/* 确保内容在遮罩层之上 */
-.homepage .hero__title,
-.homepage .hero__subtitle,
-.homepage .hero .button {
-  position: relative;
-  z-index: 2;
-  color: var(--ifm-color-emphasis-800);
-  /* 确保文字清晰可见 */
-  text-shadow: none;
-  /* 移除文字阴影 */
-}
-
-/* 主页内容样式 */
-.homepage .hero__title {
-  font-size: clamp(2rem, 6vw, 3rem);
-  /* 响应式字体大小 */
-  text-align: center;
-  margin: 0;
-  padding: 0 1rem;
-  font-weight: 600;
-}
-
-.homepage .hero__subtitle {
-  font-size: clamp(1rem, 3vw, 1.3rem);
-  /* 响应式字体大小 */
-  text-align: center;
-  margin: 1rem 0 2rem 0;
-  padding: 0 1rem;
-  color: var(--ifm-color-emphasis-600);
-}
-
-/* 确保主页的其他部分也正确显示 */
-.homepage main {
-  padding-top: 0;
-}
-
-/* 暗色模式下的顶栏和侧边栏样式 */
-:global(html[data-theme='dark']) :global(.navbar),
-:global(html[data-theme='dark']) :global(.navbar-sidebar) {
-  background: #1b1b1d !important;
-  /* 完全不透明的深色背景 */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-/* 暗色模式下的侧边栏背景遮罩 */
-:global(html[data-theme='dark']) :global(.navbar-sidebar__backdrop) {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-/* 暗色模式下的顶栏和侧边栏文字颜色 */
-:global(html[data-theme='dark']) :global(.navbar__brand),
-:global(html[data-theme='dark']) :global(.navbar__link),
-:global(html[data-theme='dark']) :global(.navbar__toggle),
-:global(html[data-theme='dark']) :global(.navbar-sidebar__brand),
-:global(html[data-theme='dark']) :global(.clean-btn),
-:global(html[data-theme='dark']) :global(.navbar-sidebar__close) {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-/* 暗色模式下的搜索框样式 */
-:global(html[data-theme='dark']) :global(.navbar__search-input) {
-  color: rgba(255, 255, 255, 0.95) !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-radius: 4px;
-  padding: 0.5rem;
-}
-
-:global(html[data-theme='dark']) :global(.navbar__search-input::placeholder) {
-  color: rgba(255, 255, 255, 0.5) !important;
-}
-
-/* 暗色模式下的导航项悬停效果 */
-:global(html[data-theme='dark']) :global(.navbar__link:hover),
-:global(html[data-theme='dark']) :global(.navbar__brand:hover),
-:global(html[data-theme='dark']) :global(.clean-btn:hover) {
-  color: var(--ifm-color-primary-lighter) !important;
-  opacity: 1;
-}
-
-/* 基础字体设置 */
-body {
-  font-family: var(--font-family-text-en), var(--font-family-text-zh);
-}
-
-/* 标题字体设置 */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-family-title-en), var(--font-family-title-zh);
-  font-weight: 700;
-}
-
-/* 导航栏标题字体 */
-.navbar__brand {
-  font-family: var(--font-family-title-en), var(--font-family-title-zh);
-}
-
-/* 主页标题特殊字体设置 */
-.hero__title {
-  font-family: var(--font-family-title-en), var(--font-family-title-zh);
-  font-weight: 700;
-}
-
-.hero__subtitle {
-  font-family: var(--font-family-text-en), var(--font-family-text-zh);
-  font-weight: 400;
-}
-
-/* 博客文章标题 */
-.blog-post-title {
-  font-family: var(--font-family-title-en), var(--font-family-title-zh);
-  font-weight: 600;
-  font-size: 2rem;
-  /* 减小文章标题字体大小 */
-  line-height: 1.4;
-  /* 优化行高 */
-  margin-bottom: 1.5rem;
-  color: var(--ifm-color-emphasis-800);
-}
-
-/* 博客文章内容 */
-.blog-post article {
-  font-family: var(--font-family-text-en), var(--font-family-text-zh);
-  font-weight: 400;
-  line-height: 1.8;
-  /* 增加行高以提升阅读体验 */
-  font-size: 1.05rem;
-  max-width: 900px;
-  /* 限制最大宽度，保持阅读舒适度 */
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* 优化文章标题层级 */
-.blog-post article h1 {
-  font-size: 1.8rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1.2rem;
-}
-
-.blog-post article h2 {
-  font-size: 1.6rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-.blog-post article h3 {
-  font-size: 1.4rem;
-  margin-top: 1.8rem;
-  margin-bottom: 0.8rem;
-}
-
-/* 侧边栏 */
-.menu__link {
-  font-family: var(--font-family-text-en), var(--font-family-text-zh);
-}
-
-/* 页脚 */
-.footer {
-  font-family: var(--font-family-text-en), var(--font-family-text-zh);
-}
-
-/* 导航栏文字样式 */
-html body .navbar__brand {
-  font-size: 1.3rem;
-  /* 减小品牌名称字体 */
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  align-items: center;
-}
-
-html body .navbar__link {
-  font-size: 1.1rem;
-  /* 减小导航链接字体 */
-  font-weight: 400;
-  padding: 0.0rem 1.2rem;
-  /* 增加点击区域 */
-  transition: color 0.2s ease;
-  align-items: center;
-}
-
-html body .navbar__link:hover {
-  opacity: 0.8;
-}
-
-
-/* 主题切换按钮大小调整 */
-.clean-btn {
-  font-size: 1.1rem;
-  padding: 0.0rem;
-}
-
-/* 导航栏图标样式 */
-.navbar-icon-item {
-  position: relative;
-}
-
-.navbar-icon-item::before {
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-  margin-right: 4px;
-}
-
-/* Index 图标 */
-.navbar-icon-item[href="/index"]::before {
-  content: "\f02e";
-  /* 书签图标 */
-}
-
-/* Blog 图标 */
-.navbar-icon-item[href="/blog"]::before {
-  content: "\f781";
-  /* 博客图标 */
-}
-
-/* Write 图标 */
-.navbar-icon-item[href="/editor"]::before {
-  content: "\f304";
-  /* 编辑图标 */
-}
-
-/* 添加平滑滚动效果 */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 30vh;
-  /* 控制跳转位置，使目标在屏幕中间偏上位置 */
-}
-
-/* 锚点跳转动画效果 */
-:target {
-  scroll-margin-top: 30vh;
-  position: relative;
-}
-
-:target::before {
-  content: none;
-}
-
-@keyframes highlight {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-/* 引用链接样式 */
-.reference-link {
-  text-decoration: none;
-  padding: 1px 3px;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-  position: relative;
-  color: var(--ifm-color-primary);
-  font-weight: 400;
-  border-bottom: 1px solid var(--ifm-color-primary-light);
-}
-
-.reference-link:hover {
-  background-color: var(--ifm-color-primary-light);
-  color: white;
-  text-decoration: none;
-  border-bottom: 1px solid var(--ifm-color-primary-light);
-}
-
-/* 返回链接样式 */
+.reference-link,
 .back-to-ref {
-  display: inline-block;
-  margin-left: 0.5em;
   text-decoration: none;
-  padding: 1px 3px;
-  border-radius: 3px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  transition: all 0.2s ease;
   color: var(--ifm-color-primary);
-  transition: all 0.3s ease;
   font-weight: 400;
-  border-bottom: 1px solid var(--ifm-color-primary-light);
+  border-bottom: 1px solid transparent;
 }
 
+.reference-link:hover,
 .back-to-ref:hover {
-  background-color: var(--ifm-color-primary-light);
-  color: white;
+  background-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-font-color-base);
   text-decoration: none;
-  border-bottom: 1px solid var(--ifm-color-primary-light);
 }
 
 [data-theme='dark'] .reference-link:hover,
 [data-theme='dark'] .back-to-ref:hover {
-  background-color: var(--ifm-color-primary-darker);
+  background-color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-font-color-base);
 }
 
-/* Zen Sidebar Style */
+/* ============================================
+   Sidebar - Minimal
+   ============================================ */
+
 .theme-doc-sidebar-container {
   border-right: none !important;
 }
 
 .theme-doc-sidebar-item-link-level-1 {
-  font-family: var(--font-family-text-en), sans-serif;
+  font-family: var(--font-family-text);
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
 }
@@ -896,16 +625,108 @@ html {
 }
 
 .menu__link--active {
-  color: var(--ifm-color-primary-dark) !important;
-  background: rgba(0, 0, 0, 0.03) !important;
+  color: var(--ifm-color-primary) !important;
+  background: transparent !important;
 }
 
-/* Zen Mode: Hide Navbar only on Homepage */
-body.zen-homepage .navbar {
-  display: none !important;
+.menu__link {
+  font-family: var(--font-family-text);
 }
 
-/* Ensure Navbar is visible elsewhere (default flex, but safety net) */
-.navbar {
-  display: flex;
+/* ============================================
+   Smooth Scrolling
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 25vh;
+}
+
+:target {
+  scroll-margin-top: 25vh;
+}
+
+:target::before {
+  content: none;
+}
+
+/* ============================================
+   Code Blocks - Subtle
+   ============================================ */
+
+code {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+}
+
+[data-theme='dark'] code {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* ============================================
+   Blockquotes - Elegant
+   ============================================ */
+
+blockquote {
+  border-left: 2px solid var(--ifm-color-primary-light);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--ifm-color-emphasis-700);
+  font-style: italic;
+}
+
+[data-theme='dark'] blockquote {
+  color: var(--ifm-color-emphasis-500);
+}
+
+/* ============================================
+   Images - Clean
+   ============================================ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+
+::selection {
+  background-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] ::selection {
+  background-color: var(--ifm-color-primary-darkest);
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  .navbar,
+  .footer,
+  .toc {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
