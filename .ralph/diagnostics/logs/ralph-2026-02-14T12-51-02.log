@@ -1,0 +1,6 @@
+2026-02-14T04:51:02.839942Z  WARN ralph: Loop locking not supported on this platform, running without lock
+2026-02-14T04:51:02.954955Z  WARN ralph::loop_runner: Failed to record loop start in history: I/O error: File locking not supported on this platform
+2026-02-14T04:51:02.955213Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder"
+2026-02-14T04:51:02.955249Z  INFO ralph_core::event_loop: Looking for memories at: "C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder\\.ralph/agent/memories.md" (exists: false)
+2026-02-14T04:51:02.956111Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-14T04:51:02.956117Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject

@@ -1,0 +1,21 @@
+2026-02-15T16:49:01.459116Z  WARN ralph: Loop locking not supported on this platform, running without lock
+2026-02-15T16:49:01.574427Z  WARN ralph::loop_runner: Failed to record loop start in history: I/O error: File locking not supported on this platform
+2026-02-15T16:49:01.574931Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder"
+2026-02-15T16:49:01.574971Z  INFO ralph_core::event_loop: Looking for memories at: "C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder\\.ralph/agent/memories.md" (exists: false)
+2026-02-15T16:49:01.575803Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-15T16:49:01.575813Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-15T16:54:02.179752Z  WARN ralph_adapters::cli_executor: Execution timeout reached, sending SIGTERM timeout_secs=300
+2026-02-15T16:54:02.242412Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder"
+2026-02-15T16:54:02.242459Z  INFO ralph_core::event_loop: Looking for memories at: "C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder\\.ralph/agent/memories.md" (exists: false)
+2026-02-15T16:54:02.242475Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-15T16:54:02.242478Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-15T16:59:02.322026Z  WARN ralph_adapters::cli_executor: Execution timeout reached, sending SIGTERM timeout_secs=300
+2026-02-15T16:59:02.368943Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder"
+2026-02-15T16:59:02.368978Z  INFO ralph_core::event_loop: Looking for memories at: "C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder\\.ralph/agent/memories.md" (exists: false)
+2026-02-15T16:59:02.368988Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-15T16:59:02.368991Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-15T17:04:02.428521Z  WARN ralph_adapters::cli_executor: Execution timeout reached, sending SIGTERM timeout_secs=300
+2026-02-15T17:04:02.480443Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder"
+2026-02-15T17:04:02.480499Z  INFO ralph_core::event_loop: Looking for memories at: "C:\\Users\\jiaji\\Documents\\github-project\\blog_ponder\\.ralph/agent/memories.md" (exists: false)
+2026-02-15T17:04:02.480517Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-15T17:04:02.480522Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
