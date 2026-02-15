@@ -255,7 +255,7 @@
     {
       "id": "you-and-your-research",
       "name": "【译】你和你的研究",
-      "description": "",
+      "description": "1986年3月7日，Richard W. Hamming博士在贝尔通信研究学术研讨会上发表了题为'你和你的研究'的演讲。他探讨了为何很少有科学家做出重大贡献，以及伟大研究的特点。",
       "type": "blog",
       "group": 3
     },
@@ -353,7 +353,7 @@
     {
       "id": "swin-transformer-sum",
       "name": "Swin Transformer总结",
-      "description": "",
+      "description": "本文总结了Swin Transformer的核心思想和技术细节，包括其创新的Shifted Windows机制如何解决传统Transformer在视觉任务中面临的计算复杂度和尺度问题。",
       "type": "blog",
       "group": 3
     },
@@ -367,7 +367,7 @@
     {
       "id": "think-for-ourself",
       "name": "【译】如何为自己思考",
-      "description": "",
+      "description": "文章探讨了独立思考的重要性及其在不同职业领域中的表现。作者指出，某些工作领域要求个体不仅要有正确的观点，还要有新颖的见解，这需要与他人持有不同的思维方式。",
       "type": "blog",
       "group": 3
     },

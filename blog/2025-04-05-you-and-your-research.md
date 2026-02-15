@@ -4,7 +4,7 @@ slug: you-and-your-research
 authors: [Richard W. Hamming, jiajiewu]
 tags: [决策]
 keywords: ["blog", "通用价值", "职业规划", "译文"]
-description: ""
+description: "1986年3月7日，Richard W. Hamming博士在贝尔通信研究学术研讨会上发表了题为'你和你的研究'的演讲。他探讨了为何很少有科学家做出重大贡献，以及伟大研究的特点。"
 draft: false
 ---
 

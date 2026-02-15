@@ -4,7 +4,7 @@ slug: swin-transformer-sum
 authors: [jiajiewu]
 tags: [神经网络, transformer]
 keywords: ["blog", "transformer", "swin transformer"]
-description: ""
+description: "本文总结了Swin Transformer的核心思想和技术细节，包括其创新的Shifted Windows机制如何解决传统Transformer在视觉任务中面临的计算复杂度和尺度问题。"
 draft: false
 ---
 
