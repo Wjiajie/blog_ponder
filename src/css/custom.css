@@ -150,6 +150,10 @@ html body .navbar__link:hover {
   content: "\f781";
 }
 
+.navbar-icon-item[href="/universe"]::before {
+  content: "\f0c0";
+}
+
 .navbar-icon-item[href="/about"]::before {
   content: "\f007";
 }

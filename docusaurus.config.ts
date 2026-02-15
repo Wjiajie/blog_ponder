@@ -164,6 +164,7 @@ const config: Config = {
       items: [
         { to: '/index', label: ' Index', position: 'left', className: 'navbar-icon-item' },
         { to: '/blog', label: ' Blog', position: 'left', className: 'navbar-icon-item' },
+        { to: '/universe', label: ' Universe', position: 'left', className: 'navbar-icon-item' },
         { to: '/about', label: ' About', position: 'left', className: 'navbar-icon-item' },
       ],
     },

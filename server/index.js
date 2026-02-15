@@ -9,6 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Get GitHub token from environment
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const BLOG_OWNER = 'Wjiajie';
+const BLOG_REPO = 'blog_ponder';
+
 // 配置文件上传
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -158,6 +163,57 @@ app.get('/api/get-blog/:fileName', async (req, res) => {
   } catch (error) {
     console.error('获取博客内容失败:', error);
     res.status(500).json({ error: '获取博客内容失败' });
+  }
+});
+
+// Submit blog to GitHub issues
+app.post('/api/submit-blog', async (req, res) => {
+  try {
+    const { title, url, description, tags } = req.body;
+
+    if (!title || !url || !description) {
+      return res.status(400).json({ error: 'Title, URL, and description are required' });
+    }
+
+    if (!GITHUB_TOKEN) {
+      return res.status(500).json({ error: 'GitHub token not configured' });
+    }
+
+    const issueBody = `## Blog Submission
+
+### URL: ${url}
+
+### Description: ${description}
+
+### Tags: ${tags || 'none'}
+
+---
+*Submitted via Blog Universe*`;
+
+    const response = await fetch(`https://api.github.com/repos/${BLOG_OWNER}/${BLOG_REPO}/issues`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json',
+      },
+      body: JSON.stringify({
+        title: `[Blog Universe] ${title}`,
+        body: issueBody,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to create issue');
+    }
+
+    const issue = await response.json();
+    console.log('Blog submitted successfully:', issue.number);
+    res.json({ success: true, issueNumber: issue.number });
+  } catch (error) {
+    console.error('Error submitting blog:', error);
+    res.status(500).json({ error: error.message || 'Failed to submit blog' });
   }
 });
 
