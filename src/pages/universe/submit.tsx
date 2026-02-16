@@ -18,13 +18,29 @@ export default function SubmitPage() {
     setSubmitting(true);
     setError(null);
 
-    // Check if we're in development (server running) or production
-    const isDev = typeof window !== 'undefined' && window.location.hostname === 'localhost';
+    // Check if local API server is available (development mode)
+    // In production, we redirect to GitHub instead
+    const isLocalDev = window.location.hostname === 'localhost';
 
-    if (isDev) {
-      // Use local server API
+    if (isLocalDev) {
+      // Try local API first, fallback to GitHub if not available
+      const API_PORT = 3001;
       try {
-        const response = await fetch('/api/submit-blog', {
+        // First check if API server is running
+        const healthCheck = await fetch(`http://localhost:${API_PORT}/api/health`, {
+          method: 'HEAD'
+        }).catch(() => null);
+
+        const useLocalApi = healthCheck !== null;
+
+        if (!useLocalApi) {
+          // No local API, redirect to GitHub
+          window.location.href = `/universe?redirectToGithub=true&title=${encodeURIComponent(formData.title)}&url=${encodeURIComponent(formData.url)}&desc=${encodeURIComponent(formData.description)}&tags=${encodeURIComponent(formData.tags)}`;
+          setSubmitting(false);
+          return;
+        }
+
+        const response = await fetch(`http://localhost:${API_PORT}/api/submit-blog`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -555,24 +555,38 @@ function UniverseContent() {
   const [cameraTarget, setCameraTarget] = useState<[number, number, number]>([0, 0, 0]);
   const [enableControls, setEnableControls] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isGalaxyListExpanded, setIsGalaxyListExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const driftAngleRef = useRef(Math.random() * Math.PI * 2);
   const animationRef = useRef<number>();
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Fetch reviewed blogs from API
   useEffect(() => {
     async function fetchReviewedBlogs() {
       try {
-        // Determine API base URL based on environment
-        const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-        const isLocalDev = hostname === 'localhost' || hostname === '127.0.0.1';
+        // For local development, always use local API server
+        // For production, use relative /api path
+        const isLocalDev = window.location.port === '3000';
         const API_BASE = isLocalDev ? 'http://localhost:3001' : '/api';
 
-        const response = await fetch(`${API_BASE}/universe-blogs`);
+        console.log('isLocalDev:', isLocalDev, 'API_BASE:', API_BASE);
+
+        const response = await fetch(`${API_BASE}/api/universe-blogs`);
 
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to fetch blogs');
+          const errorText = await response.text();
+          throw new Error(errorText || `Failed to fetch blogs: ${response.status}`);
         }
 
         const data = await response.json();
@@ -841,7 +855,7 @@ function UniverseContent() {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: 'calc(100vh - 100px)' }}>
+    <div style={{ position: 'relative', width: '100%', height: isMobile ? 'calc(100vh - 60px)' : 'calc(100vh - 100px)' }}>
       <Canvas
         camera={{ position: [0, 15, 30], fov: 60 }}
         style={{ background: '#0a0a1a' }}
@@ -866,24 +880,25 @@ function UniverseContent() {
       {/* Galaxy selector */}
       <div style={{
         position: 'absolute',
-        top: '20px',
-        left: '20px',
+        top: isMobile ? '10px' : '20px',
+        left: isMobile ? '10px' : '20px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '8px',
-        zIndex: 100
+        gap: isMobile ? '6px' : '8px',
+        zIndex: 100,
+        maxWidth: isMobile ? 'calc(100% - 20px)' : 'auto',
       }}>
         {/* Home button - always visible */}
         <a
           href="/"
           style={{
-            padding: '8px 16px',
+            padding: isMobile ? '6px 12px' : '8px 16px',
             background: 'rgba(0,0,0,0.6)',
             border: '1px solid rgba(255,255,255,0.2)',
             borderRadius: '4px',
             color: 'white',
             textDecoration: 'none',
-            fontSize: '14px',
+            fontSize: isMobile ? '12px' : '14px',
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
@@ -895,24 +910,28 @@ function UniverseContent() {
           <button
             onClick={handleBackToGalaxy}
             style={{
-              padding: '8px 16px',
+              padding: isMobile ? '6px 12px' : '8px 16px',
               background: 'rgba(0,0,0,0.6)',
               border: '1px solid rgba(255,255,255,0.2)',
               borderRadius: '4px',
               color: 'white',
               cursor: 'pointer',
-              fontSize: '14px',
+              fontSize: isMobile ? '12px' : '14px',
             }}
           >
-            ← Back to Galaxies
+            ← Back
           </button>
         )}
         <div style={{
-          padding: '8px 12px',
+          padding: isMobile ? '6px 10px' : '8px 12px',
           background: 'rgba(0,0,0,0.6)',
           borderRadius: '4px',
           color: 'white',
-          fontSize: '12px',
+          fontSize: isMobile ? '11px' : '12px',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          maxWidth: isMobile ? '150px' : 'auto',
         }}>
           {showGalaxyView ? 'Select a Galaxy' : `Galaxy: ${currentGalaxy?.name}`}
         </div>
@@ -922,32 +941,58 @@ function UniverseContent() {
       {showGalaxyView && (
         <div style={{
           position: 'absolute',
-          bottom: '80px',
+          bottom: isMobile ? (isGalaxyListExpanded ? '140px' : '80px') : '80px',
           left: '50%',
           transform: 'translateX(-50%)',
           display: 'flex',
           gap: '12px',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          maxWidth: '80%',
-          zIndex: 100
+          maxWidth: isMobile ? '95%' : '80%',
+          zIndex: 100,
+          transition: 'bottom 0.3s ease',
         }}>
-          {galaxies.map((galaxy) => (
+          {/* Mobile: Expand/Collapse button */}
+          {isMobile && (
             <button
-              key={galaxy.id}
-              onClick={() => handleGalaxyClick(galaxy)}
+              onClick={() => setIsGalaxyListExpanded(!isGalaxyListExpanded)}
               style={{
-                padding: '10px 20px',
-                background: `${galaxy.color}33`,
-                border: `2px solid ${galaxy.color}`,
+                width: '100%',
+                padding: '10px 16px',
+                background: 'rgba(255,255,255,0.15)',
+                border: '1px solid rgba(255,255,255,0.3)',
                 borderRadius: '8px',
                 color: 'white',
                 cursor: 'pointer',
                 fontSize: '14px',
                 display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                marginBottom: '8px',
+              }}
+            >
+              {isGalaxyListExpanded ? '▼ Hide Galaxies' : `▶ ${galaxies.length} Galaxies`}
+            </button>
+          )}
+
+          {/* Galaxy buttons - collapsed on mobile by default */}
+          {( !isMobile || isGalaxyListExpanded) && galaxies.map((galaxy) => (
+            <button
+              key={galaxy.id}
+              onClick={() => handleGalaxyClick(galaxy)}
+              style={{
+                padding: isMobile ? '8px 14px' : '10px 20px',
+                background: `${galaxy.color}33`,
+                border: `2px solid ${galaxy.color}`,
+                borderRadius: '8px',
+                color: 'white',
+                cursor: 'pointer',
+                fontSize: isMobile ? '12px' : '14px',
+                display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                minWidth: '100px',
+                minWidth: isMobile ? '70px' : '100px',
               }}
             >
               <span style={{ fontWeight: 'bold' }}>{galaxy.name}</span>
@@ -998,17 +1043,35 @@ function UniverseContent() {
         </div>
       )}
 
-      {/* Submit link */}
+      {/* Submit link - More prominent button */}
       <div
         style={{
           position: 'absolute',
-          bottom: '20px',
+          bottom: isMobile ? (isGalaxyListExpanded ? '20px' : '20px') : '20px',
           right: '20px',
-          fontSize: '12px',
+          zIndex: 100,
         }}
       >
-        <a href="/universe/submit" style={{ color: 'rgba(255,255,255,0.5)' }}>
-          + Submit Your Blog
+        <a
+          href="/universe/submit"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: isMobile ? '10px 16px' : '12px 20px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: '#fff',
+            textDecoration: 'none',
+            borderRadius: '25px',
+            fontSize: isMobile ? '13px' : '14px',
+            fontWeight: 600,
+            boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
+            transition: 'all 0.3s ease',
+            border: 'none',
+          }}
+        >
+          <span style={{ fontSize: '16px' }}>+</span>
+          Submit Your Blog
         </a>
       </div>
     </div>
