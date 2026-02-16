@@ -575,14 +575,14 @@ function UniverseContent() {
   useEffect(() => {
     async function fetchReviewedBlogs() {
       try {
-        // For local development, always use local API server
-        // For production, use relative /api path
-        const isLocalDev = window.location.port === '3000';
-        const API_BASE = isLocalDev ? 'http://localhost:3001' : '/api';
+        // Determine API base URL based on environment
+        // Local dev: use localhost:3001/api
+        // Production: use /api (Vercel handles the routing)
+        const hostname = window.location.hostname;
+        const isLocalDev = hostname === 'localhost' || hostname === '127.0.0.1';
+        const API_BASE = isLocalDev ? 'http://localhost:3001/api' : '/api';
 
-        console.log('isLocalDev:', isLocalDev, 'API_BASE:', API_BASE);
-
-        const response = await fetch(`${API_BASE}/api/universe-blogs`);
+        const response = await fetch(`${API_BASE}/universe-blogs`);
 
         if (!response.ok) {
           const errorText = await response.text();
