@@ -6,7 +6,7 @@ export default function AboutPage(): JSX.Element {
   return (
     <Layout
       title="关于"
-      description="关于 Jiajie Wu - 图形图像工程师，对编码、软件构建、心智模型感兴趣">
+      description="关于 Jiajie Wu - 图形图像工程师，对软件构建、心智模型感兴趣">
       <main className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>关于我</h1>
@@ -17,58 +17,59 @@ export default function AboutPage(): JSX.Element {
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>简介</h2>
             <p className={styles.paragraph}>
-              我是 Jiajie Wu，一名图形图像工程师。对编码、软件构建、心智模型有着浓厚的兴趣。
-              长期爱好是阅读和写作，相信文字的力量可以记录思考、沉淀认知。
+              我是 Jiajie Wu，一名图形图像工程师。对软件构建、心智模型有着浓厚的兴趣。
             </p>
             <p className={styles.paragraph}>
               这个博客是我的思考空间，记录着我在技术、生活、阅读中的所见所想。
-              正如博客的名字 "ponder" 所示，这里是我沉思的地方。
             </p>
           </div>
 
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>写作主题</h2>
-            <div className={styles.interests}>
-              <div className={styles.interestItem}>
-                <span className={styles.interestIcon}>🏗️</span>
-                <div className={styles.interestContent}>
-                  <h3>软件架构</h3>
-                  <p>SOLID 原则、设计模式、系统设计、Nanobot 项目系列</p>
+            <h2 className={styles.sectionTitle}>探索路线图</h2>
+            <p className={styles.paragraph}>
+              我正在构建一个系统，培养自己和更多人对太空探索的兴趣。这是我的旅程节点：
+            </p>
+            <div className={styles.roadmap}>
+              <div className={`${styles.roadmapNode} ${styles.roadmapNodeActive}`}>
+                <div className={styles.roadmapDot} />
+                <div className={styles.roadmapContent}>
+                  <span className={styles.roadmapDate}>2026.03</span>
+                  <a href="/blog/future-plan-review" className={styles.roadmapTitle}>
+                    复盘与未来计划：把注意力投向太空
+                  </a>
+                  <p className={styles.roadmapDesc}>
+                    确立使命、制定阶段路线图、搭建知识库与工具系统
+                  </p>
                 </div>
               </div>
-              <div className={styles.interestItem}>
-                <span className={styles.interestIcon}>🧠</span>
-                <div className={styles.interestContent}>
-                  <h3>决策与思维</h3>
-                  <p>思维模型、职业选择、思考框架、认知升级</p>
+              <div className={`${styles.roadmapNode} ${styles.roadmapNodeUpcoming}`}>
+                <div className={styles.roadmapDot} />
+                <div className={styles.roadmapContent}>
+                  <span className={styles.roadmapDate}>阶段零</span>
+                  <span className={styles.roadmapTitle}>自我培养期</span>
+                  <p className={styles.roadmapDesc}>
+                    深度学习太空基础学科，构建知识库，积累受众基础
+                  </p>
                 </div>
               </div>
-              <div className={styles.interestItem}>
-                <span className={styles.interestIcon}>📚</span>
-                <div className={styles.interestContent}>
-                  <h3>阅读与写作</h3>
-                  <p>读书笔记、写作方法、学习心得、知识管理</p>
+              <div className={`${styles.roadmapNode} ${styles.roadmapNodeUpcoming}`}>
+                <div className={styles.roadmapDot} />
+                <div className={styles.roadmapContent}>
+                  <span className={styles.roadmapDate}>阶段一</span>
+                  <span className={styles.roadmapTitle}>全力探索期</span>
+                  <p className={styles.roadmapDesc}>
+                    从学习者到创作者，寻找可持续的商业模式
+                  </p>
                 </div>
               </div>
-              <div className={styles.interestItem}>
-                <span className={styles.interestIcon}>🤖</span>
-                <div className={styles.interestContent}>
-                  <h3>AI 技术</h3>
-                  <p>RAG、LLM、Transformer、神经网络架构</p>
-                </div>
-              </div>
-              <div className={styles.interestItem}>
-                <span className={styles.interestIcon}>💻</span>
-                <div className={styles.interestContent}>
-                  <h3>编程语言</h3>
-                  <p>C++ 深度探索、智能指针、移动语义、现代特性</p>
-                </div>
-              </div>
-              <div className={styles.interestItem}>
-                <span className={styles.interestIcon}>💰</span>
-                <div className={styles.interestContent}>
-                  <h3>财富哲学</h3>
-                  <p>金钱观、财富积累、个人成长</p>
+              <div className={`${styles.roadmapNode} ${styles.roadmapNodeUpcoming}`}>
+                <div className={styles.roadmapDot} />
+                <div className={styles.roadmapContent}>
+                  <span className={styles.roadmapDate}>阶段二</span>
+                  <span className={styles.roadmapTitle}>亲子太空时代</span>
+                  <p className={styles.roadmapDesc}>
+                    带着孩子一起探索宇宙，构建可复用的教育系统
+                  </p>
                 </div>
               </div>
             </div>

@@ -113,6 +113,21 @@
       "icon": "fas fa-book-reader"
     },
     {
+      "id": "路线图",
+      "name": "路线图",
+      "type": "note",
+      "group": 2,
+      "description": "个人探索路线图，记录阶段性的规划与复盘",
+      "icon": "fas fa-map-signs"
+    },
+    {
+      "id": "future-plan-review",
+      "name": "复盘与未来计划：把注意力投向太空",
+      "description": "在技术浪潮不断涌来的今天，我选择锚定一个长期使命：构建一个系统，培养青少年对太空探索的兴趣。这篇文章是对这一选择的复盘与思考。",
+      "type": "blog",
+      "group": 3
+    },
+    {
       "id": "nanobot-11-future-outlook",
       "name": "未来展望与生态建设：通往 AGI 的星辰大海",
       "description": "展望 Nanobot 的未来发展 roadmap，探讨多模态交互、增强记忆机制、分布式 Agent 协作系统以及基于插件的生态构建计划。",
@@ -495,6 +510,11 @@
       "value": 2
     },
     {
+      "source": "生活随笔",
+      "target": "路线图",
+      "value": 2
+    },
+    {
       "source": "数据格式转换",
       "target": "tools",
       "value": 2
@@ -530,6 +550,11 @@
       "value": 2
     },
     {
+      "source": "路线图",
+      "target": "生活随笔",
+      "value": 2
+    },
+    {
       "source": "软件架构",
       "target": "计算机科学",
       "value": 2
@@ -538,6 +563,11 @@
       "source": "神经网络",
       "target": "计算机科学",
       "value": 2
+    },
+    {
+      "source": "路线图",
+      "target": "future-plan-review",
+      "value": 1
     },
     {
       "source": "软件架构",
