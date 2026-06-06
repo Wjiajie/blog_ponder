@@ -2,6 +2,8 @@
 
 A personal blog tracking a 6-month journey into a Forward Deployed Engineer role at [MiniMax](https://www.minimaxi.com), focused on the **education** vertical.
 
+> Last deploy test: $(date)
+
 > This site is a work in progress. The new framework was built fresh in June 2026; visual design borrows from [Shu Ding](https://shud.in), [Delba de Oliveira](https://delba.dev), and [Lee Robinson](https://leerob.io).
 
 ---
