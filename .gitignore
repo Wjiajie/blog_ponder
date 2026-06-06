@@ -1,12 +1,27 @@
 # Dependencies
 /node_modules
 
-# Production
-/build
+# Astro build output
+/dist
+/.astro
 
-# Generated files
-.docusaurus
-.cache-loader
+# Docusaurus leftovers (kept on disk for main branch reference, not tracked here)
+/docusaurus.config.ts
+/sidebars.ts
+/blog
+/static
+/api
+/server
+/plans
+/drafts
+/.docusaurus
+/.cache-loader
+/vercel.json
+/ralph.yml
+/PROMPT.md
+/titles.txt
+/debug.log
+/.env.local
 
 # Misc
 .DS_Store
@@ -19,5 +34,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# 确保知识图谱JSON被包含在版本控制中
-!static/graph.json
+# Vercel
+.vercel
+Continue

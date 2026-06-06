@@ -1,122 +1,154 @@
-# Ponder - 一个优雅的个人博客系统
+# fde-journey
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Node](https://img.shields.io/badge/node-%3E%3D18.0-brightgreen.svg)
+A personal blog tracking a 6-month journey into a Forward Deployed Engineer role at [MiniMax](https://www.minimaxi.com), focused on the **education** vertical.
 
-Ponder 是一个基于 Docusaurus v3 构建的现代化个人博客系统，专注于提供清晰、优雅的阅读体验和知识管理功能。
+> This site is a work in progress. The new framework was built fresh in June 2026; visual design borrows from [Shu Ding](https://shud.in), [Delba de Oliveira](https://delba.dev), and [Lee Robinson](https://leerob.io).
 
-## ✨ 特性
+---
 
-### 核心功能
-- 📝 支持 Markdown 和 MDX 写作
-- 🧮 内置 KaTeX 数学公式支持
-- 🔍 集成中英文全文搜索功能
-- 💬 基于 utterances 的评论系统
-- 📱 响应式设计，支持移动端访问
-- 🎨 优雅的排版和自定义主题
-- ⚡️ 快速的页面加载速度
-- 🖼️ 支持图片优化和懒加载
+## Stack
 
-### 知识管理
-- 📚 知识图谱可视化
-- 🏷️ 标签系统
-- 📂 分类管理
-- 🔗 文章关联
-- 📊 知识统计
+- **[Astro](https://astro.build) 5** — static-first, content-driven, excellent performance
+- **Tailwind CSS 3** — utility classes for layout components
+- **MDX** via `@astrojs/mdx` — Markdown with embedded components
+- **Shiki** — syntax highlighting (built into Astro, no setup)
+- **Inter Variable + JetBrains Mono** — self-hosted via `@fontsource`
+- **Content Collections** — type-safe frontmatter for blog posts + projects
+- **Vercel** — deploy target
 
-### 开发体验
-- 🔄 热重载开发
-- 📦 模块化架构
-- 🛠️ 丰富的插件系统
-- 🔧 自定义主题支持
-- 📝 在线编辑器支持
-
-## 🚀 快速开始
-
-### 环境要求
-
-- Node.js >= 18.0
-- npm 或 yarn
-
-### 安装
+## Local development
 
 ```bash
-# 克隆项目
-git clone https://github.com/Wjiajie/blog_ponder.git
-cd blog_ponder
-
-# 安装依赖
+# Install
 npm install
 
-# 启动开发服务器
+# Dev server (hot reload)
 npm run dev
-```
+# → http://127.0.0.1:4321
 
-### 项目结构
-
-```
-blog_ponder/
-├── blog/                # 博客文章目录
-├── src/                 # 源代码
-│   ├── components/      # 可复用组件
-│   ├── css/            # 自定义样式
-│   ├── hooks/          # 自定义 Hooks
-│   ├── pages/          # 页面组件
-│   ├── plugins/        # 自定义插件
-│   ├── theme/          # 主题相关
-│   ├── types/          # TypeScript 类型定义
-│   └── utils/          # 工具函数
-├── static/             # 静态资源
-├── docusaurus.config.ts # Docusaurus 配置
-└── server/             # 后端服务
-```
-
-## 📝 写作
-
-1. 在 `blog` 目录下创建新的 Markdown 文件
-2. 使用内置的在线编辑器 (`/editor`) 创建和编辑文章
-3. 支持以下功能：
-   - Markdown 格式
-   - 数学公式 (KaTeX)
-   - 代码高亮
-   - 图片优化
-   - 自定义标签
-   - 文章关联
-   - 知识图谱
-
-## 🛠 配置
-
-主要配置文件为 `docusaurus.config.ts`，可以自定义：
-
-- 网站基本信息
-- 导航栏和页脚
-- 主题设置
-- 插件配置
-- 搜索设置
-- 评论系统
-- 知识图谱配置
-
-## 🌐 部署
-
-项目可以部署到任何静态网站托管服务：
-
-```bash
-# 构建静态文件
+# Production build
 npm run build
+# → dist/ folder
 
-# 本地预览构建结果
-npm run serve
+# Preview production build
+npm run preview
+# → http://127.0.0.1:4321
 ```
 
-## 📄 许可证
+## Project structure
 
-本项目基于 MIT 许可证开源。
+```
+src/
+├── content/
+│   ├── blog/                    # MDX blog posts
+│   ├── projects/                # MDX project entries
+│   └── config.ts                # Content Collections schema
+├── components/
+│   ├── Sidebar.astro            # Left nav (italic, current page bolded)
+│   ├── RightAside.astro         # Right column (About me + social)
+│   ├── MobileHeader.astro       # Hamburger menu on <768px
+│   ├── Now.astro                # "Now / Next" section (home page)
+│   ├── TimelineItem.astro       # Journey page timeline entry
+│   ├── ArticleRow.astro         # Shu Ding-style article list row
+│   ├── Tag.astro                # Tag chip
+│   └── ThemeToggle.astro        # Dark mode toggle
+├── layouts/
+│   ├── BaseLayout.astro         # 2-col / 3-col wrapper
+│   └── ArticleLayout.astro      # Article body + meta
+├── pages/
+│   ├── index.astro              # Home (Delba-style 2-col)
+│   ├── journey.astro            # 6-month timeline
+│   ├── projects.astro           # Project list
+│   ├── about.astro              # About
+│   └── blog/
+│       ├── index.astro          # Shu Ding-style article list
+│       └── [...slug].astro      # Lee Robinson-style article body
+├── styles/
+│   └── global.css               # Design system (CSS variables)
+└── consts.ts                    # Site-wide constants (NAV, SOCIAL, SITE)
+```
 
-## 🤝 贡献
+## Design system
 
-欢迎提交 Issue 和 Pull Request 来帮助改进项目。
+All design tokens live in `src/styles/global.css` as CSS variables. Override in
+`:root` for light, `.dark` for dark.
 
-## 📮 联系方式
+| Token | Light | Dark |
+|---|---|---|
+| `--bg` | `#ffffff` | `#0a0a0a` |
+| `--bg-muted` | `#fafafa` | `#111111` |
+| `--text` | `#1a1a1a` | `#ededed` |
+| `--text-muted` | `#6b6b6b` | `#a0a0a0` |
+| `--border` | `#e5e5e5` | `#262626` |
+| `--accent` | `#text` (same) | `--text` (same) |
+| `--content-w` | 720px | 720px |
+| `--gap` | 96px | 96px |
 
-- Jike: [@jiajiewu_ponder](https://jike.city/jiajiewu_ponder)
-- GitHub: [@Wjiajie](https://github.com/Wjiajie)
+Layout breakpoints:
+
+- `>= 1024px` — 3-col (sidebar + main + aside)
+- `768–1023px` — 2-col (sidebar + main, aside hidden)
+- `< 768px` — single col, mobile header with hamburger
+
+## Adding content
+
+### A new blog post
+
+Create `src/content/blog/your-slug.mdx`:
+
+```mdx
+---
+title: 'Your title here'
+description: 'One-line description.'
+pubDate: 2026-06-06
+tags: ['fde', 'education']
+---
+
+Your content in **Markdown**. Use `client:load` for any React/Astro components
+inside MDX if you need interactivity.
+```
+
+### A new project
+
+Create `src/content/projects/your-project.md`:
+
+```mdx
+---
+title: 'Project name'
+summary: 'One-line value proposition.'
+status: 'in-progress'  # planning | in-progress | shipped | archived
+category: 'Education'
+stack: ['FastAPI', 'LangGraph', 'MiniMax M2.5']
+links:
+  post: '/blog/related-post/'
+  repo: 'https://github.com/...'
+order: 1
+---
+
+Description goes here.
+```
+
+## Deployment to Vercel
+
+1. Push this branch to GitHub:
+   ```bash
+   git push origin fde-journey
+   ```
+2. In Vercel dashboard, "Import Project" → select the `blog_ponder` repo
+3. Vercel auto-detects Astro. Build command: `astro build` (default). Output: `dist/`
+4. Vercel will create a Preview deployment for every push to this branch
+5. To deploy to production: merge `fde-journey` to `main`
+
+Vercel will give you a URL like `fde-journey-git-fde-journey-<user>.vercel.app`.
+
+## What's intentionally not here
+
+- **Comments, search, newsletter** — not needed at this scale
+- **3D / Three.js** — the design explicitly avoided visual flash
+- **Server-side rendering** — pure static; deploy anywhere
+- **Analytics** — add Vercel Analytics or Plausible when needed
+- **Auth** — no private content for now
+
+## License
+
+MIT for code; content (blog posts, project descriptions) is © the author.

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Now from '../components/Now.astro';
+import { SITE } from '../consts';
+---
+
+<BaseLayout
+  title={undefined}
+  description={SITE.description}
+  showRightAside={false}
+>
+  <section class="hero">
+    <h1 class="hero-title">
+      Hi, I'm <span class="hero-name">[your name]</span>.
+    </h1>
+    <p class="hero-sub">
+      Graphics engineer turning into an AI FDE. Targeting education, joining
+      <strong>MiniMax</strong>'s FDE team.
+    </p>
+  </section>
+
+  <Now />
+
+  <section class="journey-preview">
+    <h2 class="section-title">Journey</h2>
+    <p class="text-muted" style="font-size: var(--fs-sm); margin-bottom: var(--space-6);">
+      A 6-month ramp from "graphics + AI" to "ship AI in classrooms". Two phases done, one in progress.
+    </p>
+    <a href="/journey/" class="cta-link">→ View full journey timeline</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    margin-bottom: var(--space-16);
+  }
+
+  .hero-title {
+    font-size: var(--fs-3xl);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-name {
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .hero-sub {
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 540px;
+  }
+
+  .hero-sub strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .cta-link {
+    display: inline-block;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 4px;
+    font-size: var(--fs-sm);
+    transition: text-decoration-color var(--t-base);
+  }
+
+  .cta-link:hover {
+    text-decoration-color: var(--text);
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'default' | 'subtle';
+}
+
+const { href, variant = 'default' } = Astro.props;
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag href={href} class:list={['tag', variant === 'subtle' && 'tag-subtle']}>
+  <slot />
+</Tag>
+
+<style>
+  .tag-subtle {
+    border-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, SOCIAL } from '../consts';
+---
+
+<BaseLayout
+  title="About"
+  description="About the author"
+  showRightAside={false}
+>
+  <article class="about">
+    <h1>About</h1>
+    <p>
+      I'm <strong>[your name]</strong>, a software engineer with a background in graphics
+      and visual effects rendering. I'm spending the next six months transitioning into
+      a <strong>Forward Deployed Engineer</strong> role, with a focus on the
+      <strong>education</strong> vertical.
+    </p>
+
+    <h2>Why FDE</h2>
+    <p>
+      The best engineers I know are not the ones with the most abstract knowledge —
+      they are the ones who can sit in a customer's messy reality and ship something
+      that actually helps. That is what an FDE does. I want to be that kind of engineer.
+    </p>
+
+    <h2>Why education</h2>
+    <p>
+      I've spent years rendering pixels. The shift to rendering <em>understanding</em> —
+      helping a teacher see a student's specific misconception, helping a student
+      unstuck on a single problem — feels like the right next chapter.
+    </p>
+
+    <h2>How to follow along</h2>
+    <p>
+      I publish a weekly log on the <a href="/journey/">journey</a> page and longer
+      essays on the <a href="/blog/">thoughts</a> page. Reach out if any of it
+      resonates:
+    </p>
+    <ul>
+      {SOCIAL.map((s) => (
+        <li><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>
+      ))}
+    </ul>
+
+    <h2>Why this site looks the way it does</h2>
+    <p>
+      This site borrows from a few people whose work I admire. The article list is
+      shaped after <a href="https://shud.in">Shu Ding</a>'s ideas waterfall. The home
+      page takes cues from <a href="https://delba.dev">Delba de Oliveira</a>'s clean
+      two-column layout. The article body and footnote system follow
+      <a href="https://leerob.io">Lee Robinson</a>'s typography.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .about {
+    max-width: 640px;
+  }
+
+  .about h1 {
+    margin-bottom: var(--space-8);
+  }
+
+  .about p {
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .about ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .about li {
+    padding-left: var(--space-4);
+    position: relative;
+    margin-bottom: var(--space-2);
+  }
+
+  .about li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+</style>

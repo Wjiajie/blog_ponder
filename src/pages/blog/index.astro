@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleRow from '../../components/ArticleRow.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Group by year
+const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
+  const year = String(post.data.pubDate.getFullYear());
+  (acc[year] ??= []).push(post);
+  return acc;
+}, {});
+
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+
+// All tags (for sidebar)
+const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
+---
+
+<BaseLayout
+  title="Thoughts"
+  description="Articles, notes, and logs."
+  showRightAside={true}
+  rightAsideVariant="minimal"
+>
+  <header class="page-header">
+    <h1>Thoughts</h1>
+    <p class="text-muted" style="font-size: var(--fs-sm); margin-top: var(--space-2);">
+      Notes on the work, in reverse chronological order.
+    </p>
+  </header>
+
+  {years.length === 0 ? (
+    <p class="text-muted">No posts yet.</p>
+  ) : (
+    <div class="posts-by-year">
+      {years.map((year) => (
+        <section class="year-block">
+          {years.length > 1 && <h2 class="year-heading">{year}</h2>}
+          <ul class="posts-list">
+            {byYear[year].map((post) => {
+              const date = post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              }).replace(/\//g, '.');
+              return (
+                <li>
+                  <ArticleRow href={`/blog/${post.slug}/`}>
+                    {post.data.title}
+                    <span slot="date">{date}</span>
+                  </ArticleRow>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+  )}
+
+  <Fragment slot="aside">
+    <section class="aside-block">
+      <h3 class="section-subtitle">By tag</h3>
+      <div class="tag-cloud">
+        {allTags.length === 0 && <p class="text-muted" style="font-size: var(--fs-sm);">No tags yet.</p>}
+        {allTags.map((t) => (
+          <a href={`/blog/?tag=${t}`} class="tag">#{t}</a>
+        ))}
+      </div>
+    </section>
+  </Fragment>
+</BaseLayout>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .year-block {
+    margin-bottom: var(--space-10);
+  }
+
+  .year-heading {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-3);
+  }
+
+  .posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .posts-list li {
+    margin-bottom: 0;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+</style>

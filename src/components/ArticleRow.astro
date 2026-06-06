@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string;
+  variant?: 'dot' | 'full';
+}
+
+const { href, variant = 'dot' } = Astro.props;
+---
+
+<a href={href} class:list={['article-row', variant === 'full' && 'article-row-full']}>
+  <span class="title"><slot /></span>
+  <span class="leader" aria-hidden="true"></span>
+  <span class="date">
+    <slot name="date" />
+  </span>
+</a>

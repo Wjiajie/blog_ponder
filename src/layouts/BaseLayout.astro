@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import Sidebar from '../components/Sidebar.astro';
+import RightAside from '../components/RightAside.astro';
+import MobileHeader from '../components/MobileHeader.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { SITE } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  showRightAside?: boolean;
+  rightAsideVariant?: 'default' | 'minimal';
+}
+
+const {
+  title,
+  description = SITE.description,
+  showRightAside = true,
+  rightAsideVariant = 'default',
+} = Astro.props;
+
+const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={SITE.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <div class="page">
+      <MobileHeader currentPath={currentPath} />
+
+      <div class:list={['layout', showRightAside ? 'layout-3col' : 'layout-2col']}>
+        <Sidebar currentPath={currentPath} />
+
+        <main class="col-main">
+          <slot />
+        </main>
+
+        {showRightAside && <RightAside variant={rightAsideVariant}><slot name="aside" /></RightAside>}
+      </div>
+
+      <div class="theme-toggle-wrapper">
+        <ThemeToggle />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .theme-toggle-wrapper {
+    position: fixed;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    z-index: 10;
+  }
+
+  @media (max-width: 767px) {
+    .theme-toggle-wrapper {
+      bottom: var(--space-4);
+      right: var(--space-4);
+    }
+  }
+</style>

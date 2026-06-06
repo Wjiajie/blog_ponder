@@ -1,0 +1,149 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Tag from '../components/Tag.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+
+const { entry } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = entry.data;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+// Rough reading time: words / 200 wpm
+const wordCount = entry.body.split(/\s+/).length;
+const readingTime = Math.max(1, Math.round(wordCount / 200));
+---
+
+<BaseLayout title={title} description={description} showRightAside={true} rightAsideVariant="default">
+  <article class="article">
+    <header class="article-header">
+      <h1 class="article-title">{title}</h1>
+      <div class="article-meta">
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        <span class="meta-sep">·</span>
+        <span>{readingTime} min read</span>
+        {tags.length > 0 && (
+          <>
+            <span class="meta-sep">·</span>
+            <span class="article-tags">
+              {tags.map((t, i) => (
+                <>
+                  {i > 0 && ' '}
+                  <Tag href={`/blog/?tag=${t}`}>#{t}</Tag>
+                </>
+              ))}
+            </span>
+          </>
+        )}
+      </div>
+    </header>
+
+    <div class="article-body prose">
+      <slot />
+    </div>
+  </article>
+
+  <Fragment slot="aside">
+    <section class="aside-block">
+      <h3 class="section-subtitle">In this post</h3>
+      <p class="text-muted text-sm" style="font-size: var(--fs-sm);">
+        A log entry on the journey. Use the table of contents (where present) on the right
+        margin to jump between sections.
+      </p>
+    </section>
+  </Fragment>
+</BaseLayout>
+
+<style>
+  .article-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .article-title {
+    font-size: var(--fs-3xl);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .meta-sep {
+    color: var(--text-subtle);
+  }
+
+  .article-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .article-body :global(h2) {
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-4);
+  }
+
+  .article-body :global(h3) {
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-3);
+  }
+
+  .article-body :global(p) {
+    margin-bottom: var(--space-6);
+  }
+
+  .article-body :global(ul),
+  .article-body :global(ol) {
+    margin-bottom: var(--space-6);
+    padding-left: var(--space-6);
+  }
+
+  .article-body :global(li) {
+    margin-bottom: var(--space-2);
+  }
+
+  .article-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: var(--space-8) 0;
+  }
+
+  .article-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-8) 0;
+    font-size: var(--fs-sm);
+  }
+
+  .article-body :global(th),
+  .article-body :global(td) {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .article-body :global(th) {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .article-body :global(hr) {
+    margin: var(--space-12) 0;
+  }
+</style>

@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const statusLabel: Record<string, string> = {
+  planning: '○ planning',
+  'in-progress': '◐ in progress',
+  shipped: '✓ shipped',
+  archived: '· archived',
+};
+---
+
+<BaseLayout
+  title="Projects"
+  description="Education-focused AI projects on the FDE track."
+  showRightAside={true}
+  rightAsideVariant="minimal"
+>
+  <header class="page-header">
+    <h1>Projects</h1>
+    <p class="text-muted" style="font-size: var(--fs-sm); margin-top: var(--space-2);">
+      Built to demonstrate the customer-facing engineering work of a Forward Deployed Engineer.
+    </p>
+  </header>
+
+  <section class="project-section">
+    <h2 class="section-subtitle">Education</h2>
+    {projects.length === 0 ? (
+      <p class="text-muted">No projects yet — see the journey page for what is coming next.</p>
+    ) : (
+      <ul class="project-list">
+        {projects.map((p) => (
+          <li class="project-item">
+            <h3 class="project-title">{p.data.title}</h3>
+            <p class="project-summary">{p.data.summary}</p>
+            <p class="project-meta">
+              <span class="project-status">{statusLabel[p.data.status] ?? p.data.status}</span>
+              {p.data.stack.length > 0 && (
+                <span class="project-stack">
+                  {p.data.stack.map((s) => <code>{s}</code>)}
+                </span>
+              )}
+            </p>
+            <div class="project-links">
+              {p.data.links.post && <a href={p.data.links.post}>read more</a>}
+              {p.data.links.repo && <a href={p.data.links.repo}>github</a>}
+              {p.data.links.demo && <a href={p.data.links.demo}>demo</a>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <Fragment slot="aside">
+    <section class="aside-block">
+      <h3 class="section-subtitle">Filter</h3>
+      <p class="text-muted" style="font-size: var(--fs-sm);">
+        <a href="#">All</a><br />
+        <a href="#">Education</a><br />
+        <a href="#">Side</a>
+      </p>
+    </section>
+  </Fragment>
+</BaseLayout>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .project-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .project-item {
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-item:last-child {
+    border-bottom: none;
+  }
+
+  .project-title {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .project-summary {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-3);
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    font-size: var(--fs-xs);
+  }
+
+  .project-status {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-stack {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .project-stack code {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+  }
+
+  .project-links {
+    display: flex;
+    gap: var(--space-4);
+    font-size: var(--fs-sm);
+  }
+
+  .project-links a {
+    color: var(--text-muted);
+  }
+
+  .project-links a:hover {
+    color: var(--text);
+  }
+</style>

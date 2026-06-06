@@ -1,0 +1,65 @@
+---
+import { NAV, SITE } from '../consts';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
+---
+
+<aside class="col-left">
+  <div class="sidebar">
+    <a href="/" class="site-mark" aria-label={SITE.title}>
+      <span class="site-mark-text">{SITE.title}</span>
+    </a>
+
+    <nav class="sidebar-nav" aria-label="Primary">
+      <ul class="nav-list">
+        {NAV.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={['nav-link', isActive(item.href) && 'is-active']}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</aside>
+
+<style>
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .site-mark {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .site-mark:hover {
+    text-decoration: none;
+  }
+
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+---
+
+<section class="now-block">
+  <h2 class="section-title">Now</h2>
+  <p class="now-line">
+    <span class="now-label">M3</span>
+    <span class="now-text">in progress · learning agent development, evaluation, and tool use.</span>
+  </p>
+  <p class="now-line">
+    <span class="now-label">Next</span>
+    <span class="now-text">ship the AI 学科 Agent 助教 demo by end of M4.</span>
+  </p>
+
+  <div class="now-recent">
+    <h3 class="section-subtitle">Latest</h3>
+    <ul class="bullet-list">
+      {posts.length === 0 && <li class="text-muted">No posts yet.</li>}
+      {posts.map((p) => (
+        <li>
+          <a href={`/blog/${p.slug}/`}>{p.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .now-line {
+    display: flex;
+    gap: var(--space-4);
+    align-items: baseline;
+    margin-bottom: var(--space-3);
+  }
+
+  .now-label {
+    flex: 0 0 auto;
+    min-width: 48px;
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .now-text {
+    color: var(--text);
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .now-recent {
+    margin-top: var(--space-8);
+  }
+</style>

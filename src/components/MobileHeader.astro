@@ -1,0 +1,73 @@
+---
+import { NAV, SITE } from '../consts';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<header class="mobile-header">
+  <a href="/" class="mobile-mark">{SITE.title}</a>
+  <details class="mobile-menu">
+    <summary aria-label="Open menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 6h14M3 10h14M3 14h14" />
+      </svg>
+    </summary>
+    <nav class="mobile-nav">
+      {NAV.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+  </details>
+</header>
+
+<style>
+  .mobile-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-8);
+  }
+
+  .mobile-mark {
+    font-weight: 600;
+    font-size: var(--fs-lg);
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .mobile-menu summary {
+    cursor: pointer;
+    list-style: none;
+    color: var(--text);
+    padding: var(--space-2);
+  }
+
+  .mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4) 0;
+    gap: var(--space-3);
+    font-style: italic;
+  }
+
+  .mobile-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  @media (max-width: 767px) {
+    .mobile-header {
+      display: flex;
+    }
+  }
+</style>
