@@ -2,6 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Now from '../components/Now.astro';
 import { SITE } from '../consts';
+import { getCollection } from 'astro:content';
+
+const phases = (await getCollection('journey')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const doneCount = phases.filter((p) => p.data.status === 'done').length;
+const totalCount = phases.length;
 ---
 
 <BaseLayout
@@ -11,11 +18,11 @@ import { SITE } from '../consts';
 >
   <section class="hero">
     <h1 class="hero-title">
-      Hi, I'm <span class="hero-name">[your name]</span>.
+      Hi, I'm <span class="hero-name">{SITE.author}</span>.
     </h1>
     <p class="hero-sub">
-      Graphics engineer turning into an AI FDE. Targeting education, joining
-      <strong>MiniMax</strong>'s FDE team.
+      {SITE.shortBio} Targeting <strong>{SITE.vertical}</strong>, joining
+      <strong>{SITE.targetCompany}</strong>'s FDE team.
     </p>
   </section>
 
@@ -24,7 +31,7 @@ import { SITE } from '../consts';
   <section class="journey-preview">
     <h2 class="section-title">Journey</h2>
     <p class="text-muted" style="font-size: var(--fs-sm); margin-bottom: var(--space-6);">
-      A 6-month ramp from "graphics + AI" to "ship AI in classrooms". Two phases done, one in progress.
+      A 6-month ramp from "graphics + AI" to "ship AI in classrooms". <strong style="color: var(--text);">{doneCount} of {totalCount}</strong> phases done, one in progress.
     </p>
     <a href="/journey/" class="cta-link">→ View full journey timeline</a>
   </section>

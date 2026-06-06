@@ -1,9 +1,7 @@
 ---
-interface Props {
-  variant?: 'default' | 'minimal';
-}
-
-const { variant: _variant = 'default' } = Astro.props;
+// RightAside is a pure slot container — variant is intentionally not
+// exposed: every page renders the same chrome and any visual differences
+// belong in the caller's <Fragment slot="aside"> content, not in this shell.
 ---
 
 <aside class="col-right">

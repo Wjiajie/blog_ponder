@@ -33,4 +33,19 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, projects };
+const journey = defineCollection({
+  type: 'content',
+  schema: z.object({
+    month: z.string(), // e.g. "M1", "M2", ... — also the slug key
+    title: z.string(),
+    status: z.enum(['done', 'in-progress', 'upcoming']).default('upcoming'),
+    description: z.string(),
+    outputs: z.array(z.string()).default([]),
+    links: z
+      .array(z.object({ label: z.string(), href: z.string() }))
+      .default([]),
+    order: z.number().default(99), // ascending; lets you reorder without renumbering
+  }),
+});
+
+export const collections = { blog, projects, journey };

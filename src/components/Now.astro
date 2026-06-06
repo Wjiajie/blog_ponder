@@ -1,23 +1,35 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
+import { ROUTES } from '../consts';
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 4);
+
+// Pull the currently-in-progress milestone from the journey collection.
+// If nothing is in-progress, fall back to the first upcoming one.
+const phases = (await getCollection('journey')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const current = phases.find((p) => p.data.status === 'in-progress');
+const next = phases.find((p) => p.data.status === 'upcoming');
 ---
 
 <section class="now-block">
   <h2 class="section-title">Now</h2>
   <p class="now-line">
-    <span class="now-label">M3</span>
-    <span class="now-text">in progress · learning agent development, evaluation, and tool use.</span>
+    <span class="now-label">{current?.data.month ?? '—'}</span>
+    <span class="now-text">
+      {current ? `in progress · ${current.data.description.replace(/\.$/, '')}` : 'resting before the next phase'}
+    </span>
   </p>
-  <p class="now-line">
-    <span class="now-label">Next</span>
-    <span class="now-text">ship the AI 学科 Agent 助教 demo by end of M4.</span>
-  </p>
+  {next && (
+    <p class="now-line">
+      <span class="now-label">Next</span>
+      <span class="now-text">ship {next.data.outputs[0] ?? next.data.title} by end of {next.data.month}.</span>
+    </p>
+  )}
 
   <div class="now-recent">
     <h3 class="section-subtitle">Latest</h3>
@@ -25,10 +37,15 @@ const posts = (await getCollection('blog'))
       {posts.length === 0 && <li class="text-muted">No posts yet.</li>}
       {posts.map((p) => (
         <li>
-          <a href={`/blog/${p.slug}/`}>{p.data.title}</a>
+          <a href={ROUTES.blogPost(p.slug)}>{p.data.title}</a>
         </li>
       ))}
     </ul>
+    {posts.length > 0 && (
+      <p style="margin-top: var(--space-4);">
+        <a href="/blog/" class="cta-mini">View all thoughts →</a>
+      </p>
+    )}
   </div>
 </section>
 
@@ -57,5 +74,19 @@ const posts = (await getCollection('blog'))
 
   .now-recent {
     margin-top: var(--space-8);
+  }
+
+  .cta-mini {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+    transition: color var(--t-base), text-decoration-color var(--t-base);
+  }
+
+  .cta-mini:hover {
+    color: var(--text);
+    text-decoration-color: var(--text);
   }
 </style>

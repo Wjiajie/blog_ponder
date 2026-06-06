@@ -1,4 +1,6 @@
 ---
+import { STATUS_META } from '../consts';
+
 interface Props {
   month: string;
   title: string;
@@ -11,11 +13,7 @@ interface Props {
 
 const { month, title, status, description, outputs = [], links = [], isLast = false } = Astro.props;
 
-const statusSymbol = {
-  'done': '✓',
-  'in-progress': '◐',
-  'upcoming': '○',
-}[status];
+const statusSymbol = STATUS_META.journey[status].symbol;
 ---
 
 <div class="timeline-item">

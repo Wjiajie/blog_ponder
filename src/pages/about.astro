@@ -1,17 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, SOCIAL } from '../consts';
+import { PAGE_META, SITE, SOCIAL } from '../consts';
 ---
 
 <BaseLayout
-  title="About"
-  description="About the author"
+  title={PAGE_META.about.title}
+  description={PAGE_META.about.description}
   showRightAside={false}
 >
   <article class="about">
     <h1>About</h1>
     <p>
-      I'm <strong>[your name]</strong>, a software engineer with a background in graphics
+      I'm <strong>{SITE.author}</strong>, a software engineer with a background in graphics
       and visual effects rendering. I'm spending the next six months transitioning into
       a <strong>Forward Deployed Engineer</strong> role, with a focus on the
       <strong>education</strong> vertical.

@@ -6,7 +6,11 @@ interface Props {
 }
 
 const { currentPath } = Astro.props;
-const isArticlePage = /^\/blog\/[^/]+/.test(currentPath);
+// A "back to top" link in the mobile menu only makes sense on a long
+// article page. We detect it by checking that the path is under /blog/
+// but is not the blog index itself.
+const isArticlePage =
+  currentPath.startsWith('/blog/') && currentPath !== '/blog/';
 ---
 
 <header class="mobile-header">

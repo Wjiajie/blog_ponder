@@ -2,23 +2,20 @@
 import BaseLayout from './BaseLayout.astro';
 import Tag from '../components/Tag.astro';
 import type { CollectionEntry } from 'astro:content';
+import { FORMATTING, ROUTES } from '../consts';
 
 interface Props {
   entry: CollectionEntry<'blog'>;
 }
 
 const { entry } = Astro.props;
-const { title, description, pubDate, updatedDate, tags } = entry.data;
+const { title, description, pubDate, tags } = entry.data;
 
-const formattedDate = pubDate.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-});
+const formattedDate = pubDate.toLocaleDateString(FORMATTING.locale, FORMATTING.dateLong);
 
-// Rough reading time: words / 200 wpm
+// Rough reading time: words / wpm (see FORMATTING.readingWpm in consts.ts)
 const wordCount = entry.body.split(/\s+/).length;
-const readingTime = Math.max(1, Math.round(wordCount / 200));
+const readingTime = Math.max(1, Math.round(wordCount / FORMATTING.readingWpm));
 ---
 
 <BaseLayout
@@ -55,7 +52,7 @@ const readingTime = Math.max(1, Math.round(wordCount / 200));
               {tags.map((t, i) => (
                 <>
                   {i > 0 && ' '}
-                  <Tag href={`/blog/?tag=${t}`}>#{t}</Tag>
+                  <Tag href={ROUTES.blogTag(t)}>#{t}</Tag>
                 </>
               ))}
             </span>

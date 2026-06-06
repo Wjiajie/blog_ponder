@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleRow from '../../components/ArticleRow.astro';
 import { getCollection } from 'astro:content';
+import { PAGE_META, ROUTES, FORMATTING } from '../../consts';
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
@@ -21,10 +22,9 @@ const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
 ---
 
 <BaseLayout
-  title="Thoughts"
-  description="Articles, notes, and logs."
+  title={PAGE_META.thoughts.title}
+  description={PAGE_META.thoughts.description}
   showRightAside={true}
-  rightAsideVariant="minimal"
 >
   <header class="page-header">
     <h1>Thoughts</h1>
@@ -42,14 +42,12 @@ const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
           {years.length > 1 && <h2 class="year-heading">{year}</h2>}
           <ul class="posts-list">
             {byYear[year].map((post) => {
-              const date = post.data.pubDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              }).replace(/\//g, '.');
+              const date = post.data.pubDate
+                .toLocaleDateString(FORMATTING.locale, FORMATTING.dateShort)
+                .replace(/\//g, '.');
               return (
                 <li>
-                  <ArticleRow href={`/blog/${post.slug}/`}>
+                  <ArticleRow href={ROUTES.blogPost(post.slug)}>
                     {post.data.title}
                     <span slot="date">{date}</span>
                   </ArticleRow>
@@ -68,7 +66,7 @@ const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
       <div class="tag-cloud">
         {allTags.length === 0 && <p class="text-muted" style="font-size: var(--fs-sm);">No tags yet.</p>}
         {allTags.map((t) => (
-          <a href={`/blog/?tag=${t}`} class="tag">#{t}</a>
+          <a href={ROUTES.blogTag(t)} class="tag">#{t}</a>
         ))}
       </div>
     </section>
