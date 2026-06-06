@@ -16,7 +16,6 @@
 /drafts
 /.docusaurus
 /.cache-loader
-/vercel.json
 /ralph.yml
 /PROMPT.md
 /titles.txt
