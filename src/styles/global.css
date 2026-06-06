@@ -227,7 +227,9 @@
 
   /* Navigation link */
   .nav-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
     padding: var(--space-2) 0;
     font-style: italic;
     color: var(--text-muted);
@@ -299,6 +301,7 @@
   .tag {
     display: inline-flex;
     align-items: center;
+    min-height: 28px;
     padding: 2px var(--space-2);
     font-size: var(--fs-xs);
     border: 1px solid var(--border);
@@ -409,9 +412,10 @@
   .layout-2col {
     grid-template-columns: 1fr;
   }
+  /* Hide the desktop sidebar on mobile — hamburger menu in mobile header takes over */
   .layout-3col > .col-left,
   .layout-2col > .col-left {
-    position: static;
+    display: none;
   }
   h1 { font-size: var(--fs-2xl); }
   h2 { font-size: var(--fs-xl); }

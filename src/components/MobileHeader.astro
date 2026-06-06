@@ -11,14 +11,40 @@ const { currentPath } = Astro.props;
 <header class="mobile-header">
   <a href="/" class="mobile-mark">{SITE.title}</a>
   <details class="mobile-menu">
-    <summary aria-label="Open menu">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+    <summary aria-label="Toggle menu">
+      <svg
+        class="icon-menu"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
         <path d="M3 6h14M3 10h14M3 14h14" />
       </svg>
+      <svg
+        class="icon-close"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <path d="M5 5l10 10M15 5L5 15" />
+      </svg>
     </summary>
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" aria-label="Primary">
       {NAV.map((item) => (
-        <a href={item.href}>{item.label}</a>
+        <a
+          href={item.href}
+          class:list={[{ 'is-active': currentPath === item.href }]}
+        >
+          {item.label}
+        </a>
       ))}
     </nav>
   </details>
@@ -32,6 +58,7 @@ const { currentPath } = Astro.props;
     padding: var(--space-4) 0;
     border-bottom: 1px solid var(--border);
     margin-bottom: var(--space-8);
+    position: relative;
   }
 
   .mobile-mark {
@@ -41,28 +68,75 @@ const { currentPath } = Astro.props;
     color: var(--text);
   }
 
+  /* The <details> element becomes the popover anchor */
+  .mobile-menu {
+    position: relative;
+  }
+
   .mobile-menu summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
     cursor: pointer;
     list-style: none;
     color: var(--text);
-    padding: var(--space-2);
+    border-radius: 4px;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .mobile-menu summary::-webkit-details-marker {
     display: none;
   }
 
+  /* Swap icons based on open state — ☰ by default, ☓ when open */
+  .mobile-menu .icon-close {
+    display: none;
+  }
+  .mobile-menu[open] .icon-menu {
+    display: none;
+  }
+  .mobile-menu[open] .icon-close {
+    display: block;
+  }
+
+  /* Popover menu — anchored to the right of the summary, sits below it */
   .mobile-nav {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    min-width: 200px;
     display: flex;
     flex-direction: column;
-    padding: var(--space-4) 0;
-    gap: var(--space-3);
-    font-style: italic;
+    padding: var(--space-2) 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    z-index: 50;
   }
 
   .mobile-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    font-style: italic;
     color: var(--text-muted);
     text-decoration: none;
+    transition: color var(--t-base), background var(--t-base);
+  }
+
+  .mobile-nav a:hover {
+    color: var(--text);
+    background: var(--bg-muted);
+  }
+
+  .mobile-nav a.is-active {
+    color: var(--text);
+    font-weight: 500;
+    background: var(--bg-muted);
   }
 
   @media (max-width: 767px) {
