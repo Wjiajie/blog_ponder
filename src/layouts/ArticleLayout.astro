@@ -21,7 +21,26 @@ const wordCount = entry.body.split(/\s+/).length;
 const readingTime = Math.max(1, Math.round(wordCount / 200));
 ---
 
-<BaseLayout title={title} description={description} showRightAside={true} rightAsideVariant="default">
+<BaseLayout
+  title={title}
+  description={description}
+  showRightAside={true}
+  bodyClass="article-reading"
+>
+  <button
+    class="article-nav-toggle"
+    data-article-nav-toggle
+    aria-label="Show navigation"
+    aria-expanded="false"
+  >
+    <svg class="icon-menu" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path d="M3 6h14M3 10h14M3 14h14" />
+    </svg>
+    <svg class="icon-close" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="display:none">
+      <path d="M5 5l10 10M15 5L5 15" />
+    </svg>
+  </button>
+
   <article class="article">
     <header class="article-header">
       <h1 class="article-title">{title}</h1>
@@ -60,6 +79,47 @@ const readingTime = Math.max(1, Math.round(wordCount / 200));
     </section>
   </Fragment>
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    function init() {
+      var body = document.body;
+      var btn = document.querySelector('[data-article-nav-toggle]');
+      if (!btn || !body) return;
+
+      var iconMenu = btn.querySelector('.icon-menu');
+      var iconClose = btn.querySelector('.icon-close');
+
+      function setState(state) {
+        body.dataset.articleNav = state;
+        btn.setAttribute('aria-expanded', state === 'visible' ? 'true' : 'false');
+        btn.setAttribute('aria-label', state === 'visible' ? 'Hide navigation' : 'Show navigation');
+        if (iconMenu) iconMenu.style.display = state === 'visible' ? 'none' : '';
+        if (iconClose) iconClose.style.display = state === 'visible' ? '' : 'none';
+      }
+
+      btn.addEventListener('click', function () {
+        var next = body.dataset.articleNav === 'visible' ? 'hidden' : 'visible';
+        setState(next);
+        if (next === 'visible') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && body.dataset.articleNav === 'visible') {
+          setState('hidden');
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
 
 <style>
   .article-header {
@@ -145,5 +205,62 @@ const readingTime = Math.max(1, Math.round(wordCount / 200));
 
   .article-body :global(hr) {
     margin: var(--space-12) 0;
+  }
+</style>
+
+<style is:global>
+  /* Reading mode: hide sidebars by default, surface via floating toggle */
+  body.article-reading .col-left,
+  body.article-reading .col-right {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  body.article-reading[data-article-nav="visible"] .col-left,
+  body.article-reading[data-article-nav="visible"] .col-right {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .col-left,
+  .col-right {
+    transition: transform 250ms ease, opacity 200ms ease;
+  }
+
+  .article-nav-toggle {
+    position: fixed;
+    top: var(--space-4);
+    right: var(--space-4);
+    z-index: 30;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color var(--t-base), border-color var(--t-base), background var(--t-base);
+  }
+
+  .article-nav-toggle:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  body.article-reading[data-article-nav="visible"] .article-nav-toggle {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  /* Mobile already has hamburger; hide this duplicate */
+  @media (max-width: 767px) {
+    .article-nav-toggle {
+      display: none;
+    }
   }
 </style>

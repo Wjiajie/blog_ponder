@@ -1,42 +1,13 @@
 ---
-import { SOCIAL } from '../consts';
-
 interface Props {
   variant?: 'default' | 'minimal';
 }
 
-const { variant = 'default' } = Astro.props;
+const { variant: _variant = 'default' } = Astro.props;
 ---
 
 <aside class="col-right">
   <div class="aside-inner">
-    {variant === 'default' && (
-      <section class="aside-block">
-        <h3 class="section-subtitle">About me</h3>
-        <div class="profile">
-          <div class="profile-avatar" aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="32" cy="32" r="30" />
-              <circle cx="32" cy="24" r="10" />
-              <path d="M12 56c0-11 9-18 20-18s20 7 20 18" />
-            </svg>
-          </div>
-          <p class="profile-text">
-            Hey, I'm [your name]. A graphics engineer transitioning to AI FDE.
-            Currently exploring education as the vertical.
-          </p>
-        </div>
-
-        <div class="profile-social">
-          {SOCIAL.map((s) => (
-            <a href={s.href} target="_blank" rel="noopener noreferrer">
-              {s.label}
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
-
     <slot />
   </div>
 </aside>
@@ -46,38 +17,5 @@ const { variant = 'default' } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: var(--space-8);
-  }
-
-  .profile {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-  }
-
-  .profile-avatar {
-    color: var(--text-muted);
-  }
-
-  .profile-text {
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
-    line-height: 1.55;
-    margin: 0;
-  }
-
-  .profile-social {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    font-size: var(--fs-sm);
-  }
-
-  .profile-social a {
-    color: var(--text-muted);
-  }
-
-  .profile-social a:hover {
-    color: var(--text);
   }
 </style>

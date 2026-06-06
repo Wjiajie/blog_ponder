@@ -10,14 +10,14 @@ interface Props {
   title?: string;
   description?: string;
   showRightAside?: boolean;
-  rightAsideVariant?: 'default' | 'minimal';
+  bodyClass?: string;
 }
 
 const {
   title,
   description = SITE.description,
   showRightAside = true,
-  rightAsideVariant = 'default',
+  bodyClass,
 } = Astro.props;
 
 const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
@@ -35,7 +35,7 @@ const currentPath = Astro.url.pathname;
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
     <title>{fullTitle}</title>
   </head>
-  <body>
+  <body class={bodyClass}>
     <div class="page">
       <MobileHeader currentPath={currentPath} />
 
@@ -46,7 +46,7 @@ const currentPath = Astro.url.pathname;
           <slot />
         </main>
 
-        {showRightAside && <RightAside variant={rightAsideVariant}><slot name="aside" /></RightAside>}
+        {showRightAside && <RightAside><slot name="aside" /></RightAside>}
       </div>
 
       <div class="theme-toggle-wrapper">

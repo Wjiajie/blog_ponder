@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { currentPath } = Astro.props;
+const isArticlePage = /^\/blog\/[^/]+/.test(currentPath);
 ---
 
 <header class="mobile-header">
@@ -38,6 +39,9 @@ const { currentPath } = Astro.props;
       </svg>
     </summary>
     <nav class="mobile-nav" aria-label="Primary">
+      {isArticlePage && (
+        <a href="#top" data-back-to-top>↑ Top of post</a>
+      )}
       {NAV.map((item) => (
         <a
           href={item.href}
@@ -49,6 +53,19 @@ const { currentPath } = Astro.props;
     </nav>
   </details>
 </header>
+
+<script is:inline>
+  (function () {
+    document.addEventListener('click', function (e) {
+      var link = e.target && e.target.closest && e.target.closest('[data-back-to-top]');
+      if (!link) return;
+      e.preventDefault();
+      var details = link.closest('details');
+      if (details) details.open = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
 
 <style>
   .mobile-header {
