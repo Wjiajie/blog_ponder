@@ -36,4 +36,15 @@ yarn-error.log*
 
 # Vercel
 .vercel
+
+# Local tool caches (not source)
+.cursor/
+.claude/
+.memsearch/
+.obsidian/
+
+# ralph tool diagnostic logs (regenerated each run)
+/.ralph/diagnostics/
+/.ralph/events-*.jsonl
+/.ralph/agent/
 Continue
