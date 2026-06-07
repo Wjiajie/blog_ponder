@@ -1,22 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Blog icon" preserveAspectRatio="xMidYMid meet">
-  <title>Blog icon</title>
-  <desc>Adaptive SVG icon with light and dark theme support.</desc>
-  <style>
-    :root {
-      --bg: #F5F1EA;
-      --line: #22303B;
-      --accent1: #E08A35;
-      --accent2: #5FA7A2;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #16222B;
-        --line: #F7F3EB;
-        --accent1: #E08A35;
-        --accent2: #5FA7A2;
-      }
-    }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Blog icon dark" preserveAspectRatio="xMidYMid meet">
+  <title>Blog icon dark</title>
+  <style>:root{--bg:#16222B;--line:#F7F3EB;--accent1:#E08A35;--accent2:#5FA7A2;}</style>
   <rect x="12" y="12" width="488" height="488" rx="104" fill="var(--bg)"/>
   <circle cx="256" cy="256" r="156" fill="none" stroke="var(--line)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M 147 338 Q 200 285 256 316 Q 312 285 365 338" fill="none" stroke="var(--line)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>

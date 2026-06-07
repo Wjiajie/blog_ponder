@@ -46,4 +46,10 @@ yarn-error.log*
 /.ralph/diagnostics/
 /.ralph/events-*.jsonl
 /.ralph/agent/
-Continue
+
+# OG/favicon design workspace (sandbox for build scripts and previews)
+/icon-design/
+
+# Dev server logs (regenerated on every `astro dev`)
+/dev-stderr.log
+/dev-stdout.log

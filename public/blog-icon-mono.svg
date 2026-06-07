@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Blog icon mono" preserveAspectRatio="xMidYMid meet">
+  <title>Blog icon mono</title>
+  <g fill="none" stroke="currentColor" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="256" cy="256" r="156"/>
+    <path d="M 147 338 Q 200 285 256 316 Q 312 285 365 338"/>
+    <line x1="256" y1="174" x2="256" y2="314"/>
+  </g>
+  <circle cx="122" cy="252" r="42" fill="currentColor" opacity="0.9"/>
+  <rect x="345" y="210" width="86" height="86" rx="22" fill="currentColor" opacity="0.9"/>
+</svg>
