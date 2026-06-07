@@ -449,6 +449,53 @@ const items = headings.filter(
      Desktop: rendered inside the existing sticky right aside.
      Visible at >= 768px.
      ============================================================ */
+
+  /* Cap the panel to the viewport and let the list scroll
+     independently. Without this, a long list of headings pushes the
+     panel past the viewport — and because the outer col-right is
+     `position: sticky` (which only follows the page scroll, it does
+     not scroll on its own), the items below the fold become
+     unreachable: scrolling the article moves the panel out of view,
+     and there is no way to scroll the panel itself. */
+  .toc-aside {
+    max-height: calc(100vh - 2 * var(--space-12));
+    overflow-y: auto;
+    /* Reserve a stable scrollbar gutter so the list width doesn't
+       reflow when the OS-native scrollbar appears (Windows shows it
+       always; macOS shows it on scroll). */
+    scrollbar-gutter: stable;
+  }
+  /* Tame the scrollbar in line with the restrained chrome — thin,
+     low-contrast thumb on a transparent track. */
+  .toc-aside::-webkit-scrollbar {
+    width: 6px;
+  }
+  .toc-aside::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .toc-aside::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  .toc-aside::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  /* Keep the header (title + Top / Theme buttons) pinned to the top
+     of the scrollable panel so they stay reachable no matter how far
+     the reader scrolls within the list. The bg paint hides the
+     list items as they pass behind the header. */
+  .toc-aside > .toc-header {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 1;
+    /* A small bottom pad so the first list item doesn't crowd the
+       divider line. */
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
   @media (max-width: 767px) {
     .toc-aside {
       display: none;
