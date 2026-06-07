@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TimelineItem from '../components/TimelineItem.astro';
 import { getCollection } from 'astro:content';
 import { PAGE_META } from '../consts';
+import copy from '../data/copy.json';
 
 // All data lives in src/content/journey/. To add a new month, create a new .md file.
 const phases = (await getCollection('journey'))
@@ -13,6 +14,11 @@ const totalCount = phases.length;
 const doneCount = phases.filter((p) => p.data.status === 'done').length;
 const current = phases.find((p) => p.data.status === 'in-progress') ?? phases[doneCount];
 const next = phases.find((p) => p.data.status === 'upcoming');
+
+const journeyCopy = copy.journey;
+const intro = journeyCopy.introTemplate
+  .replace('{doneCount}', String(doneCount))
+  .replace('{totalCount}', String(totalCount));
 ---
 
 <BaseLayout
@@ -21,9 +27,9 @@ const next = phases.find((p) => p.data.status === 'upcoming');
   showRightAside={true}
 >
   <header class="journey-header">
-    <h1>FDE 转型路径</h1>
+    <h1>{journeyCopy.title}</h1>
     <p class="text-muted" style="font-size: var(--fs-sm); margin-top: var(--space-2);">
-      6 months. From "graphics + AI" to "ship AI in classrooms". <strong style="color: var(--text);">{doneCount} of {totalCount}</strong> phases done.
+      {intro}
     </p>
   </header>
 

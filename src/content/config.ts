@@ -6,10 +6,8 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     pubDate: z.coerce.date(),
-    updatedDate: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-    test: z.boolean().default(false), // marks placeholder test content
   }),
 });
 
@@ -29,7 +27,6 @@ const projects = defineCollection({
       })
       .default({}),
     order: z.number().default(99),
-    test: z.boolean().default(false),
   }),
 });
 
@@ -48,4 +45,14 @@ const journey = defineCollection({
   }),
 });
 
-export const collections = { blog, projects, journey };
+// Top-level content pages (about, journey header, etc.). Authored as MDX
+// so they can interpolate site identity and social links from consts.ts.
+const pages = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, projects, journey, pages };

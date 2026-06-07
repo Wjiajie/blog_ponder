@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { ROUTES } from '../consts';
+import copy from '../data/copy.json';
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
@@ -14,6 +15,14 @@ const phases = (await getCollection('journey')).sort(
 );
 const current = phases.find((p) => p.data.status === 'in-progress');
 const next = phases.find((p) => p.data.status === 'upcoming');
+
+// Substitutions stay minimal — keep templates in copy.json, do the
+// .replace() once at the call site so copy stays readable as English.
+const nowCopy = copy.now;
+const renderInProgress = (description: string) =>
+  nowCopy.inProgressTemplate.replace('{description}', description.replace(/\.$/, ''));
+const renderShip = (output: string, month: string) =>
+  nowCopy.shipTemplate.replace('{output}', output).replace('{month}', month);
 ---
 
 <section class="now-block">
@@ -21,18 +30,18 @@ const next = phases.find((p) => p.data.status === 'upcoming');
   <p class="now-line">
     <span class="now-label">{current?.data.month ?? '—'}</span>
     <span class="now-text">
-      {current ? `in progress · ${current.data.description.replace(/\.$/, '')}` : 'resting before the next phase'}
+      {current ? renderInProgress(current.data.description) : nowCopy.restingText}
     </span>
   </p>
   {next && (
     <p class="now-line">
       <span class="now-label">Next</span>
-      <span class="now-text">ship {next.data.outputs[0] ?? next.data.title} by end of {next.data.month}.</span>
+      <span class="now-text">{renderShip(next.data.outputs[0] ?? next.data.title, next.data.month)}</span>
     </p>
   )}
 
   <div class="now-recent">
-    <h3 class="section-subtitle">Latest</h3>
+    <h3 class="section-subtitle">{nowCopy.latestTitle}</h3>
     <ul class="bullet-list">
       {posts.length === 0 && <li class="text-muted">No posts yet.</li>}
       {posts.map((p) => (
@@ -43,7 +52,7 @@ const next = phases.find((p) => p.data.status === 'upcoming');
     </ul>
     {posts.length > 0 && (
       <p style="margin-top: var(--space-4);">
-        <a href="/blog/" class="cta-mini">View all thoughts →</a>
+        <a href={ROUTES.blog} class="cta-mini">{nowCopy.viewAllCta}</a>
       </p>
     )}
   </div>

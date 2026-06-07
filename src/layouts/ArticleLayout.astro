@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Tag from '../components/Tag.astro';
 import type { CollectionEntry } from 'astro:content';
 import { FORMATTING, ROUTES } from '../consts';
+import copy from '../data/copy.json';
 
 interface Props {
   entry: CollectionEntry<'blog'>;
@@ -16,6 +17,8 @@ const formattedDate = pubDate.toLocaleDateString(FORMATTING.locale, FORMATTING.d
 // Rough reading time: words / wpm (see FORMATTING.readingWpm in consts.ts)
 const wordCount = entry.body.split(/\s+/).length;
 const readingTime = Math.max(1, Math.round(wordCount / FORMATTING.readingWpm));
+
+const articleCopy = copy.article;
 ---
 
 <BaseLayout
@@ -68,10 +71,9 @@ const readingTime = Math.max(1, Math.round(wordCount / FORMATTING.readingWpm));
 
   <Fragment slot="aside">
     <section class="aside-block">
-      <h3 class="section-subtitle">In this post</h3>
+      <h3 class="section-subtitle">{articleCopy.asideTitle}</h3>
       <p class="text-muted text-sm" style="font-size: var(--fs-sm);">
-        A log entry on the journey. Use the table of contents (where present) on the right
-        margin to jump between sections.
+        {articleCopy.asideBody}
       </p>
     </section>
   </Fragment>

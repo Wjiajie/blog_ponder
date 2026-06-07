@@ -7,10 +7,11 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import remarkGfm from 'remark-gfm';
+import { SITE } from './src/consts';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://fde-journey.vercel.app',
+  site: SITE.url,
   integrations: [
     tailwind({ applyBaseStyles: false }),
     mdx(),

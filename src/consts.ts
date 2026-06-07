@@ -1,5 +1,6 @@
 // Site-wide constants — the single config file for identity and chrome.
-// All content lives in src/content/ (journey/, blog/, projects/).
+// All content lives in src/content/ (journey/, blog/, projects/, pages/).
+// All static UI copy lives in src/data/copy.json.
 
 export const SITE = {
   title: "FDE Journey",
@@ -83,6 +84,8 @@ export const ROUTES = {
   blogTag: (tag: string) => `/blog/?tag=${encodeURIComponent(tag)}`,
   blogPost: (slug: string) => `/blog/${slug}/`,
   project: (slug: string) => `/projects/${slug}/`,
+  projectCategory: (category: string) =>
+    `/projects/?category=${encodeURIComponent(category)}`,
   about: "/about/",
 } as const;
 

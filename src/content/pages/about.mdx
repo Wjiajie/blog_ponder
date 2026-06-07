@@ -1,0 +1,42 @@
+---
+title: "About"
+description: "About the author"
+---
+
+import { SITE, SOCIAL } from '../../consts';
+
+I'm **{SITE.author}**, a software engineer with a background in graphics
+and visual effects rendering. I'm spending the next six months transitioning into
+a **Forward Deployed Engineer** role, with a focus on the **education** vertical.
+
+## Why FDE
+
+The best engineers I know are not the ones with the most abstract knowledge —
+they are the ones who can sit in a customer's messy reality and ship something
+that actually helps. That is what an FDE does. I want to be that kind of engineer.
+
+## Why education
+
+I've spent years rendering pixels. The shift to rendering *understanding* —
+helping a teacher see a student's specific misconception, helping a student
+unstuck on a single problem — feels like the right next chapter.
+
+## How to follow along
+
+I publish a weekly log on the [journey](/journey/) page and longer
+essays on the [thoughts](/blog/) page. Reach out if any of it
+resonates:
+
+<ul>
+{SOCIAL.map((s) => (
+  <li><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>
+))}
+</ul>
+
+## Why this site looks the way it does
+
+This site borrows from a few people whose work I admire. The article list is
+shaped after [Shu Ding](https://shud.in)'s ideas waterfall. The home
+page takes cues from [Delba de Oliveira](https://delba.dev)'s clean
+two-column layout. The article body and footnote system follow
+[Lee Robinson](https://leerob.io)'s typography.

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { PAGE_META, ROUTES, STATUS_META } from '../consts';
+import copy from '../data/copy.json';
 
 // Always render all projects; filter is done client-side via JS
 const all = (await getCollection('projects'))
@@ -16,6 +17,10 @@ const formatProjectStatus = (s: string): string => {
   const meta = STATUS_META.project[s as keyof typeof STATUS_META.project];
   return meta ? `${meta.symbol} ${meta.label}` : s;
 };
+
+const projectsCopy = copy.projects;
+const filterHintTemplate = projectsCopy.filterHintTemplate;
+const filterAllLabel = projectsCopy.filterAllLabel;
 ---
 
 <BaseLayout
@@ -32,7 +37,7 @@ const formatProjectStatus = (s: string): string => {
   </header>
 
   <section class="project-section">
-    <h2 id="filter-heading" class="section-subtitle">All</h2>
+    <h2 id="filter-heading" class="section-subtitle">{filterAllLabel}</h2>
     <ul class="project-list">
       {all.map((p) => (
         <li class="project-item" data-category={p.data.category}>
@@ -55,7 +60,7 @@ const formatProjectStatus = (s: string): string => {
       ))}
     </ul>
     <p id="empty-state" class="text-muted hidden">
-      No projects in this category yet — <a href="/projects/">view all</a>.
+      No projects in this category yet — <a href={ROUTES.projects}>view all</a>.
     </p>
   </section>
 
@@ -65,7 +70,7 @@ const formatProjectStatus = (s: string): string => {
       <ul class="filter-list">
         <li>
           <a id="filter-all" href={ROUTES.projects} class="filter-link is-active">
-            All
+            {filterAllLabel}
             <span class="filter-count">{all.length}</span>
           </a>
         </li>
@@ -75,7 +80,7 @@ const formatProjectStatus = (s: string): string => {
             <li>
               <a
                 id={`filter-${c}`}
-                href={`/projects/?category=${encodeURIComponent(c)}`}
+                href={ROUTES.projectCategory(c)}
                 class="filter-link"
               >
                 {c}
@@ -89,16 +94,17 @@ const formatProjectStatus = (s: string): string => {
   </Fragment>
 </BaseLayout>
 
-<script>
-  // Client-side category filter — works on static build
+<script is:inline define:vars={{ filterHintTemplate }}>
+  // Client-side category filter — works on static build.
+  // filterHintTemplate is server-injected so the hint copy stays in copy.json.
   const params = new URLSearchParams(window.location.search);
   const activeCategory = params.get('category') || '';
 
-  function applyFilter(cat: string) {
-    const items = document.querySelectorAll<HTMLElement>('.project-item');
-    const heading = document.getElementById('filter-heading')!;
-    const hint = document.getElementById('filter-hint')!;
-    const emptyState = document.getElementById('empty-state')!;
+  function applyFilter(cat) {
+    const items = document.querySelectorAll('.project-item');
+    const heading = document.getElementById('filter-heading');
+    const hint = document.getElementById('filter-hint');
+    const emptyState = document.getElementById('empty-state');
 
     let visible = 0;
     items.forEach((item) => {
@@ -110,13 +116,13 @@ const formatProjectStatus = (s: string): string => {
     heading.textContent = cat || 'All';
     emptyState.classList.toggle('hidden', visible > 0);
     hint.classList.toggle('hidden', !cat);
-    if (cat) hint.textContent = `· filtered by ${cat}`;
+    if (cat) hint.textContent = filterHintTemplate.replace('{category}', cat);
 
     // Update active link
     document.querySelectorAll('.filter-link').forEach((link) => {
       link.classList.toggle('is-active',
-        (cat && (link as HTMLAnchorElement).href.includes(`category=${encodeURIComponent(cat)}`)) ||
-        (!cat && (link as HTMLAnchorElement).id === 'filter-all')
+        (cat && link.href.includes(`category=${encodeURIComponent(cat)}`)) ||
+        (!cat && link.id === 'filter-all')
       );
     });
   }
@@ -151,110 +157,4 @@ const formatProjectStatus = (s: string): string => {
   .filter-link:hover { color: var(--text); }
   .filter-link.is-active { color: var(--text); font-weight: 500; }
   .filter-count { color: var(--text-subtle); font-variant-numeric: tabular-nums; }
-</style>
-
-<style>
-  .page-header {
-    margin-bottom: var(--space-12);
-  }
-
-  .project-section {
-    margin-bottom: var(--space-12);
-  }
-
-  .project-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .project-item {
-    padding: var(--space-6) 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .project-item:last-child {
-    border-bottom: none;
-  }
-
-  .project-title {
-    font-size: var(--fs-lg);
-    font-weight: 600;
-    margin: 0 0 var(--space-2) 0;
-  }
-
-  .project-summary {
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
-    margin-bottom: var(--space-3);
-  }
-
-  .project-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-3);
-    font-size: var(--fs-xs);
-  }
-
-  .project-status {
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .project-stack {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-
-  .project-stack code {
-    font-size: var(--fs-xs);
-    color: var(--text-muted);
-  }
-
-  .project-links {
-    display: flex;
-    gap: var(--space-4);
-    font-size: var(--fs-sm);
-  }
-
-  .project-links a {
-    color: var(--text-muted);
-  }
-
-  .project-links a:hover {
-    color: var(--text);
-  }
-
-  .filter-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: var(--fs-sm);
-  }
-
-  .filter-link {
-    display: flex;
-    justify-content: space-between;
-    padding: var(--space-1) 0;
-    color: var(--text-muted);
-    text-decoration: none;
-  }
-
-  .filter-link:hover {
-    color: var(--text);
-  }
-
-  .filter-link.is-active {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .filter-count {
-    color: var(--text-subtle);
-    font-variant-numeric: tabular-nums;
-  }
 </style>

@@ -1,5 +1,5 @@
 ---
-import { NAV, SITE } from '../consts';
+import { NAV, SITE, ROUTES } from '../consts';
 
 interface Props {
   currentPath: string;
@@ -8,14 +8,14 @@ interface Props {
 const { currentPath } = Astro.props;
 
 const isActive = (href: string) => {
-  if (href === '/') return currentPath === '/';
+  if (href === ROUTES.home) return currentPath === ROUTES.home;
   return currentPath.startsWith(href);
 };
 ---
 
 <aside class="col-left">
   <div class="sidebar">
-    <a href="/" class="site-mark" aria-label={SITE.title}>
+    <a href={ROUTES.home} class="site-mark" aria-label={SITE.title}>
       <span class="site-mark-text">{SITE.title}</span>
     </a>
 

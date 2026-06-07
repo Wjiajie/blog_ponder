@@ -1,14 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Now from '../components/Now.astro';
-import { SITE } from '../consts';
+import { SITE, ROUTES } from '../consts';
 import { getCollection } from 'astro:content';
+import copy from '../data/copy.json';
 
 const phases = (await getCollection('journey')).sort(
   (a, b) => a.data.order - b.data.order
 );
 const doneCount = phases.filter((p) => p.data.status === 'done').length;
 const totalCount = phases.length;
+
+const homeCopy = copy.home;
+
+// Split a template on {name} so we can wrap that slot in <span class="hero-name">.
+// {placeholder}→value substitution is a pure string transform; the JSX wrapping
+// is a structural concern, so it lives in the .astro file.
+const renderGreeting = (template: string) => {
+  const [before = '', after = ''] = template.split('{name}');
+  return { before, after };
+};
+const renderSub = (shortBio: string, vertical: string, company: string) =>
+  homeCopy.heroSubTemplate
+    .replace('{shortBio}', shortBio)
+    .replace('{vertical}', vertical)
+    .replace('{company}', company);
+const renderPreviewBody = (done: number, total: number) =>
+  homeCopy.journeyPreviewBodyTemplate
+    .replace('{doneCount}', String(done))
+    .replace('{totalCount}', String(total));
+
+const greeting = renderGreeting(homeCopy.heroGreetingTemplate);
 ---
 
 <BaseLayout
@@ -18,22 +40,21 @@ const totalCount = phases.length;
 >
   <section class="hero">
     <h1 class="hero-title">
-      Hi, I'm <span class="hero-name">{SITE.author}</span>.
+      {greeting.before}<span class="hero-name">{SITE.author}</span>{greeting.after}
     </h1>
     <p class="hero-sub">
-      {SITE.shortBio} Targeting <strong>{SITE.vertical}</strong>, joining
-      <strong>{SITE.targetCompany}</strong>'s FDE team.
+      {renderSub(SITE.shortBio, SITE.vertical, SITE.targetCompany)}
     </p>
   </section>
 
   <Now />
 
   <section class="journey-preview">
-    <h2 class="section-title">Journey</h2>
+    <h2 class="section-title">{homeCopy.journeyPreviewTitle}</h2>
     <p class="text-muted" style="font-size: var(--fs-sm); margin-bottom: var(--space-6);">
-      A 6-month ramp from "graphics + AI" to "ship AI in classrooms". <strong style="color: var(--text);">{doneCount} of {totalCount}</strong> phases done, one in progress.
+      {renderPreviewBody(doneCount, totalCount)}
     </p>
-    <a href="/journey/" class="cta-link">→ View full journey timeline</a>
+    <a href={ROUTES.journey} class="cta-link">{homeCopy.journeyPreviewCta}</a>
   </section>
 </BaseLayout>
 

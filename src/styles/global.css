@@ -87,10 +87,9 @@
   }
 
   body {
+    @apply font-sans;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Inter Variable', Inter, system-ui, -apple-system, BlinkMacSystemFont,
-      'Segoe UI', Roboto, sans-serif;
     font-size: var(--fs-base);
     line-height: 1.6;
     font-feature-settings: 'cv11', 'ss01', 'ss03';
@@ -126,7 +125,7 @@
   }
 
   code {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    @apply font-mono;
     font-size: 0.875em;
     background: var(--code-bg);
     padding: 0.15em 0.35em;
@@ -134,7 +133,7 @@
   }
 
   pre {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    @apply font-mono;
     font-size: var(--fs-sm);
     line-height: 1.65;
     background: var(--code-bg) !important;
@@ -337,36 +336,6 @@
     font-weight: 600;
   }
 
-  /* Inline link with bullet prefix (Delba style) */
-  .link-bullet {
-    display: block;
-    position: relative;
-    padding-left: var(--space-6);
-    margin-bottom: var(--space-2);
-  }
-
-  .link-bullet::before {
-    content: '·';
-    position: absolute;
-    left: var(--space-2);
-    color: var(--text-muted);
-    font-weight: 600;
-  }
-
-  /* Footnote superscript */
-  .footnote-ref {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.75em;
-    vertical-align: super;
-    line-height: 0;
-    margin-left: 1px;
-  }
-
-  .footnote-ref:hover {
-    color: var(--text);
-  }
-
   /* Heading anchor (rehype-autolink-headings) */
   .heading-anchor {
     color: inherit;
@@ -381,9 +350,6 @@
 
 @layer utilities {
   .text-muted { color: var(--text-muted); }
-  .text-subtle { color: var(--text-subtle); }
-  .text-italic-display { font-style: italic; color: var(--text-muted); }
-  .tabular-nums { font-variant-numeric: tabular-nums; }
 }
 
 /* ====================================================================
