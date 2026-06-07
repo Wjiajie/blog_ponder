@@ -3,9 +3,9 @@
 // All static UI copy lives in src/data/copy.json.
 
 export const SITE = {
-  title: "FDE Journey",
+  title: "jiajie个人博客",
   vertical: "education", // primary domain (shown in hero, about, journey)
-  targetCompany: "MiniMax", // goal employer (shown in hero)
+  targetCompany: "AI Native Company", // goal employer (shown in hero)
   // Personal identity — change these once, propagates everywhere.
   author: "Jiajie", // your name (shown in hero, about, posts byline)
   shortBio: "Graphics engineer turning into an AI FDE.",
@@ -27,9 +27,16 @@ export const NAV = [
 // Social links — shown in /about page
 export const SOCIAL = [
   { label: "GitHub", href: "https://github.com/Wjiajie" },
-  { label: "X", href: "https://x.com/" },
-  { label: "LinkedIn", href: "https://linkedin.com/" },
-  { label: "Email", href: "mailto:hi@example.com" },
+  { label: "X", href: "https://x.com/jiajiewu233" },
+  {
+    label: "Jike",
+    href: "https://web.okjike.com/u/2febc920-3ed4-4ac1-abbe-7ef68cf533e0",
+  },
+  {
+    label: "xiaohongshu",
+    href: "https://www.xiaohongshu.com/user/profile/62ab5e8d000000001b02a158",
+  },
+  { label: "Email", href: "jiajiewu233@gmail.com" },
 ] as const;
 
 // Status visual metadata — one source of truth for both project cards
@@ -58,7 +65,7 @@ export const STATUS_META = {
 export const PAGE_META = {
   journey: {
     title: "Journey",
-    description: "6-month ramp into a Forward Deployed Engineer role.",
+    description: "ramp into a Forward Deployed Engineer role.",
   },
   projects: {
     title: "Projects",

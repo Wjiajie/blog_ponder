@@ -58,8 +58,49 @@ const isArticlePage =
   </details>
 </header>
 
+<!--
+  Floating hamburger (mobile only).
+  Sits in the top-right corner so the menu stays reachable after the user
+  has scrolled past the inline header. State is synced with the
+  <details> element above via the data-mobile-menu-fab handler.
+-->
+<button
+  type="button"
+  class="mobile-menu-fab"
+  data-mobile-menu-fab
+  aria-label="Open menu"
+>
+  <svg
+    class="icon-menu"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    aria-hidden="true"
+  >
+    <path d="M3 6h14M3 10h14M3 14h14" />
+  </svg>
+  <svg
+    class="icon-close"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    aria-hidden="true"
+  >
+    <path d="M5 5l10 10M15 5L5 15" />
+  </svg>
+</button>
+
 <script is:inline>
   (function () {
+    // "Back to top" link inside the popover menu — close the popover
+    // first, then smooth-scroll. The two steps stay distinct so the
+    // menu animation does not fight the scroll.
     document.addEventListener('click', function (e) {
       var link = e.target && e.target.closest && e.target.closest('[data-back-to-top]');
       if (!link) return;
@@ -68,6 +109,44 @@ const isArticlePage =
       if (details) details.open = false;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // Floating hamburger button — mirrors the <details> state. We
+    // toggle programmatically instead of forwarding clicks, so the
+    // inline <summary> and the FAB never desync.
+    var fab = document.querySelector('[data-mobile-menu-fab]');
+    if (fab) {
+      fab.addEventListener('click', function () {
+        var details = document.querySelector('details.mobile-menu');
+        if (!details) return;
+        details.open = !details.open;
+        fab.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+        fab.setAttribute('aria-label', details.open ? 'Close menu' : 'Open menu');
+      });
+    }
+
+    // Reveal the FAB only after the user has scrolled past the
+    // inline header. Uses rAF throttling so scroll listeners stay cheap.
+    if (fab) {
+      var ticking = false;
+      var threshold = 80; // px of scroll before FAB fades in
+      function update() {
+        var y = window.scrollY || window.pageYOffset || 0;
+        var visible = y > threshold;
+        fab.classList.toggle('is-visible', visible);
+        ticking = false;
+      }
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (!ticking) {
+            window.requestAnimationFrame(update);
+            ticking = true;
+          }
+        },
+        { passive: true }
+      );
+      update();
+    }
   })();
 </script>
 
@@ -122,11 +201,13 @@ const isArticlePage =
     display: block;
   }
 
-  /* Popover menu — anchored to the right of the summary, sits below it */
+  /* Popover menu — fixed in the top-right corner, just below the
+     FAB. Using fixed (not absolute) so the popover stays anchored
+     to the FAB even after the inline header has scrolled out of view. */
   .mobile-nav {
-    position: absolute;
-    top: calc(100% + var(--space-2));
-    right: 0;
+    position: fixed;
+    top: calc(var(--space-3) + 40px + var(--space-2));
+    right: var(--space-3);
     min-width: 200px;
     display: flex;
     flex-direction: column;
@@ -160,9 +241,81 @@ const isArticlePage =
     background: var(--bg-muted);
   }
 
+  /* Floating hamburger — fixed in the top-right corner. Hidden on
+     desktop and hidden at the top of the page; fades in once the
+     user scrolls past the inline header. Visual weight matches the
+     TOC FAB (transparent background, transparent border, low
+     opacity) so chrome never competes with the article body. */
+  .mobile-menu-fab {
+    display: none;
+    position: fixed;
+    top: var(--space-3);
+    right: var(--space-3);
+    z-index: 40;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    color: var(--text-subtle);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease,
+      color var(--t-base),
+      background var(--t-base),
+      border-color var(--t-base);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-menu-fab:hover,
+  .mobile-menu-fab:focus-visible {
+    color: var(--text);
+    background: var(--bg);
+    border-color: var(--border);
+  }
+
+  .mobile-menu-fab:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+  }
+
+  .mobile-menu-fab.is-visible {
+    opacity: 0.55;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobile-menu-fab.is-visible:hover,
+  .mobile-menu-fab.is-visible:focus-visible {
+    opacity: 1;
+  }
+
+  /* Mirror the inline hamburger's icon swap using the FAB's own
+     aria-expanded state, so the visible icon matches the open popover. */
+  .mobile-menu-fab .icon-close {
+    display: none;
+  }
+  .mobile-menu-fab[aria-expanded="true"] .icon-menu {
+    display: none;
+  }
+  .mobile-menu-fab[aria-expanded="true"] .icon-close {
+    display: block;
+  }
+
   @media (max-width: 767px) {
     .mobile-header {
       display: flex;
+    }
+
+    .mobile-menu-fab {
+      display: inline-flex;
     }
   }
 </style>

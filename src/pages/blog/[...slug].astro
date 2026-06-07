@@ -15,9 +15,9 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 ---
 
-<ArticleLayout entry={entry}>
+<ArticleLayout entry={entry} headings={headings}>
   <Content />
 </ArticleLayout>

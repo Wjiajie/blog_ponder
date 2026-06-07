@@ -1,15 +1,18 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Tag from '../components/Tag.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from '@astrojs/markdown-remark';
 import { FORMATTING, ROUTES } from '../consts';
 import copy from '../data/copy.json';
 
 interface Props {
   entry: CollectionEntry<'blog'>;
+  headings: MarkdownHeading[];
 }
 
-const { entry } = Astro.props;
+const { entry, headings } = Astro.props;
 const { title, description, pubDate, tags } = entry.data;
 
 const formattedDate = pubDate.toLocaleDateString(FORMATTING.locale, FORMATTING.dateLong);
@@ -26,6 +29,9 @@ const articleCopy = copy.article;
   description={description}
   showRightAside={true}
   bodyClass="article-reading"
+  ogType="article"
+  publishedTime={pubDate.toISOString()}
+  tags={tags}
 >
   <button
     class="article-nav-toggle"
@@ -70,13 +76,21 @@ const articleCopy = copy.article;
   </article>
 
   <Fragment slot="aside">
-    <section class="aside-block">
-      <h3 class="section-subtitle">{articleCopy.asideTitle}</h3>
-      <p class="text-muted text-sm" style="font-size: var(--fs-sm);">
-        {articleCopy.asideBody}
-      </p>
-    </section>
+    <TableOfContents
+      variant="desktop"
+      headings={headings}
+      title={articleCopy.asideTitle}
+    />
   </Fragment>
+
+  {/* Mobile TOC (FAB + popover). Rendered outside the right aside slot
+      because position: fixed inside col-right's transform: translateX(...)
+      would otherwise anchor the FAB to the aside instead of the viewport. */}
+  <TableOfContents
+    variant="mobile"
+    headings={headings}
+    title={articleCopy.asideTitle}
+  />
 </BaseLayout>
 
 <script is:inline>
@@ -97,12 +111,13 @@ const articleCopy = copy.article;
         if (iconClose) iconClose.style.display = state === 'visible' ? '' : 'none';
       }
 
+      // Nav toggle is now strictly a side-panel toggle — no scroll
+      // side-effect. "Top of post" lives inside the TOC panel
+      // (see TableOfContents.astro) so reading flow and navigation
+      // are no longer bundled into a single click.
       btn.addEventListener('click', function () {
         var next = body.dataset.articleNav === 'visible' ? 'hidden' : 'visible';
         setState(next);
-        if (next === 'visible') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
       });
 
       document.addEventListener('keydown', function (e) {
@@ -223,6 +238,13 @@ const articleCopy = copy.article;
     pointer-events: auto;
   }
 
+  /* On article pages, theme switching lives inside the TOC panel
+     (TableOfContents.astro renders the [data-toc-theme] button).
+     Hide the floating wrapper so the two UIs do not compete. */
+  body.article-reading .theme-toggle-wrapper {
+    display: none;
+  }
+
   .col-left,
   .col-right {
     transition: transform 250ms ease, opacity 200ms ease;
@@ -233,27 +255,37 @@ const articleCopy = copy.article;
     top: var(--space-4);
     right: var(--space-4);
     z-index: 30;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg);
-    border: 1px solid var(--border);
+    background: transparent;
+    border: 1px solid transparent;
     border-radius: 6px;
-    color: var(--text-muted);
+    color: var(--text-subtle);
     cursor: pointer;
-    transition: color var(--t-base), border-color var(--t-base), background var(--t-base);
+    opacity: 0.55;
+    transition:
+      color var(--t-base),
+      background var(--t-base),
+      border-color var(--t-base),
+      opacity var(--t-base);
   }
 
-  .article-nav-toggle:hover {
+  .article-nav-toggle:hover,
+  .article-nav-toggle:focus-visible {
     color: var(--text);
-    border-color: var(--text-muted);
+    background: var(--bg);
+    border-color: var(--border);
+    opacity: 1;
   }
 
   body.article-reading[data-article-nav="visible"] .article-nav-toggle {
     color: var(--text);
-    border-color: var(--text-muted);
+    background: var(--bg);
+    border-color: var(--border);
+    opacity: 1;
   }
 
   /* Mobile already has hamburger; hide this duplicate */
