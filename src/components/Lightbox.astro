@@ -1,0 +1,487 @@
+---
+// Lightbox.astro
+// Reusable image lightbox. Click any <img> inside .article-body (or any
+// <img data-zoomable>) to open it fullscreen. Uses native <dialog> for
+// built-in a11y, focus trap, and ESC handling.
+//
+// Theming
+//   - Backdrop is dark in both modes (the image is the focus; the page
+//     recedes). A subtle backdrop-blur keeps the article faintly visible.
+//   - The image canvas uses var(--bg) so dark mode paints a black border
+//     around the image and light mode paints a white one.
+//
+// Animation
+//   - Open: backdrop fades in + image scales up from 0.96 → 1 over 200ms.
+//   - Close: same in reverse. We toggle a `.is-shown` class on the dialog
+//     after `showModal()` (with a forced reflow) so the transition has a
+//     starting state to interpolate from.
+//   - Image crossfade: when switching to a different image while the
+//     lightbox is already open, the image fades out → swaps src → fades in.
+//
+// Body scroll lock
+//   - We add `lightbox-open` to BOTH <html> and <body>. The CSS rule uses
+//     `!important` because some Tailwind resets in this project re-apply
+//     `overflow` at higher specificity.
+//
+// Include once per page (e.g., in ArticleLayout).
+---
+
+<dialog id="image-lightbox" class="lightbox" aria-label="图片预览">
+  <button
+    type="button"
+    class="lightbox-close"
+    data-lightbox-close
+    aria-label="关闭预览"
+    title="关闭 (Esc)"
+  >
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  </button>
+
+  <figure class="lightbox-figure">
+    <div class="lightbox-img-wrap" data-lightbox-stage>
+      <img class="lightbox-img" src="" alt="" />
+    </div>
+    <figcaption class="lightbox-caption" hidden></figcaption>
+  </figure>
+
+  <p class="lightbox-hint" aria-hidden="true">按 Esc 关闭 · 点击图片外区域也可关闭</p>
+</dialog>
+
+<script is:inline>
+  (function () {
+    // Guard against double-init (e.g. if Lightbox is rendered twice on a page)
+    if (window.__lightboxInited) return;
+    window.__lightboxInited = true;
+
+    var OPEN_MS = 200; // match CSS transition duration
+
+    function init() {
+      var dlg = document.getElementById('image-lightbox');
+      if (!dlg) return;
+      var stage = dlg.querySelector('[data-lightbox-stage]');
+      var img = dlg.querySelector('.lightbox-img');
+      var captionEl = dlg.querySelector('.lightbox-caption');
+      var closeBtn = dlg.querySelector('[data-lightbox-close]');
+      if (!stage || !img || !captionEl || !closeBtn) return;
+
+      var isOpen = false;
+      var pendingClose = 0; // setTimeout id for the deferred dlg.close()
+
+      function setImage(src, alt, text) {
+        img.alt = alt || '';
+        if (text) {
+          captionEl.textContent = text;
+          captionEl.hidden = false;
+        } else {
+          captionEl.textContent = '';
+          captionEl.hidden = true;
+        }
+        // Crossfade: fade out → swap src → fade in
+        stage.classList.add('is-swapping');
+        setTimeout(function () {
+          img.onload = function () {
+            stage.classList.remove('is-swapping');
+            img.onload = null;
+          };
+          // If the new src is already cached, onload may not fire — clear
+          // the swap class on the next frame as a fallback.
+          setTimeout(function () { stage.classList.remove('is-swapping'); }, 50);
+          img.src = src;
+        }, 120);
+      }
+
+      function open(src, alt, captionText) {
+        // Cancel any pending close from a prior dismissal — without
+        // this, a fast open-then-close-then-open sequence lets the
+        // previous close()'s deferred dlg.close() fire on the new
+        // instance and dismiss it immediately.
+        if (pendingClose) {
+          clearTimeout(pendingClose);
+          pendingClose = 0;
+        }
+
+        // Pre-fill image src so the first paint isn't blank
+        img.src = src;
+        img.alt = alt || '';
+        if (captionText) {
+          captionEl.textContent = captionText;
+          captionEl.hidden = false;
+        } else {
+          captionEl.textContent = '';
+          captionEl.hidden = true;
+        }
+        // Lock body scroll on both html + body (Tailwind resets can
+        // otherwise re-apply overflow at higher specificity).
+        document.documentElement.classList.add('lightbox-open');
+        document.body.classList.add('lightbox-open');
+
+        if (typeof dlg.showModal === 'function') {
+          dlg.showModal();
+        } else {
+          dlg.setAttribute('open', '');
+        }
+        isOpen = true;
+        // Force a reflow so the .is-shown transition triggers.
+        // Reading offsetWidth flushes pending style changes.
+        // eslint-disable-next-line no-unused-expressions
+        dlg.offsetWidth;
+        dlg.classList.add('is-shown');
+        // Move focus to the close button so keyboard users can dismiss
+        dlg.querySelector('[data-lightbox-close]').focus();
+      }
+
+      function close() {
+        if (!isOpen) return;
+        isOpen = false;
+        dlg.classList.remove('is-shown');
+        // Wait for fade-out, then actually close. Stash the timer id
+        // so open() can cancel it if the user reopens quickly.
+        pendingClose = setTimeout(function () {
+          pendingClose = 0;
+          if (typeof dlg.close === 'function') {
+            dlg.close();
+          } else {
+            dlg.removeAttribute('open');
+          }
+        }, OPEN_MS);
+      }
+
+      // ---- Wire up close behaviors ----
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        close();
+      });
+
+      // Click on the dialog (but NOT on the image / caption) closes
+      dlg.addEventListener('click', function (e) {
+        if (e.target === dlg) close();
+      });
+
+      // Intercept ESC ourselves so the fade-out animation can play
+      // before the dialog actually closes. Without this, the browser
+      // would call dlg.close() directly on ESC, snapping the dialog
+      // away without the transition.
+      dlg.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          e.stopPropagation();
+          close();
+        }
+      });
+
+      // Native <dialog> handles ESC by default. Clean up scroll lock
+      // and reset src on close.
+      dlg.addEventListener('close', function () {
+        document.documentElement.classList.remove('lightbox-open');
+        document.body.classList.remove('lightbox-open');
+        dlg.classList.remove('is-shown');
+        // Defer src clear so the fade-out can finish
+        setTimeout(function () { img.src = ''; }, OPEN_MS + 50);
+      });
+
+      // ---- Attach zoom behavior to images ----
+      function attach(el) {
+        if (el.__zoomAttached) return;
+        el.__zoomAttached = true;
+        el.style.cursor = 'zoom-in';
+        el.addEventListener('click', function (e) {
+          // Don't hijack clicks on links-wrapped images
+          if (e.target.closest && e.target.closest('a')) return;
+          e.preventDefault();
+          var text = el.getAttribute('data-caption') || '';
+          if (!text) {
+            var fig = el.closest('figure');
+            if (fig) {
+              var fc = fig.querySelector('figcaption');
+              if (fc) text = fc.textContent.trim();
+            }
+          }
+          // If already open, swap to the new image with crossfade
+          if (isOpen) {
+            setImage(el.currentSrc || el.src, el.alt, text);
+          } else {
+            open(el.currentSrc || el.src, el.alt, text);
+          }
+        });
+      }
+
+      function attachIn(root) {
+        if (!root || !root.querySelectorAll) return;
+        var explicit = root.querySelectorAll('img[data-zoomable]');
+        for (var i = 0; i < explicit.length; i++) attach(explicit[i]);
+        var body = root.querySelectorAll ? root.querySelectorAll('.article-body img') : [];
+        for (var j = 0; j < body.length; j++) {
+          if (!body[j].hasAttribute('data-zoomable')) attach(body[j]);
+        }
+      }
+
+      attachIn(document);
+
+      // Future-proof: if content is loaded async (e.g. client-side
+      // navigation), observe DOM mutations and attach to new images.
+      if (typeof MutationObserver !== 'undefined') {
+        var mo = new MutationObserver(function (muts) {
+          for (var k = 0; k < muts.length; k++) {
+            var added = muts[k].addedNodes;
+            for (var l = 0; l < added.length; l++) {
+              if (added[l].nodeType === 1) attachIn(added[l]);
+            }
+          }
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<style>
+  /* ============================================================
+     Dialog shell — fill the viewport, transparent bg.
+     Animations: opacity + transform on .is-shown. Reflow trick in
+     open() ensures the transition triggers after showModal().
+     ============================================================ */
+  .lightbox {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Animated entry */
+    opacity: 0;
+    transform: scale(0.96);
+    transition:
+      opacity 200ms ease-out,
+      transform 200ms ease-out,
+      overlay 200ms ease-out allow-discrete;
+  }
+
+  .lightbox.is-shown {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Modern browsers: animate the ::backdrop in lockstep with the
+     dialog. Falls back to no animation on browsers that don't
+     support animating the overlay property. */
+  .lightbox::backdrop {
+    background: rgba(15, 15, 15, 0);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    transition:
+      background-color 200ms ease-out,
+      -webkit-backdrop-filter 200ms ease-out,
+      backdrop-filter 200ms ease-out;
+  }
+  .lightbox.is-shown::backdrop {
+    background: rgba(15, 15, 15, 0.9);
+  }
+  :global(.dark) .lightbox.is-shown::backdrop {
+    background: rgba(0, 0, 0, 0.96);
+  }
+
+  /* ============================================================
+     Body scroll lock — applied to BOTH html and body (the
+     `!important` defends against Tailwind's `overflow` reset that
+     re-applies at higher specificity otherwise).
+     ============================================================ */
+  :global(html.lightbox-open),
+  :global(body.lightbox-open) {
+    overflow: hidden !important;
+    /* Prevent rubber-band scroll on iOS */
+    overscroll-behavior: none;
+  }
+
+  /* ============================================================
+     Figure layout — vertical stack: image stage + caption + hint.
+     The stage (wrap) is the actual "click-to-close" surface — clicking
+     the image keeps the dialog open so users can zoom in / select
+     the URL bar / etc. without immediately closing.
+     ============================================================ */
+  .lightbox-figure {
+    margin: 0;
+    padding: var(--space-12) var(--space-4) var(--space-6);
+    box-sizing: border-box;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    pointer-events: none;
+  }
+
+  /* The image stage — the "clickable outside" area. */
+  .lightbox-img-wrap {
+    pointer-events: auto;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 180ms ease-out;
+  }
+
+  /* During a src swap (clicking a different image while open) we
+     briefly hide the stage so the swap reads as a crossfade rather
+     than a flicker. */
+  .lightbox-img-wrap.is-swapping {
+    opacity: 0;
+  }
+
+  .lightbox-img {
+    display: block;
+    /* Let the image fill the viewport generously — max 96vw / 88vh,
+     with a hard cap of 1800px so retina images don't bloat. */
+    max-width: min(96vw, 1800px);
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    background: var(--bg);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-caption {
+    margin: 0;
+    max-width: 80vw;
+    text-align: center;
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    pointer-events: auto;
+  }
+
+  .lightbox-caption[hidden] {
+    display: none;
+  }
+
+  /* ============================================================
+     Close button — top-right. Solid darker fill (instead of
+     semi-transparent) so it reads against ANY backdrop, and a
+     ring on hover/focus to telegraph the hit area.
+     ============================================================ */
+  .lightbox-close {
+    position: fixed;
+    top: var(--space-4);
+    right: var(--space-4);
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(255, 255, 255,  0.25);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    transition:
+      background var(--t-base),
+      border-color var(--t-base),
+      transform var(--t-base),
+      box-shadow var(--t-base);
+  }
+
+  .lightbox-close:hover,
+  .lightbox-close:focus-visible {
+    background: rgba(40, 40, 40, 0.95);
+    border-color: rgba(255, 255, 255,  0.5);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .lightbox-close:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.7);
+    outline-offset: 2px;
+  }
+
+  /* ============================================================
+     Hint — pill at the bottom, more contrast than v1 so it
+     doesn't disappear in light or dark mode.
+     ============================================================ */
+  .lightbox-hint {
+    position: fixed;
+    bottom: var(--space-4);
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 6px 14px;
+    font-size: var(--fs-xs);
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(20, 20, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+
+  /* Show hint after dialog enters; fade it out after a few seconds */
+  .lightbox.is-shown .lightbox-hint {
+    opacity: 1;
+    animation: lightbox-hint-fade 2.4s ease-out 600ms forwards;
+  }
+
+  @keyframes lightbox-hint-fade {
+    0%   { opacity: 1; }
+    60%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* ============================================================
+     Mobile — tighter padding, smaller close button
+     ============================================================ */
+  @media (max-width: 767px) {
+    .lightbox-figure {
+      padding: var(--space-10) var(--space-3) var(--space-6);
+    }
+
+    .lightbox-img {
+      max-width: 100vw;
+      max-height: 78vh;
+    }
+
+    .lightbox-caption {
+      max-width: 92vw;
+      font-size: var(--fs-xs);
+    }
+
+    .lightbox-close {
+      top: var(--space-3);
+      right: var(--space-3);
+      width: 36px;
+      height: 36px;
+    }
+
+    .lightbox-hint {
+      bottom: var(--space-3);
+      font-size: 11px;
+    }
+  }
+</style>
