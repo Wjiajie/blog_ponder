@@ -16,7 +16,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import Link from '@docusaurus/Link';
-import ZoomImage from '@site/src/components/ZoomImage';
 
 
 ## 基础语法
@@ -511,20 +510,19 @@ Docusaurus 提供了一种特殊的提示框语法，通过使用三个冒号和
 
 ### 响应式图片
 
-在 .mdx文件中，可以使用 `<ZoomImage />` 组件来支持响应式图片。
+在 .mdx文件中，可以使用 `` 组件来支持响应式图片。
 
 ```jsx
-import ZoomImage from '@site/src/components/ZoomImage';
 ```
 
-你只需要在正文中使用 `<ZoomImage />` 组件，并传入图片的 src 和 alt 属性。
+你只需要在正文中使用 `` 组件，并传入图片的 src 和 alt 属性。
 
 ```md
-<ZoomImage src="https://s2.loli.net/2025/01/10/Xj47aLr5SGEM3ln.jpg" alt="图　保时捷911E,1973年产" />
+![图　保时捷911E,1973年产](https://s2.loli.net/2025/01/10/Xj47aLr5SGEM3ln.jpg)
 ```
 
 
-<ZoomImage src="https://s2.loli.net/2025/01/10/Xj47aLr5SGEM3ln.jpg" alt="图　保时捷911E,1973年产" />
+![图　保时捷911E,1973年产](https://s2.loli.net/2025/01/10/Xj47aLr5SGEM3ln.jpg)
 
 ### 引用跳转
 

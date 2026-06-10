@@ -8,7 +8,6 @@ description: "本文总结了Swin Transformer的核心思想和技术细节，�
 draft: false
 ---
 
-import ZoomImage from '@site/src/components/ZoomImage';
 
 Transformer在NLP领域大展身手，但将Transformer迁移到CV领域，会面临两个困难：
 
@@ -23,7 +22,7 @@ Transformer在NLP领域大展身手，但将Transformer迁移到CV领域，会�
 
 Swin Transformer(Swin-T)网络结构如下图：
 
-<ZoomImage src="https://s2.loli.net/2022/04/08/Ponfq6rGbjwdh4F.jpg" alt="Swin Transformer网络结构" />
+![Swin Transformer网络结构](https://s2.loli.net/2022/04/08/Ponfq6rGbjwdh4F.jpg)
 
 假设网络输入图像尺寸是$H \times W \times 3$，经过*Patch Partition*模块后被分为互不重叠的*patches*，注意在论文中*patch*是最小的计算单元，一个patch区域的特征后续会被展开成一个向量用于计算自注意力。在论文中*patch*被设置为$4 \times 4$的像素方块，所以经过*Patch Partition*模块后的特征图维度是$\frac{H}{4} \times \frac{W}{4} \times 48$。网络后续部分被分成四个Stage，除了Stage1是*Linear Embedding*模块与*Swin Transformer Block*的组合，后续的Stage都是*Patch Merging*与*Swin Transformer Block*的组合。Stage1中的*linear embedding*层将特征维度变换为$\frac{H}{4} \times \frac{W}{4} \times C$，*Swin Transformer Block*即论文提出的修改版本的Transformer模块，将在下文具体介绍。*Patch Merging*对特征图采用步长为2的等间隔采样，并将采样后的特征图在通道维度上合并，此时特征图的分辨率将降采样为原来的$\frac{1}{4}$，通道为从$C$提升为$4C$，并通过一个线性变换层转换为$2C$。
 
@@ -33,7 +32,7 @@ Swin Transformer(Swin-T)网络结构如下图：
 
 的问题，论文提出让*Swin Transformer Block*只在一个区域(windows，论文将windows固定为7$\times$7个patch，patch是最小的计算单元)中计算自注意力。全局的MSA和基于窗口的MSA的计算复杂度如下所示(仅考虑乘法操作)：
 
-<ZoomImage src="https://s2.loli.net/2022/04/11/ps6WMmlAkxKjUab.jpg" alt="计算复杂度" />
+![计算复杂度](https://s2.loli.net/2022/04/11/ps6WMmlAkxKjUab.jpg)
 
 然而这样的方式中只能得到局部注意力，论文的主要贡献点在于提出了*Shifted windows*的操作，
 
@@ -51,33 +50,33 @@ Swin Transformer(Swin-T)网络结构如下图：
 
 *Shifted windows*的示意图如下：
 
-<ZoomImage src="https://s2.loli.net/2022/04/08/VSjh1J3H5XWGUAx.jpg" alt="Shifted windows" />
+![Shifted windows](https://s2.loli.net/2022/04/08/VSjh1J3H5XWGUAx.jpg)
 
 在上图中，一个大小为$M \times M$($M$在论文里设定为7，如果特征图大小不能被$M$整除，则先零填充特征图)经过基础版本的Shifted windows操作后，4个windows会被分为9个windows，每个windows将分别计算自注意力，这样存在的问题是：由于每个windows并不是保持一样的大小，这给代码实现时并行化处理带来麻烦，降低了运算效率，论文中*Shifted windows*的实现巧妙地利用掩码(mask)的MSA层解决该问题，如下图所示：
 
-<ZoomImage src="https://s2.loli.net/2022/04/08/uWmy7JxRT81GDjL.jpg" alt="Shifted windows" />
+![Shifted windows](https://s2.loli.net/2022/04/08/uWmy7JxRT81GDjL.jpg)
 
 从上图中看出，论文将9个windows重新填补成4个windows并做好标记(标记该张量原本来自哪里)，然后对该4个windows计算W-MSA，但这样的操作会为本不应该计算注意力系数的向量之间也计算了注意力系数，因为重新填充后的窗口的向量很可能是不相关的。masked MSA的操作在重新填补的windows计算MSA时，为不应该计算注意力系数的区域填充一个很大的负数，这样MSA经过后续的softmax操作后，该区域将归零。这样，通过masked MSA的处理，虽然总的计算量提高了，但由于windows大小变的一致，硬件并行化实现反而然模型的运算效率提高了。masked MSA的计算示意图如下所示：
 
-<ZoomImage src="https://s2.loli.net/2022/04/08/PU5ctlgWGoi9QJj.jpg" alt="Shifted windows" />
+![Shifted windows](https://s2.loli.net/2022/04/08/PU5ctlgWGoi9QJj.jpg)
 
 mask的可视化如下所示：
 
-<ZoomImage src="https://s2.loli.net/2022/04/08/SOM45VlwsvP9EGa.jpg" alt="Shifted windows" />
+![Shifted windows](https://s2.loli.net/2022/04/08/SOM45VlwsvP9EGa.jpg)
 
 ### Patch Merging
 
-<ZoomImage src="https://s2.loli.net/2022/04/08/cAnJwrzl8TQosZq.jpg" alt="Patch Merging" />
+![Patch Merging](https://s2.loli.net/2022/04/08/cAnJwrzl8TQosZq.jpg)
 
 如上图，Patch Merging会在每个stage开始时调整特征图分辨率，改变特征图的通道数，由于Swin Transformer Block不改变向量的通道数和特征图分辨率，这两者的改变都由Patch Merging实现。Patch Merging的做法时在行方向和列方向上，间隔2选取元素，然后拼接在一起作为一整个张量，最后展开。此时通道维度会变成原先的4倍（因为H,W各缩小2倍），此时再通过一个全连接层再调整通道维度为原来的两倍。
 
-<ZoomImage src="https://s2.loli.net/2022/04/08/Z18WRLsTp4BaXvq.jpg" alt="Patch Merging" />
+![Patch Merging](https://s2.loli.net/2022/04/08/Z18WRLsTp4BaXvq.jpg)
 
 ### 相对位置编码
 
 对于一个大小是$Wh \times Ww$的窗口，每个patch的横坐标到其他patch的横坐标的距离(偏移)的取值范围是$(-(Wh-1), (Wh-1))$，每个patch的纵坐标到其他patch的纵坐标的距离(偏移)的取值范围是$(-(Ww-1), (Ww-1))$，分别把取值调整为$(0, (2 \times Wh-1))$，$(0, (2 \times Ww-1))$，故作者维持一个大小是$(2Wh-1) \times (2Ww-1)$的偏置矩阵$\hat{B}$(*relative_position_bias_table*)，该偏置矩阵是一个可学习参数组成的二维矩阵。对于一个$Wh \times Ww$的窗口，需要得到每个patch到其他patch的相对位置编码，方法是计算一个相对坐标矩阵(*relative_coords*)，该矩阵的维度是$(Wh * Ww)\times(Wh * Ww)$，如下图所示，最终每个位置的相对位置编码根据relative_coords的值当作索引从*relative_position_bias_table*中取得。关于相对位置编码可以结合下文的代码理解。
 
-<ZoomImage src="https://s2.loli.net/2022/04/12/SniHeLKmk5PcNoy.jpg" alt="Patch Merging" />
+![Patch Merging](https://s2.loli.net/2022/04/12/SniHeLKmk5PcNoy.jpg)
 
 ## 代码结构
 

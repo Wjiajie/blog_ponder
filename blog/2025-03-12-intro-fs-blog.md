@@ -7,9 +7,8 @@ keywords: ["思维模型", "信息源", "个人博客"]
 description: "介绍一个高质量的信息源Farnam Street博客，包括其播客、实体书和文章板块的内容介绍。"
 draft: false
 ---
-import ZoomImage from '@site/src/components/ZoomImage';
 
-<ZoomImage src="https://cdn.sa.net/2025/03/12/Zh4RQ3I1CHW6USl.png" alt="farnamStreetIntro.png" />
+![farnamStreetIntro.png](https://cdn.sa.net/2025/03/12/Zh4RQ3I1CHW6USl.png)
 
 [Farnam Street](https://fs.blog/)这个博客是我的一位朋友推荐的高质量的信息源，这个博客的愿景是:
 
@@ -22,7 +21,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 ## 播客《**The Knowledge Project Podcast**》
 
-<ZoomImage src="https://cdn.sa.net/2025/03/12/YFGeuvsaCZWNTg9.png" alt="screenshot-20250312-224845.png" />
+![screenshot-20250312-224845.png](https://cdn.sa.net/2025/03/12/YFGeuvsaCZWNTg9.png)
 
 《**The Knowledge Project Podcast**》 是一档聚焦于跨学科智慧与顶尖思维模型的深度访谈类播客，旨在通过剖析历史人物与当代领袖的成功路径，帮助听众掌握高效决策、问题解决和价值创造的方法论。它旨在提炼历史上最伟大思想家与当代卓越领导者的思维模型，帮助听众 “站在巨人的肩膀上” 优化决策，避免试错成本。播客的每一期内容都浓缩了高浓度的智慧，通过拆解他人已验证的成功经验，助力个人与组织实现突破性成长。
 
@@ -40,14 +39,14 @@ import ZoomImage from '@site/src/components/ZoomImage';
 🔗 **平台**：Apple Podcasts、Spotify、YouTube
 
 ## 实体书
-<ZoomImage src="https://cdn.sa.net/2025/03/12/3HYVP4eoRT9Mq5S.png" alt="screenshot-20250312-224821.png" />
+![screenshot-20250312-224821.png](https://cdn.sa.net/2025/03/12/3HYVP4eoRT9Mq5S.png)
 
 - **畅销书《清晰思考》**：纽约时报榜单作品，提供应对复杂问题的 6 步行动框架。
 - **《思维模型》系列丛书**：四卷本跨学科巨著，将物理、生物等领域原理转化为商业武器。
 
 ## 博客文章板块
 
-<ZoomImage src="https://cdn.sa.net/2025/03/12/Aqx7kb4ZWzNPI9C.png" alt="screenshot-20250312-224907.png" />
+![screenshot-20250312-224907.png](https://cdn.sa.net/2025/03/12/Aqx7kb4ZWzNPI9C.png)
 
 fs的博客文章聚焦思维模型、决策科学与高效学习，提供跨学科的深度认知框架，分为下面六个核心板块：
 

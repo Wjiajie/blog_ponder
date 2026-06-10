@@ -8,9 +8,8 @@ description: "介绍一个强大的网页转电子书工具 Wepub，探讨其重
 draft: false
 ---
 
-import ZoomImage from '@site/src/components/ZoomImage';
 
-<ZoomImage src="https://s2.loli.net/2025/02/23/FdTcD6U5xHmp7Wh.png" alt="wepub流程图" />
+![wepub流程图](https://s2.loli.net/2025/02/23/FdTcD6U5xHmp7Wh.png)
 
 最近一年我花了很多时间在使用微信读书上，通过类似[安娜的档案馆](https://zh.annas-archive.org/)的工具导入书籍，或者直接阅读微信读书的官方书城找书，但都无法解决一个问题：我希望阅读一些最新的工具的说明书，而且我希望能对这些说明书做好阅读笔记，方便后续的检索和二次创作。
 
@@ -70,19 +69,19 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 ### 使用流程
 
-<ZoomImage src="https://s2.loli.net/2025/02/23/VomOzlDUP6wLTgX.png" alt="输入网页链接并抓取内容" />
+![输入网页链接并抓取内容](https://s2.loli.net/2025/02/23/VomOzlDUP6wLTgX.png)
 
 这个工具要求你输入一个网页的链接，它会自动抓取当前网页以及子网页内容，你可以通过`最大页面数量`，`递归深度`来控制抓取的规模，通过`保留历史内容`来控制是否保留历史内容，保证这些内容暂时写进浏览器缓存中，刷新网页和解析新的链接也不会被清除。
 
-<ZoomImage src="https://s2.loli.net/2025/02/23/hxXgmDSCU6brKIL.png" alt="抓取网页内容并通过列表展示" />
+![抓取网页内容并通过列表展示](https://s2.loli.net/2025/02/23/hxXgmDSCU6brKIL.png)
 
 抓取的网页内容会通过列表展示，你可以选择是否保留这些内容，或者删除这些内容，或者可以只选择部分网页内容导出。
 
-<ZoomImage src="https://s2.loli.net/2025/02/23/Lh4egFUlsyJAi1q.png" alt="配置导出选项" />
+![配置导出选项](https://s2.loli.net/2025/02/23/Lh4egFUlsyJAi1q.png)
 
 在点击导出后，配置导出的`文档标题`，`作者`，`更多说明`，并且选择导出的格式，目前支持HTML，PDF，EPUB和Markdown格式。
 
-<ZoomImage src="https://s2.loli.net/2025/02/23/I2ZesAbyiPWxm4F.png" alt="网页内容导出中" />
+![网页内容导出中](https://s2.loli.net/2025/02/23/I2ZesAbyiPWxm4F.png)
 
 点击确认后，工具会将网页内容发送到后端处理，并生成对应的导出文件，返回到浏览器中并下载。
 

@@ -8,11 +8,10 @@ description: "Transformer是谷歌在2017年提出的一种基于注意力机制
 draft: false
 ---
 
-import ZoomImage from '@site/src/components/ZoomImage';
 
 Transformer是谷歌在2017年提出的一种基于注意力机制的神经网络架构，它在自然语言处理（NLP）领域取得了显著的成果，并逐渐在计算机视觉（CV）领域展现出强大的潜力。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/Oth6gQU8PcX5waS.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/Oth6gQU8PcX5waS.png)
 
 
 <!-- truncate -->
@@ -24,13 +23,13 @@ Transformer是谷歌在2017年提出的一种基于注意力机制的神经网�
 
 *Attention* 机制不是谷歌首先提出来的，但在在谷歌17年的论文[《Attention is All You Need》](https://arxiv.org/abs/1706.03762)中被很好地总结。这里贴出一篇很优秀的论文解读[《Attention is All You Need》浅读（简介+代码）](https://kexue.fm/archives/4765)，感兴趣的可以进一步去了解。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/NStVDMOHdw74QI9.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/NStVDMOHdw74QI9.png)
 
 在NLP的任务中,如词性识别，语音识别，文字翻译等，可以将文字通过文字嵌入(word embedding)的方式转化为向量的集合，或者将语音序列通过窗口裁切的方式转化为向量的集合， 然后通过RNN 或者 CNN 的方式完成序列的编码。RNN是一个马尔科夫决策过程，当前输入会依赖上一次的输出，CNN用局部窗口能捕捉到一定范围的结构信息。这两者要获得全局的信息必须得逐步进行(如RNN逐步递归，CNN通过多层卷积扩大感受野)， 而*Attention*是一种一次计算可以得到全局信息的方法。
 
 *Self-attention* 是 *Attention*中被用的最多的一种类型，下面简要介绍下*Self-attention* 。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/SzLPT7RlpWfY821.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/SzLPT7RlpWfY821.png)
 
 *Attention* 为每一个输入的向量与其他向量计算相关度，最后输出的向量是每个向量根据相关度的加权总和。
 
@@ -44,19 +43,19 @@ Transformer是谷歌在2017年提出的一种基于注意力机制的神经网�
 
 举个例子，上图的更具体的表示形式如下：
 
-<ZoomImage src="https://i.loli.net/2021/05/08/CiTAwkLt5eoW9n2.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/CiTAwkLt5eoW9n2.png)
 
-<ZoomImage src="https://i.loli.net/2021/05/08/pqKeDRs3k6T2gS9.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/pqKeDRs3k6T2gS9.png)
 
 对于输入的每一个向量都可以表示成上述的计算过程，很明显上述的过程对于多个输入向量是可以并行计算，这意味着可以表示成矩阵的形式。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/Vs2KqdnNP6hmMGD.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/Vs2KqdnNP6hmMGD.png)
 
-<ZoomImage src="https://i.loli.net/2021/05/08/2knOibyhBFXTjrY.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/2knOibyhBFXTjrY.png)
 
 用矩阵的形式表示 $Q, K, V$ 的计算过程如下：
 
-<ZoomImage src="https://i.loli.net/2021/05/08/IJLB8aUldNSbpPk.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/IJLB8aUldNSbpPk.png)
 
 在上图中，
 
@@ -87,13 +86,13 @@ Attention可以分为Self-attention 和 Cross-attention, 在Self-attention中，
 
 *Multi-head Self-attention* 就是把 $Q,K,V$ 通过参数矩阵映射一下，然后再做 *Attention* ，把这个过程重复做n次，结果拼接起来,再经过一层线性变换做维度变换， 用于表示不同类型的相关性。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/vbPTdOQieaXjHJI.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/vbPTdOQieaXjHJI.png)
 
 上面是对 *Attention* 结构的简单介绍，严谨的符号定义还是得看原论文。
 
 ### Attention与CNN， GNN的联系
 
-<ZoomImage src="https://i.loli.net/2021/05/08/MUJQNd3coBwuP6F.png" alt="Attention" />
+![Attention](https://i.loli.net/2021/05/08/MUJQNd3coBwuP6F.png)
 
 *Attention* 用过计算相关性来加权融合不同的向量得到新的向量， 可以看作是更加灵活的*CNN*。*CNN*可以当做是*Attention*的子集，在论文[On the Relationship between Self-Attention and Convolutional Layers](https://arxiv.org/abs/1911.03584)有具体的论证。
 
@@ -105,7 +104,7 @@ Attention可以分为Self-attention 和 Cross-attention, 在Self-attention中，
 
 我们来看*Transformer*的编码层是怎么实现的：
 
-<ZoomImage src="https://i.loli.net/2021/05/08/IMwOqH5ZYeAyT8v.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/IMwOqH5ZYeAyT8v.png)
 
 有几个需要注意的细节：
 
@@ -140,7 +139,7 @@ $$
 
 指的是上文说过的做 *Muiti-Head Self-Attention* 的过程
 
-<ZoomImage src="https://i.loli.net/2021/05/08/jdAawKM6EsUp813.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/jdAawKM6EsUp813.png)
 
 1. *Add add Norm*
 
@@ -156,7 +155,7 @@ $$
 
 解码层，首先输入一个标志位，结合编码器的编码信息输出第一个解码信息，联合标志位和第一个解码信息作为输入，结合结合编码器的编码信息输出第二个解码信息...以此类推。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/7Vci9RWHUx1gvSl.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/7Vci9RWHUx1gvSl.png)
 
 值得注意的几点：
 
@@ -164,7 +163,7 @@ $$
 
 带有*Mask*的 *Multi-Head Self-Attention*, 因为在解码阶段的输入不可能预先知道解码后的输出是什么，所以需要设置一个 *Mask* (下三角矩阵)， 把为输出的解码位信息遮盖。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/vj2VZ3qmI4OhtX1.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/vj2VZ3qmI4OhtX1.png)
 
 1. 第二个 *Multi-Head Attention*
 
@@ -173,11 +172,11 @@ $$
 1. 解码过程什么时候停止
 可以在训练的时候，训练标签中当解码器的输入属于最后一个输入，则输出一个结束符，让网络在数据中自行学习什么时候停止。这属于*AT Decoder*,(AT 指的是auto termination), 也有一些 *NAT Decoder* 的方法，一次性并行输入$N$个标志位， 一次性输出解码信息。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/XI5p7nKWNyhQw2J.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/XI5p7nKWNyhQw2J.png)
 
 ### 更多Transformer的扩展
 
-<ZoomImage src="https://i.loli.net/2021/05/08/NL2ntbiBaJWsDRI.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/NL2ntbiBaJWsDRI.png)
 
 ## Transformer的代码实现
 
@@ -231,7 +230,7 @@ class ScaledDotProductAttention(nn.Module):
 
 ```
 
-<ZoomImage src="https://i.loli.net/2021/05/08/IMwOqH5ZYeAyT8v.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/IMwOqH5ZYeAyT8v.png)
 
 下面的代码实现 *Multi-head Self-attention* + *Add and Norm*的过程。
 
@@ -380,7 +379,7 @@ class Encoder(nn.Module):
 
 ### Decoder层
 
-<ZoomImage src="https://i.loli.net/2021/05/08/7Vci9RWHUx1gvSl.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/7Vci9RWHUx1gvSl.png)
 
 ```
 class DecoderLayer(nn.Module):
@@ -456,7 +455,7 @@ return F.softmax(self.model.trg_word_prj(dec_output), dim=-1)
 
 ### LOFTR
 
-<ZoomImage src="https://i.loli.net/2021/05/08/mDOTZdjCeVKcXi1.png" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/mDOTZdjCeVKcXi1.png)
 
 LOFTR的处理流程如下：
 
@@ -614,11 +613,11 @@ class LocalFeatureTransformer(nn.Module):
 
 *ViT 和 DETR*在[3W字长文带你轻松入门视觉transformer](https://zhuanlan.zhihu.com/p/308301901)中有详细介绍和代码注释。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/MeKS3QoiJqT1BvA.jpg" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/MeKS3QoiJqT1BvA.jpg)
 
 *ViT*将图像切块构建嵌入向量，并只用*Transformer*中的编码器模块实现图像分类， 在 *ViT*中，作者在嵌入向量集合的最开始添加了一个属于可学习参数的嵌入向量， 并将该输入对应的输出向量用于图像分类(如果不加入这个向量，用剩下其他的输出向量中的哪个都说不过去，不过我觉得可以将输出经过一个线性变换后，再用于分类)。
 
-<ZoomImage src="https://i.loli.net/2021/05/08/xOsDV59EY6GjQqb.jpg" alt="Transformer" />
+![Transformer](https://i.loli.net/2021/05/08/xOsDV59EY6GjQqb.jpg)
 
 而 *DETR* 是将 *Transformer* 用于目标检测。它的每一层编码器和解码器都添加位置编码信息，而且解码器的输入是前面说的 *NAT* 方式，一次性输入初始化全0的(100,b,256)的输出嵌入向量，经过多层解码器后，将最后一个解码器输出输入到分类和回归head中，得到100个无序集合，再后处理得到提取前景类别和对应的bbox坐标。
 

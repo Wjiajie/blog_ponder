@@ -7,7 +7,6 @@ keywords: ["RAG", "LLM", "个人博客", "技术实现"]
 description: "本文介绍了如何使用llmware库创建第一个知识库，包括文档解析、分块、索引和基本查询的步骤。"
 draft: false
 ---
-import ZoomImage from '@site/src/components/ZoomImage';
 
 **系列文章**
 * [我的RAG学习路线图](/blog/my-rag-learning-road-map)
@@ -153,7 +152,7 @@ LLMWareConfig 是 llmware 库中的核心配置类，它负责管理整个框�
 
 ## 创建知识库（Library）
 Library 类是 llmware 的核心组织结构，它提供了一个统一的接口来管理非结构化信息的集合。
-<ZoomImage src="https://cdn.sa.net/2025/03/16/9afgx5tyknNjV47.png" alt="screenshot-20250316-131507.png" />
+![screenshot-20250316-131507.png](https://cdn.sa.net/2025/03/16/9afgx5tyknNjV47.png)
 ### 核心特点：
 - 组织结构：Library 作为一个索引集合，包含从解析文件中提取的文本、表格和图像。
 - 元数据管理：每个 Library 都有一个 library_card，记录了文档数量、块数量、图像数量等元数据。

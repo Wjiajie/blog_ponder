@@ -7,7 +7,6 @@ date: 2026-04-26
 description: 基于 VILA-Lab 论文，梳理 Claude Code 项目的来龙去脉、整体架构（7 组件 5 层次）、5 个价值观与 13 条设计原则，以及围绕 Claude Code 架构的各类学习资源导航。
 draft: false
 ---
-import ZoomImage from '@site/src/components/ZoomImage';
 
 # 深入理解 Claude Code 设计原则（一）：项目全局认知与资源导航
 
@@ -54,7 +53,7 @@ Agent 循环本身就是一个 while 循环。就这么简单。模型被调用�
 
 Claude Code 的整体结构可以拆成 7 个组件：
 
-<ZoomImage src="/img/dive-into-claude-code/main_structure.png" alt="Claude Code 高层系统结构" />
+![Claude Code 高层系统结构](/img/dive-into-claude-code/main_structure.png)
 
 1. **用户** - 发 prompt，批准权限，看结果
 2. **入口层** - 交互式 CLI、无头 CLI（`claude -p`）、Agent SDK、IDE 插件，四种入口共用同一个执行引擎
@@ -68,7 +67,7 @@ Claude Code 的整体结构可以拆成 7 个组件：
 
 把这 7 个组件按职责分层，形成 5 层架构：
 
-<ZoomImage src="/img/dive-into-claude-code/layered_architecture.png" alt="5 层子系统分解" />
+![5 层子系统分解](/img/dive-into-claude-code/layered_architecture.png)
 
 | 层级 | 职责 | 主要组件 |
 |:----|:-----|:--------|

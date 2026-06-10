@@ -7,7 +7,6 @@ date: 2026-04-26
 description: 拆开 Claude Code 引擎盖，深入分析 Agent 循环、5 层上下文压缩管道、7 层权限系统、4 种可扩展性机制、子 agent 委托架构以及会话持久化设计。
 draft: false
 ---
-import ZoomImage from '@site/src/components/ZoomImage';
 
 # 深入理解 Claude Code 设计原则（二）：核心机制深潜
 
@@ -28,7 +27,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 Claude Code 的 Agent 循环是一个 ReAct 模式的 while 循环。实现上是 `query.ts` 里的一个 `AsyncGenerator`，每个 yield 产出一个流式事件。
 
-<ZoomImage src="/img/dive-into-claude-code/iteration.png" alt="运行时轮次流程" />
+![运行时轮次流程](/img/dive-into-claude-code/iteration.png)
 
 每一轮（turn）的执行走一个 9 步管道：
 
@@ -76,7 +75,7 @@ Claude Code 的 Agent 循环是一个 ReAct 模式的 while 循环。实现上�
 
 ### 上下文的 9 个来源
 
-<ZoomImage src="/img/dive-into-claude-code/context.png" alt="上下文构建" />
+![上下文构建](/img/dive-into-claude-code/context.png)
 
 模型看到的上下文由 9 个来源按顺序拼装：
 
@@ -115,7 +114,7 @@ Claude Code 的记忆系统不用向量数据库，不用 embedding。它的做�
 
 ## 权限系统
 
-<ZoomImage src="/img/dive-into-claude-code/permission.png" alt="权限门控" />
+![权限门控](/img/dive-into-claude-code/permission.png)
 
 ### 7 种权限模式
 
@@ -177,7 +176,7 @@ auto 模式的实现在 `yoloClassifier.ts`（对，文件名就叫这个）。�
 
 ## 可扩展性
 
-<ZoomImage src="/img/dive-into-claude-code/extensibility.png" alt="三个注入点" />
+![三个注入点](/img/dive-into-claude-code/extensibility.png)
 
 Claude Code 的扩展机制有 4 种，按上下文成本从低到高排列。
 
@@ -214,7 +213,7 @@ Agent 循环有 3 个地方可以被外部代码干预：
 
 ## 子 agent 委托
 
-<ZoomImage src="/img/dive-into-claude-code/subagent.png" alt="子 agent 架构" />
+![子 agent 架构](/img/dive-into-claude-code/subagent.png)
 
 ### SkillTool 和 AgentTool
 
@@ -252,7 +251,7 @@ Claude Code 内置了 6 种子 agent：Explore（探索代码库）、Plan（制
 
 ## 会话持久化
 
-<ZoomImage src="/img/dive-into-claude-code/session_compact.png" alt="会话持久化与上下文压缩" />
+![会话持久化与上下文压缩](/img/dive-into-claude-code/session_compact.png)
 
 ### 3 个持久化通道
 

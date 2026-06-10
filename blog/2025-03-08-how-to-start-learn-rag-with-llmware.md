@@ -7,10 +7,9 @@ keywords: ["rag", "llmware"]
 description: "本指南将帮助您系统地学习如何使用llmware构建RAG应用，从基础概念到高级技术，涵盖环境设置、知识库创建、嵌入向量构建等内容。"
 draft: false
 ---
-import ZoomImage from '@site/src/components/ZoomImage';
 
 
-<ZoomImage src="https://cdn.sa.net/2025/03/08/7ILDUeZ1c5npu2C.png" alt="screenshot-20250308-180515.png" />
+![screenshot-20250308-180515.png](https://cdn.sa.net/2025/03/08/7ILDUeZ1c5npu2C.png)
 
 本指南将帮助您使用llmware仓库系统地学习检索增强生成（Retrieval-Augmented Generation，RAG）技术。llmware是一个强大的框架，提供了构建RAG应用所需的所有组件，从文档解析、嵌入生成到检索和生成。
 

@@ -8,7 +8,6 @@ description: "SOLID是五条原则的英文首字母拼接，这五条原则指�
 draft: false
 ---
 
-import ZoomImage from '@site/src/components/ZoomImage';
 
 
 SOLID是五条原则的英文首字母拼接，这五条原则指的是：
@@ -50,7 +49,7 @@ SRP的一个描述是：类发生更改的原因应该只有一个， 更简单�
 《架构整洁之道》中举了一个例子描述违反SRP原则的例子：
 
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/FBgi7SDLaCOKh4c.png" alt="违反SRP原则的例子" />
+![违反SRP原则的例子](https://s2.loli.net/2025/01/24/FBgi7SDLaCOKh4c.png)
 
 - calculatePay（）函数是由财务部门制定的，他们负责向CFO汇报。
 - reportHours（）函数是由人力资源部门制定并使用的，他们负责向COO汇报。
@@ -65,7 +64,7 @@ SRP的一个描述是：类发生更改的原因应该只有一个， 更简单�
 > `Facade`（外观）模式：一个复杂的子系统，它由许多类和接口组成。这些类和接口之间的交互可能相当复杂，对于使用该子系统的客户端来说，直接与这些细节进行交互可能会很困难。Facade设计模式通过提供一个简单的接口，封装了底层复杂的子系统，使客户端与子系统的交互变得更加简单。它相当于一个外观，隐藏了子系统的复杂性，使客户端只需要与Facade接口进行交互，而不需要了解底层子系统的细节。
 > 
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/ur4IEYqUsDXKyMn.png" alt="Facade设计模式" />
+![Facade设计模式](https://s2.loli.net/2025/01/24/ur4IEYqUsDXKyMn.png)
 
 ## OCP：开闭原则
 
@@ -78,7 +77,7 @@ OCP是研究软件架构的根本目的，一个设计良好的计算机系统�
 
 OCR在软件架构层次上应用的一个例子是组件结构，软件架构师可以根据相关函数被修改的原因、修改的方式及修改的时间来对其进行分组隔离，并将这些互相隔离的函数分组整理成组件结构，使得高阶组件不会因低阶组件被修改而受到影响。如果A组件不想被B组件上发生的修改所影响，那么就应该让B组件依赖于A组件。下面是一个例子：
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/QHqAszvrfVSUEBd.png" alt="OCP设计模式" />
+![OCP设计模式](https://s2.loli.net/2025/01/24/QHqAszvrfVSUEBd.png)
 
 图中的Interactor组件包含了其最高层次的应用策略。其他组件都只是负责处理周边的辅助逻辑，只有Interactor才是核心组件。是整个系统中最符合OCP的。发生在Database、Controller、Presenter甚至View上的修改都不会影响到Interactor。
 
@@ -90,13 +89,13 @@ OCR在软件架构层次上应用的一个例子是组件结构，软件架构�
 > 
 
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/V2JW51mwxIk3PZs.png" alt="LSP设计模式" />
+![LSP设计模式](https://s2.loli.net/2025/01/24/V2JW51mwxIk3PZs.png)
 
 一个例子是：假设一个License类，该类中有一个名为calcFee（）的方法，该方法将由Billing应用程序来调用。而License类有两个“子类型”: PersonalLicense与BusinessLicense，这两个类会用不同的算法来计算授权费用。上述设计是符合LSP原则的，因为Billing应用程序的行为并不依赖于其使用的任何一个衍生类。License类对象可以用来替换两个衍生类的对象，而保持行为不变。
 
 《架构整洁之道》中提到一个经典的违反LSP原则的例子：
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/AEgWFKC8jdUvBQk.png" alt="违反LSP原则的例子" />
+![违反LSP原则的例子](https://s2.loli.net/2025/01/24/AEgWFKC8jdUvBQk.png)
 
 上图中当用户调用Rectangle的设置宽、高函数，并不能正确为Square设置边长，因为正方形要求边长相等，用户调用setH()和setW()设置不相等时，最后会返回的不正确正方形面积。因为Rectangle的实例替换Square的实例并不带来相同的表现，所以Rectangle并不是Square的子类型。
 
@@ -105,10 +104,10 @@ OCR在软件架构层次上应用的一个例子是组件结构，软件架构�
 在一般情况下，任何层次的软件设计如果依赖于不需要的东西，都会是有害的。从源代码层次来说，这样的依赖关系会导致不必要的重新编译和重新部署，对更高层次的软件架构设计来说，问题也是类似的。这个问题可以通过将不同的操作隔离成接口来解决，如下图左一改为下图左二。
 
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/JO2G6cqibFuB3zr.png" alt="ISP设计模式" />
+![ISP设计模式](https://s2.loli.net/2025/01/24/JO2G6cqibFuB3zr.png)
 
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/PG7yw4AKzc58Bdb.png" alt="ISP设计模式" />
+![ISP设计模式](https://s2.loli.net/2025/01/24/PG7yw4AKzc58Bdb.png)
 
 
 
@@ -130,10 +129,10 @@ OCR在软件架构层次上应用的一个例子是组件结构，软件架构�
 在下图中Application类是通过Service接口来使用ConcreteImpl类的，然而，Application类还是必须要构造ConcreteImpl类实例，这意味着在源代码层次上引入对ConcreteImpl 类具体实现的依赖，如左下图所示。我们可以使用抽象工厂再封装一层稳定的接口来解决该问题，如右下图所示。
 
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/C73h5JaS2HDOTPR.png" alt="DIP设计模式" />
+![DIP设计模式](https://s2.loli.net/2025/01/24/C73h5JaS2HDOTPR.png)
 
 
-<ZoomImage src="https://s2.loli.net/2025/01/24/OSUmEfLvjP2Z5zp.png" alt="DIP设计模式" />
+![DIP设计模式](https://s2.loli.net/2025/01/24/OSUmEfLvjP2Z5zp.png)
 
 在右上图中，考虑接口 `Service Facroty` 和实现类`Service Facroty impl` ，它们之间的边界代表了软件架构中的抽象层与具体实现层的边界。可以发现这里的控制流跨越架构边界的方向与源代码依赖关系跨越该边界的方向正好相反。
 

@@ -7,7 +7,6 @@ keywords: ["mcp", "技术栈"]
 description: "本文介绍了MCP(Model Context Protocol)协议的基本概念、架构设计以及服务器端开发指南。MCP作为一种开放协议，为AI应用提供了标准化的上下文提供方式，本文将帮助读者理解如何利用MCP协议开发服务器并在Cursor等IDE中使用它。"
 draft: false
 ---
-import ZoomImage from '@site/src/components/ZoomImage';
 
 
 ## MCP是什么
@@ -18,7 +17,7 @@ MCP 是一种开放协议，它规范了应用程序如何向大语言模型提�
 ### 总体架构
 
 在其核心部分，MCP 遵循客户端-服务器架构，其中一个主机应用程序可以连接到多个服务器。
-<ZoomImage src="https://cdn.sa.net/2025/04/19/PQSXnsTZHEtApkm.png" alt="MCP架构图" />
+![MCP架构图](https://cdn.sa.net/2025/04/19/PQSXnsTZHEtApkm.png)
 - **MCP 主机**：像 Claude Desktop、IDE(如cursor) 或人工智能工具等希望通过 MCP 访问数据的程序。
 - **MCP 客户端**：与服务器保持 1:1 连接的协议客户端。
 - **MCP 服务器**：轻量级程序，每个程序都通过标准化的模型上下文协议公开特定功能，包括创建公开资源、提示和工具。
@@ -123,12 +122,12 @@ npm build
 }
 ```
 
-<ZoomImage src="https://cdn.sa.net/2025/04/19/W31AysBhVH6ZPvK.png" alt="MCP服务器配置示例" />
+![MCP服务器配置示例](https://cdn.sa.net/2025/04/19/W31AysBhVH6ZPvK.png)
 
 
 添加服务器后，它应出现在 MCP 服务器列表中。你可能需要手动按下 MCP 服务器右上角的刷新按钮，才能填充工具列表。以下是加载（修改后的）天气和示例服务器后的工具列表的样子。
 
-<ZoomImage src="https://cdn.sa.net/2025/04/19/F1pIKqWtjwd4G9b.png" alt="MCP工具列表示例" />
+![MCP工具列表示例](https://cdn.sa.net/2025/04/19/F1pIKqWtjwd4G9b.png)
 
 ### 在 Agent 中使用 MCP 工具
 
@@ -137,7 +136,7 @@ Composer Agent 将 **自动** 使用 MCP 设置页面上 `可用工具` 下列�
 
 默认情况下，当 Agent 想要使用 MCP 工具时，它将显示一条消息，要求你批准：
 
-<ZoomImage src="https://mintlify.s3.us-west-1.amazonaws.com/cursor/images/advanced/mcp-mars-request.png" alt="MCP工具调用批准示例" />
+![MCP工具调用批准示例](https://mintlify.s3.us-west-1.amazonaws.com/cursor/images/advanced/mcp-mars-request.png)
 
 用户可以展开消息以查看工具调用参数。
 #### Yolo 模式
@@ -147,7 +146,7 @@ Composer Agent 将 **自动** 使用 MCP 设置页面上 `可用工具` 下列�
 ### 测试结果
 在对话中，输入`查询下旧金山今天的天气`：
 
-<ZoomImage src="https://cdn.sa.net/2025/04/19/2hWiLEbPDJOKYHU.png" alt="MCP天气查询示例" />
+![MCP天气查询示例](https://cdn.sa.net/2025/04/19/2hWiLEbPDJOKYHU.png)
 
 上面是一个简单的使用流程，你可以在[awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers)和[modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)中寻找感兴趣的mcp-servers，按照上述的流程集成到cursor中，如果想详细了解cursor中的mcp的能力，请访问[cursor](https://cursordocs.com/docs/context/model-context-protocol)。
 
@@ -327,7 +326,7 @@ async function main() {
 服务器使用`StdioServerTransport`作为通信层，这使得它可以通过标准输入输出与调用者（如AI助手）进行通信。这是MCP的常见模式，允许通过进程间通信方式实现服务交互。
 
 ### 6. 测试结果
-<ZoomImage src="https://cdn.sa.net/2025/04/19/2hWiLEbPDJOKYHU.png" alt="MCP天气查询示例" />
+![MCP天气查询示例](https://cdn.sa.net/2025/04/19/2hWiLEbPDJOKYHU.png)
 
 
 ## 参考链接

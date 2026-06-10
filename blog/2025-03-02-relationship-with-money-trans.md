@@ -7,7 +7,6 @@ keywords: ["blog", "金钱观"]
 description: "本文探讨了我们与金钱的复杂关系。作者通过个人经历和对金钱光谱的分析，揭示了金钱如何放大我们的身份认同和价值观。文章指出，我们对金钱的态度会随着人生阶段的变化而改变，从生存需求到追求安全感，再到实现更高层次的目标。"
 draft: false
 ---
-import ZoomImage from '@site/src/components/ZoomImage';
 
 本文探讨了我们与金钱的复杂关系。作者通过个人经历和对金钱光谱的分析，揭示了金钱如何放大我们的身份认同和价值观。文章指出，我们对金钱的态度会随着人生阶段的变化而改变，从生存需求到追求安全感，再到实现更高层次的目标。
 
@@ -21,7 +20,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 我彻夜难眠，寻找任何可能对我所能提供的一点点东西感兴趣的公司的招聘信息。我拍打着"上传简历"按钮，好像它是我的宿敌，但在上传之前一定要小心上传正确的文件格式。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/Us7RqhKwBjfdExy.png" alt="求职中的焦虑" />
+![求职中的焦虑](https://s2.loli.net/2023/12/23/Us7RqhKwBjfdExy.png)
 
 我的日子除了打盹、吃饭、上传和提交什么都没有。说得委婉一点，我处于恐慌状态，想找些工作。
 
@@ -31,7 +30,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 我对无家可归的强烈而可怕的恐惧。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/zyl7dID6LtcafHF.png" alt="无家可归的恐惧" />
+![无家可归的恐惧](https://s2.loli.net/2023/12/23/zyl7dID6LtcafHF.png)
 
 在很长一段时间里，这种恐惧驱使我恐慌地寻找稳定、高薪的工作（不管这有多无意义）。我以为只要我能用每张薪水存些钱，如果出了什么差错，我就不用露宿街头了。
 
@@ -39,13 +38,13 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 不管它的起源是什么，这种恐惧在我20多岁的时候一直存在，它塑造了我对金钱的看法。我没有把金钱视为财富的创造者，而是把它视为一张直接的安全网，它（勉强）让我远离了在高速公路坡道上的生活。我拥有的越多，它就让我离街道越远，越轻松。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/mKO4AFrwnUPI5ZC.png" alt="金钱作为安全网" />
+![金钱作为安全网](https://s2.loli.net/2023/12/23/mKO4AFrwnUPI5ZC.png)
 
 从那以后很多年过去了，幸运的是，我不再有这种恐惧。然而，这并不意味着我不再考虑金钱。这是人类有史以来最伟大的故事，所以它将永远是日常生活舞台上的中心人物。改变的不是金钱本身，而是它给我看待世界的方式带来的影响。
 
 生活几乎总是一个框架问题，财富也不例外。说金钱是复杂的是一种陈词滥调，值得无数次翻白眼，但是当谈到我们与它的持续关系时，我发现解释和提炼起来很简单。在任何给定的时刻，我们的旅程都沿着垂直谱下降，有三个主要阶段：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/PgJK3oDinzSw7es.png" alt="金钱光谱的三个阶段" />
+![金钱光谱的三个阶段](https://s2.loli.net/2023/12/23/PgJK3oDinzSw7es.png)
 
 这就是我所说的金钱光谱，它代表了我们一生中对万能的美元/欧元/任何东西的各种各样的看法。金钱可能是一件很难谈论的事情，因为它唤起了各种奇怪的情感，这种模糊不清的感觉很难通过粗糙的语言工具来表达。
 
@@ -55,7 +54,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 完全有可能有人会100%沉浸在第一阶段，但他们更有可能比第二阶段更接近第一阶段，并将共享这两个领域的特征。这是我们稍后将在这篇文章中做出的一个重要区分，但是现在，请记住，我们与事物的关系很少是绝对的，金钱也不例外。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/OkBjXxpguYybdav.png" alt="金钱光谱示意图" />
+![金钱光谱示意图](https://s2.loli.net/2023/12/23/OkBjXxpguYybdav.png)
 
 让我们从这个问题开始我们的金钱光谱之旅：当你看一下你的银行账户余额时，你有什么感觉？
 
@@ -63,7 +62,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 ## 第一阶段：生存
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/CBSx7fIq8uZT4cm.png" alt="生存阶段示意图" />
+![生存阶段示意图](https://s2.loli.net/2023/12/23/CBSx7fIq8uZT4cm.png)
 
 有人可能会说，在这部分范围内，我们都共享一些空间。最终，所有生活必需品都需要某种支付：我们放进嘴里的食物，我们走来走去的衣服，我们头上的屋顶，等等。没有钱，我们就不会有这些东西，所以公平地说，这是我们所有人生存的必要条件，对吗？
 
@@ -75,7 +74,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 为了消除这种主观性的迷雾，让我们放大光谱的生存部分并将其分解。当我在这篇文章中使用"生存"这个词时，我只是指一个人生存和拥有健康的能力。在下面的插图中，我将这一部分分成了较小的组成部分，贫困水平越低。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/fVgWHyuBrCTMsqL.png" alt="生存阶段的细分" />
+![生存阶段的细分](https://s2.loli.net/2023/12/23/fVgWHyuBrCTMsqL.png)
 
 在最底层，你没有钱或食物，你真的饿死了。这更有可能是国家/公民基础设施的作用，而不是个人缺钱，因为这在任何第一世界国家都很罕见。然而，这在很大程度上仍然是因为没有财政资源，这是一个人能发现的最糟糕的结果。
 
@@ -85,7 +84,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 接下来的几个步骤与一个人在拥有基本必需品（食物/水、住所和衣服）后的生存理念有关。生存不再是获得这些必需品的不懈努力，而是维护这些必需品的坚定承诺。当然，维持资源引擎运转的燃料是金钱。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/iSvG1IXqU6jgr7H.png" alt="生存阶段的工作" />
+![生存阶段的工作](https://s2.loli.net/2023/12/23/iSvG1IXqU6jgr7H.png)
 
 为了维持自己和家人的健康，需要稳定的收入来源，这通常以有偿就业的形式出现。请记住，在生存阶段的高端，你不再为生存而战；你在为保存而战。你希望资金流动是可预测的，每隔几周你就可以依靠它来维持你需要的基本资源水平。
 
@@ -95,7 +94,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 你的工作在什么时候给你足够的钱来感到安全感？是当你不再paycheck-to-paycheck生活，每个月都能存些钱的时候吗？如果是这样的话，你的储蓄看起来怎么样才能让你感到宽慰？2000美元？10,000美元？30,000美元？
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/ezB7VOg1FyDqSKC.png" alt="生存阶段的储蓄" />
+![生存阶段的储蓄](https://s2.loli.net/2023/12/23/ezB7VOg1FyDqSKC.png)
 
 在这个阶段的上端，生存更多的是关于你的心态，而不是你的现实。你已经过了冒险睡在街上的地方，但是你可能会继续相信它随时可能发生。这会让你陷入有限的思维方式，瘫痪你的成长潜力。
 
@@ -103,7 +102,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 风险通常伴随着恐惧的情绪，如果你在生存模式下操作，你会害怕做任何不确定的事情，不管风险实际上有多小：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/dDMEOAsPhuJS76n.png" alt="生存阶段的风险" />
+![生存阶段的风险](https://s2.loli.net/2023/12/23/dDMEOAsPhuJS76n.png)
 
 有了这种程度的持续恐惧，你不会做任何超出舒适区的事情。你永远不会因为害怕被解雇而要求升职，你永远不会因为害怕失去股票市场而投资，你永远不会因为害怕身无分文而追求有目的的东西。
 
@@ -115,7 +114,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 当现实被恐惧的迷雾笼罩时，生存模式就会开启。它把一个完全可以控制的情况变成了一个夸大其词的情况，每一个关于金钱的小决定都会引起巨大的焦虑。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/bhdxe1Lk5KBEPyA.png" alt="消除恐惧迷雾" />
+![消除恐惧迷雾](https://s2.loli.net/2023/12/23/bhdxe1Lk5KBEPyA.png)
 
 消除这团迷雾需要理性，同时要明白一切都会好起来的。只要你继续致力于你的财务状况，事情就会以一种有趣的方式自行解决。如果你失业了，你会找到另一份工作。如果你没有达到储蓄目标，你最终会实现的。如果你本月超支了预算，你会在下一个月弥补。
 
@@ -129,13 +128,13 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 这是金钱作为自由工具的第一次体验。当金钱被用来维持一种生活方式而不是生活本身时，你已经走出了生存，进入了这个新的领域。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/TQSnP7AsKuZk4YJ.png" alt="金钱作为自由工具" />
+![金钱作为自由工具](https://s2.loli.net/2023/12/23/TQSnP7AsKuZk4YJ.png)
 
 最常见的自由形式之一是休闲。一旦你的基本需求得到满足，休闲就成了你向自己和他人表达品味和偏好的方式。购买难忘的经历和美味的食物不仅是愉快的，它也标志着对你来说很重要的事情
 
 当你和家人坐在遥远国度的沙滩椅上，俯瞰海浪的起伏，它能唤起美好生活的感觉。它能让你觉得你已经到达了自由的顶峰，你在生活中必须做的一切都值得这一刻。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/piEkU5jdgmF9qNX.png" alt="休闲自由" />
+![休闲自由](https://s2.loli.net/2023/12/23/piEkU5jdgmF9qNX.png)
 
 但这也是问题所在。
 
@@ -149,11 +148,11 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 这就是为什么当您在Google图片中搜索"退休"时，这些是最热门的结果：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/Vo8Gd9OSM1WFhvc.png" alt="退休搜索结果1" />
+![退休搜索结果1](https://s2.loli.net/2023/12/23/Vo8Gd9OSM1WFhvc.png)
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/zo9cuMJlRbyWYIE.png" alt="退休搜索结果2" />
+![退休搜索结果2](https://s2.loli.net/2023/12/23/zo9cuMJlRbyWYIE.png)
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/T5iWnQlkBYbugeR.png" alt="退休搜索结果3" />
+![退休搜索结果3](https://s2.loli.net/2023/12/23/T5iWnQlkBYbugeR.png)
 
 对大多数人来说，退休意味着他们终于可以自由地做任何他们想做的事，而不用担心钱。他们终于可以离开工作，环游世界，并设定他们的时间表，以适应他们的生活节奏。
 
@@ -165,15 +164,15 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 下一点是金钱可以买到的自由，因为它与你的工作有关。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/zHoUpq7OdNvG9tf.png" alt="工作自由" />
+![工作自由](https://s2.loli.net/2023/12/23/zHoUpq7OdNvG9tf.png)
 
 在自由休闲（或传统退休）模式中，工作原因的排名如下：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/lAGoM4b2EYzWdIL.png" alt="自由休闲模式优先级" />
+![自由休闲模式优先级](https://s2.loli.net/2023/12/23/lAGoM4b2EYzWdIL.png)
 
 但在工作自由模式中，优先顺序发生了变化：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/ldpG7ZM8uVqFsHB.png" alt="工作自由模式优先级" />
+![工作自由模式优先级](https://s2.loli.net/2023/12/23/ldpG7ZM8uVqFsHB.png)
 
 赚钱仍然很重要，但它的目的不仅仅是积累。它的主要目的是给你自由去做你想建造的东西。
 
@@ -187,11 +186,11 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 这是因为金钱不再是你价值和优先事项的可靠信号。在自由休闲模式中，你从工作中赚到的钱是最重要的。如果钱是你继续工作的唯一理由，那么工资最好足够高，让你的时间物有所值。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/EG3keDx9iZpnO4w.png" alt="自由休闲模式下的金钱" />
+![自由休闲模式下的金钱](https://s2.loli.net/2023/12/23/EG3keDx9iZpnO4w.png)
 
 但是在工作自由模式中，金钱只是你保持你和你的努力运转所需的燃料。如果你把这一点与互联网的零边际成本性质（尤其是对内容创作者来说）结合起来，你不需要太多就能过你的日常生活。只要你的基本必需品被覆盖，你就可以在惊人的长时间内继续做你关心的事情。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/Cl1BcdIQ9HUibZV.png" alt="工作自由模式下的金钱" />
+![工作自由模式下的金钱](https://s2.loli.net/2023/12/23/Cl1BcdIQ9HUibZV.png)
 
 虽然这听起来很自由，但我明白这看起来有些牵强。将金钱与自我价值脱钩是一件相当困难的事情。我们已经习惯于将金钱视为成功的指标，它是世界任何地方都公认的地位信号。财富驱动我们自己和他人的感知。
 
@@ -201,7 +200,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 所以不要让像金钱这样丰富的东西成为你身份的基石。相反，让它放大只有你才能拥有的真实声音。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/DzB5R3HKPwNtWo2.png" alt="金钱作为真实性放大器" />
+![金钱作为真实性放大器](https://s2.loli.net/2023/12/23/DzB5R3HKPwNtWo2.png)
 
 在自由阶段，金钱被视为一种工具，是你所体现的真实性的放大器。它是一种资源，可以让你在处理你认为有价值的问题时照顾好自己。你不需要很多来继续前进，你只需要足够的。
 
@@ -217,11 +216,11 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 将这三个原则与"足够"的心态结合起来，最终你会发现自己处于一个有趣的境地。不久前，似乎没有人关心你在做什么，但现在，一小部分人已经开始喜欢你的工作。他们中的一些人甚至为你的服务、产品或你提供的任何东西付钱。缓慢但肯定地，你能够把你的金钱工具带扩大几个档次。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/c7qE6f95Zg3ojkh.png" alt="实现盈余" />
+![实现盈余](https://s2.loli.net/2023/12/23/c7qE6f95Zg3ojkh.png)
 
 当你从努力中获得的收入开始超过维持事情发展的成本门槛时，你会得到我所说的实现盈余。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/JxuLqNFVyMvSGoE.png" alt="实现盈余的意义" />
+![实现盈余的意义](https://s2.loli.net/2023/12/23/JxuLqNFVyMvSGoE.png)
 
 履行盈余是一个人能拥有的最好的钱。你不仅拥有的比你需要的多，而且你是通过做一些你本可以免费做的事情赢得的。更好的是，反过来也是如此：即使你有世界上所有的钱，你也会努力工作。
 
@@ -229,23 +228,23 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 注意力自由。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/CDGTFKNOmutByli.png" alt="注意力自由" />
+![注意力自由](https://s2.loli.net/2023/12/23/CDGTFKNOmutByli.png)
 
 当我们想到财务自由时，我们倾向于想象一个超级富豪在这种情况下：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/zXnxvNT4ZObHhuE.png" alt="超级富豪" />
+![超级富豪](https://s2.loli.net/2023/12/23/zXnxvNT4ZObHhuE.png)
 
 当我们想到一个没有经济自由的人时，我们会在这种情况下想象一个普通人：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/OXIx4nVw6Fik25y.png" alt="普通人" />
+![普通人](https://s2.loli.net/2023/12/23/OXIx4nVw6Fik25y.png)
 
 然而，如果超级富豪把他所有的精力都花在他有多少钱以及他将如何维持这种生活方式上，那么他就不富有：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/E7Dv15cQLeTRVMq.png" alt="关注金钱的富豪" />
+![关注金钱的富豪](https://s2.loli.net/2023/12/23/E7Dv15cQLeTRVMq.png)
 
 但是，如果普通人不沉思金钱，因为他知道他拥有他需要的一切，那么他就是富有的：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/Yr3wC1NL2Ap6c8G.png" alt="不关注金钱的普通人" />
+![不关注金钱的普通人](https://s2.loli.net/2023/12/23/Yr3wC1NL2Ap6c8G.png)
 
 财务自由不是关于金钱，而是关于注意力。你越少考虑金钱，你实际上就越自由。
 
@@ -259,7 +258,7 @@ import ZoomImage from '@site/src/components/ZoomImage';
 
 当你想到"权力"这个词时，你可能会想到这样一个形象：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/VcesWxGbI5tidh7.png" alt="权力的形象" />
+![权力的形象](https://s2.loli.net/2023/12/23/VcesWxGbI5tidh7.png)
 
 但是让我们花点时间看看我们在牛津的语言领主是如何定义这个词的。
 
@@ -283,7 +282,7 @@ Power: 权力：
 
 我把这个初始区域称为自我控制。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/4IndBo7Zc8rbjqM.png" alt="自我控制" />
+![自我控制](https://s2.loli.net/2023/12/23/4IndBo7Zc8rbjqM.png)
 
 我们不会在这里停留太久，因为它类似于自由阶段的上端，但是在我们继续之前，我想回顾一下一个重要的声明：
 
@@ -297,7 +296,7 @@ Power: 权力：
 
 理解你想如何行使你的个人权力是驾驭下一个也是最后一个领域的关键：超越他人。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/UstmE4PZCf3AYn9.png" alt="凌驾于他人之上" />
+![凌驾于他人之上](https://s2.loli.net/2023/12/23/UstmE4PZCf3AYn9.png)
 
 "凌驾于他人之上"听起来很吓人，但请记住，它只是指一个人影响他人行为的能力。这方面的关键问题是：你是如何用金钱来指导人们的生活进程的？
 
@@ -305,7 +304,7 @@ Power: 权力：
 
 如果影响力是一座塔，从自我开始的直接层次将是家庭的领域。在这个领域，金钱的力量是直接的，因为你所爱的人会以更高质量的生活经历的形式看到它的证据。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/5hMqDX6JA4OZo8b.png" alt="家庭领域" />
+![家庭领域](https://s2.loli.net/2023/12/23/5hMqDX6JA4OZo8b.png)
 
 然而，这并不意味着金钱的力量总是会产生更好的家庭生活。事实上，反过来也可能是真的：你越提升金钱的重要性，你就可能（无意中）越孤立自己。
 
@@ -313,7 +312,7 @@ Power: 权力：
 
 影响的每一层都是权力权衡，绿色区域代表拥有金钱权力的好处，红色代表其更有害的方面。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/a4iYU3HIrA8htyq.png" alt="家庭层的权力权衡" />
+![家庭层的权力权衡](https://s2.loli.net/2023/12/23/a4iYU3HIrA8htyq.png)
 
 上图显示了家庭层的权力权衡，绿色和红色区域都存在。绿色部分应该不足为奇——人们工作这么多的主要原因是为了养家糊口。他们赚的钱越多，他们就越有能力提升亲人的福祉。
 
@@ -323,25 +322,25 @@ Power: 权力：
 
 然而，在这种权力权衡中，绿色仍然大于红色，因为我们最终能够理解牺牲的本质。只要我们知道父母爱我们，我们就能同情他们的困境，理解他们为给每个人提供更好的生活所做的努力。这可能需要时间，但如果理性占上风，从长远来看，这些类型的家庭困难是可以治愈的。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/rTnyRS4pIjKbeif.png" alt="家庭层的权力权衡总结" />
+![家庭层的权力权衡总结](https://s2.loli.net/2023/12/23/rTnyRS4pIjKbeif.png)
 
 许多人会止步于影响力之塔。他们可能满足于养活自己和家人，不会通过额外的权力结构进步。但更有可能的是，如果这两层得到满足，他们会寻求帮助或影响他们所属的紧密团体的健康。
 
 接下来是社区领域。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/7bCq1J6NRpxIv4Q.png" alt="社区领域" />
+![社区领域](https://s2.loli.net/2023/12/23/7bCq1J6NRpxIv4Q.png)
 
 那么权力权衡是什么样的呢？
 
 和你关系密切的社区里的人都很了解你，你们通常会为了一些共同的目的聚在一起。这种粘合剂可能是宗教，可能是服务，也可能是更无价值的东西，比如娱乐。不管是什么，这个目的分布在它的每个成员身上，并在这个公共竞争环境中平衡每个人的角色。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/TG37IUJdRjMqaEf.png" alt="社区目标" />
+![社区目标](https://s2.loli.net/2023/12/23/TG37IUJdRjMqaEf.png)
 
 然而，通过金钱影响社区会使情况复杂化。
 
 如果你决定做一笔超大的捐赠，并且每个人都听说了，这很可能会发生：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/rux7wt3KsBYAkcS.png" alt="金钱对社区的影响" />
+![金钱对社区的影响](https://s2.loli.net/2023/12/23/rux7wt3KsBYAkcS.png)
 
 金钱的棘手之处在于，它经常被用作衡量一个人对社区价值的标尺。如果你给你关心的事业捐了很多钱，这可能是人们衡量这个事业对你有多重要的方式，因为群体越大，细微差别往往会被消除。
 
@@ -357,7 +356,7 @@ Power: 权力：
 
 这里的平衡更好。用心使用你的钱，社区会和你一起繁荣。鲁莽地使用它，你会被你试图帮助的社区诋毁。金钱会滋生各种奇怪的群体行为，所以在导航这个领域时，你的判断必须敏锐。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/4rLaf8AzFiMVmNb.png" alt="社区层面的权力权衡" />
+![社区层面的权力权衡](https://s2.loli.net/2023/12/23/4rLaf8AzFiMVmNb.png)
 
 对我们绝大多数人来说，这就是我们对影响力的渴望（因为它与金钱有关）将停止的地方。有能力帮助我们认识的人会产生一种成就感，这足以让我们满足于余生。
 
@@ -365,23 +364,23 @@ Power: 权力：
 
 为了简化这一系列的可能性，让我们把它们都扔到最后一层，叫做"你不认识的人"
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/V8vQpLO6kbrTaj5.png" alt="你不认识的人层面" />
+![你不认识的人层面](https://s2.loli.net/2023/12/23/V8vQpLO6kbrTaj5.png)
 
 在影响力之塔的所有层次中，这一层是迄今为止风险最大的。这就是"权力+金钱"名声不佳的地方，人们倾向于对在这里运作的人持怀疑态度。
 
 为了说明原因，请从社区级别回忆一下这个场景：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/nvPpYo7OH6ucyWG.png" alt="社区级别的关注" />
+![社区级别的关注](https://s2.loli.net/2023/12/23/nvPpYo7OH6ucyWG.png)
 
 意识到当你在"你不认识的人"层面运作时，你会遇到这种令人生畏的情况：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/2PqWj1nBgJaSowm.png" alt="陌生人层面的关注" />
+![陌生人层面的关注](https://s2.loli.net/2023/12/23/2PqWj1nBgJaSowm.png)
 
 对你的财务决策如此关注，很容易被视为你金钱的漫画。不认识你的人对你和邻居的关系漠不关心，你姐姐可能生病的事实，或者你日常冥想练习的细节。你主要是由你的财富来定义的，你如何处理你的财富塑造了对你性格的看法。
 
 你可能认为我在这里过于笼统，但是当你把财富和某人的属性列表混合在一起时，其他一切似乎都消失了。想看看证据吗？把任何著名商人或企业家的名字放在谷歌上，猜猜什么总是会作为热门搜索建议弹出：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/7EH6yf5jwrLcgh8.png" alt="搜索建议" />
+![搜索建议](https://s2.loli.net/2023/12/23/7EH6yf5jwrLcgh8.png)
 
 这是人们最关心的。
 
@@ -391,7 +390,7 @@ Power: 权力：
 
 但是当然，有钱有势并不意味着你是邪恶的。事实远非如此。我想起了这个伟大的插图，它描绘了现实情况：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/KwuEpny7Q3aPTjs.png" alt="富人与穷人的现实" />
+![富人与穷人的现实](https://s2.loli.net/2023/12/23/KwuEpny7Q3aPTjs.png)
 
 这张图片来自史蒂夫·科诺弗的书《中性国债》。
 
@@ -401,25 +400,25 @@ Power: 权力：
 
 金钱是一种工具，但是如果这个工具定义了你如何影响成千上万人的生活，那么继续拥有它对你来说将是最重要的。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/NbX7J4gwiGsBcSH.png" alt="金钱的依恋" />
+![金钱的依恋](https://s2.loli.net/2023/12/23/NbX7J4gwiGsBcSH.png)
 
 说到依恋，这三个词总结得很好：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/d3jYnrUsyBmWAKS.png" alt="依恋总结" />
+![依恋总结](https://s2.loli.net/2023/12/23/d3jYnrUsyBmWAKS.png)
 
 具有讽刺意味的是，金钱光谱的终结会像生存入口一样滋生恐惧。拥有巨大的权力会让一个人害怕失去他们的钱，就像一个需要钱来生存另一天的人一样。
 
 这种依恋的倾向使得最后一关的权力权衡成为不利的赌注：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/mK8xwnqaUp934DG.png" alt="最后一关的权力权衡" />
+![最后一关的权力权衡](https://s2.loli.net/2023/12/23/mK8xwnqaUp934DG.png)
 
 现在我们已经对每一层都进行了着色，让我们后退一步，看看整个影响力塔。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/oPSbgCKtvk85ip3.png" alt="影响力塔全景" />
+![影响力塔全景](https://s2.loli.net/2023/12/23/oPSbgCKtvk85ip3.png)
 
 目前，它看起来像是单个红色和绿色光谱的拼贴画，但是如果我们把它们混合在一起，为整个事情创建一个平均的功率权衡，它会看起来像这样：
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/NOZY5fBpSJ1bk36.png" alt="权力阶段总结" />
+![权力阶段总结](https://s2.loli.net/2023/12/23/NOZY5fBpSJ1bk36.png)
 
 这是对金钱光谱中权力阶段的一个很好的总结。金钱在自我和家庭领域对你很有用，但是当它给你对许多人的权力时，它会产生依恋。当你的身份被金钱的影响所定义时，你就涉入了危险的水域，你必须运用出色的判断力来正确地驾驭它。
 
@@ -429,13 +428,13 @@ Power: 权力：
 
 我们已经对所有三个阶段进行了全面审查，因此现在是时候缩小并从整体上查看货币谱了。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/BVuIzQxSoAywGt9.png" alt="金钱光谱全景" />
+![金钱光谱全景](https://s2.loli.net/2023/12/23/BVuIzQxSoAywGt9.png)
 
 看到这些，我问自己的第一个问题是，"是什么决定了一个人在光谱中的位置？"
 
 这里最初的假设可能是你有多少钱。毕竟，如果你没有钱，你可能是在为生存而挣扎，但是如果你有很多，你可以用它行使巨大的自由和权力。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/D2QHmWMzqChaNb6.png" alt="金钱数量与光谱位置" />
+![金钱数量与光谱位置](https://s2.loli.net/2023/12/23/D2QHmWMzqChaNb6.png)
 
 但事实并非如此。
 
@@ -447,7 +446,7 @@ Power: 权力：
 
 你所拥有的金钱数量并不是看待你在金钱光谱上的位置的合适镜头。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/wcDvXqrVhoOFeJC.png" alt="金钱数量不决定光谱位置" />
+![金钱数量不决定光谱位置](https://s2.loli.net/2023/12/23/wcDvXqrVhoOFeJC.png)
 
 所以如果金钱本身不能决定你在金钱光谱中的位置，那到底是什么？
 
@@ -455,23 +454,23 @@ Power: 权力：
 
 你自己选择你的立场。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/7x1HnOtkLCpB65b.png" alt="自己选择立场" />
+![自己选择立场](https://s2.loli.net/2023/12/23/7x1HnOtkLCpB65b.png)
 
 要理解我的意思，我们首先需要通过正确的框架来看待事物。而不是通过你有多少钱的镜头来看待光谱，你必须通过两件事的情感范围来看待它：清晰和恐惧。
 
 你在生存模式下越低，你就越害怕金钱及其对你生活的影响。然而，随着你进入生存阶段并接近自由，围绕金钱的恐惧逐渐消退，事情进入清晰的领域。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/jRbB3e8qCQkAvf5.png" alt="清晰与恐惧的情感范围" />
+![清晰与恐惧的情感范围](https://s2.loli.net/2023/12/23/jRbB3e8qCQkAvf5.png)
 
 当你处于自由阶段时，事情会变得更加清晰，但是休闲自由仍然是一个有点模糊的地方。你走得越高，你开始对自己的生活有更多的控制，当你处于工作自由和这一阶段的freedom-in-attention领域时，最大的好处就会到来。
 
 这就是我所说的甜蜜点，这是你的财富走得最远的地方，不管你有多少。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/NOk4zf3dxgKPbn8.png" alt="金钱光谱的甜蜜点" />
+![金钱光谱的甜蜜点](https://s2.loli.net/2023/12/23/NOk4zf3dxgKPbn8.png)
 
 如果你决定进一步进入权力阶段，那么你必须进入影响力之塔，在那里，权力权衡变得越来越脆弱。通过金钱行使你的影响力可能对你的家人来说更容易管理，但是一旦它进入你不认识的社区和人的层面，就会有更多的风险。依恋会变得强烈，恐惧会再次主导光谱。
 
-<ZoomImage src="https://s2.loli.net/2023/12/23/gKxezOfMl138vn5.png" alt="权力阶段的恐惧" />
+![权力阶段的恐惧](https://s2.loli.net/2023/12/23/gKxezOfMl138vn5.png)
 
 当你把金钱谱与情感的层次一起看待时，它最有意义。它帮助你理解金钱不是你拥有的东西，而是你与之有关系的东西。就像你选择身边的人一样，这是一种由意图和关心形成的纽带。
 
