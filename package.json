@@ -8,7 +8,10 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "diagrams": "node scripts/render-diagrams.cjs",
+    "predev": "node scripts/render-diagrams.cjs",
+    "prebuild": "node scripts/render-diagrams.cjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
