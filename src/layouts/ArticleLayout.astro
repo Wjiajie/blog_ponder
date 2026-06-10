@@ -2,7 +2,6 @@
 import BaseLayout from './BaseLayout.astro';
 import Tag from '../components/Tag.astro';
 import TableOfContents from '../components/TableOfContents.astro';
-import Lightbox from '../components/Lightbox.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from '@astrojs/markdown-remark';
 import { FORMATTING, ROUTES } from '../consts';
@@ -92,9 +91,6 @@ const articleCopy = copy.article;
     headings={headings}
     title={articleCopy.asideTitle}
   />
-
-  {/* Image lightbox — auto-attaches to all <img> in .article-body */}
-  <Lightbox />
 </BaseLayout>
 
 <script is:inline>
@@ -139,17 +135,92 @@ const articleCopy = copy.article;
   })();
 </script>
 
+<script>
+  // Image lightbox — medium-zoom attaches click-to-zoom to every <img>
+  // inside the article body. ESC / click-outside / scroll past threshold
+  // all close the zoom — all built into the library, no custom state
+  // machine to maintain.
+  //
+  // We pull the dark/light background from the design tokens (via
+  // getComputedStyle) so the overlay matches the active theme. A
+  // MutationObserver re-attaches when client-side navigation swaps
+  // in fresh images.
+  import mediumZoom from 'medium-zoom';
+
+  function readBg() {
+    return getComputedStyle(document.body).getPropertyValue('--bg').trim() || '#fff';
+  }
+
+  function init() {
+    let zoom: ReturnType<typeof mediumZoom> | null = null;
+
+    function start() {
+      if (zoom) return; // already attached
+      const root = document.querySelector('.article-body');
+      if (!root) return;
+      const imgs = root.querySelectorAll('img');
+      if (imgs.length === 0) return;
+      zoom = mediumZoom(Array.from(imgs), {
+        background: readBg(),
+        margin: 24,
+        scrollOffset: 40,
+      });
+    }
+
+    start();
+
+    // Re-attach after client-side view transitions (Astro <ClientRouter />)
+    // swap in fresh article images. MutationObserver is the safe
+    // fallback when the view transition event isn't available.
+    document.addEventListener('astro:page-load', () => {
+      if (zoom) {
+        zoom.detach();
+        zoom = null;
+      }
+      start();
+    });
+
+    if (typeof MutationObserver !== 'undefined') {
+      const mo = new MutationObserver(() => {
+        // Only refresh if new images have been added that we haven't
+        // already attached to.
+        if (!zoom) {
+          start();
+          return;
+        }
+        const root = document.querySelector('.article-body');
+        if (!root) return;
+        const attached = new Set(zoom.getImages());
+        const fresh = Array.from(root.querySelectorAll('img')).filter(
+          (img) => !attached.has(img)
+        );
+        if (fresh.length > 0) zoom.attach(fresh);
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>
+
 <style>
   .article-header {
     margin-bottom: var(--space-12);
   }
 
   .article-title {
-    font-size: var(--fs-3xl);
+    /* Pin article H1 to 32px — independent of --fs-3xl which has been
+       retuned smaller for non-article page heroes (see global.css). */
+    font-size: 32px;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.02em;
     margin-bottom: var(--space-3);
+    text-wrap: balance;
   }
 
   .article-meta {
@@ -174,11 +245,17 @@ const articleCopy = copy.article;
   .article-body :global(h2) {
     margin-top: var(--space-16);
     margin-bottom: var(--space-4);
+    /* Pin prose H2 to the original (24px) size even if global --fs-2xl is
+       tuned smaller for list / index pages — keeps Lee Robinson prose feel. */
+    font-size: 24px;
+    letter-spacing: -0.02em;
   }
 
   .article-body :global(h3) {
     margin-top: var(--space-10);
     margin-bottom: var(--space-3);
+    /* Same rationale as h2 above: pin prose H3 to 20px. */
+    font-size: 20px;
   }
 
   .article-body :global(p) {
@@ -324,5 +401,16 @@ const articleCopy = copy.article;
     .article-nav-toggle {
       display: none;
     }
+  }
+
+  /* medium-zoom overlay & zoomed image — pin above the TOC FAB
+     (z-index 30) and the article nav toggle (z-index 30) so the
+     lightbox always wins the stacking context. The library's default
+     is z-index 999, which is already higher; we set it explicitly
+     here so future z-index changes to the page chrome don't
+     accidentally cover the zoom. */
+  :global(.medium-zoom-overlay),
+  :global(.medium-zoom-image--opened) {
+    z-index: 50;
   }
 </style>

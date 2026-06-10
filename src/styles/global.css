@@ -10,15 +10,15 @@
    ==================================================================== */
 
 :root {
-  /* Color system — light */
-  --bg: #ffffff;
-  --bg-muted: #fafafa;
-  --border: #e5e5e5;
-  --text: #1a1a1a;
-  --text-muted: #6b6b6b;
-  --text-subtle: #a0a0a0;
-  --accent: #1a1a1a;
-  --code-bg: #f6f6f6;
+  /* Color system — light (rurikon scale, aligned with shud.in) */
+  --bg: #fcfcfc;
+  --bg-muted: #f7f7f8;
+  --border: #d8dbdf;
+  --text: #3b4149;        /* rurikon-600 — slightly cooler than #1a1a1a */
+  --text-muted: #697381;  /* rurikon-400 */
+  --text-subtle: #b3b9c1; /* rurikon-200 — date / anchor # */
+  --accent: #3b4149;
+  --code-bg: #f4f4f5;
 
   /* Spacing (8px grid) */
   --space-1: 4px;
@@ -39,15 +39,16 @@
   --aside-w: 220px;
   --gap: 96px;
 
-  /* Type scale */
-  --fs-xs: 13px;
-  --fs-sm: 14px;
-  --fs-base: 16px;
-  --fs-lg: 18px;
-  --fs-xl: 20px;
-  --fs-2xl: 24px;
-  --fs-3xl: 32px;
-  --fs-4xl: 40px;
+  /* Type scale — converged: H1 ≈ 1.5× body, H2 ≈ 1.13× body
+     (rurikon-style: list/index pages don't use a giant H1) */
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 15px;
+  --fs-lg: 16px;
+  --fs-xl: 16px;   /* H3: same as body, distinguish by weight */
+  --fs-2xl: 18px;  /* H2 */
+  --fs-3xl: 22px;  /* secondary H1 (mobile, hero sub-page) */
+  --fs-4xl: 26px;  /* page H1 — not a 48px hero anymore */
 
   /* Motion */
   --t-fast: 150ms ease;
@@ -56,14 +57,14 @@
 }
 
 .dark {
-  --bg: #0a0a0a;
-  --bg-muted: #111111;
-  --border: #262626;
-  --text: #ededed;
-  --text-muted: #a0a0a0;
-  --text-subtle: #6b6b6b;
-  --accent: #ededed;
-  --code-bg: #161616;
+  --bg: #0e0f10;
+  --bg-muted: #15171a;
+  --border: #2a2d31;
+  --text: #d4d8de;
+  --text-muted: #a8aeb6;
+  --text-subtle: #5a6068;
+  --accent: #d4d8de;
+  --code-bg: #161618;
 }
 
 /* ====================================================================
@@ -110,15 +111,16 @@
 
   h1, h2, h3, h4, h5, h6 {
     color: var(--text);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.25;
     letter-spacing: -0.01em;
+    text-wrap: balance;
   }
 
-  h1 { font-size: var(--fs-4xl); font-weight: 600; letter-spacing: -0.02em; }
-  h2 { font-size: var(--fs-2xl); font-weight: 600; margin-top: var(--space-12); margin-bottom: var(--space-4); }
-  h3 { font-size: var(--fs-xl); font-weight: 500; margin-top: var(--space-8); margin-bottom: var(--space-3); }
-  h4 { font-size: var(--fs-lg); font-weight: 500; margin-top: var(--space-6); margin-bottom: var(--space-2); }
+  h1 { font-size: var(--fs-4xl); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
+  h2 { font-size: var(--fs-2xl); font-weight: 500; margin-top: var(--space-12); margin-bottom: var(--space-4); letter-spacing: -0.015em; }
+  h3 { font-size: var(--fs-xl); font-weight: 500; margin-top: var(--space-8); margin-bottom: var(--space-3); letter-spacing: 0; }
+  h4 { font-size: var(--fs-lg); font-weight: 500; margin-top: var(--space-6); margin-bottom: var(--space-2); letter-spacing: 0; }
 
   p {
     margin: 0 0 var(--space-6) 0;
@@ -245,47 +247,16 @@
     font-weight: 500;
   }
 
-  /* Article list item — Shu Ding style */
-  .article-row {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
-    padding: var(--space-2) 0;
-    text-decoration: none;
-    color: var(--text);
-  }
-
-  .article-row .title {
-    flex: 0 1 auto;
-    text-decoration: underline;
-    text-decoration-color: var(--border);
-    text-underline-offset: 3px;
-  }
-
-  .article-row .leader {
-    flex: 1 1 auto;
-    border-bottom: 1px dotted var(--border);
-    transform: translateY(-4px);
-    min-width: 1em;
-  }
-
-  .article-row .date {
-    flex: 0 0 auto;
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .article-row:hover .title {
-    text-decoration-color: var(--text);
-  }
+  /* Article list item — moved into src/components/ArticleRow.astro
+     so each page can tune its own list-row style without fighting
+     a global rule. The component now owns the shud.in dot leader. */
 
   /* Section heading */
   .section-title {
     font-size: var(--fs-2xl);
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: var(--space-6);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
 
   .section-subtitle {
@@ -315,7 +286,7 @@
     border-color: var(--text);
   }
 
-  /* Bullet list */
+  /* Bullet list — Delba-style "· 项目名 : 一行描述" */
   .bullet-list {
     list-style: none;
     padding: 0;
@@ -326,14 +297,150 @@
     position: relative;
     padding-left: var(--space-6);
     margin-bottom: var(--space-3);
+    line-height: 1.6;
   }
 
   .bullet-list > li::before {
     content: '·';
     position: absolute;
     left: var(--space-2);
+    top: 0;
     color: var(--text-muted);
-    font-weight: 600;
+    font-weight: 400;
+  }
+
+  .bullet-list > li > strong {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* Solid dark CTA button — Delba "Let's talk" style */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 10px 18px;
+    font-size: var(--fs-base);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--bg);
+    background: var(--text);
+    border: 1px solid var(--text);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity var(--t-base), transform var(--t-base);
+  }
+
+  .btn:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  /* Delba-style hero: a long, slightly muted first sentence with bold link phrases */
+  .delba-hero {
+    margin-bottom: var(--space-12);
+  }
+
+  .delba-hero p {
+    font-size: var(--fs-base);
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 36em;
+  }
+
+  .delba-hero p a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--text);
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    font-weight: 400;
+  }
+
+  .delba-hero p a:hover {
+    text-decoration-thickness: 1px;
+    color: var(--text);
+  }
+
+  .delba-hero .btn {
+    margin-top: var(--space-4);
+  }
+
+  /* About-me card (right column on the home page) — kept minimal,
+     no card border / no horizontal divider, just stacked text + avatar */
+  .about-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .about-card .about-head {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .about-card .about-avatar {
+    width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+    border-radius: 50%;
+    background: var(--bg-muted);
+    /* border removed — keep avatar but no decoration */
+    border: 0;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0;
+  }
+
+  .about-card .about-body {
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .about-card .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .about-card .about-links a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 2px;
+  }
+
+  .about-card .about-links a:hover {
+    text-decoration-color: var(--text);
+  }
+
+  .about-card .about-links .sep {
+    color: var(--text-subtle);
+    margin: 0 0.5em;
+    user-select: none;
+  }
+
+  /* HR used as about-card divider: rendered, but visually flat
+     (no top border on the rule itself — just spacing). This keeps
+     the markup intact while removing the decorative line. */
+  .about-card .about-divider {
+    border: 0;
+    margin: 0;
+    height: 0;
   }
 
   /* Heading anchor (rehype-autolink-headings) */
@@ -383,6 +490,9 @@
   .layout-2col > .col-left {
     display: none;
   }
-  h1 { font-size: var(--fs-2xl); }
-  h2 { font-size: var(--fs-xl); }
+  h1 { font-size: var(--fs-3xl); letter-spacing: -0.02em; }
+  h2 { font-size: var(--fs-lg); }
+  .delba-hero p { font-size: var(--fs-base); }
+  .about-card .about-head { gap: var(--space-3); }
+  .about-card .about-avatar { width: 44px; height: 44px; flex-basis: 44px; }
 }

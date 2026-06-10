@@ -1,104 +1,177 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Now from '../components/Now.astro';
-import { SITE, ROUTES } from '../consts';
+import { SITE, ROUTES, SOCIAL } from '../consts';
 import { getCollection } from 'astro:content';
 import copy from '../data/copy.json';
 
-const phases = (await getCollection('journey')).sort(
-  (a, b) => a.data.order - b.data.order
-);
-const doneCount = phases.filter((p) => p.data.status === 'done').length;
-const totalCount = phases.length;
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
 
 const homeCopy = copy.home;
 
-// Split a template on {name} so we can wrap that slot in <span class="hero-name">.
-// {placeholder}→value substitution is a pure string transform; the JSX wrapping
-// is a structural concern, so it lives in the .astro file.
-const renderGreeting = (template: string) => {
-  const [before = '', after = ''] = template.split('{name}');
-  return { before, after };
-};
-const renderSub = (shortBio: string, vertical: string, company: string) =>
-  homeCopy.heroSubTemplate
-    .replace('{shortBio}', shortBio)
-    .replace('{vertical}', vertical)
-    .replace('{company}', company);
-const renderPreviewBody = (done: number, total: number) =>
-  homeCopy.journeyPreviewBodyTemplate
-    .replace('{doneCount}', String(done))
-    .replace('{totalCount}', String(total));
+const heroSentence = homeCopy.heroGreetingTemplate.replace('{vertical}', SITE.vertical);
+const heroBody = homeCopy.heroBody
+  .replace('{shortBio}', SITE.shortBio)
+  .replace('{company}', SITE.targetCompany);
 
-const greeting = renderGreeting(homeCopy.heroGreetingTemplate);
+// Truncate a description to a soft length so the bullet list stays compact.
+// We cut on a Chinese / English full stop, falling back to a hard cut at maxLen
+// if no terminator is found. ASCII space is preferred over mid-word breaks.
+const truncate = (text: string, maxLen = 80): string => {
+  const cleaned = text.replace(/\s+/g, ' ').trim();
+  if (cleaned.length <= maxLen) return cleaned;
+  const slice = cleaned.slice(0, maxLen);
+  const lastTerminator = Math.max(
+    slice.lastIndexOf('。'),
+    slice.lastIndexOf('. '),
+    slice.lastIndexOf(' '),
+  );
+  return (lastTerminator > maxLen * 0.4 ? slice.slice(0, lastTerminator) : slice) + '…';
+};
 ---
 
 <BaseLayout
   title={undefined}
   description={SITE.description}
-  showRightAside={false}
+  showRightAside={true}
 >
-  <section class="hero">
-    <h1 class="hero-title">
-      {greeting.before}<span class="hero-name">{SITE.author}</span>{greeting.after}
-    </h1>
-    <p class="hero-sub">
-      {renderSub(SITE.shortBio, SITE.vertical, SITE.targetCompany)}
+  <h1 class="page-title">Portfolio</h1>
+
+  <section class="delba-hero">
+    <p>{heroSentence}</p>
+    <p>
+      {homeCopy.heroHiring}
+      <a href={ROUTES.about}>{heroBody}</a>
     </p>
+    <a href="mailto:jiajiewu233@gmail.com" class="btn">{homeCopy.heroCta}</a>
+  </section>
+
+  <section class="delba-section">
+    <h2>{homeCopy.workTitle}</h2>
+    <p class="section-lede">{homeCopy.workLede}</p>
+    <ul class="bullet-list">
+      {projects.map((p) => (
+        <li>
+          <strong>
+            <a href={ROUTES.project(p.slug)}>{p.data.title}</a>
+          </strong>
+          {'：'}{p.data.summary}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="delba-section">
+    <h2>{homeCopy.personalTitle}</h2>
+    <p class="section-lede">{homeCopy.personalLede}</p>
+    <ul class="bullet-list">
+      {posts.map((post) => (
+        <li>
+          <strong>
+            <a href={ROUTES.blogPost(post.slug)}>{post.data.title}</a>
+          </strong>
+          {post.data.description ? '：' + truncate(post.data.description, 80) : ''}
+        </li>
+      ))}
+    </ul>
+    {posts.length > 0 && (
+      <p class="cta-mini-wrap">
+        <a href={ROUTES.blog} class="cta-mini">{copy.now.viewAllCta}</a>
+      </p>
+    )}
   </section>
 
   <Now />
 
-  <section class="journey-preview">
-    <h2 class="section-title">{homeCopy.journeyPreviewTitle}</h2>
-    <p class="text-muted" style="font-size: var(--fs-sm); margin-bottom: var(--space-6);">
-      {renderPreviewBody(doneCount, totalCount)}
-    </p>
-    <a href={ROUTES.journey} class="cta-link">{homeCopy.journeyPreviewCta}</a>
-  </section>
+  <Fragment slot="aside">
+    <section class="about-card">
+      <h2 class="about-title">{homeCopy.aboutTitle}</h2>
+      <div class="about-head">
+        <div class="about-avatar" aria-hidden="true">J</div>
+        <p class="about-body">{homeCopy.aboutBody}</p>
+      </div>
+      <hr class="about-divider" />
+      <div class="about-links">
+        {SOCIAL.map((s, i) => (
+          <>
+            <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">{s.label}</a>
+            {i < SOCIAL.length - 1 && <span class="sep">·</span>}
+          </>
+        ))}
+      </div>
+    </section>
+  </Fragment>
 </BaseLayout>
 
 <style>
-  .hero {
-    margin-bottom: var(--space-16);
-  }
-
-  .hero-title {
-    font-size: var(--fs-3xl);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-4);
-  }
-
-  .hero-name {
-    font-style: italic;
-    color: var(--text-muted);
-  }
-
-  .hero-sub {
-    font-size: var(--fs-lg);
-    color: var(--text-muted);
-    line-height: 1.5;
-    max-width: 540px;
-  }
-
-  .hero-sub strong {
-    color: var(--text);
+  .page-title {
+    font-size: var(--fs-4xl);
     font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 var(--space-6) 0;
+    text-wrap: balance;
   }
 
-  .cta-link {
-    display: inline-block;
-    color: var(--text);
+  .delba-section {
+    margin-top: var(--space-12);
+  }
+
+  .delba-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+    font-size: var(--fs-xl);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .section-lede {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-4);
+    max-width: 38em;
+  }
+
+  .cta-mini-wrap {
+    margin-top: var(--space-4);
+  }
+
+  .cta-mini {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
     text-decoration: underline;
     text-decoration-color: var(--border);
-    text-underline-offset: 4px;
-    font-size: var(--fs-sm);
-    transition: text-decoration-color var(--t-base);
+    text-underline-offset: 2px;
+    transition: color var(--t-base), text-decoration-color var(--t-base);
   }
 
-  .cta-link:hover {
+  .cta-mini:hover {
+    color: var(--text);
     text-decoration-color: var(--text);
+  }
+
+  /* Right column About-me card — keep title small and unornamented
+     (no borders, no uppercase, no separator line). */
+  :global(.col-right) .about-title {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0 0 var(--space-3) 0;
+    color: var(--text-muted);
+  }
+
+  :global(.col-right) .about-divider {
+    /* divider removed visually; markup is preserved for stability */
+    border: 0;
+    margin: 0;
+    height: 0;
   }
 </style>
