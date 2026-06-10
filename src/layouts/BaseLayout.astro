@@ -1,5 +1,9 @@
 ---
 import '../styles/global.css';
+// KaTeX stylesheet for $$ / $ math rendering (added when remark-math + rehype-katex
+// are wired in astro.config.mjs). Imported here so every page that uses the layout
+// gets math styling without needing per-page imports.
+import 'katex/dist/katex.min.css';
 import Sidebar from '../components/Sidebar.astro';
 import RightAside from '../components/RightAside.astro';
 import MobileHeader from '../components/MobileHeader.astro';

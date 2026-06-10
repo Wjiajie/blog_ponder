@@ -53,3 +53,12 @@ yarn-error.log*
 # Dev server logs (regenerated on every `astro dev`)
 /dev-stderr.log
 /dev-stdout.log
+/dev.out.log
+/dev.err.log
+
+# Local diagram preview (sandbox for design review; regenerated on demand)
+/diagrams/preview.html
+
+# Stale OG-image drafts left over from old workflows (real OG is generated
+# dynamically by src/pages/og/blog/[slug].png.ts)
+/public/blog/*.png

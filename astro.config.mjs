@@ -6,7 +6,9 @@ import sitemap from '@astrojs/sitemap';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
+import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import { SITE } from './src/consts';
 
 // https://astro.build/config
@@ -18,7 +20,7 @@ export default defineConfig({
     sitemap(),
   ],
   markdown: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [
       rehypeSlug,
       [
@@ -32,6 +34,7 @@ export default defineConfig({
         rehypeExternalLinks,
         { target: '_blank', rel: ['noopener', 'noreferrer'] },
       ],
+      [rehypeKatex, { strict: false, throwOnError: false }],
     ],
     shikiConfig: {
       themes: {
