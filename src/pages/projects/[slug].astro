@@ -4,15 +4,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ROUTES } from '../../consts';
 
 export async function getStaticPaths() {
-  const projects = (await getCollection('projects'));
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { entry: project },
-  }));
+ const projects = (await getCollection('projects'));
+ return projects.map((project) => ({
+ params: { slug: project.slug },
+ props: { entry: project },
+ }));
 }
 
 interface Props {
-  entry: CollectionEntry<'projects'>;
+ entry: CollectionEntry<'projects'>;
 }
 
 const { entry } = Astro.props;
@@ -20,147 +20,240 @@ const { Content } = await entry.render();
 ---
 
 <BaseLayout
-  title={entry.data.title}
-  description={entry.data.summary}
-  showRightAside={true}
+ title={entry.data.title}
+ description={entry.data.summary}
+ showRightAside={true}
 >
-  <article class="project-detail">
-    <p class="kicker">— Project</p>
-    <h1 class="project-title">{entry.data.title}</h1>
-    <p class="project-summary">{entry.data.summary}</p>
+ <article class="project-detail">
+ <p class="eyebrow">project</p>
+ <h1 class="page-title">{entry.data.title}</h1>
+ <p class="page-lead">{entry.data.summary}</p>
 
-    {entry.data.stack.length > 0 && (
-      <p class="project-stack">
-        {entry.data.stack.map((s, i) => (
-          <>
-            {i > 0 && <span class="sep" aria-hidden="true"> · </span>}
-            <code>{s}</code>
-          </>
-        ))}
-      </p>
-    )}
+ {(entry.data.stack.length >0 || Object.keys(entry.data.links).length >0) && (
+ <p class="page-meta">
+ {entry.data.stack.length >0 && (
+ <span class="meta-block">
+ <span class="meta-label">stack</span>
+ <span class="meta-value">
+ {entry.data.stack.map((s, i) => (
+ <>
+ {i >0 && <span class="sep" aria-hidden="true">·</span>}
+ <code>{s}</code>
+ </>
+ ))}
+ </span>
+ </span>
+ )}
+ {Object.keys(entry.data.links).length >0 && (
+ <span class="meta-block">
+ <span class="meta-label">links</span>
+ <span class="meta-value">
+ {entry.data.links.demo && <a href={entry.data.links.demo} target="_blank" rel="noopener noreferrer">在线</a>}
+ {entry.data.links.repo && <a href={entry.data.links.repo} target="_blank" rel="noopener noreferrer">源码</a>}
+ {entry.data.links.post && <a href={entry.data.links.post}>笔记</a>}
+ </span>
+ </span>
+ )}
+ </p>
+ )}
 
-    {Object.keys(entry.data.links).length > 0 && (
-      <p class="project-links">
-        {entry.data.links.demo && <a href={entry.data.links.demo} target="_blank" rel="noopener noreferrer">在线 →</a>}
-        {entry.data.links.repo && <a href={entry.data.links.repo} target="_blank" rel="noopener noreferrer">源码 →</a>}
-        {entry.data.links.post && <a href={entry.data.links.post}>相关笔记 →</a>}
-      </p>
-    )}
+ <hr />
 
-    <hr />
+ <div class="project-body prose">
+ <Content />
+ </div>
 
-    <div class="project-body prose">
-      <Content />
-    </div>
+ <p class="back-link">
+ <a href={ROUTES.projects}>←回到所有项目</a>
+ </p>
+ </article>
 
-    <p class="back-link">
-      <a href={ROUTES.projects}>← 回到所有项目</a>
-    </p>
-  </article>
-
-  <Fragment slot="aside">
-    <section class="aside-block">
-      <h3 class="section-subtitle">项目状态</h3>
-      <p class="text-muted" style="font-size: var(--fs-sm); line-height: 1.7;">
-        {entry.data.status === 'shipped' && '已上线。有可演示的工件。'}
-        {entry.data.status === 'in-progress' && '持续迭代中，每周有可衡量的进展。'}
-        {entry.data.status === 'planning' && '规划阶段：先把最小链路跑通，再叠加更多能力。'}
-        {entry.data.status === 'archived' && '已归档：保留作为参考，不再投入精力。'}
-      </p>
-    </section>
-  </Fragment>
+ <Fragment slot="aside">
+ <section class="aside-block">
+ <h3 class="aside-title">项目状态</h3>
+ <p class="aside-body">
+ {entry.data.status === 'shipped' && '已上线。有可演示的工件。'}
+ {entry.data.status === 'in-progress' && '持续迭代中,每周有可衡量的进展。'}
+ {entry.data.status === 'planning' && '规划阶段:先把最小链路跑通,再叠加更多能力。'}
+ {entry.data.status === 'archived' && '已归档:保留作为参考,不再投入精力。'}
+ </p>
+ </section>
+ </Fragment>
 </BaseLayout>
 
 <style>
-  .project-detail {
-    max-width: 640px;
-  }
+ /* ==================================================================
+ Page header — 与列表页保持一致的收敛字号
+ ================================================================== */
+ .page-title {
+ font-size:22px;
+ font-weight:500;
+ color: var(--text);
+ letter-spacing: -0.02em;
+ line-height:1.25;
+ margin:0;
+ text-wrap: balance;
+ }
 
-  .kicker {
-    font-size: var(--fs-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--text-subtle);
-    margin: 0 0 var(--space-4) 0;
-  }
+ .eyebrow {
+ font-size:12px;
+ color: var(--text-subtle);
+ font-style: italic;
+ letter-spacing:0;
+ text-transform: none; /*覆盖 global kicker 的 uppercase */
+ margin:0020px0;
+ }
 
-  .project-title {
-    font-size: var(--fs-3xl);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin: 0 0 var(--space-3) 0;
-  }
+ .page-lead {
+ color: var(--text-muted);
+ font-size:15px;
+ line-height:1.6;
+ max-width:38em;
+ margin:20px08px;
+ text-wrap: pretty;
+ }
 
-  .project-summary {
-    color: var(--text-muted);
-    font-size: var(--fs-lg);
-    line-height: 1.55;
-    margin: 0 0 var(--space-6) 0;
-    max-width: 36em;
-  }
+ /* ==================================================================
+ Meta line — stack + links同一行,小字、subtle
+ ================================================================== */
+ .page-meta {
+ display: flex;
+ flex-wrap: wrap;
+ align-items: baseline;
+ gap:24px;
+ font-size:13px;
+ color: var(--text-muted);
+ margin:8px00;
+ }
 
-  .project-stack {
-    font-size: var(--fs-sm);
-    color: var(--text-muted);
-    margin: 0 0 var(--space-4) 0;
-  }
+ .meta-block {
+ display: inline-flex;
+ align-items: baseline;
+ gap:8px;
+ }
 
-  .project-stack code {
-    font-size: var(--fs-sm);
-    background: transparent;
-    padding: 0;
-  }
+ .meta-label {
+ color: var(--text-subtle);
+ font-style: italic;
+ font-size:12px;
+ }
 
-  .project-stack .sep {
-    color: var(--text-subtle);
-  }
+ .meta-value {
+ display: inline-flex;
+ align-items: baseline;
+ flex-wrap: wrap;
+ gap:0;
+ color: var(--text-muted);
+ }
 
-  .project-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-6);
-    font-size: var(--fs-sm);
-    margin: 0 0 var(--space-6) 0;
-  }
+ .meta-value code {
+ font-size:12px;
+ color: var(--text-muted);
+ background: transparent;
+ padding:0;
+ border-radius:0;
+ }
 
-  .project-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1px;
-  }
+ .meta-value .sep {
+ color: var(--text-subtle);
+ margin:00.5em;
+ user-select: none;
+ }
 
-  .project-links a:hover {
-    color: var(--text);
-    border-bottom-color: var(--text);
-  }
+ .meta-value a {
+ color: var(--text-muted);
+ text-decoration: underline;
+ text-decoration-color: var(--border);
+ text-underline-offset:2px;
+ transition: color150ms ease, text-decoration-color150ms ease;
+ }
 
-  .project-body :global(p) {
-    line-height: 1.7;
-  }
+ .meta-value a:hover {
+ color: var(--text);
+ text-decoration-color: var(--text);
+ }
 
-  .back-link {
-    margin-top: var(--space-12);
-    font-size: var(--fs-sm);
-  }
+ /* ==================================================================
+ Body — Lee Robinson排版 (1px hr分隔)
+ ================================================================== */
+ .project-body :global(p) {
+ line-height:1.7;
+ }
 
-  .back-link a {
-    color: var(--text-muted);
-  }
+ .project-body :global(h2) {
+ font-size:18px;
+ font-weight:500;
+ letter-spacing: -0.01em;
+ margin-top:48px;
+ margin-bottom:16px;
+ text-wrap: balance;
+ }
 
-  .back-link a:hover {
-    color: var(--text);
-  }
+ .project-body :global(h3) {
+ font-size:16px;
+ font-weight:500;
+ letter-spacing:0;
+ margin-top:32px;
+ margin-bottom:12px;
+ text-wrap: balance;
+ }
 
-  @media (max-width: 767px) {
-    .project-title {
-      font-size: var(--fs-2xl);
-    }
+ .project-body :global(hr) {
+ border:0;
+ border-top:1px solid var(--border);
+ margin:40px0;
+ }
 
-    .project-summary {
-      font-size: var(--fs-base);
-    }
-  }
+ /* ==================================================================
+ Back link
+ ================================================================== */
+ .back-link {
+ margin-top:56px;
+ font-size:13px;
+ color: var(--text-muted);
+ }
+
+ .back-link a {
+ color: var(--text-muted);
+ text-decoration: underline;
+ text-decoration-color: var(--border);
+ text-underline-offset:2px;
+ transition: color150ms ease, text-decoration-color150ms ease;
+ }
+
+ .back-link a:hover {
+ color: var(--text);
+ text-decoration-color: var(--text);
+ }
+
+ /* ==================================================================
+ Aside
+ ================================================================== */
+ .aside-block {
+ margin-bottom:32px;
+ }
+
+ .aside-title {
+ font-size:13px;
+ font-weight:500;
+ color: var(--text);
+ letter-spacing:0;
+ text-transform: none;
+ margin:0012px0;
+ }
+
+ .aside-body {
+ font-size:13px;
+ line-height:1.65;
+ color: var(--text-muted);
+ }
+
+ /* ==================================================================
+ Responsive
+ ================================================================== */
+ @media (max-width:767px) {
+ .page-title { font-size:20px; }
+ .page-lead { font-size:15px; }
+ .page-meta { gap:16px; font-size:13px; }
+ }
 </style>
