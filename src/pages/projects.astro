@@ -21,6 +21,10 @@ const formatProjectStatus = (s: string): string => {
 const projectsCopy = copy.projects;
 const filterHintTemplate = projectsCopy.filterHintTemplate;
 const filterAllLabel = projectsCopy.filterAllLabel;
+
+// Pre-render a "01" / "02" index for each project — stays stable across filters
+// because order is fixed in the frontmatter.
+const indexFor = (order: number) => String(order).padStart(2, '0');
 ---
 
 <BaseLayout
@@ -29,44 +33,64 @@ const filterAllLabel = projectsCopy.filterAllLabel;
   showRightAside={true}
 >
   <header class="page-header">
-    <h1>Projects</h1>
-    <p class="text-muted" style="font-size: var(--fs-sm); margin-top: var(--space-2);">
-      Built to demonstrate the customer-facing engineering work of a Forward Deployed Engineer.
-      <span id="filter-hint" class="hidden"></span>
+    <p class="kicker">— Index</p>
+    <h1>项目</h1>
+    <p class="text-muted lede" style="font-size: var(--fs-base); margin-top: var(--space-3); max-width: 36em;">
+      三件正在并行推进的事。每一个都是为「在客户现场独立交付生产代码」这一目标打磨出来的可演示工件。
+      <span id="filter-hint" class="filter-hint hidden"></span>
     </p>
   </header>
 
   <section class="project-section">
-    <h2 id="filter-heading" class="section-subtitle">{filterAllLabel}</h2>
-    <ul class="project-list">
+    <h2 id="filter-heading" class="section-subtitle filter-heading">{filterAllLabel}</h2>
+
+    <ol class="project-list" role="list">
       {all.map((p) => (
         <li class="project-item" data-category={p.data.category}>
-          <h3 class="project-title">{p.data.title}</h3>
-          <p class="project-summary">{p.data.summary}</p>
-          <p class="project-meta">
-            <span class="project-status">{formatProjectStatus(p.data.status)}</span>
-            {p.data.stack.length > 0 && (
-              <span class="project-stack">
-                {p.data.stack.map((s) => <code>{s}</code>)}
-              </span>
-            )}
-          </p>
-          <div class="project-links">
-            {p.data.links.post && <a href={p.data.links.post}>read more</a>}
-            {p.data.links.repo && <a href={p.data.links.repo}>github</a>}
-            {p.data.links.demo && <a href={p.data.links.demo}>demo</a>}
+          <div class="project-index" aria-hidden="true">
+            <span class="project-index-num">{indexFor(p.data.order)}</span>
+          </div>
+
+          <div class="project-main">
+            <div class="project-head">
+              <h3 class="project-title">
+                <a href={ROUTES.project(p.slug)}>{p.data.title}</a>
+              </h3>
+              <p class="project-summary">{p.data.summary}</p>
+            </div>
+
+            <div class="project-meta">
+              <span class="project-status" data-status={p.data.status}>{formatProjectStatus(p.data.status)}</span>
+              {p.data.stack.length > 0 && (
+                <span class="project-stack">
+                  {p.data.stack.map((s, i) => (
+                    <>
+                      {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+                      <code>{s}</code>
+                    </>
+                  ))}
+                </span>
+              )}
+            </div>
+
+            <div class="project-links">
+              {p.data.links.demo && <a href={p.data.links.demo} target="_blank" rel="noopener noreferrer">在线 →</a>}
+              {p.data.links.repo && <a href={p.data.links.repo} target="_blank" rel="noopener noreferrer">源码 →</a>}
+              {p.data.links.post && <a href={p.data.links.post}>详情 →</a>}
+            </div>
           </div>
         </li>
       ))}
-    </ul>
-    <p id="empty-state" class="text-muted hidden">
-      No projects in this category yet — <a href={ROUTES.projects}>view all</a>.
+    </ol>
+
+    <p id="empty-state" class="text-muted empty-state hidden">
+      这个分类下还没有项目 — <a href={ROUTES.projects}>查看全部</a>。
     </p>
   </section>
 
   <Fragment slot="aside">
     <section class="aside-block">
-      <h3 class="section-subtitle">Filter</h3>
+      <h3 class="section-subtitle">分类</h3>
       <ul class="filter-list">
         <li>
           <a id="filter-all" href={ROUTES.projects} class="filter-link is-active">
@@ -91,6 +115,13 @@ const filterAllLabel = projectsCopy.filterAllLabel;
         })}
       </ul>
     </section>
+
+    <section class="aside-block">
+      <h3 class="section-subtitle">关于</h3>
+      <p class="text-muted" style="font-size: var(--fs-sm); line-height: 1.7;">
+        这些项目的存在只有一个目的：证明我可以把 AI 在真实场景里端到端交付。每一条都从「客户痛点」开始，到「可演示的工件」结束。
+      </p>
+    </section>
   </Fragment>
 </BaseLayout>
 
@@ -113,7 +144,7 @@ const filterAllLabel = projectsCopy.filterAllLabel;
       if (match) visible++;
     });
 
-    heading.textContent = cat || 'All';
+    heading.textContent = cat || '全部';
     emptyState.classList.toggle('hidden', visible > 0);
     hint.classList.toggle('hidden', !cat);
     if (cat) hint.textContent = filterHintTemplate.replace('{category}', cat);
@@ -138,23 +169,262 @@ const filterAllLabel = projectsCopy.filterAllLabel;
 
 <style>
   .hidden { display: none; }
-  .page-header { margin-bottom: var(--space-12); }
-  .project-section { margin-bottom: var(--space-12); }
-  .project-list { list-style: none; padding: 0; margin: 0; }
-  .project-item { padding: var(--space-6) 0; border-bottom: 1px solid var(--border); }
-  .project-item:last-child { border-bottom: none; }
-  .project-title { font-size: var(--fs-lg); font-weight: 600; margin: 0 0 var(--space-2) 0; }
-  .project-summary { color: var(--text-muted); font-size: var(--fs-sm); margin-bottom: var(--space-3); }
-  .project-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); font-size: var(--fs-xs); }
-  .project-status { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  .project-stack { display: inline-flex; flex-wrap: wrap; gap: var(--space-2); }
-  .project-stack code { font-size: var(--fs-xs); color: var(--text-muted); }
-  .project-links { display: flex; gap: var(--space-4); font-size: var(--fs-sm); }
-  .project-links a { color: var(--text-muted); }
-  .project-links a:hover { color: var(--text); }
-  .filter-list { list-style: none; padding: 0; margin: 0; font-size: var(--fs-sm); }
-  .filter-link { display: flex; justify-content: space-between; padding: var(--space-1) 0; color: var(--text-muted); text-decoration: none; }
-  .filter-link:hover { color: var(--text); }
-  .filter-link.is-active { color: var(--text); font-weight: 500; }
-  .filter-count { color: var(--text-subtle); font-variant-numeric: tabular-nums; }
+
+  /* ---- Page header: editorial kicker + title + lede ---- */
+  .page-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .kicker {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-subtle);
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .lede {
+    line-height: 1.6;
+  }
+
+  .filter-hint {
+    display: inline;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-left: 0.25em;
+  }
+
+  /* ---- Section: filter heading + project list ---- */
+  .project-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .filter-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+
+  .filter-heading::after {
+    content: '';
+    flex: 1 1 auto;
+    border-top: 1px solid var(--border);
+    transform: translateY(-2px);
+  }
+
+  /* ---- Project list: editorial spread ---- */
+  .project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: project;
+  }
+
+  .project-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-8);
+    padding: var(--space-8) 0;
+    border-top: 1px solid var(--border);
+    transition: background var(--t-base);
+  }
+
+  .project-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-item:hover {
+    background: var(--bg-muted);
+  }
+
+  /* ---- Big index number on the left (the visual "art" beat) ---- */
+  .project-index {
+    position: sticky;
+    top: var(--space-8);
+    align-self: start;
+  }
+
+  .project-index-num {
+    display: block;
+    font-size: var(--fs-4xl);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Main content column ---- */
+  .project-main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .project-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .project-title {
+    font-size: var(--fs-2xl);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  .project-title a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--t-base);
+  }
+
+  .project-title a:hover {
+    text-decoration: none;
+    border-bottom-color: var(--text);
+  }
+
+  .project-summary {
+    color: var(--text-muted);
+    font-size: var(--fs-base);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 38em;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+  }
+
+  .project-status {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .project-status[data-status='shipped']::before {
+    content: '✓';
+    margin-right: 0.4em;
+    color: var(--text);
+  }
+
+  .project-status[data-status='in-progress']::before {
+    content: '◐';
+    margin-right: 0.4em;
+    color: var(--text);
+  }
+
+  .project-status[data-status='planning']::before {
+    content: '○';
+    margin-right: 0.4em;
+    color: var(--text-muted);
+  }
+
+  .project-stack {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .project-stack code {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    background: transparent;
+    padding: 0;
+  }
+
+  .project-stack .sep {
+    color: var(--text-subtle);
+    user-select: none;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    font-size: var(--fs-sm);
+    margin-top: var(--space-2);
+  }
+
+  .project-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: color var(--t-base), border-color var(--t-base);
+  }
+
+  .project-links a:hover {
+    color: var(--text);
+    border-bottom-color: var(--text);
+  }
+
+  /* ---- Empty state ---- */
+  .empty-state {
+    padding: var(--space-8) 0;
+    font-size: var(--fs-sm);
+  }
+
+  /* ---- Filter sidebar ---- */
+  .filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: var(--fs-sm);
+  }
+
+  .filter-link {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-1) 0;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--t-base);
+  }
+
+  .filter-link:hover {
+    color: var(--text);
+  }
+
+  .filter-link.is-active {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .filter-count {
+    color: var(--text-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 767px) {
+    .project-item {
+      grid-template-columns: 48px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-6) 0;
+    }
+
+    .project-index-num {
+      font-size: var(--fs-2xl);
+    }
+
+    .project-title {
+      font-size: var(--fs-xl);
+    }
+
+    .project-summary {
+      font-size: var(--fs-sm);
+    }
+  }
 </style>

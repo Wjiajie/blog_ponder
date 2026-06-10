@@ -17,16 +17,16 @@ const current = phases.find((p) => p.data.status === 'in-progress');
 const next = phases.find((p) => p.data.status === 'upcoming');
 
 // Substitutions stay minimal — keep templates in copy.json, do the
-// .replace() once at the call site so copy stays readable as English.
+// .replace() once at the call site so copy stays readable.
 const nowCopy = copy.now;
 const renderInProgress = (description: string) =>
-  nowCopy.inProgressTemplate.replace('{description}', description.replace(/\.$/, ''));
+  nowCopy.inProgressTemplate.replace('{description}', description.replace(/[。.]$/, ''));
 const renderShip = (output: string, month: string) =>
   nowCopy.shipTemplate.replace('{output}', output).replace('{month}', month);
 ---
 
 <section class="now-block">
-  <h2 class="section-title">Now</h2>
+  <h2 class="section-title">现在</h2>
   <p class="now-line">
     <span class="now-label">{current?.data.month ?? '—'}</span>
     <span class="now-text">
@@ -35,7 +35,7 @@ const renderShip = (output: string, month: string) =>
   </p>
   {next && (
     <p class="now-line">
-      <span class="now-label">Next</span>
+      <span class="now-label">下一站</span>
       <span class="now-text">{renderShip(next.data.outputs[0] ?? next.data.title, next.data.month)}</span>
     </p>
   )}
@@ -43,7 +43,7 @@ const renderShip = (output: string, month: string) =>
   <div class="now-recent">
     <h3 class="section-subtitle">{nowCopy.latestTitle}</h3>
     <ul class="bullet-list">
-      {posts.length === 0 && <li class="text-muted">No posts yet.</li>}
+      {posts.length === 0 && <li class="text-muted">暂无文章。</li>}
       {posts.map((p) => (
         <li>
           <a href={ROUTES.blogPost(p.slug)}>{p.data.title}</a>

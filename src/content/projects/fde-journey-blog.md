@@ -1,29 +1,32 @@
 ---
-title: "FDE Journey Blog (this site)"
-summary: "A quiet, content-first blog built on Astro 5 + Tailwind + MDX + Shiki, with content collections for blog posts, projects, and the 6-month journey. Deployed on Vercel at jiajiewu.top."
+title: "FDE-Journey · 转型博客与源码"
+summary: "你现在正在浏览的这个网站。它本身是 FDE 准备过程中的一部分——用 Astro + MDX 搭建的极简博客，内容包括 6 个月转型路径、随想、项目集合。"
 status: "shipped"
-category: "Education"
+category: "Meta"
 stack: ["Astro 5", "Tailwind CSS", "MDX", "Shiki", "Vercel"]
 links:
-  repo: "https://github.com/wjiajie/blog_ponder"
   demo: "https://www.jiajiewu.top"
-order: 2
+  repo: "https://github.com/wjiajie/blog_ponder"
+order: 3
 ---
 
-The blog you are reading right now. Built as a working demonstration of three things at once:
+这个博客本身就是我「FDE 准备」项目集的一部分。**它不只是记录转型过程的容器——它同时也是我交付能力的一次公开展示**。
 
-- **End-to-end ownership** — design, implementation, content pipeline, deployment, and domain. No hand-offs, no "the design team will do this next."
-- **Content as data** — every page (blog, projects, journey) is driven by a typed content collection. Adding a new project is one new Markdown file, no code change.
-- **Long-form, low-noise** — black, white, three grays, no decorative motion, no 3D, no color. The point is the writing.
+## 这个网站在做什么
 
-## Architecture
+- **6 个月转型路径**：从「图形学 + AI」到「在教育场景里交付 AI 产品」的阶段化时间线
+- **随想**：FDE 准备过程中读到的、想到的、写下来的长文笔记
+- **项目集合**：把转型过程中产出的项目集中展示（你现在正在看的页面）
+- **关于**：自我介绍 + 联系方式
 
-- **Astro 5** for SSG + content collections
-- **Tailwind CSS** for design tokens and utilities
-- **MDX** for posts that need React components
-- **Shiki** for syntax highlighting
-- **Vercel** for hosting with auto-deploy on push to `fde-journey`
+## 设计与工程选择
 
-## Why this matters for FDE
+- **Astro 5 + MDX**——内容驱动，发布一篇随想只需要写一个 .mdx 文件
+- **Tailwind + CSS 变量**——3 色 + 5 灰阶的克制配色，0 个 emoji / 0 张图 / 0 个装饰
+- **Shiki**——代码高亮与正文排版融为一体
+- **Vercel**——push 即部署，preview link 方便分享
+- **内容集合（content collections）**——所有页面（blog / projects / journey）都跑在同一个类型化 schema 上
 
-FDE interviews ask "show me something you shipped." This site is that artifact. It demonstrates content-driven design, deployment, and a working build pipeline — all in one repo. The journey page is the FDE interview talking points in advance.
+## 为什么它对 FDE 准备有意义
+
+FDE 面试问的不是「你用过什么技术栈」，而是「你能不能交付一个能跑的东西」。这个网站回答的是后者——从需求、到设计、到内容、到部署、到域名，**端到端 owner**。它也是我后续每个项目 README 的「视觉规范」——所有项目都长这样，没有例外。

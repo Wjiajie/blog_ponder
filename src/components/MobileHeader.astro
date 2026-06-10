@@ -15,8 +15,8 @@ const isArticlePage =
 
 <header class="mobile-header">
   <a href={ROUTES.home} class="mobile-mark">{SITE.title}</a>
-  <details class="mobile-menu">
-    <summary aria-label="Toggle menu">
+    <details class="mobile-menu">
+      <summary aria-label="切换菜单">
       <svg
         class="icon-menu"
         width="20"
@@ -42,9 +42,9 @@ const isArticlePage =
         <path d="M5 5l10 10M15 5L5 15" />
       </svg>
     </summary>
-    <nav class="mobile-nav" aria-label="Primary">
+    <nav class="mobile-nav" aria-label="主导航">
       {isArticlePage && (
-        <a href="#top" data-back-to-top>↑ Top of post</a>
+        <a href="#top" data-back-to-top>↑ 回到顶部</a>
       )}
       {NAV.map((item) => (
         <a
@@ -68,7 +68,7 @@ const isArticlePage =
   type="button"
   class="mobile-menu-fab"
   data-mobile-menu-fab
-  aria-label="Open menu"
+  aria-label="打开菜单"
 >
   <svg
     class="icon-menu"
@@ -120,7 +120,7 @@ const isArticlePage =
         if (!details) return;
         details.open = !details.open;
         fab.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-        fab.setAttribute('aria-label', details.open ? 'Close menu' : 'Open menu');
+        fab.setAttribute('aria-label', details.open ? '关闭菜单' : '打开菜单');
       });
     }
 

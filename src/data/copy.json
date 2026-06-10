@@ -1,29 +1,29 @@
 {
   "home": {
-    "heroGreetingTemplate": "Hi, I'm {name}.",
-    "heroSubTemplate": "{shortBio} Targeting {vertical}, joining {company}'s FDE team.",
-    "journeyPreviewTitle": "Journey",
-    "journeyPreviewBodyTemplate": "A 6-month ramp from \"graphics + AI\" to \"ship AI in classrooms\". {doneCount} of {totalCount} phases done, one in progress.",
-    "journeyPreviewCta": "→ View full journey timeline"
+    "heroGreetingTemplate": "你好，我是 {name}。",
+    "heroSubTemplate": "{shortBio}。目标方向是 {vertical}，希望加入 {company} 的 FDE 团队。",
+    "journeyPreviewTitle": "路径",
+    "journeyPreviewBodyTemplate": "6 个月时间，从「图形学 + AI」到「在教育场景里交付 AI 产品」。{totalCount} 个阶段，{doneCount} 个已完成。",
+    "journeyPreviewCta": "→ 查看完整时间线"
   },
-  "_homeTemplateNote": "home.*Template strings use {placeholder} syntax; .astro consumers split on the placeholder to inject JSX (e.g. the italic <span> around the hero name).",
+  "_homeTemplateNote": "home.*Template 字符串使用 {placeholder} 占位符；.astro 消费者在占位符处切分后注入 JSX（如把 hero name 包成斜体 <span>）。",
   "now": {
-    "latestTitle": "Latest",
-    "viewAllCta": "View all thoughts →",
-    "inProgressTemplate": "in progress · {description}",
-    "restingText": "resting before the next phase",
-    "shipTemplate": "ship {output} by end of {month}."
+    "latestTitle": "最新",
+    "viewAllCta": "查看全部随想 →",
+    "inProgressTemplate": "进行中 · {description}",
+    "restingText": "在两个阶段之间调整节奏",
+    "shipTemplate": "目标在 {month} 之前交付 {output}。"
   },
   "article": {
-    "asideTitle": "In this post",
-    "asideBody": "A log entry on the journey. Use the table of contents (where present) on the right margin to jump between sections."
+    "asideTitle": "本文目录",
+    "asideBody": "一篇关于转型路上的日志。右侧目录（如有）可跳转到各章节。"
   },
   "projects": {
-    "filterHintTemplate": "· filtered by {category}",
-    "filterAllLabel": "All"
+    "filterHintTemplate": "· 按 {category} 筛选",
+    "filterAllLabel": "全部"
   },
   "journey": {
     "title": "FDE 转型路径",
-    "introTemplate": "6 months. From \"graphics + AI\" to \"ship AI in classrooms\". {doneCount} of {totalCount} phases done."
+    "introTemplate": "6 个月时间，从「图形学 + AI」到「在教育场景里交付 AI 产品」。{totalCount} 个阶段，{doneCount} 个已完成。"
   }
 }

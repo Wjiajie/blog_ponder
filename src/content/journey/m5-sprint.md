@@ -1,22 +1,27 @@
 ---
 month: "M5"
-title: "Sprint — 3 Education Projects + Portfolio"
+title: "冲刺期 · 3 个教育项目 + 作品集"
 status: "upcoming"
-description: "Two more end-to-end demos, polished portfolio site."
+description: "再交付 2 个端到端教育项目 + 作品集网站。"
 outputs:
-  - "Smart learning diagnostics"
-  - "3D immersive learning scene"
+  - "教育项目 2：智能学情诊断 + 分层作业系统"
+  - "教育项目 3：AI 沉浸式 3D 学习场景"
+  - "作品集网站"
 order: 5
 ---
 
-## What I plan to ship
+## 这个月要做什么
 
-Project 2: smart learning diagnostics + differentiated homework system (knowledge graph
-+ difficulty-tiered homework packs). Project 3: AI-immersive 3D learning scene
-(Three.js + LLM as a virtual lab assistant). Polish each project with README, demo
-video, blog write-up.
+第 17 周：**教育项目 2：智能学情诊断 + 分层作业系统**——输入：学生作业 + 错题；输出：知识图谱 + 难度分级作业包（Agent + RAG + 评估）。
 
-## What I expect to learn
+第 18 周：**教育项目 3：AI 沉浸式 3D 学习场景**——用 Three.js / WebGL + LLM 做「3D 虚拟实验室 + 智能引导」，体现我的图形学背景。
 
-- The portfolio site itself is a project — `yourname.dev` with the 3 demos in context
-- 3D + LLM is genuinely differentiating — **only person on the FDE track who can do this**
+第 19 周：项目打磨 + 文档——每个项目补 README、架构图、效果截图、demo 视频、博客文章。
+
+第 20 周：作品集网站——上线作品集主页，放 3 个项目 + 博客 + 简历。
+
+## 这个月要建立的能力
+
+- 3 个端到端、可演示、有量化结果的教育项目
+- 一份「让面试官一眼看懂」的简历 + 作品集
+- 在「FDE 候选人里只有我能做 3D + LLM」这个护城河上立住

@@ -49,17 +49,17 @@ const intro = journeyCopy.introTemplate
 
   <Fragment slot="aside">
     <section class="aside-block">
-      <h3 class="section-subtitle">At a glance</h3>
+      <h3 class="section-subtitle">概览</h3>
       <p class="text-muted" style="font-size: var(--fs-sm);">
-        <strong style="color: var(--text);">{doneCount} / {totalCount}</strong> months done.<br />
-        {current && <>Currently in <strong style="color: var(--text);">{current.data.month}</strong>.</>}
+        已完成 <strong style="color: var(--text);">{doneCount} / {totalCount}</strong> 个阶段。<br />
+        {current && <>当前在 <strong style="color: var(--text);">{current.data.month}</strong>。</>}
       </p>
     </section>
     {next && (
       <section class="aside-block">
-        <h3 class="section-subtitle">Next</h3>
+        <h3 class="section-subtitle">下一站</h3>
         <p class="text-muted" style="font-size: var(--fs-sm);">
-          {next.data.title}: {next.data.description}
+          {next.data.title}：{next.data.description}
         </p>
       </section>
     )}

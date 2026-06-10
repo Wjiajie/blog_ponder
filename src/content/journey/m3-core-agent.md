@@ -1,23 +1,28 @@
 ---
 month: "M3"
-title: "Core — Agent + Evaluation"
-status: "in-progress"
-description: "Going deep on LangGraph agents, MCP, and RAGAS evaluation."
+title: "核心期 · Agent 与评估"
+status: "upcoming"
+description: "深入 Agent 框架、评估体系和 MCP 协议。"
 outputs:
-  - "Multi-agent teaching assistant"
-  - "RAGAS evaluation report"
+  - "多步 Agent 项目（带工具调用、记忆、子任务分解）"
+  - "自定义 MCP Server"
+  - "RAGAS 评估报告"
+  - "Multi-Agent 协作系统"
 order: 3
 ---
 
-## What I'm shipping this month
+## 这个月要做什么
 
-A multi-step agent with tool calling, memory, and sub-task decomposition. Custom MCP
-server for my own tools. RAGAS-based evaluation report on the M2/W9 work with accuracy,
-hallucination rate, and token cost.
+第 9 周：Agent 框架深入——用 LangGraph 或 Dify 搭一个多步 Agent（带工具调用、记忆、子任务分解）。
 
-## What I expect to learn
+第 10 周：MCP 协议实战——实现一个自定义 MCP Server，让 LLM 能调用我自己的工具。
 
-- **ReAct vs Plan-and-Execute** — when to use which (and why Plan-and-Execute is almost
-  always better for production)
-- MCP as the "USB-C for LLM tools" — building one teaches you more than using ten
-- Evaluation is the **first** thing, not the last — bake it into every project
+第 11 周：LLM 评估体系——用 RAGAS + 自建评测集，对 M2/W9 的项目做完整评估报告（准确率、幻觉率、Token 成本）。
+
+第 12 周：多智能体协作——实现一个简单的 Multi-Agent 系统（例如：教学 Agent + 评估 Agent + 修订 Agent）。
+
+## 这个月要建立的能力
+
+- ReAct / Plan-and-Execute / Reflection / Multi-Agent 的取舍判断
+- 评估先行：每个 Agent 项目自带评测集 + 量化结果
+- MCP 作为「LLM 工具的 USB-C」：能自己写 Server、也能接外部 Server
