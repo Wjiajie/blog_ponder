@@ -4,186 +4,268 @@ import ArticleRow from '../../components/ArticleRow.astro';
 import { getCollection } from 'astro:content';
 import { PAGE_META, ROUTES, FORMATTING } from '../../consts';
 
-// Read ?tag=… from the URL. Sidebar links use ROUTES.blogTag(t) which
-// lands on /blog/?tag=<t>, so this is the filter entry point.
-const activeTag = Astro.url.searchParams.get('tag')?.trim() || '';
+// SSG note: this site uses `output: 'static'`, so Astro.url.searchParams is
+// always empty at build time and never sees ?tag=… at runtime (Astro serves
+// the same pre-rendered HTML regardless of query string). Filter happens
+// client-side via the <script> block at the bottom of this file — when the
+// user lands on /blog/?tag=FDE, JS reads window.location.search, hides
+// non-matching <li data-tags="…"> rows, fills the filter-bar, and toggles
+// the matching sidebar tag's .is-active state.
 
 const allPosts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+ .filter((p) => !p.data.draft)
+ .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // All tags (for sidebar) — derived from the unfiltered collection so the
 // tag list stays stable as the user clicks through filters.
 const allTags = Array.from(new Set(allPosts.flatMap((p) => p.data.tags))).sort();
 
-// Apply tag filter (if any). A post matches when the tag is present
-// in its tags array (case-insensitive — tags in markdown are typed
-// ad-hoc, so we don't trust casing).
-const posts = activeTag
-  ? allPosts.filter((p) =>
-      p.data.tags.some((t) => t.toLowerCase() === activeTag.toLowerCase())
-    )
-  : allPosts;
-
 // Group by year
-const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
-  const year = String(post.data.pubDate.getFullYear());
-  (acc[year] ??= []).push(post);
-  return acc;
+const byYear = allPosts.reduce<Record<string, typeof allPosts>>((acc, post) => {
+ const year = String(post.data.pubDate.getFullYear());
+ (acc[year] ??= []).push(post);
+ return acc;
 }, {});
 
 const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <BaseLayout
-  title={PAGE_META.thoughts.title}
-  description={PAGE_META.thoughts.description}
-  showRightAside={true}
+ title={PAGE_META.thoughts.title}
+ description={PAGE_META.thoughts.description}
+ showRightAside={true}
 >
-  <header class="page-header">
-    <h1>随想</h1>
-    <p class="text-muted" style="font-size: var(--fs-sm); margin-top: var(--space-2);">
-      关于这段转型的笔记与日志，按时间倒序排列。
-    </p>
-  </header>
+ <header class="page-header">
+ <h1>随想</h1>
+ <p class="text-muted" style="font-size: var(--fs-sm); margin-top: var(--space-2);">
+ 关于这段转型的笔记与日志，按时间倒序排列。
+ </p>
+ </header>
 
-  {activeTag && (
-    <p class="filter-bar" aria-live="polite">
-      当前筛选：<code>#{activeTag}</code>
-      <a href={ROUTES.blog} class="filter-clear">清除</a>
-    </p>
-  )}
+ <!--
+ Filter bar: rendered unconditionally in the DOM (initially hidden) so
+ the client-side script can fill it in without re-flowing the page.
+ Markup mirrors what the old server-side branch produced so styles
+ and spacing are identical.
+ -->
+ <p class="filter-bar" id="filter-bar" hidden aria-live="polite"></p>
 
-  {years.length === 0 ? (
-    <p class="text-muted">
-      {activeTag ? `没有标记为 #${activeTag} 的文章。` : '暂无文章。'}
-    </p>
-  ) : (
-    <div class="posts-by-year">
-      {years.map((year) => (
-        <section class="year-block">
-          {years.length > 1 && <h2 class="year-heading">{year}</h2>}
-          <ul class="posts-list">
-            {byYear[year].map((post) => {
-              const date = post.data.pubDate
-                .toLocaleDateString(FORMATTING.locale, FORMATTING.dateShort)
-                .replace(/\//g, '.');
-              return (
-                <li>
-                  <ArticleRow href={ROUTES.blogPost(post.slug)}>
-                    {post.data.title}
-                    <span slot="date">{date}</span>
-                  </ArticleRow>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      ))}
-    </div>
-  )}
+ {years.length ===0 ? (
+ <p class="text-muted">暂无文章。</p>
+ ) : (
+ <div class="posts-by-year" id="posts-by-year">
+ {years.map((year) => (
+ <section class="year-block">
+ {years.length >1 && <h2 class="year-heading">{year}</h2>}
+ <ul class="posts-list">
+ {byYear[year].map((post) => {
+ const date = post.data.pubDate
+ .toLocaleDateString(FORMATTING.locale, FORMATTING.dateShort)
+ .replace(/\//g, '.');
+ // data-tags is the single source of truth for client-side
+ // filtering. Lowercased + deduped so the JS match is
+ // case-insensitive without re-normalizing on every click.
+ const tagsAttr = Array.from(
+ new Set(post.data.tags.map((t) => t.toLowerCase()))
+ ).join(',');
+ return (
+ <li data-tags={tagsAttr}>
+ <ArticleRow href={ROUTES.blogPost(post.slug)}>
+ {post.data.title}
+ <span slot="date">{date}</span>
+ </ArticleRow>
+ </li>
+ );
+ })}
+ </ul>
+ </section>
+ ))}
 
-  <Fragment slot="aside">
-    <section class="aside-block">
-      <h3 class="section-subtitle">按标签</h3>
-      <div class="tag-cloud">
-        {allTags.length === 0 && <p class="text-muted" style="font-size: var(--fs-sm);">暂无标签。</p>}
-        {allTags.map((t) => (
-          <a
-            href={ROUTES.blogTag(t)}
-            class={`tag${t.toLowerCase() === activeTag.toLowerCase() ? ' is-active' : ''}`}
-            aria-current={t.toLowerCase() === activeTag.toLowerCase() ? 'true' : undefined}
-          >#{t}</a>
-        ))}
-      </div>
-    </section>
-  </Fragment>
+ <!-- Empty-state for a filter that matched nothing. The script shows
+ this when activeTag is set and no row matches. -->
+ <p
+ class="text-muted"
+ id="empty-filtered"
+ hidden
+ style="margin-top: var(--space-6);"
+ ></p>
+ </div>
+ )}
+
+ <Fragment slot="aside">
+ <section class="aside-block">
+ <h3 class="section-subtitle">按标签</h3>
+ <div class="tag-cloud" id="tag-cloud">
+ {allTags.length ===0 && <p class="text-muted" style="font-size: var(--fs-sm);">暂无标签。</p>}
+ {allTags.map((t) => (
+ <a
+ href={ROUTES.blogTag(t)}
+ class="tag"
+ data-tag={t.toLowerCase()}
+ >#{t}</a>
+ ))}
+ </div>
+ </section>
+ </Fragment>
 </BaseLayout>
 
+<script>
+ // Client-side tag filter.
+ //
+ // Flow:
+ //1. Read ?tag=… from window.location.search (URLSearchParams).
+ //2. For each <li data-tags="…"> under #posts-by-year, hide rows whose
+ // data-tags CSV does NOT contain the active tag.
+ //3. Update the .filter-bar text to "当前筛选：#X ·清除".
+ //4. Toggle .is-active on the matching sidebar tag link so the visual
+ // state matches the server-side branch we're replacing.
+ //
+ // The sidebar links still point to /blog/?tag=…, which triggers a full
+ // page reload — that's intentional. The script re-runs on each load.
+
+ const root = document.getElementById('posts-by-year');
+ const filterBar = document.getElementById('filter-bar');
+ const tagCloud = document.getElementById('tag-cloud');
+ const emptyFiltered = document.getElementById('empty-filtered');
+
+ if (root && filterBar && tagCloud) {
+ const params = new URLSearchParams(window.location.search);
+ const activeTag = (params.get('tag') ?? '').trim().toLowerCase();
+
+ if (activeTag) {
+ const rows = Array.from(root.querySelectorAll<HTMLLIElement>('li[data-tags]'));
+ const tagSet = new Set(activeTag.split(','));
+ let visibleCount =0;
+
+ rows.forEach((row) => {
+ const rowTags = (row.dataset.tags ?? '')
+ .split(',')
+ .map((s) => s.trim())
+ .filter(Boolean);
+ const match = rowTags.some((t) => tagSet.has(t));
+ row.hidden = !match;
+ if (match) visibleCount++;
+ });
+
+ // Fill the filter-bar. We write innerHTML once so the markup stays
+ // identical to the old server-side version — same classes, same
+ // structure, same anchor to ROUTES.blog ("/blog/").
+ filterBar.innerHTML =
+ '当前筛选：<code>#' +
+ escapeHtml(activeTag) +
+ '</code>' +
+ '<a href="/blog/" class="filter-clear">清除</a>';
+ filterBar.hidden = false;
+
+ // Sidebar: toggle .is-active on the matching tag(s).
+ tagCloud.querySelectorAll<HTMLAnchorElement>('a.tag[data-tag]').forEach((a) => {
+ const isActive = (a.dataset.tag ?? '') === activeTag;
+ a.classList.toggle('is-active', isActive);
+ if (isActive) a.setAttribute('aria-current', 'true');
+ });
+
+ // Empty-state when the filter matched nothing.
+ if (visibleCount ===0 && emptyFiltered) {
+ emptyFiltered.textContent = `没有标记为 #${activeTag} 的文章。`;
+ emptyFiltered.hidden = false;
+ }
+ }
+ }
+
+ function escapeHtml(s: string): string {
+ return s
+ .replace(/&/g, '&amp;')
+ .replace(/</g, '&lt;')
+ .replace(/>/g, '&gt;')
+ .replace(/"/g, '&quot;')
+ .replace(/'/g, '&#39;');
+ }
+</script>
+
 <style>
-  .page-header {
-    margin-bottom: var(--space-12);
-  }
+ .page-header {
+ margin-bottom: var(--space-12);
+ }
 
-  .year-block {
-    margin-bottom: var(--space-10);
-  }
+ .year-block {
+ margin-bottom: var(--space-10);
+ }
 
-  .year-heading {
-    /* shud.in style: small, un-bold section divider — no uppercase,
-       no letter-spacing. Just a quiet grey label that lets the list
-       breathe. */
-    font-size: var(--fs-xs);
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: none;
-    letter-spacing: 0;
-    margin: var(--space-8) 0 var(--space-3);
-    text-wrap: balance;
-  }
+ .year-heading {
+ /* shud.in style: small, un-bold section divider — no uppercase,
+ no letter-spacing. Just a quiet grey label that lets the list
+ breathe. */
+ font-size: var(--fs-xs);
+ font-weight:500;
+ color: var(--text-muted);
+ text-transform: none;
+ letter-spacing:0;
+ margin: var(--space-8)0 var(--space-3);
+ text-wrap: balance;
+ }
 
-  .year-block:first-of-type .year-heading {
-    margin-top: var(--space-4);
-  }
+ .year-block:first-of-type .year-heading {
+ margin-top: var(--space-4);
+ }
 
-  .posts-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+ .posts-list {
+ list-style: none;
+ padding:0;
+ margin:0;
+ }
 
-  .posts-list li {
-    margin-bottom: 0;
-  }
+ .posts-list li {
+ margin-bottom:0;
+ }
 
-  .tag-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
+ .tag-cloud {
+ display: flex;
+ flex-wrap: wrap;
+ gap: var(--space-2);
+ }
 
-  .filter-bar {
-    font-size: var(--fs-sm);
-    color: var(--text-muted);
-    margin: 0 0 var(--space-6);
-  }
+ .filter-bar {
+ font-size: var(--fs-sm);
+ color: var(--text-muted);
+ margin:00 var(--space-6);
+ }
 
-  .filter-bar code {
-    color: var(--text);
-    background: var(--bg-muted);
-    padding: 1px 6px;
-    border-radius: 4px;
-  }
+ .filter-bar code {
+ color: var(--text);
+ background: var(--bg-muted);
+ padding:1px6px;
+ border-radius:4px;
+ }
 
-  .filter-clear {
-    margin-left: var(--space-3);
-    color: var(--text-muted);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
+ .filter-clear {
+ margin-left: var(--space-3);
+ color: var(--text-muted);
+ text-decoration: underline;
+ text-underline-offset:2px;
+ }
 
-  .filter-clear:hover {
-    color: var(--text);
-  }
+ .filter-clear:hover {
+ color: var(--text);
+ }
 
-  /* Tag — borderless plain text per shud.in spec §4.1 / §6.2.
-     Active state is communicated purely via color + underline,
-     never via background or border. */
-  .tag-cloud .tag {
-    border: 0;
-    background: transparent;
-    border-radius: 0;
-    padding: 0 4px;
-    min-height: 24px;
-    text-decoration: none;
-  }
+ /* Tag — borderless plain text per shud.in spec §4.1 / §6.2.
+ Active state is communicated purely via color + underline,
+ never via background or border. */
+ .tag-cloud .tag {
+ border:0;
+ background: transparent;
+ border-radius:0;
+ padding:04px;
+ min-height:24px;
+ text-decoration: none;
+ }
 
-  .tag.is-active {
-    color: var(--text);
-    text-decoration: underline;
-    text-decoration-color: var(--text);
-    text-underline-offset: 2px;
-    border: 0;
-    background: transparent;
-  }
+ .tag.is-active {
+ color: var(--text);
+ text-decoration: underline;
+ text-decoration-color: var(--text);
+ text-underline-offset:2px;
+ border:0;
+ background: transparent;
+ }
 </style>
