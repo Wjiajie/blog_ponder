@@ -14,3 +14,81 @@ const { href, variant = 'dot' } = Astro.props;
     <slot name="date" />
   </span>
 </a>
+
+<style>
+  /* Shu Ding / shud.in inspired row: text-only list item, no card / no
+     background, with a true CSS dot leader between title and date. The
+     rule lives here (instead of global.css) so other pages can keep
+     their own list-row style without inheriting this one. */
+
+  .article-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 6px 0;
+    text-decoration: none;
+    color: var(--text);
+    font-size: var(--fs-base);
+    font-weight: 400;            /* base — title overrides below */
+    line-height: 1.5;
+    transition: color 150ms ease;
+  }
+
+  .article-row .title {
+    flex: 0 1 auto;
+    font-weight: 500;            /* medium, not bold — per shud.in */
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 150ms ease,
+                text-decoration-color 150ms ease;
+  }
+
+  .article-row .leader {
+    flex: 1 1 auto;
+    min-width: 1em;
+    height: 1em;
+    /* True CSS dot leader — radial-gradient pattern, not border-bottom.
+       Color follows the row's static border token; on hover it deepens
+       to var(--text) so title / leader / date all shift together. */
+    background-image: radial-gradient(
+      circle,
+      var(--border) 1px,
+      transparent 1.5px
+    );
+    background-size: 6px 6px;
+    background-repeat: repeat-x;
+    background-position: 0 70%;
+    transition: background-image 150ms ease;
+  }
+
+  .article-row .date {
+    flex: 0 0 auto;
+    color: var(--text-muted);
+    font-size: inherit;          /* match row — no separate small size */
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.05em;
+    transition: color 150ms ease;
+  }
+
+  /* Hover: three states deepen in sync */
+  .article-row:hover .title {
+    color: var(--text);
+    text-decoration-color: var(--text);
+  }
+
+  .article-row:hover .leader {
+    background-image: radial-gradient(
+      circle,
+      var(--text) 1px,
+      transparent 1.5px
+    );
+  }
+
+  .article-row:hover .date {
+    color: var(--text);
+  }
+</style>

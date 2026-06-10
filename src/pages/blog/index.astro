@@ -4,9 +4,26 @@ import ArticleRow from '../../components/ArticleRow.astro';
 import { getCollection } from 'astro:content';
 import { PAGE_META, ROUTES, FORMATTING } from '../../consts';
 
-const posts = (await getCollection('blog'))
+// Read ?tag=… from the URL. Sidebar links use ROUTES.blogTag(t) which
+// lands on /blog/?tag=<t>, so this is the filter entry point.
+const activeTag = Astro.url.searchParams.get('tag')?.trim() || '';
+
+const allPosts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// All tags (for sidebar) — derived from the unfiltered collection so the
+// tag list stays stable as the user clicks through filters.
+const allTags = Array.from(new Set(allPosts.flatMap((p) => p.data.tags))).sort();
+
+// Apply tag filter (if any). A post matches when the tag is present
+// in its tags array (case-insensitive — tags in markdown are typed
+// ad-hoc, so we don't trust casing).
+const posts = activeTag
+  ? allPosts.filter((p) =>
+      p.data.tags.some((t) => t.toLowerCase() === activeTag.toLowerCase())
+    )
+  : allPosts;
 
 // Group by year
 const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
@@ -16,9 +33,6 @@ const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
 }, {});
 
 const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
-
-// All tags (for sidebar)
-const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
 ---
 
 <BaseLayout
@@ -33,8 +47,17 @@ const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
     </p>
   </header>
 
+  {activeTag && (
+    <p class="filter-bar" aria-live="polite">
+      当前筛选：<code>#{activeTag}</code>
+      <a href={ROUTES.blog} class="filter-clear">清除</a>
+    </p>
+  )}
+
   {years.length === 0 ? (
-    <p class="text-muted">暂无文章。</p>
+    <p class="text-muted">
+      {activeTag ? `没有标记为 #${activeTag} 的文章。` : '暂无文章。'}
+    </p>
   ) : (
     <div class="posts-by-year">
       {years.map((year) => (
@@ -66,7 +89,11 @@ const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
       <div class="tag-cloud">
         {allTags.length === 0 && <p class="text-muted" style="font-size: var(--fs-sm);">暂无标签。</p>}
         {allTags.map((t) => (
-          <a href={ROUTES.blogTag(t)} class="tag">#{t}</a>
+          <a
+            href={ROUTES.blogTag(t)}
+            class={`tag${t.toLowerCase() === activeTag.toLowerCase() ? ' is-active' : ''}`}
+            aria-current={t.toLowerCase() === activeTag.toLowerCase() ? 'true' : undefined}
+          >#{t}</a>
         ))}
       </div>
     </section>
@@ -83,12 +110,20 @@ const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
   }
 
   .year-heading {
-    font-size: var(--fs-sm);
+    /* shud.in style: small, un-bold section divider — no uppercase,
+       no letter-spacing. Just a quiet grey label that lets the list
+       breathe. */
+    font-size: var(--fs-xs);
     font-weight: 500;
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: var(--space-3);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: var(--space-8) 0 var(--space-3);
+    text-wrap: balance;
+  }
+
+  .year-block:first-of-type .year-heading {
+    margin-top: var(--space-4);
   }
 
   .posts-list {
@@ -105,5 +140,50 @@ const allTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
+  }
+
+  .filter-bar {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    margin: 0 0 var(--space-6);
+  }
+
+  .filter-bar code {
+    color: var(--text);
+    background: var(--bg-muted);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .filter-clear {
+    margin-left: var(--space-3);
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .filter-clear:hover {
+    color: var(--text);
+  }
+
+  /* Tag — borderless plain text per shud.in spec §4.1 / §6.2.
+     Active state is communicated purely via color + underline,
+     never via background or border. */
+  .tag-cloud .tag {
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    padding: 0 4px;
+    min-height: 24px;
+    text-decoration: none;
+  }
+
+  .tag.is-active {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--text);
+    text-underline-offset: 2px;
+    border: 0;
+    background: transparent;
   }
 </style>
