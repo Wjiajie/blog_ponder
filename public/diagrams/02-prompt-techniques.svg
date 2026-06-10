@@ -1,0 +1,94 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow-d2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 L8 3 L0 6 z" fill="#1A1A1A"/>
+    </marker>
+  </defs>
+
+  <!-- canvas -->
+  <rect width="1600" height="900" fill="#FAFAF7"/>
+  <rect x="32" y="32" width="1536" height="836" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+
+  <!-- header -->
+  <text x="80" y="92" font-size="36" font-weight="700" fill="#0F0F0F" letter-spacing="-0.5">Prompt 工程五大技术</text>
+  <text x="80" y="118" font-size="12" font-weight="500" fill="#8C8C8C" letter-spacing="2.5">FIVE TECHNIQUES · WHEN TO USE EACH</text>
+
+  <text x="1520" y="92" font-size="13" font-weight="500" fill="#5C5C5C" text-anchor="end">第 5 节 · 核心概念矩阵</text>
+  <line x1="32" y1="148" x2="1568" y2="148" stroke="#1A1A1A" stroke-width="1"/>
+
+  <!-- column headers -->
+  <text x="100" y="190" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2">技术</text>
+  <text x="380" y="190" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2">一句话本质</text>
+  <text x="860" y="190" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2">适用场景</text>
+  <text x="1240" y="190" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2">代价 / 注意点</text>
+
+  <line x1="80" y1="206" x2="1520" y2="206" stroke="#1A1A1A" stroke-width="0.5"/>
+
+  <!-- Row 1: Zero-shot -->
+  <text x="100" y="252" font-size="22" font-weight="600" fill="#0F0F0F">Zero-shot</text>
+  <text x="100" y="276" font-size="11" font-weight="500" fill="#8C8C8C" letter-spacing="1.5">零样本</text>
+  <text x="380" y="252" font-size="15" font-weight="500" fill="#0F0F0F">不举例，直接让模型做。</text>
+  <text x="380" y="276" font-size="13" font-weight="400" fill="#5C5C5C">靠模型训练阶段见过的海量数据兜底。</text>
+  <text x="860" y="252" font-size="14" font-weight="500" fill="#0F0F0F">简单明确的单步任务</text>
+  <text x="860" y="276" font-size="13" font-weight="400" fill="#5C5C5C">翻译、改写、摘要、简单分类。</text>
+  <text x="1240" y="252" font-size="14" font-weight="400" fill="#5C5C5C">几乎无代价</text>
+  <text x="1240" y="276" font-size="13" font-weight="400" fill="#5C5C5C">复杂任务准确率显著下降。</text>
+
+  <line x1="80" y1="306" x2="1520" y2="306" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <!-- Row 2: Few-shot -->
+  <text x="100" y="352" font-size="22" font-weight="600" fill="#0F0F0F">Few-shot</text>
+  <text x="100" y="376" font-size="11" font-weight="500" fill="#8C8C8C" letter-spacing="1.5">少样本</text>
+  <text x="380" y="352" font-size="15" font-weight="500" fill="#0F0F0F">给 3–5 个示例，模型"看样学样"。</text>
+  <text x="380" y="376" font-size="13" font-weight="400" fill="#5C5C5C">in-context learning 的核心机制。</text>
+  <text x="860" y="352" font-size="14" font-weight="500" fill="#0F0F0F">需要稳定格式 / 风格的输出</text>
+  <text x="860" y="376" font-size="13" font-weight="400" fill="#5C5C5C">JSON schema、特定语气、分类标签。</text>
+  <text x="1240" y="352" font-size="14" font-weight="400" fill="#5C5C5C">多花 prompt token</text>
+  <text x="1240" y="376" font-size="13" font-weight="400" fill="#5C5C5C">示例选错会反向带偏模型。</text>
+
+  <line x1="80" y1="406" x2="1520" y2="406" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <!-- Row 3: CoT -->
+  <text x="100" y="452" font-size="22" font-weight="600" fill="#0F0F0F">CoT</text>
+  <text x="100" y="476" font-size="11" font-weight="500" fill="#8C8C8C" letter-spacing="1.5">思维链</text>
+  <text x="380" y="452" font-size="15" font-weight="500" fill="#0F0F0F">让模型"先想一步，再给答案"。</text>
+  <text x="380" y="476" font-size="13" font-weight="400" fill="#5C5C5C">中间推理步骤显式输出。</text>
+  <text x="860" y="452" font-size="14" font-weight="500" fill="#0F0F0F">数学 / 逻辑 / 规划类任务</text>
+  <text x="860" y="476" font-size="13" font-weight="400" fill="#5C5C5C">Wei et al. 2022：准确率 +30~50pp。</text>
+  <text x="1240" y="452" font-size="14" font-weight="400" fill="#5C5C5C">输出变长，成本上升</text>
+  <text x="1240" y="476" font-size="13" font-weight="400" fill="#5C5C5C">简单任务上几乎无效。</text>
+
+  <line x1="80" y1="506" x2="1520" y2="506" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <!-- Row 4: ReAct -->
+  <text x="100" y="552" font-size="22" font-weight="600" fill="#0F0F0F">ReAct</text>
+  <text x="100" y="576" font-size="11" font-weight="500" fill="#8C8C8C" letter-spacing="1.5">思考 + 行动</text>
+  <text x="380" y="552" font-size="15" font-weight="500" fill="#0F0F0F">"思考 → 行动 → 观察"循环。</text>
+  <text x="380" y="576" font-size="13" font-weight="400" fill="#5C5C5C">模型决定下一步，调工具，再思考。</text>
+  <text x="860" y="552" font-size="14" font-weight="500" fill="#0F0F0F">需要外部信息或多步决策</text>
+  <text x="860" y="576" font-size="13" font-weight="400" fill="#5C5C5C">检索、计算、API 调用、Agent 场景。</text>
+  <text x="1240" y="552" font-size="14" font-weight="400" fill="#5C5C5C">工程复杂度高</text>
+  <text x="1240" y="576" font-size="13" font-weight="400" fill="#5C5C5C">需设计工具、错误恢复、终止条件。</text>
+
+  <line x1="80" y1="606" x2="1520" y2="606" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <!-- Row 5: System Prompt -->
+  <text x="100" y="652" font-size="22" font-weight="600" fill="#0F0F0F">System Prompt</text>
+  <text x="100" y="676" font-size="11" font-weight="500" fill="#8C8C8C" letter-spacing="1.5">系统提示词</text>
+  <text x="380" y="652" font-size="15" font-weight="500" fill="#0F0F0F">给模型一个稳定的"行为边界"。</text>
+  <text x="380" y="676" font-size="13" font-weight="400" fill="#5C5C5C">角色 + 约束 + 输出格式规范。</text>
+  <text x="860" y="652" font-size="14" font-weight="500" fill="#0F0F0F">所有稳定行为的基础设施</text>
+  <text x="860" y="676" font-size="13" font-weight="400" fill="#5C5C5C">Cursor / Copilot / ChatGPT Custom Instructions。</text>
+  <text x="1240" y="652" font-size="14" font-weight="400" fill="#5C5C5C">不是越长越好</text>
+  <text x="1240" y="676" font-size="13" font-weight="400" fill="#5C5C5C">冲突指令会降低表现。</text>
+
+  <line x1="80" y1="706" x2="1520" y2="706" stroke="#1A1A1A" stroke-width="1"/>
+
+  <!-- footer summary -->
+  <text x="80" y="746" font-size="14" font-weight="600" fill="#0F0F0F">一句话选型</text>
+  <text x="80" y="772" font-size="14" font-weight="400" fill="#5C5C5C">简单任务 → Zero-shot；稳定格式 → Few-shot；复杂推理 → CoT；外部工具 → ReAct；行为规范 → System Prompt。</text>
+  <text x="80" y="796" font-size="14" font-weight="400" fill="#5C5C5C">这五种技术不是替代关系，而是可以叠加：System Prompt 做边界 + Few-shot 做示例 + CoT 做推理 + ReAct 做工具。</text>
+
+  <!-- bottom signature -->
+  <text x="1520" y="836" font-size="10" font-weight="400" fill="#8C8C8C" text-anchor="end">详见 §5.1 + §5.2 真实案例</text>
+</svg>

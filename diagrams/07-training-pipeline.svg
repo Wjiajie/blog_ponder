@@ -1,0 +1,178 @@
+<svg viewBox="0 0 1600 1100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-r7" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 L8 3 L0 6 z" fill="#1A1A1A"/>
+    </marker>
+  </defs>
+
+  <!-- canvas + frame -->
+  <rect width="1600" height="1100" fill="#FAFAF7"/>
+  <rect x="32" y="32" width="1536" height="1036" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+
+  <!-- header -->
+  <text x="80" y="92" font-size="40" font-weight="700" fill="#0F0F0F" letter-spacing="-0.5">训练一个 LLM 的四个阶段</text>
+  <text x="80" y="118" font-size="12" font-weight="500" fill="#8C8C8C" letter-spacing="2.5">PRETRAIN · SFT · INSTRUCT · RLHF</text>
+  <text x="1520" y="92" font-size="13" font-weight="500" fill="#5C5C5C" text-anchor="end">第 4 节 · 训练流水线</text>
+  <line x1="32" y1="148" x2="1568" y2="148" stroke="#1A1A1A" stroke-width="1"/>
+
+  <!-- intro -->
+  <text x="80" y="194" font-size="14" font-weight="500" fill="#0F0F0F">一个 LLM 从"什么都不会"到"能跟你对话"——背后是四个阶段，每个阶段解决不同问题。</text>
+  <text x="80" y="216" font-size="13" font-weight="400" fill="#5C5C5C">每个阶段用一个损失函数驱动。模型"学什么"，由"它在最小化哪个损失"决定。</text>
+
+  <!-- ============ HORIZONTAL PIPELINE ============ -->
+  <!-- 4 stages: x = 80, 440, 800, 1160 (each 320 wide, 40 gap), y = 280 to 760 -->
+
+  <!-- stage header strip (timeline axis) -->
+  <line x1="100" y1="280" x2="1500" y2="280" stroke="#1A1A1A" stroke-width="1"/>
+
+  <!-- arrows between stages -->
+  <line x1="400" y1="280" x2="440" y2="280" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr-r7)"/>
+  <line x1="760" y1="280" x2="800" y2="280" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr-r7)"/>
+  <line x1="1120" y1="280" x2="1160" y2="280" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr-r7)"/>
+
+  <!-- phase dots on timeline -->
+  <circle cx="100" cy="280" r="6" fill="#1A1A1A"/>
+  <circle cx="440" cy="280" r="6" fill="#1A1A1A"/>
+  <circle cx="800" cy="280" r="6" fill="#1A1A1A"/>
+  <circle cx="1160" cy="280" r="6" fill="#1A1A1A"/>
+  <circle cx="1500" cy="280" r="6" fill="#1A1A1A"/>
+
+  <!-- phase labels above timeline -->
+  <text x="100" y="262" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2" text-anchor="middle">STAGE 01</text>
+  <text x="440" y="262" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2" text-anchor="middle">STAGE 02</text>
+  <text x="800" y="262" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2" text-anchor="middle">STAGE 03</text>
+  <text x="1160" y="262" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2" text-anchor="middle">STAGE 04</text>
+  <text x="1500" y="262" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="2" text-anchor="middle">DEPLOY</text>
+
+  <!-- cost indicator (size of stage proportional to cost) -->
+  <line x1="100" y1="312" x2="1500" y2="312" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+  <text x="100" y="306" font-size="10" font-weight="500" fill="#5C5C5C" text-anchor="middle">最贵</text>
+  <text x="1500" y="306" font-size="10" font-weight="500" fill="#5C5C5C" text-anchor="middle">最便宜</text>
+  <text x="800" y="306" font-size="10" font-weight="500" fill="#5C5C5C" text-anchor="middle">成本梯度 →</text>
+
+  <!-- ============ STAGE 1: Pre-train ============ -->
+  <rect x="80" y="340" width="320" height="420" fill="#FAFAF7" stroke="#1A1A1A" stroke-width="1.5"/>
+  <rect x="80" y="340" width="320" height="36" fill="#1A1A1A"/>
+  <text x="100" y="364" font-size="11" font-weight="700" fill="#FAFAF7" letter-spacing="2">STAGE 01</text>
+  <text x="380" y="364" font-size="14" font-weight="700" fill="#FAFAF7" text-anchor="end">预训练</text>
+
+  <text x="100" y="408" font-size="22" font-weight="700" fill="#0F0F0F">Pre-train</text>
+  <text x="100" y="430" font-size="12" font-weight="500" fill="#5C5C5C">万亿级无标注文本</text>
+
+  <!-- data visual: stacked books -->
+  <g transform="translate(100, 446)">
+    <rect x="0" y="0" width="280" height="6" fill="#1A1A1A"/>
+    <text x="0" y="22" font-size="11" font-weight="500" fill="#5C5C5C">网页 · 书籍 · 代码 · 论文</text>
+    <text x="0" y="40" font-size="10" font-weight="500" fill="#8C8C8C">≈ 10-15T tokens</text>
+  </g>
+
+  <line x1="100" y1="510" x2="380" y2="510" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <text x="100" y="540" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">目标</text>
+  <text x="100" y="566" font-size="13" font-weight="500" fill="#0F0F0F">学"预测下一个 token"</text>
+  <text x="100" y="588" font-size="13" font-weight="500" fill="#0F0F0F">→ 学会语言本身</text>
+
+  <text x="100" y="624" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">损失函数</text>
+  <text x="100" y="650" font-size="13" font-weight="500" fill="#0F0F0F" font-style="italic">Causal LM:</text>
+  <text x="100" y="672" font-size="12" font-weight="500" fill="#5C5C5C">L = -Σ log p(xₜ | x&lt;t)</text>
+
+  <text x="100" y="708" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">成本</text>
+  <text x="100" y="734" font-size="14" font-weight="600" fill="#0F0F0F">数千万到数亿美元</text>
+
+  <!-- ============ STAGE 2: SFT ============ -->
+  <rect x="420" y="340" width="320" height="420" fill="#FAFAF7" stroke="#1A1A1A" stroke-width="1.5"/>
+  <rect x="420" y="340" width="320" height="36" fill="#FAFAF7" stroke="#1A1A1A" stroke-width="1.5"/>
+  <text x="440" y="364" font-size="11" font-weight="700" fill="#0F0F0F" letter-spacing="2">STAGE 02</text>
+  <text x="720" y="364" font-size="14" font-weight="700" fill="#0F0F0F" text-anchor="end">监督微调</text>
+
+  <text x="440" y="408" font-size="22" font-weight="700" fill="#0F0F0F">SFT</text>
+  <text x="440" y="430" font-size="12" font-weight="500" fill="#5C5C5C">人工写的"问题→好答案"对</text>
+
+  <g transform="translate(440, 446)">
+    <rect x="0" y="0" width="280" height="6" fill="#1A1A1A"/>
+    <text x="0" y="22" font-size="11" font-weight="500" fill="#5C5C5C">问答对 · 演示对话</text>
+    <text x="0" y="40" font-size="10" font-weight="500" fill="#8C8C8C">≈ 10-100K 高质量样本</text>
+  </g>
+
+  <line x1="440" y1="510" x2="720" y2="510" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <text x="440" y="540" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">目标</text>
+  <text x="440" y="566" font-size="13" font-weight="500" fill="#0F0F0F">从"会接话"到"会回答人话"</text>
+
+  <text x="440" y="624" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">损失函数</text>
+  <text x="440" y="650" font-size="13" font-weight="500" fill="#0F0F0F" font-style="italic">同 Causal LM，</text>
+  <text x="440" y="672" font-size="12" font-weight="500" fill="#5C5C5C">只在 assistant token 上算</text>
+
+  <text x="440" y="708" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">成本</text>
+  <text x="440" y="734" font-size="14" font-weight="600" fill="#0F0F0F">数千到数万 GPU·小时</text>
+
+  <!-- ============ STAGE 3: Instruction Tuning ============ -->
+  <rect x="780" y="340" width="320" height="420" fill="#FAFAF7" stroke="#1A1A1A" stroke-width="1.5"/>
+  <rect x="780" y="340" width="320" height="36" fill="#FAFAF7" stroke="#1A1A1A" stroke-width="1.5"/>
+  <text x="800" y="364" font-size="11" font-weight="700" fill="#0F0F0F" letter-spacing="2">STAGE 03</text>
+  <text x="1080" y="364" font-size="14" font-weight="700" fill="#0F0F0F" text-anchor="end">指令微调</text>
+
+  <text x="800" y="408" font-size="22" font-weight="700" fill="#0F0F0F">Instruction</text>
+  <text x="800" y="430" font-size="12" font-weight="500" fill="#5C5C5C">大规模"按指令执行"数据</text>
+
+  <g transform="translate(800, 446)">
+    <rect x="0" y="0" width="280" height="6" fill="#1A1A1A"/>
+    <text x="0" y="22" font-size="11" font-weight="500" fill="#5C5C5C">FLAN · Tulu · OpenAssistant</text>
+    <text x="0" y="40" font-size="10" font-weight="500" fill="#8C8C8C">≈ 百万到千万条</text>
+  </g>
+
+  <line x1="800" y1="510" x2="1080" y2="510" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <text x="800" y="540" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">目标</text>
+  <text x="800" y="566" font-size="13" font-weight="500" fill="#0F0F0F">从"会说人话"到"听懂指令"</text>
+
+  <text x="800" y="624" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">代表工作</text>
+  <text x="800" y="650" font-size="13" font-weight="500" fill="#0F0F0F">FLAN-T5 · FLAN-PaLM</text>
+  <text x="800" y="672" font-size="12" font-weight="500" fill="#5C5C5C">Self-Instruct · NaturalInstructions</text>
+
+  <text x="800" y="708" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">成本</text>
+  <text x="800" y="734" font-size="14" font-weight="600" fill="#0F0F0F">数万到数十万 GPU·小时</text>
+
+  <!-- ============ STAGE 4: RLHF ============ -->
+  <rect x="1140" y="340" width="360" height="420" fill="#FAFAF7" stroke="#1A1A1A" stroke-width="1.5"/>
+  <rect x="1140" y="340" width="360" height="36" fill="#1A1A1A"/>
+  <text x="1160" y="364" font-size="11" font-weight="700" fill="#FAFAF7" letter-spacing="2">STAGE 04</text>
+  <text x="1480" y="364" font-size="14" font-weight="700" fill="#FAFAF7" text-anchor="end">人类反馈强化学习</text>
+
+  <text x="1160" y="408" font-size="22" font-weight="700" fill="#0F0F0F">RLHF</text>
+  <text x="1160" y="430" font-size="12" font-weight="500" fill="#5C5C5C">奖励模型 + 强化学习</text>
+
+  <g transform="translate(1160, 446)">
+    <rect x="0" y="0" width="320" height="6" fill="#1A1A1A"/>
+    <text x="0" y="22" font-size="11" font-weight="500" fill="#5C5C5C">人类排序 · DPO · RLAIF</text>
+    <text x="0" y="40" font-size="10" font-weight="500" fill="#8C8C8C">≈ 数十万排序</text>
+  </g>
+
+  <line x1="1160" y1="510" x2="1480" y2="510" stroke="#1A1A1A" stroke-width="0.3" stroke-dasharray="2 4"/>
+
+  <text x="1160" y="540" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">目标</text>
+  <text x="1160" y="566" font-size="13" font-weight="500" fill="#0F0F0F">从"听懂指令"到"对你有用"</text>
+
+  <text x="1160" y="624" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">三步</text>
+  <text x="1160" y="650" font-size="13" font-weight="500" fill="#0F0F0F">1) 收集偏好排序</text>
+  <text x="1160" y="670" font-size="13" font-weight="500" fill="#0F0F0F">2) 训练奖励模型 (RM)</text>
+  <text x="1160" y="690" font-size="13" font-weight="500" fill="#0F0F0F">3) PPO / DPO 优化</text>
+
+  <text x="1160" y="722" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">关键事实</text>
+  <text x="1160" y="746" font-size="12" font-weight="500" fill="#5C5C5C">1.3B InstructGPT &gt; 175B GPT-3</text>
+
+  <!-- ============ BOTTOM: 关键洞察 ============ -->
+  <line x1="80" y1="800" x2="1520" y2="800" stroke="#1A1A1A" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <text x="80" y="836" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">关键洞察</text>
+  <text x="80" y="862" font-size="14" font-weight="500" fill="#0F0F0F">你以为"提示词写得好"的效果，大部分其实是模型在训练阶段（特别是 SFT + RLHF）就已经学到的能力。</text>
+  <text x="80" y="884" font-size="13" font-weight="400" fill="#5C5C5C">"请你以专家身份回答"有效——不是因为提示词巧妙，而是 RLHF 阶段见过无数"专家回答"数据，知道这种语境该输出什么风格。</text>
+  <text x="80" y="906" font-size="13" font-weight="400" fill="#5C5C5C">Prompt 工程很重要，但天花板受限于训练分布。理解这四阶段才能理解"为什么这个 prompt 有效"。</text>
+
+  <line x1="80" y1="940" x2="1520" y2="940" stroke="#1A1A1A" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <text x="80" y="976" font-size="11" font-weight="700" fill="#8C8C8C" letter-spacing="1.5">常见误解</text>
+  <text x="80" y="1000" font-size="13" font-weight="500" fill="#0F0F0F">· RLHF 不是"教新知识"——它教的是"行为偏好"。知识在 Pre-train 阶段就基本学完了。</text>
+  <text x="80" y="1024" font-size="13" font-weight="500" fill="#0F0F0F">· DPO（2023）可以无 RL 也能对齐——直接用偏好数据微调，省去 RM + PPO 的工程复杂度。</text>
+  <text x="80" y="1048" font-size="13" font-weight="500" fill="#0F0F0F">· 后训练（post-training）的成本远低于预训练，但带来的"产品感"差异极大。</text>
+
+  <text x="1520" y="1048" font-size="10" font-weight="400" fill="#8C8C8C" text-anchor="end">详见 §4.1 训练目标公式</text>
+</svg>
