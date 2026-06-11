@@ -35,7 +35,7 @@
   /* Layout */
   --max-w: 1280px;
   --sidebar-w: 220px;
-  --content-w: 720px;
+  --content-w: 42rem; /* 672px — spec §3.1 recommendation (was 720px) */
   --aside-w: 220px;
   --gap: 96px;
 
@@ -160,9 +160,13 @@
     margin: var(--space-6) 0;
   }
 
-  /* Keyboard focus indicator (WCAG 2.4.7) */
+  /* Keyboard focus indicator (WCAG 2.4.7)
+     spec §6.5: dotted 1px + offset for restrained shud.in aesthetic.
+     We use rurikon-400 (--text-muted) at 1px dotted + 2px offset — slightly
+     stronger contrast than spec's rurikon-400 offset 1, to keep keyboard
+     focus visible without being visually heavy. */
   :focus-visible {
-    outline: 2px solid var(--text);
+    outline: 1px dotted var(--text-muted);
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -267,18 +271,17 @@
     margin-bottom: var(--space-3);
   }
 
-  /* Tag chip */
+  /* Tag chip — 默认纯文本无边框 (spec §4 第 1 项)。
+     任何页面用 <a class="tag"> 都不需要再覆盖 border。 */
   .tag {
     display: inline-flex;
     align-items: center;
     min-height: 28px;
     padding: 2px var(--space-2);
     font-size: var(--fs-xs);
-    border: 1px solid var(--border);
-    border-radius: 4px;
     color: var(--text-muted);
     text-decoration: none;
-    transition: all var(--t-base);
+    transition: color var(--t-base);
   }
 
   .tag:hover {
