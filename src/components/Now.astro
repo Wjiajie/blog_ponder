@@ -3,11 +3,6 @@ import { getCollection } from 'astro:content';
 import { ROUTES } from '../consts';
 import copy from '../data/copy.json';
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 4);
-
 // Pull the currently-in-progress milestone from the journey collection.
 // If nothing is in-progress, fall back to the first upcoming one.
 const phases = (await getCollection('journey')).sort(
@@ -26,7 +21,7 @@ const renderShip = (output: string, month: string) =>
 ---
 
 <section class="now-block">
-  <h2 class="section-title">现在</h2>
+  <h2 class="now-title">现在</h2>
   <p class="now-line">
     <span class="now-label">{current?.data.month ?? '—'}</span>
     <span class="now-text">
@@ -39,26 +34,23 @@ const renderShip = (output: string, month: string) =>
       <span class="now-text">{renderShip(next.data.outputs[0] ?? next.data.title, next.data.month)}</span>
     </p>
   )}
-
-  <div class="now-recent">
-    <h3 class="section-subtitle">{nowCopy.latestTitle}</h3>
-    <ul class="bullet-list">
-      {posts.length === 0 && <li class="text-muted">暂无文章。</li>}
-      {posts.map((p) => (
-        <li>
-          <a href={ROUTES.blogPost(p.slug)}>{p.data.title}</a>
-        </li>
-      ))}
-    </ul>
-    {posts.length > 0 && (
-      <p style="margin-top: var(--space-4);">
-        <a href={ROUTES.blog} class="cta-mini">{nowCopy.viewAllCta}</a>
-      </p>
-    )}
-  </div>
+  <p class="now-cta">
+    <a href={ROUTES.journey} class="cta-mini">→ 查看完整时间线</a>
+  </p>
 </section>
 
 <style>
+  .now-block {
+    margin-top: var(--space-12);
+  }
+
+  .now-title {
+    font-size: var(--fs-2xl);
+    font-weight: 500;
+    margin: 0 0 var(--space-3) 0;
+    letter-spacing: -0.02em;
+  }
+
   .now-line {
     display: flex;
     gap: var(--space-4);
@@ -71,8 +63,7 @@ const renderShip = (output: string, month: string) =>
     min-width: 48px;
     font-size: var(--fs-xs);
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
   }
 
   .now-text {
@@ -81,8 +72,8 @@ const renderShip = (output: string, month: string) =>
     min-width: 0;
   }
 
-  .now-recent {
-    margin-top: var(--space-8);
+  .now-cta {
+    margin-top: var(--space-4);
   }
 
   .cta-mini {
