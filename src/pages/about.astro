@@ -16,7 +16,7 @@ const { Content } = await entry.render();
   showRightAside={false}
 >
   <article class="about">
-    <h1>{entry.data.title}</h1>
+    <h1 class="page-title">关于</h1>
     <Content />
   </article>
 </BaseLayout>
@@ -26,8 +26,12 @@ const { Content } = await entry.render();
     max-width: 640px;
   }
 
-  .about h1 {
-    margin-bottom: var(--space-8);
+  .page-title {
+    font-size: var(--fs-4xl);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 var(--space-8) 0;
   }
 
   .about :global(p) {
@@ -52,5 +56,12 @@ const { Content } = await entry.render();
     left: 0;
     color: var(--text-muted);
     font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .page-title {
+      font-size: var(--fs-3xl);
+      letter-spacing: -0.02em;
+    }
   }
 </style>

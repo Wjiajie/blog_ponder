@@ -1,10 +1,21 @@
 {
   "home": {
-    "heroGreetingTemplate": "你好，我是 {name}。",
-    "heroSubTemplate": "{shortBio}。目标方向是 {vertical}，希望加入 {company} 的 FDE 团队。",
+    "heroEyebrow": "Portfolio",
+    "heroGreetingTemplate": "我正在为下一份工作做准备，做 {vertical} 行业的 AI 前向部署工程师。",
+    "heroGreetingTemplateFallback": "我正在为下一份工作做准备，做 {vertical} 行业的 AI 前向部署工程师。",
+    "heroBody": "图形学工程师 → AI FDE 转型中。希望加入 {company} 的 FDE 团队，把 AI 在客户现场端到端交付。",
+    "heroHiring": "在招人",
+    "heroCta": "聊聊",
+    "workTitle": "项目",
+    "workLede": "3 个正在并行推进的项目，每一个都从「客户痛点」开始，到「可演示的工件」结束。",
+    "personalTitle": "随想",
+    "personalLede": "转型路上写下的笔记和复盘。",
     "journeyPreviewTitle": "路径",
     "journeyPreviewBodyTemplate": "6 个月时间，从「图形学 + AI」到「在教育场景里交付 AI 产品」。{totalCount} 个阶段，{doneCount} 个已完成。",
-    "journeyPreviewCta": "→ 查看完整时间线"
+    "journeyPreviewCta": "→ 查看完整时间线",
+    "aboutTitle": "About me",
+    "aboutBody": "图形学工程师，转型 AI 前向部署工程师中。",
+    "aboutLinksLabel": "在以下平台能找到我："
   },
   "_homeTemplateNote": "home.*Template 字符串使用 {placeholder} 占位符；.astro 消费者在占位符处切分后注入 JSX（如把 hero name 包成斜体 <span>）。",
   "now": {
