@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" font-family="ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif">
+  <!-- Reading Room palette -->
+
+  <rect width="1600" height="1100" fill="#F6EBD8"/>
+  <rect x="32" y="32" width="1536" height="1036" fill="none" stroke="#0B0A09" stroke-width="2.5"/>
+
+  <!-- Header -->
+  <text x="80" y="118" font-size="44" font-weight="700" letter-spacing="3" fill="#0B0A09">AGENT RUNTIMES · THREE LINES</text>
+  <text x="80" y="158" font-size="20" font-weight="400" fill="#0B0A09">同一个底座模型,放进不同的 runtime,表现差异比你想的大得多。</text>
+  <line x1="80" y1="190" x2="1520" y2="190" stroke="#0B0A09" stroke-width="2.5"/>
+
+  <!-- 3 vertical columns -->
+  <!-- column 1: Claude Code / butter -->
+  <rect x="80" y="232" width="466" height="780" fill="#F1DAB1" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="100" y="290" font-size="32" font-weight="700" letter-spacing="2" fill="#0B0A09">CLAUDE CODE</text>
+  <text x="100" y="320" font-size="14" font-style="italic" fill="#0B0A09">Anthropic · 受控的 coding runtime</text>
+  <line x1="100" y1="346" x2="526" y2="346" stroke="#0B0A09" stroke-width="2"/>
+  <text x="100" y="394" font-size="16" font-weight="700" fill="#0B0A09">最像</text>
+  <text x="100" y="418" font-size="16" font-weight="400" fill="#0B0A09">有纪律的 IDE 协作者</text>
+  <text x="100" y="476" font-size="16" font-weight="700" fill="#0B0A09">核心机制</text>
+  <text x="100" y="500" font-size="14" font-weight="400" fill="#0B0A09">· 默认只读 + bash 审批</text>
+  <text x="100" y="524" font-size="14" font-weight="400" fill="#0B0A09">· Hooks 可拦截 / 放行 / 升级</text>
+  <text x="100" y="548" font-size="14" font-weight="400" fill="#0B0A09">· Subagents 隔离上下文</text>
+  <text x="100" y="572" font-size="14" font-weight="400" fill="#0B0A09">· MCP 接外部工具</text>
+  <text x="100" y="630" font-size="16" font-weight="700" fill="#0B0A09">强项</text>
+  <text x="100" y="654" font-size="14" font-weight="400" fill="#0B0A09">仓库级 coding、企业治理、</text>
+  <text x="100" y="674" font-size="14" font-weight="400" fill="#0B0A09">DevEx 自动化</text>
+  <text x="100" y="732" font-size="16" font-weight="700" fill="#0B0A09">短板</text>
+  <text x="100" y="756" font-size="14" font-weight="400" fill="#0B0A09">· 本体 license 不是 OSI 开源</text>
+  <text x="100" y="776" font-size="14" font-weight="400" fill="#0B0A09">· runtime 与 Anthropic 模型紧耦合</text>
+  <text x="100" y="836" font-size="16" font-weight="700" fill="#0B0A09">适合谁</text>
+  <text x="100" y="860" font-size="14" font-weight="400" fill="#0B0A09">想要"稳修 repo、带审批、</text>
+  <text x="100" y="880" font-size="14" font-weight="400" fill="#0B0A09">可观测、可接企业工具"的团队</text>
+  <text x="100" y="950" font-size="12" font-style="italic" fill="#0B0A09">License: 商业条款下的</text>
+  <text x="100" y="970" font-size="12" font-style="italic" fill="#0B0A09">source-available;SDK 为 MIT</text>
+
+  <!-- column 2: MiniMax / lilac -->
+  <rect x="567" y="232" width="466" height="780" fill="#D6C7CC" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="587" y="290" font-size="32" font-weight="700" letter-spacing="2" fill="#0B0A09">Mavis</text>
+  <text x="587" y="320" font-size="14" font-style="italic" fill="#0B0A09">MiniMax · 模型 + 产品 + RL 一体</text>
+  <line x1="587" y1="346" x2="1013" y2="346" stroke="#0B0A09" stroke-width="2"/>
+  <text x="587" y="394" font-size="16" font-weight="700" fill="#0B0A09">最像</text>
+  <text x="587" y="418" font-size="16" font-weight="400" fill="#0B0A09">产品级的"数字团队"</text>
+  <text x="587" y="476" font-size="16" font-weight="700" fill="#0B0A09">核心机制</text>
+  <text x="587" y="500" font-size="14" font-weight="400" fill="#0B0A09">· Agent Teams 角色化分工</text>
+  <text x="587" y="524" font-size="14" font-weight="400" fill="#0B0A09">· Interleaved Thinking</text>
+  <text x="587" y="548" font-size="14" font-weight="400" fill="#0B0A09">· 上下文管理 = 训练对象</text>
+  <text x="587" y="572" font-size="14" font-weight="400" fill="#0B0A09">· Forge 做 agent-native RL</text>
+  <text x="587" y="630" font-size="16" font-weight="700" fill="#0B0A09">强项</text>
+  <text x="587" y="654" font-size="14" font-weight="400" fill="#0B0A09">长任务、coding + office + 多模态、</text>
+  <text x="587" y="674" font-size="14" font-weight="400" fill="#0B0A09">M3 模型 1M context</text>
+  <text x="587" y="732" font-size="16" font-weight="700" fill="#0B0A09">短板</text>
+  <text x="587" y="756" font-size="14" font-weight="400" fill="#0B0A09">· 文档与产品之间版本漂移</text>
+  <text x="587" y="776" font-size="14" font-weight="400" fill="#0B0A09">· 公开复现材料少于闭源产品</text>
+  <text x="587" y="836" font-size="16" font-weight="700" fill="#0B0A09">适合谁</text>
+  <text x="587" y="860" font-size="14" font-weight="400" fill="#0B0A09">AI-native 团队、研究 agent RL</text>
+  <text x="587" y="880" font-size="14" font-weight="400" fill="#0B0A09">与产品化 runtime 的研究者</text>
+  <text x="587" y="950" font-size="12" font-style="italic" fill="#0B0A09">License: 产品服务化交付,</text>
+  <text x="587" y="970" font-size="12" font-style="italic" fill="#0B0A09">Mini-Agent / Skills / MCP 是 MIT</text>
+
+  <!-- column 3: Hermes / terracotta -->
+  <rect x="1054" y="232" width="466" height="780" fill="#DE916A" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="1074" y="290" font-size="32" font-weight="700" letter-spacing="2" fill="#0B0A09">HERMES</text>
+  <text x="1074" y="320" font-size="14" font-style="italic" fill="#0B0A09">Nous Research · 开源常驻代理</text>
+  <line x1="1074" y1="346" x2="1500" y2="346" stroke="#0B0A09" stroke-width="2"/>
+  <text x="1074" y="394" font-size="16" font-weight="700" fill="#0B0A09">最像</text>
+  <text x="1074" y="418" font-size="16" font-weight="400" fill="#0B0A09">长期数字同事</text>
+  <text x="1074" y="476" font-size="16" font-weight="700" fill="#0B0A09">核心机制</text>
+  <text x="1074" y="500" font-size="14" font-weight="400" fill="#0B0A09">· Skills Hub 一等公民</text>
+  <text x="1074" y="524" font-size="14" font-weight="400" fill="#0B0A09">· 内建 + 外部 memory providers</text>
+  <text x="1074" y="548" font-size="14" font-weight="400" fill="#0B0A09">· Gateway 多通道接入</text>
+  <text x="1074" y="572" font-size="14" font-weight="400" fill="#0B0A09">· Cron scheduler 常驻</text>
+  <text x="1074" y="630" font-size="16" font-weight="700" fill="#0B0A09">强项</text>
+  <text x="1074" y="654" font-size="14" font-weight="400" fill="#0B0A09">常驻个人代理、消息 bot、</text>
+  <text x="1074" y="674" font-size="14" font-weight="400" fill="#0B0A09">私有化部署</text>
+  <text x="1074" y="732" font-size="16" font-weight="700" fill="#0B0A09">短板</text>
+  <text x="1074" y="756" font-size="14" font-weight="400" fill="#0B0A09">· 工程复杂度会移到配置侧</text>
+  <text x="1074" y="776" font-size="14" font-weight="400" fill="#0B0A09">· 公开 benchmark 不如架构文档细</text>
+  <text x="1074" y="836" font-size="16" font-weight="700" fill="#0B0A09">适合谁</text>
+  <text x="1074" y="860" font-size="14" font-weight="400" fill="#0B0A09">想要"一个会越来越懂我和</text>
+  <text x="1074" y="880" font-size="14" font-weight="400" fill="#0B0A09">我的项目"的长期代理</text>
+  <text x="1074" y="950" font-size="12" font-style="italic" fill="#0B0A09">License: MIT 开源,</text>
+  <text x="1074" y="970" font-size="12" font-style="italic" fill="#0B0A09">Provider / Model 可换</text>
+
+  <!-- Footer -->
+  <line x1="80" y1="1040" x2="1520" y2="1040" stroke="#0B0A09" stroke-width="1"/>
+  <text x="80" y="1058" font-size="14" font-style="italic" fill="#0B0A09">三家共同点:都已把 runtime(状态 / 治理 / 记忆 / 工具)作为差异化主战场,而不是 prompt 模板。</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" font-family="ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif">
+  <!-- Reading Room palette -->
+  <!-- canvas #F6EBD8 / ink #0B0A09 / lilac #D6C7CC / terracotta #DE916A / butter #F1DAB1 -->
+
+  <rect width="1600" height="1100" fill="#F6EBD8"/>
+  <rect x="32" y="32" width="1536" height="1036" fill="none" stroke="#0B0A09" stroke-width="2.5"/>
+
+  <!-- Header -->
+  <text x="80" y="118" font-size="44" font-weight="700" letter-spacing="3" fill="#0B0A09">AGENT EVAL · THE FOUR LEDGERS</text>
+  <text x="80" y="158" font-size="20" font-weight="400" fill="#0B0A09">上线一个 agent 之前,你至少要在这四本账上都看到数字。</text>
+  <line x1="80" y1="190" x2="1520" y2="190" stroke="#0B0A09" stroke-width="2.5"/>
+
+  <!-- 2x2 grid of four ledgers -->
+  <!-- top-left: 主指标 / butter -->
+  <rect x="80" y="232" width="700" height="380" fill="#F1DAB1" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="112" y="290" font-size="34" font-weight="700" letter-spacing="2" fill="#0B0A09">主指标</text>
+  <text x="112" y="318" font-size="15" font-weight="400" fill="#0B0A09">任务真的做完了吗</text>
+  <text x="112" y="372" font-size="18" font-weight="700" fill="#0B0A09">· 任务成功率  Success Rate</text>
+  <text x="112" y="402" font-size="18" font-weight="700" fill="#0B0A09">· Pass@k / Exact Match</text>
+  <text x="112" y="432" font-size="18" font-weight="700" fill="#0B0A09">· 路径完成度  Trajectory</text>
+  <text x="112" y="488" font-size="15" font-weight="400" fill="#0B0A09">代表基准:</text>
+  <text x="112" y="514" font-size="14" font-weight="400" fill="#0B0A09">SWE-bench · GAIA · WebArena · τ-bench</text>
+  <text x="112" y="572" font-size="13" font-style="italic" fill="#0B0A09">最容易被当成"唯一指标"。但只盯它,会骗人。</text>
+
+  <!-- top-right: 护栏指标 / lilac -->
+  <rect x="820" y="232" width="700" height="380" fill="#D6C7CC" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="852" y="290" font-size="34" font-weight="700" letter-spacing="2" fill="#0B0A09">护栏</text>
+  <text x="852" y="318" font-size="15" font-weight="400" fill="#0B0A09">上线前必须不恶化</text>
+  <text x="852" y="372" font-size="18" font-weight="700" fill="#0B0A09">· 安全违规率  Safety Violation</text>
+  <text x="852" y="402" font-size="18" font-weight="700" fill="#0B0A09">· 拒答过度率  Over-Refusal</text>
+  <text x="852" y="432" font-size="18" font-weight="700" fill="#0B0A09">· 越权调用  Unauthorized Tool Calls</text>
+  <text x="852" y="488" font-size="15" font-weight="400" fill="#0B0A09">代表基准:</text>
+  <text x="852" y="514" font-size="14" font-weight="400" fill="#0B0A09">HarmBench · Agent-SafetyBench · Promptfoo</text>
+  <text x="852" y="572" font-size="13" font-style="italic" fill="#0B0A09">"模型不会说坏话"≠"agent 不会做坏事"。</text>
+
+  <!-- bottom-left: 运营指标 / terracotta -->
+  <rect x="80" y="640" width="700" height="380" fill="#DE916A" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="112" y="698" font-size="34" font-weight="700" letter-spacing="2" fill="#0B0A09">运营</text>
+  <text x="112" y="726" font-size="15" font-weight="400" fill="#0B0A09">为老板和工程团队记账</text>
+  <text x="112" y="780" font-size="18" font-weight="700" fill="#0B0A09">· P50 / P95 延迟</text>
+  <text x="112" y="810" font-size="18" font-weight="700" fill="#0B0A09">· TTFT · TPOT · 总 token</text>
+  <text x="112" y="840" font-size="18" font-weight="700" fill="#0B0A09">· 每成功任务成本</text>
+  <text x="112" y="896" font-size="15" font-weight="400" fill="#0B0A09">测量工具:</text>
+  <text x="112" y="922" font-size="14" font-weight="400" fill="#0B0A09">EvalScope · OpenInference · LangSmith</text>
+  <text x="112" y="980" font-size="13" font-style="italic" fill="#0B0A09">高成功率 + 高成本 = 商业上还是失败。</text>
+
+  <!-- bottom-right: 步数效率 / cream with ink frame -->
+  <rect x="820" y="640" width="700" height="380" fill="#F6EBD8" stroke="#0B0A09" stroke-width="2.5"/>
+  <rect x="820" y="640" width="700" height="80" fill="#0B0A09"/>
+  <text x="852" y="694" font-size="34" font-weight="700" letter-spacing="2" fill="#F6EBD8">步数效率</text>
+  <text x="852" y="758" font-size="15" font-weight="400" fill="#0B0A09">长流程 agent 的专属指标</text>
+  <text x="852" y="812" font-size="18" font-weight="700" fill="#0B0A09">· 平均步数  Avg Steps</text>
+  <text x="852" y="842" font-size="18" font-weight="700" fill="#0B0A09">· 步数方差  Step Variance</text>
+  <text x="852" y="872" font-size="18" font-weight="700" fill="#0B0A09">· 工具切换次数  Tool Switches</text>
+  <text x="852" y="928" font-size="15" font-weight="400" fill="#0B0A09">OSWorld-Human 发现:</text>
+  <text x="852" y="954" font-size="14" font-weight="400" fill="#0B0A09">当前最强 computer-use agent 比人类多走</text>
+  <text x="852" y="976" font-size="14" font-weight="400" fill="#0B0A09">1.4 — 2.7 倍步骤才能完成同样的任务。</text>
+
+  <!-- Footer -->
+  <text x="80" y="1040" font-size="14" font-style="italic" fill="#0B0A09">FDE 现场:四个数字都要看,任意一个恶化都不能上线。</text>
+</svg>

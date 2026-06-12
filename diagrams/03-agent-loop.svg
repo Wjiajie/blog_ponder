@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif">
+  <!-- Reading Room palette -->
+
+  <rect width="1600" height="900" fill="#F6EBD8"/>
+  <rect x="32" y="32" width="1536" height="836" fill="none" stroke="#0B0A09" stroke-width="2.5"/>
+
+  <!-- Header -->
+  <text x="80" y="100" font-size="40" font-weight="700" letter-spacing="3" fill="#0B0A09">A MINIMAL AGENT LOOP</text>
+  <text x="80" y="138" font-size="18" font-weight="400" fill="#0B0A09">把今天所有严肃 agent 框架的共性剥到骨头:状态 + 工具 + 记忆,反复转。</text>
+  <line x1="80" y1="170" x2="1520" y2="170" stroke="#0B0A09" stroke-width="2.5"/>
+
+  <!-- Central loop (big circle) -->
+  <circle cx="800" cy="540" r="200" fill="none" stroke="#0B0A09" stroke-width="2.5"/>
+  <circle cx="800" cy="540" r="170" fill="#F1DAB1" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="800" y="510" text-anchor="middle" font-size="22" font-weight="700" letter-spacing="2" fill="#0B0A09">AGENT LOOP</text>
+  <text x="800" y="540" text-anchor="middle" font-size="14" font-weight="400" fill="#0B0A09">while not done:</text>
+  <text x="800" y="566" text-anchor="middle" font-size="14" font-weight="400" fill="#0B0A09">  build_context()</text>
+  <text x="800" y="590" text-anchor="middle" font-size="14" font-weight="400" fill="#0B0A09">  model.step()</text>
+  <text x="800" y="614" text-anchor="middle" font-size="14" font-weight="400" fill="#0B0A09">  execute(policy)</text>
+
+  <!-- Around-the-loop stations: 4 boxes (N, E, S, W) -->
+  <!-- N: STATE / cream block -->
+  <rect x="660" y="240" width="280" height="100" fill="#F6EBD8" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="800" y="276" text-anchor="middle" font-size="20" font-weight="700" letter-spacing="2" fill="#0B0A09">STATE</text>
+  <text x="800" y="304" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">会话 / 日志 / 工作目录 / 恢复点</text>
+  <text x="800" y="324" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">what's true right now</text>
+
+  <!-- E: TOOLS / terracotta -->
+  <rect x="1180" y="490" width="280" height="100" fill="#DE916A" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="1320" y="526" text-anchor="middle" font-size="20" font-weight="700" letter-spacing="2" fill="#0B0A09">TOOLS</text>
+  <text x="1320" y="554" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">文件 / Bash / MCP / 浏览器</text>
+  <text x="1320" y="574" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">how it touches the world</text>
+
+  <!-- S: MEMORY / lilac -->
+  <rect x="660" y="740" width="280" height="100" fill="#D6C7CC" stroke="#0B0A09" stroke-width="2.5"/>
+  <text x="800" y="776" text-anchor="middle" font-size="20" font-weight="700" letter-spacing="2" fill="#0B0A09">MEMORY</text>
+  <text x="800" y="804" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">长期记忆 / Skills / 上下文</text>
+  <text x="800" y="824" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">what it knows across sessions</text>
+
+  <!-- W: POLICY / cream with ink banner -->
+  <rect x="140" y="490" width="280" height="100" fill="#F6EBD8" stroke="#0B0A09" stroke-width="2.5"/>
+  <rect x="140" y="490" width="280" height="26" fill="#0B0A09"/>
+  <text x="280" y="510" text-anchor="middle" font-size="20" font-weight="700" letter-spacing="2" fill="#F6EBD8">POLICY</text>
+  <text x="280" y="546" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">权限 / 沙箱 / Hooks / 审批</text>
+  <text x="280" y="566" text-anchor="middle" font-size="13" font-weight="400" fill="#0B0A09">what's allowed</text>
+
+  <!-- connectors (4 arrows on the loop) -->
+  <!-- N to E (top right quadrant) -->
+  <path d="M 940 290 Q 1080 290 1180 540" fill="none" stroke="#0B0A09" stroke-width="2"/>
+  <polygon points="1180,540 1170,528 1170,552" fill="#0B0A09"/>
+  <!-- E to S (bottom right quadrant) -->
+  <path d="M 1180 590 Q 1080 790 940 790" fill="none" stroke="#0B0A09" stroke-width="2"/>
+  <polygon points="940,790 952,780 952,800" fill="#0B0A09"/>
+  <!-- S to W (bottom left quadrant) -->
+  <path d="M 660 790 Q 520 790 420 590" fill="none" stroke="#0B0A09" stroke-width="2"/>
+  <polygon points="420,590 430,602 430,578" fill="#0B0A09"/>
+  <!-- W to N (top left quadrant) -->
+  <path d="M 420 490 Q 520 290 660 290" fill="none" stroke="#0B0A09" stroke-width="2"/>
+  <polygon points="660,290 648,300 648,280" fill="#0B0A09"/>
+
+  <!-- Footer note -->
+  <line x1="80" y1="864" x2="1520" y2="864" stroke="#0B0A09" stroke-width="1"/>
+  <text x="80" y="884" font-size="14" font-style="italic" fill="#0B0A09">真正拉开 framework 差距的,是这四块怎么做:上下文怎么裁剪、工具怎么治理、失败怎么恢复、多 agent 怎么分工。</text>
+</svg>
