@@ -52,6 +52,15 @@ const pages = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    // Optional right-rail block shown in BaseLayout's aside slot. The
+    // home page uses it for the "About me" card; other pages can
+    // omit it and the layout will render nothing.
+    aside: z
+      .object({
+        title: z.string(),
+        body: z.string(),
+      })
+      .optional(),
   }),
 });
 

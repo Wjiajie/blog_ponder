@@ -1,39 +1,46 @@
 ---
 import { getCollection } from 'astro:content';
-import { ROUTES, COPY } from '../consts';
+import { ROUTES } from '../consts';
 
-// Pull the currently-in-progress milestone from the journey collection.
-// If nothing is in-progress, fall back to the first upcoming one.
+interface Props {
+  title?: string;
+  nextLabel?: string;
+  viewTimelineText?: string;
+}
+
+const {
+  title = '现在',
+  nextLabel = '下一站',
+  viewTimelineText = '→ 查看完整时间线',
+} = Astro.props;
+
 const phases = (await getCollection('journey')).sort(
-  (a, b) => a.data.order - b.data.order
+  (a, b) => a.data.order - b.data.order,
 );
 const current = phases.find((p) => p.data.status === 'in-progress');
 const next = phases.find((p) => p.data.status === 'upcoming');
 
-// Substitutions stay minimal — keep templates in COPY, do the
-// .replace() once at the call site so copy stays readable.
-const renderInProgress = (description: string) =>
-  COPY.now.inProgressTemplate.replace('{description}', description.replace(/[。.]$/, ''));
-const renderShip = (output: string, month: string) =>
-  COPY.now.shipTemplate.replace('{output}', output).replace('{month}', month);
+const trimSentenceEnd = (text: string) => text.replace(/[。.]$/, '');
 ---
 
 <section class="now-block">
-  <h2 class="now-title">现在</h2>
+  <h2 class="now-title">{title}</h2>
   <p class="now-line">
     <span class="now-label">{current?.data.month ?? '—'}</span>
     <span class="now-text">
-      {current ? renderInProgress(current.data.description) : nowCopy.restingText}
+      {current ? `进行中 · ${trimSentenceEnd(current.data.description)}` : '在两个阶段之间调整节奏'}
     </span>
   </p>
   {next && (
     <p class="now-line">
-      <span class="now-label">下一站</span>
-      <span class="now-text">{renderShip(next.data.outputs[0] ?? next.data.title, next.data.month)}</span>
+      <span class="now-label">{nextLabel}</span>
+      <span class="now-text">
+        {`目标在 ${next.data.month} 之前交付 ${next.data.outputs[0] ?? next.data.title}。`}
+      </span>
     </p>
   )}
   <p class="now-cta">
-    <a href={ROUTES.journey} class="cta-mini">→ 查看完整时间线</a>
+    <a href={ROUTES.journey} class="cta-mini">{viewTimelineText}</a>
   </p>
 </section>
 

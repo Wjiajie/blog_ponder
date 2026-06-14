@@ -1,37 +1,18 @@
 ---
+// Home page is now content-driven: src/content/pages/home.mdx owns
+// the markup (hero / project list / post list / "now" block) and
+// this file is just the layout shell + right-rail about-card.
+//
+// To edit the home page, open home.mdx — not this file.
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Now from '../components/Now.astro';
-import { SITE, ROUTES, SOCIAL, COPY } from '../consts';
-import { getCollection } from 'astro:content';
+import { SITE, SOCIAL } from '../consts';
 
-const projects = (await getCollection('projects'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
-
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 4);
-
-const heroSentence = COPY.home.heroGreetingTemplate.replace('{vertical}', SITE.vertical);
-const heroBody = COPY.home.heroBody
-  .replace('{shortBio}', SITE.shortBio)
-  .replace('{company}', SITE.targetCompany);
-
-// Truncate a description to a soft length so the bullet list stays compact.
-// We cut on a Chinese / English full stop, falling back to a hard cut at maxLen
-// if no terminator is found. ASCII space is preferred over mid-word breaks.
-const truncate = (text: string, maxLen = 80): string => {
-  const cleaned = text.replace(/\s+/g, ' ').trim();
-  if (cleaned.length <= maxLen) return cleaned;
-  const slice = cleaned.slice(0, maxLen);
-  const lastTerminator = Math.max(
-    slice.lastIndexOf('。'),
-    slice.lastIndexOf('. '),
-    slice.lastIndexOf(' '),
-  );
-  return (lastTerminator > maxLen * 0.4 ? slice.slice(0, lastTerminator) : slice) + '…';
-};
+const entry = await getEntry('pages', 'home');
+if (!entry) {
+  throw new Error('Missing content entry: pages/home');
+}
+const { Content } = await entry.render();
 ---
 
 <BaseLayout
@@ -39,60 +20,14 @@ const truncate = (text: string, maxLen = 80): string => {
   description={SITE.description}
   showRightAside={true}
 >
-  <h1 class="page-title">Portfolio</h1>
-
-  <section class="delba-hero">
-    <p>{heroSentence}</p>
-    <p>
-      {COPY.home.heroHiring}
-      <a href={ROUTES.about}>{heroBody}</a>
-    </p>
-    <a href="mailto:jiajiewu233@gmail.com" class="btn">{COPY.home.heroCta}</a>
-  </section>
-
-  <section class="delba-section">
-    <h2>{COPY.home.workTitle}</h2>
-    <p class="section-lede">{COPY.home.workLede}</p>
-    <ul class="bullet-list">
-      {projects.map((p) => (
-        <li>
-          <strong>
-            <a href={ROUTES.project(p.slug)}>{p.data.title}</a>
-          </strong>
-          {'：'}{p.data.summary}
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  <section class="delba-section">
-    <h2>{COPY.home.personalTitle}</h2>
-    <p class="section-lede">{COPY.home.personalLede}</p>
-    <ul class="bullet-list">
-      {posts.map((post) => (
-        <li>
-          <strong>
-            <a href={ROUTES.blogPost(post.slug)}>{post.data.title}</a>
-          </strong>
-          {post.data.description ? '：' + truncate(post.data.description, 80) : ''}
-        </li>
-      ))}
-    </ul>
-    {posts.length > 0 && (
-      <p class="cta-mini-wrap">
-        <a href={ROUTES.blog} class="cta-mini">{COPY.now.viewAllCta}</a>
-      </p>
-    )}
-  </section>
-
-  <Now />
+  <Content />
 
   <Fragment slot="aside">
     <section class="about-card">
-      <h2 class="about-title">{COPY.home.aboutTitle}</h2>
+      <h2 class="about-title">{entry.data.aside?.title ?? 'About me'}</h2>
       <div class="about-head">
         <div class="about-avatar" aria-hidden="true">J</div>
-        <p class="about-body">{COPY.home.aboutBody}</p>
+        <p class="about-body">{entry.data.aside?.body}</p>
       </div>
       <hr class="about-divider" />
       <div class="about-links">
@@ -108,51 +43,12 @@ const truncate = (text: string, maxLen = 80): string => {
 </BaseLayout>
 
 <style>
-  .page-title {
-    font-size: var(--fs-4xl);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin: 0 0 var(--space-6) 0;
-    text-wrap: balance;
-  }
-
-  .delba-section {
-    margin-top: var(--space-12);
-  }
-
-  .delba-section h2 {
-    margin-top: 0;
-    margin-bottom: var(--space-3);
-    font-size: var(--fs-xl);
-    font-weight: 500;
-    letter-spacing: 0;
-  }
-
-  .section-lede {
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
-    margin-bottom: var(--space-4);
-    max-width: 38em;
-  }
-
-  .cta-mini-wrap {
-    margin-top: var(--space-4);
-  }
-
-  .cta-mini {
-    font-size: var(--fs-sm);
-    color: var(--text-muted);
-    text-decoration: underline;
-    text-decoration-color: var(--border);
-    text-underline-offset: 2px;
-    transition: color var(--t-base), text-decoration-color var(--t-base);
-  }
-
-  .cta-mini:hover {
-    color: var(--text);
-    text-decoration-color: var(--text);
-  }
+  /* The home.mdx markup is responsible for its own rhythm
+     (.delba-section / .page-title / etc. live there). This file
+     only owns the right-rail about-card, which is layout-shared
+     chrome rather than content. Keeping the styles here means
+     home.mdx can be edited by a non-engineer without touching
+     this file. */
 
   /* Right column About-me card — keep title small and unornamented
      (no borders, no uppercase, no separator line). */

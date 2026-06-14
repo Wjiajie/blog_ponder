@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import { ROUTES } from '../consts';
+
+interface Props {
+  maxItems?: number;
+}
+
+const { maxItems = 4 } = Astro.props;
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, maxItems);
+---
+
+<ul class="bullet-list">
+  {projects.map((p) => (
+    <li>
+      <strong>
+        <a href={ROUTES.project(p.slug)}>{p.data.title}</a>
+      </strong>
+      {'：'}{p.data.summary}
+    </li>
+  ))}
+</ul>
