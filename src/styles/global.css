@@ -476,14 +476,19 @@
     background: var(--bg-muted);
     /* border removed — keep avatar but no decoration */
     border: 0;
+    overflow: hidden;          /* clip the <img> to the round mask */
+  }
+
+  /* The avatar is now an <img> (was the letter "J" before). The container
+     is a circle with overflow:hidden; the img fills the container and
+     gets cropped to a circle by the border-radius. Keeping
+     object-fit:cover on the container as well is harmless if a future
+     change swaps back to a <div> with a background-image. */
+  .about-card .about-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--text-muted);
-    letter-spacing: 0;
   }
 
   .about-card .about-body {

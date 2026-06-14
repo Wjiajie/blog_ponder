@@ -1,0 +1,27 @@
+/* Home page pin block — the "current top priorities" callout that
+   sits above the project list. Imported by src/content/pages/home.mdx
+   (MDX is strict about inline <style> blocks with CSS, so we keep
+   the CSS external). */
+
+.home-pin {
+  border-left: 2px solid currentColor;
+  padding: 0.5rem 0 0.5rem 0.9rem;
+  margin: 0 0 2rem 0;
+}
+
+.home-pin .pin-label {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.home-pin .pin-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.home-pin .pin-list li + li {
+  margin-top: 0.15rem;
+}

@@ -6,6 +6,7 @@ aside:
   body: "图形学工程师，转型 AI 前向部署工程师中。"
 ---
 
+import '../../styles/home-pin.css';
 import HomeProjectList from '../../components/HomeProjectList.astro';
 import HomePostList from '../../components/HomePostList.astro';
 import HomeNow from '../../components/HomeNow.astro';
@@ -14,19 +15,30 @@ import HomeNow from '../../components/HomeNow.astro';
 
 <section class="delba-hero">
   <p>我是jiajie，目前在准备做教育行业的AI前向部署工程师。</p>
-  <p><a href="/about/">我关注的、以及我相信的。</a></p>
+  <p><a href="/about/">-->我关注的、以及我相信的。</a></p>
+</section>
+
+<section class="delba-section home-pin" aria-label="最高优先级">
+  <p class="pin-label">📌 当前最高优先级 → <a href="/blog/2026-06-14-priority-issues/">查看完整 5 件事</a></p>
+  <ol class="pin-list">
+    <li>继续学习 LLM 基础概念,并持续在社交媒体分享(主题: agent 基本功系列)</li>
+    <li>梳理关注的信息源,搭建"每日总结 + 推送"自动化流程</li>
+    <li>梳理我的人生信条</li>
+    <li>构建 weread-wise</li>
+    <li>100-minds 优化思维模型介绍水平</li>
+  </ol>
 </section>
 
 <section class="delba-section">
   <h2>项目</h2>
-  <p class="section-lede">3 个正在并行推进的项目，每一个都从「客户痛点」开始，到「可演示的工件」结束。</p>
-  <HomeProjectList maxItems={4} />
+  <p class="section-lede">3 个在并行推进的项目，包含源码以及展示网站。</p>
+  <HomeProjectList maxItems={3} />
 </section>
 
 <section class="delba-section">
   <h2>随想</h2>
   <p class="section-lede">转型路上写下的笔记和复盘。</p>
-  <HomePostList emptyText="暂无随想。" viewAllText="查看全部随想 →" />
+  <HomePostList emptyText="暂无随想。" viewAllText="查看全部随想 →" maxItems={3} />
 </section>
 
 <HomeNow title="现在" nextLabel="下一站" viewTimelineText="→ 查看完整时间线" />
