@@ -7,7 +7,7 @@ import { PAGE_META, ROUTES, FORMATTING } from '../../consts';
 // SSG note: this site uses `output: 'static'`, so Astro.url.searchParams is
 // always empty at build time and never sees ?tag=… at runtime (Astro serves
 // the same pre-rendered HTML regardless of query string). Filter happens
-// client-side via the <script> block at the bottom of this file — when the
+// client-side via the script block at the bottom of this file — when the
 // user lands on /blog/?tag=FDE, JS reads window.location.search, hides
 // non-matching <li data-tags="…"> rows, fills the filter-bar, and toggles
 // the matching sidebar tag's .is-active state.
@@ -110,20 +110,20 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 </BaseLayout>
 
 <script>
- // Client-side tag filter.
- //
- // Flow:
- //1. Read ?tag=… from window.location.search (URLSearchParams).
- //2. For each <li data-tags="…"> under #posts-by-year, hide rows whose
- // data-tags CSV does NOT contain the active tag.
- //3. Update the .filter-bar text to "当前筛选：#X ·清除".
- //4. Toggle .is-active on the matching sidebar tag link so the visual
- // state matches the server-side branch we're replacing.
- //
- // The sidebar links still point to /blog/?tag=…, which triggers a full
- // page reload — that's intentional. The script re-runs on each load.
+  // Client-side tag filter.
+  //
+  // Flow:
+  //   1. Read ?tag=… from window.location.search (URLSearchParams).
+  //   2. For each <li data-tags="…"> under #posts-by-year, hide rows whose
+  //      data-tags CSV does NOT contain the active tag.
+  //   3. Update the .filter-bar text to "当前筛选：#X ·清除".
+  //   4. Toggle .is-active on the matching sidebar tag link so the visual
+  //      state matches the server-side branch we're replacing.
+  //
+  // The sidebar links still point to /blog/?tag=…, which triggers a full
+  // page reload — that's intentional. The script re-runs on each load.
 
- const root = document.getElementById('posts-by-year');
+  const root = document.getElementById('posts-by-year');
  const filterBar = document.getElementById('filter-bar');
  const tagCloud = document.getElementById('tag-cloud');
  const emptyFiltered = document.getElementById('empty-filtered');
@@ -251,18 +251,26 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
  /* Tag — borderless plain text per shud.in spec §4.1 / §6.2.
  Active state is communicated purely via color + underline,
  never via background or border. */
+ /* 用 text-decoration-line 而不是 shorthand,这样不会被 .is-active 的
+    text-decoration-line: underline 覆盖 (audit §3.1 — specificity bug)。 */
  .tag-cloud .tag {
- border:0;
- background: transparent;
- border-radius:0;
- padding:04px;
- min-height:24px;
- text-decoration: none;
+   border: 0;
+   background: transparent;
+   border-radius: 0;
+   padding: 0 4px;
+   min-height: 24px;
+   text-decoration-line: none;
  }
 
+  /* Local override — bump specificity to beat the scoped .tag-cloud .tag
+     rule (0,0,4,0) from global.css, so .is-active's underline actually
+     shows. The global default in global.css now uses
+     `text-decoration-line: none` which would be overridable on its own,
+     but scoped styles are loaded later so they win anyway. We restate
+     the active state here with matching specificity (0,0,5,0) for safety. */
   .tag-cloud .tag.is-active {
     color: var(--text);
-    text-decoration: underline;
+    text-decoration-line: underline;
     text-decoration-color: var(--text);
     text-underline-offset: 2px;
     border: 0;
