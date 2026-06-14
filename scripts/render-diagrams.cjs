@@ -1,11 +1,11 @@
 // Render every diagrams/*.svg → diagrams/*.png (2x retina), then copy
 // the PNGs into public/diagrams/ so Astro serves them at /diagrams/*.
 //
-// Run automatically via `predev` / `prebuild` npm hooks, or manually:
+// Both PNG folders are committed to git; `npm run dev` / `npm run build`
+// do NOT auto-render — that would slow startup and require resvg at
+// runtime. Regenerate manually whenever a source SVG changes:
 //   npm run diagrams
-//
-// diagrams/*.png and public/diagrams/*.png are both .gitignored — this
-// script is the only thing that writes to either folder.
+// then commit the diff.
 const { Resvg } = require('@resvg/resvg-js');
 const fs = require('fs');
 const path = require('path');

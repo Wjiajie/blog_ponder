@@ -9,9 +9,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
+    "validate": "astro check",
+    "typecheck": "tsc --noEmit",
     "diagrams": "node scripts/render-diagrams.cjs",
-    "predev": "node scripts/render-diagrams.cjs",
-    "prebuild": "node scripts/render-diagrams.cjs"
+    "new": "node scripts/new-post.mjs",
+    "og:prune": "node scripts/prune-og.cjs",
+    "postbuild:search": "pagefind --site dist --output-subdir _pagefind"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -39,5 +43,8 @@
     "shiki": "^1.24.4",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
   }
 }
