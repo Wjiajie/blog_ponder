@@ -4,15 +4,22 @@
  * `getStaticPaths` enumerates every published post at build, so the
  * output is a flat set of pre-rendered PNGs. Unknown slugs simply don't
  * get a route; that's the right behaviour for a public site.
+ *
+ * Draft handling: by default we skip drafts so a half-written post
+ * can't be shared with a misleading OG card. Flip `INCLUDE_DRAFTS` to
+ * true during local dev if you want to preview the card before
+ * unflagging the draft.
  */
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import { renderOgPng } from "../../../lib/og";
 import { SITE, ROUTES } from "../../../consts";
 
+const INCLUDE_DRAFTS = false;
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = (await getCollection("blog"))
-    .filter((p) => !p.data.draft)
+    .filter((p) => INCLUDE_DRAFTS || !p.data.draft)
     .map((p) => ({ params: { slug: p.slug } }));
   return posts;
 };
