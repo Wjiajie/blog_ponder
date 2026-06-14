@@ -332,6 +332,72 @@
     color: var(--text);
   }
 
+  /* ------------------------------------------------------------
+     Shared page-rhythm classes
+     ------------------------------------------------------------
+     These used to live as scoped styles in every page (index,
+     journey, about, projects, ...). When the home page moved into
+     a .mdx file, the per-page styles no longer applied (mdx has
+     no `data-astro-cid` to scope against). Hoisting the
+     canonical rules to @layer components makes them available
+     to .mdx without each page re-declaring them.
+
+     Per-page stylesheets still get to override (their [data-cid]
+     selector wins on specificity), so this is backwards-compatible
+     with the journey / about / projects pages that define their
+     own responsive variants. */
+
+  /* Page H1 — same shape across all top-level pages, only the
+     letter-spacing and margin differ slightly. Pages that need
+     different sizes (projects mobile) override locally. */
+  .page-title {
+    font-size: var(--fs-4xl);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 var(--space-6) 0;
+    text-wrap: balance;
+  }
+
+  /* Delba section: same rhythm as the home bullet list / lede
+     pattern. Used by home.mdx and any future page that wants
+     this layout. */
+  .delba-section {
+    margin-top: var(--space-12);
+  }
+  .delba-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+    font-size: var(--fs-xl);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  /* Muted one-liner under a section heading. */
+  .section-lede {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-4);
+    max-width: 38em;
+  }
+
+  /* Small inline link after a section — "查看全部 →" style. */
+  .cta-mini-wrap {
+    margin-top: var(--space-4);
+  }
+  .cta-mini {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 2px;
+    transition: color var(--t-base), text-decoration-color var(--t-base);
+  }
+  .cta-mini:hover {
+    color: var(--text);
+    text-decoration-color: var(--text);
+  }
+
   /* Solid dark CTA button — Delba "Let's talk" style */
   .btn {
     display: inline-flex;
