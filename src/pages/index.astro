@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Now from '../components/Now.astro';
-import { SITE, ROUTES, SOCIAL } from '../consts';
+import { SITE, ROUTES, SOCIAL, COPY } from '../consts';
 import { getCollection } from 'astro:content';
-import copy from '../data/copy.json';
 
 const projects = (await getCollection('projects'))
   .sort((a, b) => a.data.order - b.data.order)
@@ -14,10 +13,8 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 4);
 
-const homeCopy = copy.home;
-
-const heroSentence = homeCopy.heroGreetingTemplate.replace('{vertical}', SITE.vertical);
-const heroBody = homeCopy.heroBody
+const heroSentence = COPY.home.heroGreetingTemplate.replace('{vertical}', SITE.vertical);
+const heroBody = COPY.home.heroBody
   .replace('{shortBio}', SITE.shortBio)
   .replace('{company}', SITE.targetCompany);
 
@@ -47,15 +44,15 @@ const truncate = (text: string, maxLen = 80): string => {
   <section class="delba-hero">
     <p>{heroSentence}</p>
     <p>
-      {homeCopy.heroHiring}
+      {COPY.home.heroHiring}
       <a href={ROUTES.about}>{heroBody}</a>
     </p>
-    <a href="mailto:jiajiewu233@gmail.com" class="btn">{homeCopy.heroCta}</a>
+    <a href="mailto:jiajiewu233@gmail.com" class="btn">{COPY.home.heroCta}</a>
   </section>
 
   <section class="delba-section">
-    <h2>{homeCopy.workTitle}</h2>
-    <p class="section-lede">{homeCopy.workLede}</p>
+    <h2>{COPY.home.workTitle}</h2>
+    <p class="section-lede">{COPY.home.workLede}</p>
     <ul class="bullet-list">
       {projects.map((p) => (
         <li>
@@ -69,8 +66,8 @@ const truncate = (text: string, maxLen = 80): string => {
   </section>
 
   <section class="delba-section">
-    <h2>{homeCopy.personalTitle}</h2>
-    <p class="section-lede">{homeCopy.personalLede}</p>
+    <h2>{COPY.home.personalTitle}</h2>
+    <p class="section-lede">{COPY.home.personalLede}</p>
     <ul class="bullet-list">
       {posts.map((post) => (
         <li>
@@ -83,7 +80,7 @@ const truncate = (text: string, maxLen = 80): string => {
     </ul>
     {posts.length > 0 && (
       <p class="cta-mini-wrap">
-        <a href={ROUTES.blog} class="cta-mini">{copy.now.viewAllCta}</a>
+        <a href={ROUTES.blog} class="cta-mini">{COPY.now.viewAllCta}</a>
       </p>
     )}
   </section>
@@ -92,10 +89,10 @@ const truncate = (text: string, maxLen = 80): string => {
 
   <Fragment slot="aside">
     <section class="about-card">
-      <h2 class="about-title">{homeCopy.aboutTitle}</h2>
+      <h2 class="about-title">{COPY.home.aboutTitle}</h2>
       <div class="about-head">
         <div class="about-avatar" aria-hidden="true">J</div>
-        <p class="about-body">{homeCopy.aboutBody}</p>
+        <p class="about-body">{COPY.home.aboutBody}</p>
       </div>
       <hr class="about-divider" />
       <div class="about-links">

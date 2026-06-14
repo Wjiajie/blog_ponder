@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { ROUTES } from '../consts';
-import copy from '../data/copy.json';
+import { ROUTES, COPY } from '../consts';
 
 // Pull the currently-in-progress milestone from the journey collection.
 // If nothing is in-progress, fall back to the first upcoming one.
@@ -11,13 +10,12 @@ const phases = (await getCollection('journey')).sort(
 const current = phases.find((p) => p.data.status === 'in-progress');
 const next = phases.find((p) => p.data.status === 'upcoming');
 
-// Substitutions stay minimal — keep templates in copy.json, do the
+// Substitutions stay minimal — keep templates in COPY, do the
 // .replace() once at the call site so copy stays readable.
-const nowCopy = copy.now;
 const renderInProgress = (description: string) =>
-  nowCopy.inProgressTemplate.replace('{description}', description.replace(/[。.]$/, ''));
+  COPY.now.inProgressTemplate.replace('{description}', description.replace(/[。.]$/, ''));
 const renderShip = (output: string, month: string) =>
-  nowCopy.shipTemplate.replace('{output}', output).replace('{month}', month);
+  COPY.now.shipTemplate.replace('{output}', output).replace('{month}', month);
 ---
 
 <section class="now-block">

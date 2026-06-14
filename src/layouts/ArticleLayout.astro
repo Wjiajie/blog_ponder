@@ -4,15 +4,20 @@ import Tag from '../components/Tag.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from '@astrojs/markdown-remark';
-import { FORMATTING, ROUTES } from '../consts';
-import copy from '../data/copy.json';
+import { FORMATTING, ROUTES, COPY } from '../consts';
 
 interface Props {
   entry: CollectionEntry<'blog'>;
   headings: MarkdownHeading[];
+  /** A more recently published post — the "newer" / "next" arrow. */
+  newer?: CollectionEntry<'blog'> | null;
+  /** An older post — the "previous" arrow at the foot of the page. */
+  older?: CollectionEntry<'blog'> | null;
+  /** Posts that share at least one tag with the current post, capped at 3. */
+  related?: CollectionEntry<'blog'>[];
 }
 
-const { entry, headings } = Astro.props;
+const { entry, headings, newer = null, older = null, related = [] } = Astro.props;
 const { title, description, pubDate, tags } = entry.data;
 
 const formattedDate = pubDate.toLocaleDateString(FORMATTING.locale, FORMATTING.dateLong);
@@ -21,7 +26,17 @@ const formattedDate = pubDate.toLocaleDateString(FORMATTING.locale, FORMATTING.d
 const wordCount = entry.body.split(/\s+/).length;
 const readingTime = Math.max(1, Math.round(wordCount / FORMATTING.readingWpm));
 
-const articleCopy = copy.article;
+// Short-date label used in prev/next + related footers. We render dates
+// at the same muted color so the visual hierarchy stays consistent with
+// the .article-row list at /blog/.
+const shortDate = (d: Date) =>
+  d
+    .toLocaleDateString(FORMATTING.locale, FORMATTING.dateShort)
+    .replace(/\//g, '.');
+
+// Single source of truth for the TOC aside header — kept here (not in
+// TableOfContents) so the layout is the one place to change it.
+const asideTitle = COPY.article.asideTitle;
 ---
 
 <BaseLayout
@@ -32,6 +47,7 @@ const articleCopy = copy.article;
   ogType="article"
   publishedTime={pubDate.toISOString()}
   tags={tags}
+  hideSearch={true}
 >
   <button
     class="article-nav-toggle"
@@ -75,11 +91,59 @@ const articleCopy = copy.article;
     </div>
   </article>
 
+  {/* ============================================================
+       Post-footer navigation — three blocks:
+         1. "上一篇 / 下一篇" (newer / older) — text-only links with
+            a small date beside each, aligned in a 2-column grid.
+         2. "相关随想" (related) — list of up to 3 posts sharing a tag,
+            rendered as a compact bullet list (the same Delba-style
+            "· 项目名 : 一行描述" rhythm we use elsewhere).
+       Both are visually subordinate to the body — the body remains
+       the dominant element. We render only what's available so a
+       single-post blog doesn't show empty boxes.
+       ============================================================ */}
+  {(newer || older) && (
+    <nav class="article-nav" aria-label="上一篇 / 下一篇">
+      {older ? (
+        <a href={ROUTES.blogPost(older.slug)} class="article-nav-link article-nav-link--prev">
+          <span class="article-nav-direction">← 上一篇</span>
+          <span class="article-nav-title">{older.data.title}</span>
+          <span class="article-nav-date">{shortDate(older.data.pubDate)}</span>
+        </a>
+      ) : (
+        <span class="article-nav-spacer" aria-hidden="true"></span>
+      )}
+      {newer ? (
+        <a href={ROUTES.blogPost(newer.slug)} class="article-nav-link article-nav-link--next">
+          <span class="article-nav-direction">下一篇 →</span>
+          <span class="article-nav-title">{newer.data.title}</span>
+          <span class="article-nav-date">{shortDate(newer.data.pubDate)}</span>
+        </a>
+      ) : (
+        <span class="article-nav-spacer" aria-hidden="true"></span>
+      )}
+    </nav>
+  )}
+
+  {related.length > 0 && (
+    <aside class="article-related" aria-label="相关随想">
+      <h3 class="article-related-title">相关随想</h3>
+      <ul class="bullet-list">
+        {related.map((p) => (
+          <li>
+            <strong><a href={ROUTES.blogPost(p.slug)}>{p.data.title}</a></strong>
+            <span class="article-related-date">{shortDate(p.data.pubDate)}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
+
   <Fragment slot="aside">
     <TableOfContents
       variant="desktop"
       headings={headings}
-      title={articleCopy.asideTitle}
+      title={asideTitle}
     />
   </Fragment>
 
@@ -89,7 +153,7 @@ const articleCopy = copy.article;
   <TableOfContents
     variant="mobile"
     headings={headings}
-    title={articleCopy.asideTitle}
+    title={asideTitle}
   />
 </BaseLayout>
 
@@ -327,6 +391,94 @@ const articleCopy = copy.article;
 
   .article-body :global(hr) {
     margin: var(--space-12) 0;
+  }
+
+  /* ============================================================
+     Post-footer navigation (prev/next + related)
+     ============================================================
+     Visually subordinate to the body. Same shud.in dot-leader
+     rhythm as /blog/ rows: 2-column grid, text-only, the "newer"
+     side aligns right, dates use --text-subtle. No card, no border,
+     no shadow — just a generous margin separating footer from body. */
+  .article-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-16);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border);
+  }
+
+  .article-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-decoration: none;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .article-nav-link--prev { text-align: left; }
+  .article-nav-link--next { text-align: right; }
+
+  .article-nav-direction {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    text-transform: none;       /* explicit: no uppercase even if global
+                                   .section-subtitle ever flips back */
+  }
+  .article-nav-title {
+    font-size: var(--fs-base);
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: text-decoration-color var(--t-base);
+  }
+  .article-nav-link:hover .article-nav-title {
+    text-decoration-color: var(--text);
+  }
+  .article-nav-date {
+    font-size: var(--fs-xs);
+    color: var(--text-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Spacer keeps the grid balanced when only one direction is present
+     (e.g. the very newest post has no "older" link). */
+  .article-nav-spacer {
+    display: block;
+  }
+
+  /* Related-posts block — reuses the global .bullet-list styling so it
+     stays in the same family as the project list on the home page. */
+  .article-related {
+    margin-top: var(--space-12);
+  }
+  .article-related-title {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0;
+    margin: 0 0 var(--space-4) 0;
+  }
+  .article-related-date {
+    margin-left: var(--space-2);
+    font-size: var(--fs-xs);
+    color: var(--text-subtle);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 600px) {
+    /* On phones, prev/next stack to one line each so the title doesn't
+       wrap awkwardly inside a 1-col grid. */
+    .article-nav {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .article-nav-link--next { text-align: left; }
   }
 </style>
 

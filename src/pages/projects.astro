@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { PAGE_META, ROUTES, STATUS_META } from '../consts';
-import copy from '../data/copy.json';
+import { PAGE_META, ROUTES, STATUS_META, COPY } from '../consts';
 
 // Always render all projects; filter is done client-side via JS
 const all = (await getCollection('projects'))
@@ -18,9 +17,8 @@ const formatProjectStatus = (s: string): string => {
  return meta ? `${meta.symbol} ${meta.label}` : s;
 };
 
-const projectsCopy = copy.projects;
-const filterHintTemplate = projectsCopy.filterHintTemplate;
-const filterAllLabel = projectsCopy.filterAllLabel;
+const filterHintTemplate = COPY.projects.filterHintTemplate;
+const filterAllLabel = COPY.projects.filterAllLabel;
 
 // Pre-render a stable, sortable token — category is already a string in
 // the frontmatter; we just need to uppercase nothing and let CSS handle

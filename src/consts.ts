@@ -112,3 +112,59 @@ export const FORMATTING = {
   } as Intl.DateTimeFormatOptions,
   readingWpm: 300, // 中文按字符计
 } as const;
+
+// =====================================================================
+// Page-level copy
+// =====================================================================
+//
+// Per-page UI strings. Lives here (not src/data/copy.json) so editing
+// a label is a one-file change with full TypeScript autocomplete — no
+// import-from-JSON ceremony, no `as const` casts, no broken-key typing.
+//
+// Conventions:
+//   - Keys are namespaced by the page that owns them (home / now / etc.)
+//   - Template strings use {placeholder} substitution. Consumers split
+//     on the placeholder and inject JSX (e.g. wrap a name in <em>).
+//   - Site identity (vertical / company / author) still flows from
+//     SITE.* above — COPY only carries the surrounding text.
+export const COPY = {
+  home: {
+    heroEyebrow: "Portfolio",
+    heroGreetingTemplate:
+      "我正在为下一份工作做准备，做 {vertical} 行业的 AI 前向部署工程师。",
+    heroBody:
+      "图形学工程师 → AI FDE 转型中。希望加入 {company} 的 FDE 团队，把 AI 在客户现场端到端交付。",
+    heroHiring: "在招人",
+    heroCta: "聊聊",
+    workTitle: "项目",
+    workLede:
+      "3 个正在并行推进的项目，每一个都从「客户痛点」开始，到「可演示的工件」结束。",
+    personalTitle: "随想",
+    personalLede: "转型路上写下的笔记和复盘。",
+    journeyPreviewTitle: "路径",
+    journeyPreviewBodyTemplate:
+      "6 个月时间，从「图形学 + AI」到「在教育场景里交付 AI 产品」。{totalCount} 个阶段，{doneCount} 个已完成。",
+    journeyPreviewCta: "→ 查看完整时间线",
+    aboutTitle: "About me",
+    aboutBody: "图形学工程师，转型 AI 前向部署工程师中。",
+    aboutLinksLabel: "在以下平台能找到我：",
+  },
+  now: {
+    inProgressTemplate: "进行中 · {description}",
+    restingText: "在两个阶段之间调整节奏",
+    shipTemplate: "目标在 {month} 之前交付 {output}。",
+    viewAllCta: "查看全部随想 →",
+  },
+  projects: {
+    filterHintTemplate: "· 按 {category} 筛选",
+    filterAllLabel: "全部",
+  },
+  journey: {
+    title: "FDE 转型路径",
+    introTemplate:
+      "6 个月时间，从「图形学 + AI」到「在教育场景里交付 AI 产品」。{totalCount} 个阶段，{doneCount} 个已完成。",
+  },
+  article: {
+    asideTitle: "本文目录",
+  },
+} as const;
