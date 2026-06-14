@@ -263,16 +263,24 @@
     letter-spacing: -0.015em;
   }
 
+  /* Subtitle/eyebrow for the right-rail blocks (TOC title, blog tag
+     cloud heading, journey "概览 / 下一站"). Per spec §4 the
+     "uppercase + letter-spacing" pattern is the kind of "marketing
+     typography" we explicitly want to avoid — keep these as plain
+     muted small caps in name only, not in glyphs. */
   .section-subtitle {
     font-size: var(--fs-sm);
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-weight: 500;
+    letter-spacing: 0;
     margin-bottom: var(--space-3);
   }
 
   /* Tag chip — 默认纯文本无边框 (spec §4 第 1 项)。
-     任何页面用 <a class="tag"> 都不需要再覆盖 border。 */
+     任何页面用 <a class="tag"> 都不需要再覆盖 border。
+     注意:text-decoration 拆成 line / color / thickness 三个子属性,这样
+     .is-active 只需重写 text-decoration-line 就能拿到下划线,而不被
+     shorthand 全覆盖压住 (audit §3.1 specificity bug 的根因)。 */
   .tag {
     display: inline-flex;
     align-items: center;
@@ -280,13 +288,20 @@
     padding: 2px var(--space-2);
     font-size: var(--fs-xs);
     color: var(--text-muted);
-    text-decoration: none;
-    transition: color var(--t-base);
+    text-decoration-line: none;
+    text-decoration-color: var(--border);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color var(--t-base), text-decoration-color var(--t-base);
   }
 
   .tag:hover {
     color: var(--text);
-    border-color: var(--text);
+  }
+
+  .tag.is-active {
+    color: var(--text);
+    text-decoration-line: underline;
   }
 
   /* Bullet list — Delba-style "· 项目名 : 一行描述" */
