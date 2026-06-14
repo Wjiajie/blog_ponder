@@ -1,23 +1,62 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getPublishedPosts } from '../../lib/blog';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { entry: post },
-  }));
+  // Use the same published-posts pipeline as the rest of the site so
+  // draft filtering, sort order, and content-collection drift stay in
+  // lockstep. Cost: O(n log n) per build, but n = number of posts.
+  const posts = await getPublishedPosts();
+
+  // Index posts by slug for O(1) prev/next lookup once we know the
+  // current post's position in the date-sorted list. We sort newest
+  // first to match /blog/ — so "next" (older) sits at idx+1 and
+  // "prev" (newer) sits at idx-1.
+  const indexBySlug = new Map(posts.map((p, i) => [p.slug, i]));
+
+  return posts.map((post) => {
+    const idx = indexBySlug.get(post.slug) ?? 0;
+    const newer = idx > 0 ? posts[idx - 1] : null; // more recent
+    const older = idx < posts.length - 1 ? posts[idx + 1] : null; // older
+
+    // Related: shared tags. Score = size of intersection with current
+    // post's tag set; tiebreak by recency. We cap at 3 to keep the
+    // footer compact — more than 3 starts to feel like a "you might
+    // also like" widget, which we explicitly don't want.
+    const currentTags = new Set(post.data.tags.map((t) => t.toLowerCase()));
+    const related = posts
+      .filter((p) => p.slug !== post.slug)
+      .map((p) => {
+        const shared = p.data.tags.filter((t) => currentTags.has(t.toLowerCase()));
+        return { post: p, score: shared.length };
+      })
+      .filter((r) => r.score > 0)
+      .sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf();
+      })
+      .slice(0, 3)
+      .map((r) => r.post);
+
+    return {
+      params: { slug: post.slug },
+      props: { entry: post, newer, older, related },
+    };
+  });
 }
 
 interface Props {
   entry: CollectionEntry<'blog'>;
+  newer: CollectionEntry<'blog'> | null;
+  older: CollectionEntry<'blog'> | null;
+  related: CollectionEntry<'blog'>[];
 }
 
-const { entry } = Astro.props;
+const { entry, newer, older, related } = Astro.props;
 const { Content, headings } = await entry.render();
 ---
 
-<ArticleLayout entry={entry} headings={headings}>
+<ArticleLayout entry={entry} headings={headings} newer={newer} older={older} related={related}>
   <Content />
 </ArticleLayout>
