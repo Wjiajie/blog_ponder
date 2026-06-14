@@ -8,6 +8,7 @@ import Sidebar from '../components/Sidebar.astro';
 import RightAside from '../components/RightAside.astro';
 import MobileHeader from '../components/MobileHeader.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import Search from '../components/Search.astro';
 import { SITE, ROUTES } from '../consts';
 
 interface Props {
@@ -23,6 +24,15 @@ interface Props {
   publishedTime?: string;
   /** Tags for og:article:tag */
   tags?: string[];
+  /**
+   * Hide the search widget from the right rail / mobile chrome.
+   * Default false (search is on by default for every page with a right
+   * aside). Pages that need an uncluttered right rail (e.g. the
+   * article page, where the TOC already occupies the slot) should
+   * pass `hideSearch={true}` — the mobile floating button then takes
+   * over so search stays reachable on phones.
+   */
+  hideSearch?: boolean;
 }
 
 const {
@@ -34,6 +44,7 @@ const {
   ogType = 'website',
   publishedTime,
   tags = [],
+  hideSearch = false,
 } = Astro.props;
 
 const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
@@ -114,8 +125,18 @@ const ogImageUrl = new URL(resolvedOgImage, SITE.url).toString();
           <slot />
         </main>
 
-        {showRightAside && <RightAside><slot name="aside" /></RightAside>}
+        {showRightAside && <RightAside>
+          {!hideSearch && <Search variant="desktop" />}
+          <slot name="aside" />
+        </RightAside>}
       </div>
+
+      {/* Mobile floating search — sits next to the mobile header's
+          hamburger so search is reachable on phones even when the
+          right rail is hidden. Renders unconditionally (no hideSearch
+          opt-out): on mobile the right rail is gone anyway, so search
+          needs a permanent home. */}
+      <Search variant="mobile" />
 
       <div class="theme-toggle-wrapper">
         <ThemeToggle />

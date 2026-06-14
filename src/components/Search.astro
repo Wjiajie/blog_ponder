@@ -1,0 +1,466 @@
+---
+// Floating search panel — wraps Pagefind UI for the static site.
+//
+// Why Pagefind: builds a static index into dist/_pagefind at the end of
+// the build pipeline. Zero server runtime, zero client framework
+// dependency beyond the ~50KB Pagefind UI bundle. Works on every
+// static host.
+//
+// Behaviour:
+//   - Triggered by Cmd/Ctrl-K (or just `/`), the floating "搜索" button
+//     in the right rail, and the search input inside the mobile menu.
+//   - ESC closes. Click outside closes.
+//   - The results panel reuses the shud.in dot-leader rhythm: title +
+//     leader + date. URL is shown as muted subtitle.
+//   - Empty state is plain text — no icon, no illustration.
+
+interface Props {
+  /** Variant — same pattern as TableOfContents. We render the same
+   *  component twice on article pages (rail + mobile popover), and
+   *  guard against double-init in the inline script. */
+  variant: 'desktop' | 'mobile';
+}
+
+const { variant } = Astro.props;
+---
+
+<div class={`search search--${variant}`} data-search-root>
+  <button
+    type="button"
+    class="search-trigger"
+    data-search-trigger
+    aria-label="搜索"
+    aria-haspopup="dialog"
+  >
+    {variant === 'desktop' ? (
+      <span class="search-trigger-row">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="9" cy="9" r="5" />
+          <path d="M13 13l4 4" />
+        </svg>
+        <span>搜索</span>
+        <kbd class="search-kbd">⌘K</kbd>
+      </span>
+    ) : (
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="9" cy="9" r="5" />
+        <path d="M13 13l4 4" />
+      </svg>
+    )}
+  </button>
+
+  <div
+    class="search-popover"
+    data-search-popover
+    role="dialog"
+    aria-label="站内搜索"
+    aria-modal="true"
+    hidden
+  >
+    <div class="search-popover-header">
+      <input
+        type="search"
+        class="search-input"
+        data-search-input
+        placeholder="搜索随想、项目、路径…"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button
+        type="button"
+        class="search-close"
+        data-search-close
+        aria-label="关闭"
+      >
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M5 5l10 10M15 5L5 15" />
+        </svg>
+      </button>
+    </div>
+    <div class="search-results" data-search-results aria-live="polite">
+      <p class="search-empty">输入关键词开始搜索…</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    // Guard against double-init when Search renders twice (desktop + mobile)
+    if (window.__searchInited) return;
+    window.__searchInited = true;
+
+    function $(s, r) { return (r || document).querySelector(s); }
+    function $$(s, r) { return Array.from((r || document).querySelectorAll(s)); }
+
+    function open(root) {
+      const pop = $('[data-search-popover]', root);
+      if (!pop) return;
+      pop.hidden = false;
+      const input = $('[data-search-input]', root);
+      if (input) {
+        input.focus();
+        input.select();
+      }
+      document.addEventListener('keydown', onEscClose);
+    }
+
+    function close(root) {
+      const pop = $('[data-search-popover]', root);
+      if (!pop) return;
+      pop.hidden = true;
+      const input = $('[data-search-input]', root);
+      if (input) input.value = '';
+      const results = $('[data-search-results]', root);
+      if (results) results.innerHTML = '<p class="search-empty">输入关键词开始搜索…</p>';
+      document.removeEventListener('keydown', onEscClose);
+    }
+
+    function onEscClose(e) {
+      if (e.key === 'Escape') {
+        $$('[data-search-root]').forEach(close);
+      }
+    }
+
+    function debounce(fn, ms) {
+      let t;
+      return function () {
+        const args = arguments, ctx = this;
+        clearTimeout(t);
+        t = setTimeout(() => fn.apply(ctx, args), ms);
+      };
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    async function ensurePagefind() {
+      if (window.__pagefind) return window.__pagefind;
+      try {
+        // Pagefind ships a static JS bundle at /_pagefind/pagefind.js
+        const mod = await import('/_pagefind/pagefind.js');
+        await mod.init();
+        window.__pagefind = mod;
+        return mod;
+      } catch (err) {
+        console.warn('[search] Pagefind bundle not found — run `npm run postbuild:search` after `npm run build`', err);
+        return null;
+      }
+    }
+
+    async function runSearch(root, query) {
+      const results = $('[data-search-results]', root);
+      if (!results) return;
+      const q = query.trim();
+      if (!q) {
+        results.innerHTML = '<p class="search-empty">输入关键词开始搜索…</p>';
+        return;
+      }
+      const pf = await ensurePagefind();
+      if (!pf) {
+        results.innerHTML = '<p class="search-empty">搜索索引尚未生成。<code>npm run build &amp;&amp; npm run postbuild:search</code></p>';
+        return;
+      }
+      const search = await pf.search(q);
+      if (!search.results.length) {
+        results.innerHTML = '<p class="search-empty">没有匹配的结果。</p>';
+        return;
+      }
+      // Fetch top 8 results in parallel. Pagefind's API for result
+      // metadata is `result.data()` (a method on each search result
+      // object) — there's no `getMetadata` / `getMetaData` method on
+      // the pagefind instance. The old name silently returned null
+      // for every result, which is why the results list appeared
+      // empty even when pagefind found 8 matches.
+      //
+      // `data()` returns: { url, excerpt, meta: { title, ... },
+      // sub_results: [...] }
+      const top = search.results.slice(0, 8);
+      const detailed = await Promise.all(top.map((r) => r.data().catch(() => null)));
+      const html = ['<ul class="search-list">'];
+      detailed.forEach((d, i) => {
+        if (!d) return;
+        const r = top[i];
+        const title = (d.meta && (d.meta.title || d.meta['og:title'])) || d.excerpt || '(无标题)';
+        const url = d.url || '#';
+        const excerpt = d.excerpt || '';
+        html.push(
+          '<li class="search-item">' +
+            '<a class="search-item-link" href="' + escapeHtml(url) + '">' +
+              '<span class="search-item-title">' + escapeHtml(title) + '</span>' +
+              (excerpt ? '<span class="search-item-excerpt">' + excerpt + '</span>' : '') +
+            '</a>' +
+          '</li>'
+        );
+      });
+      html.push('</ul>');
+      results.innerHTML = html.join('');
+    }
+
+    function init() {
+      const roots = $$('[data-search-root]');
+      if (!roots.length) return;
+
+      // Triggers (one per variant): the floating button. Open the matching
+      // popover; if both are present, opening the desktop one is enough
+      // (mobile is a fallback for narrow viewports).
+      roots.forEach((root) => {
+        const trigger = $('[data-search-trigger]', root);
+        const closeBtn = $('[data-search-close]', root);
+        const input = $('[data-search-input]', root);
+        const pop = $('[data-search-popover]', root);
+
+        if (trigger) trigger.addEventListener('click', () => open(root));
+        if (closeBtn) closeBtn.addEventListener('click', () => close(root));
+        if (pop) {
+          pop.addEventListener('click', (e) => {
+            // Click on a result link should navigate, not close first.
+            const link = e.target.closest && e.target.closest('.search-item-link');
+            if (link) return;
+            e.stopPropagation();
+          });
+        }
+        if (input) {
+          const debounced = debounce(() => runSearch(root, input.value), 150);
+          input.addEventListener('input', debounced);
+          input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              // Run the search synchronously (bypass the 150ms debounce)
+              // and navigate to the first result. If the query has no
+              // matches yet, runSearch will still render "没有匹配的结果。"
+              // so the user gets feedback.
+              runSearch(root, input.value).then(() => {
+                const first = $('.search-item-link', $('[data-search-results]', root));
+                if (first) window.location.href = first.getAttribute('href');
+              });
+            }
+          });
+        }
+      });
+
+      // Global Cmd/Ctrl-K to open the first available trigger.
+      document.addEventListener('keydown', (e) => {
+        const isK = e.key === 'k' || e.key === 'K';
+        if (isK && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          const firstRoot = roots[0];
+          if (firstRoot) open(firstRoot);
+        }
+        // Slash also opens, mimicking GitHub.
+        if (e.key === '/' && !e.metaKey && !e.ctrlKey) {
+          const t = e.target;
+          if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+          e.preventDefault();
+          const firstRoot = roots[0];
+          if (firstRoot) open(firstRoot);
+        }
+      });
+
+      // Click outside closes.
+      document.addEventListener('click', (e) => {
+        roots.forEach((root) => {
+          const pop = $('[data-search-popover]', root);
+          if (!pop || pop.hidden) return;
+          const t = e.target;
+          if (t.closest && (t.closest('[data-search-popover]') || t.closest('[data-search-trigger]'))) return;
+          close(root);
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<style>
+  /* ====================================================================
+     Search — same restrained chrome as the TOC.
+     The trigger sits in the right rail; the popover is a fixed modal
+     panel that overlays the article body. ==================================================================== */
+
+  .search-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 10px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: color var(--t-base), border-color var(--t-base), background var(--t-base);
+    width: 100%;
+    justify-content: space-between;
+  }
+  .search-trigger:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+    background: var(--bg-muted);
+  }
+  .search-trigger:focus-visible {
+    outline: 1px dotted var(--text-muted);
+    outline-offset: 2px;
+  }
+
+  .search-trigger-row {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .search-kbd {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 11px;
+    color: var(--text-subtle);
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: transparent;
+    line-height: 1.2;
+  }
+
+  /* The popover — large enough for excerpt lines, never wider than the
+     viewport. On mobile it sticks to the top of the screen so the user
+     sees the input even when the keyboard pops up. */
+  .search-popover[hidden] {
+    display: none !important;
+  }
+
+  .search-popover {
+    position: fixed;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(560px, calc(100vw - 32px));
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    z-index: 60;
+    overflow: hidden;
+  }
+
+  .search-popover-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-input {
+    flex: 1 1 auto;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font-size: var(--fs-base);
+    font-family: inherit;
+  }
+  .search-input::placeholder { color: var(--text-subtle); }
+
+  .search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .search-close:hover { color: var(--text); background: var(--bg-muted); }
+
+  .search-results {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .search-empty {
+    margin: 0;
+    padding: var(--space-3) var(--space-3);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+  .search-empty code {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.85em;
+    background: var(--bg-muted);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  .search-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .search-item {
+    margin: 0;
+  }
+  .search-item-link {
+    display: block;
+    padding: var(--space-3);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text);
+    transition: background var(--t-base);
+  }
+  .search-item-link:hover {
+    background: var(--bg-muted);
+  }
+  .search-item-title {
+    display: block;
+    font-size: var(--fs-base);
+    font-weight: 500;
+    color: var(--text);
+  }
+  .search-item-excerpt {
+    display: block;
+    margin-top: 4px;
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    line-height: 1.5;
+    /* Pagefind returns HTML with <mark> tags around matches — keep them. */
+  }
+  .search-item-excerpt :global(mark) {
+    background: transparent;
+    color: var(--text);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--text);
+    text-underline-offset: 2px;
+  }
+
+  /* Mobile variant — fixed in the top-right corner like the TOC FAB.
+     Hidden on desktop. */
+  .search--mobile .search-trigger {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    justify-content: center;
+  }
+  .search--mobile .search-trigger-row,
+  .search--mobile .search-kbd { display: none; }
+
+  @media (min-width: 768px) {
+    .search--mobile { display: none; }
+  }
+  @media (max-width: 767px) {
+    .search--desktop { display: none; }
+  }
+</style>
