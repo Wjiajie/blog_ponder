@@ -21,6 +21,7 @@ export const NAV = [
   { href: "/journey/", label: "路径" },
   { href: "/projects/", label: "项目" },
   { href: "/blog/", label: "随想" },
+  { href: "/feeds/", label: "Feeds" },
   { href: "/about/", label: "关于" },
 ] as const;
 
@@ -79,6 +80,10 @@ export const PAGE_META = {
     title: "关于",
     description: "关于作者",
   },
+  feeds: {
+    title: "Feeds",
+    description: "按日历查看所有文章。",
+  },
 } as const;
 
 // Cross-cutting URL helpers. These exist so route prefixes are not
@@ -94,6 +99,7 @@ export const ROUTES = {
   projectCategory: (category: string) =>
     `/projects/?category=${encodeURIComponent(category)}`,
   about: "/about/",
+  feeds: "/feeds/",
 } as const;
 
 // Cross-cutting formatters. Locale + wpm live here so every page renders
