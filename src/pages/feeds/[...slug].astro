@@ -1,0 +1,42 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const items = (await getCollection('feeds'))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const indexBySlug = new Map(items.map((p, i) => [p.slug, i]));
+
+  return items.map((item) => {
+    const idx = indexBySlug.get(item.slug) ?? 0;
+    const newer = idx > 0 ? items[idx - 1] : null;
+    const older = idx < items.length - 1 ? items[idx + 1] : null;
+
+    return {
+      params: { slug: item.slug },
+      props: { entry: item, newer, older },
+    };
+  });
+}
+
+interface Props {
+  entry: CollectionEntry<'feeds'>;
+  newer: CollectionEntry<'feeds'> | null;
+  older: CollectionEntry<'feeds'> | null;
+}
+
+const { entry, newer, older } = Astro.props;
+const { Content, headings } = await entry.render();
+---
+
+<ArticleLayout
+  entry={entry}
+  headings={headings}
+  collection="feeds"
+  newer={newer}
+  older={older}
+  related={[]}
+>
+  <Content />
+</ArticleLayout>

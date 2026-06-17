@@ -6,19 +6,26 @@ import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from '@astrojs/markdown-remark';
 import { FORMATTING, ROUTES, COPY } from '../consts';
 
+type ArticleCollection = 'blog' | 'feeds';
+type ArticleEntry = CollectionEntry<'blog'> | CollectionEntry<'feeds'>;
+
 interface Props {
-  entry: CollectionEntry<'blog'>;
+  entry: ArticleEntry;
   headings: MarkdownHeading[];
+  collection?: ArticleCollection;
   /** A more recently published post — the "newer" / "next" arrow. */
-  newer?: CollectionEntry<'blog'> | null;
+  newer?: ArticleEntry | null;
   /** An older post — the "previous" arrow at the foot of the page. */
-  older?: CollectionEntry<'blog'> | null;
+  older?: ArticleEntry | null;
   /** Posts that share at least one tag with the current post, capped at 3. */
-  related?: CollectionEntry<'blog'>[];
+  related?: ArticleEntry[];
 }
 
-const { entry, headings, newer = null, older = null, related = [] } = Astro.props;
+const { entry, headings, collection = 'blog', newer = null, older = null, related = [] } = Astro.props;
 const { title, description, pubDate, tags } = entry.data;
+const postHref = (slug: string) =>
+  collection === 'feeds' ? ROUTES.feedPost(slug) : ROUTES.blogPost(slug);
+const relatedTitle = collection === 'feeds' ? '相关热点' : '相关随想';
 
 const formattedDate = pubDate.toLocaleDateString(FORMATTING.locale, FORMATTING.dateLong);
 
@@ -77,7 +84,11 @@ const asideTitle = COPY.article.asideTitle;
               {tags.map((t, i) => (
                 <>
                   {i > 0 && ' '}
-                  <Tag href={ROUTES.blogTag(t)}>#{t}</Tag>
+                  {collection === 'blog' ? (
+                    <Tag href={ROUTES.blogTag(t)}>#{t}</Tag>
+                  ) : (
+                    <span class="article-tag-plain">#{t}</span>
+                  )}
                 </>
               ))}
             </span>
@@ -105,7 +116,7 @@ const asideTitle = COPY.article.asideTitle;
   {(newer || older) && (
     <nav class="article-nav" aria-label="上一篇 / 下一篇">
       {older ? (
-        <a href={ROUTES.blogPost(older.slug)} class="article-nav-link article-nav-link--prev">
+        <a href={postHref(older.slug)} class="article-nav-link article-nav-link--prev">
           <span class="article-nav-direction">← 上一篇</span>
           <span class="article-nav-title">{older.data.title}</span>
           <span class="article-nav-date">{shortDate(older.data.pubDate)}</span>
@@ -114,7 +125,7 @@ const asideTitle = COPY.article.asideTitle;
         <span class="article-nav-spacer" aria-hidden="true"></span>
       )}
       {newer ? (
-        <a href={ROUTES.blogPost(newer.slug)} class="article-nav-link article-nav-link--next">
+        <a href={postHref(newer.slug)} class="article-nav-link article-nav-link--next">
           <span class="article-nav-direction">下一篇 →</span>
           <span class="article-nav-title">{newer.data.title}</span>
           <span class="article-nav-date">{shortDate(newer.data.pubDate)}</span>
@@ -126,12 +137,12 @@ const asideTitle = COPY.article.asideTitle;
   )}
 
   {related.length > 0 && (
-    <aside class="article-related" aria-label="相关随想">
-      <h3 class="article-related-title">相关随想</h3>
+    <aside class="article-related" aria-label={relatedTitle}>
+      <h3 class="article-related-title">{relatedTitle}</h3>
       <ul class="bullet-list">
         {related.map((p) => (
           <li>
-            <strong><a href={ROUTES.blogPost(p.slug)}>{p.data.title}</a></strong>
+            <strong><a href={postHref(p.slug)}>{p.data.title}</a></strong>
             <span class="article-related-date">{shortDate(p.data.pubDate)}</span>
           </li>
         ))}
@@ -304,6 +315,11 @@ const asideTitle = COPY.article.asideTitle;
     display: inline-flex;
     flex-wrap: wrap;
     gap: var(--space-2);
+  }
+
+  .article-tag-plain {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
   }
 
   .article-body :global(h2) {

@@ -43,7 +43,8 @@ export const GET: APIRoute = async ({ params }) => {
       .replace(/^https?:\/\//, ""),
     kind: "essays",
   });
-  return new Response(png, {
+  const body = Uint8Array.from(png).buffer as ArrayBuffer;
+  return new Response(body, {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": "public, max-age=86400, immutable",

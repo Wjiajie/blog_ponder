@@ -21,7 +21,7 @@ export const NAV = [
   { href: "/journey/", label: "路径" },
   { href: "/projects/", label: "项目" },
   { href: "/blog/", label: "随想" },
-  { href: "/feeds/", label: "Feeds" },
+  { href: "/feeds/", label: "热点" },
   { href: "/about/", label: "关于" },
 ] as const;
 
@@ -81,8 +81,8 @@ export const PAGE_META = {
     description: "关于作者",
   },
   feeds: {
-    title: "Feeds",
-    description: "按日历查看所有文章。",
+    title: "热点",
+    description: "按日历查看收集到的热点信息。",
   },
 } as const;
 
@@ -95,6 +95,7 @@ export const ROUTES = {
   blog: "/blog/",
   blogTag: (tag: string) => `/blog/?tag=${encodeURIComponent(tag)}`,
   blogPost: (slug: string) => `/blog/${slug}/`,
+  feedPost: (slug: string) => `/feeds/${slug}/`,
   project: (slug: string) => `/projects/${slug}/`,
   projectCategory: (category: string) =>
     `/projects/?category=${encodeURIComponent(category)}`,

@@ -11,6 +11,17 @@ const blog = defineCollection({
   }),
 });
 
+const feeds = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const projects = defineCollection({
   type: 'content',
   schema: z.object({
@@ -64,4 +75,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { blog, projects, journey, pages };
+export const collections = { blog, feeds, projects, journey, pages };

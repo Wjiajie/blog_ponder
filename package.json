@@ -11,6 +11,7 @@
     "astro": "astro",
     "check": "astro check",
     "validate": "astro check",
+    "lint:content": "node scripts/lint-content.cjs",
     "typecheck": "tsc --noEmit",
     "diagrams": "node scripts/render-diagrams.cjs",
     "new": "node scripts/new-post.mjs",

@@ -8,8 +8,6 @@ draft: false
 
 > 写给要做 agent 选型 / 想理解今天框架到底在拼什么的人。我尽量不堆名词，但你需要的几个关键概念（ReAct、interleaved thinking、agent runtime、MCP、skills）我会讲到能讲出口的程度。
 
-![一个最小可工作的 agent loop](/diagrams/03-agent-loop.png)
-
 ---
 
 ## 0. 一句话：今天的 agent 框架之争，已经不在 prompt 层，而在 runtime 层
@@ -322,8 +320,6 @@ Hermes Agent 是 Nous Research 推出的开源 agent runtime。最鲜明的定�
 - Claude Code = 有纪律的 coding runtime
 - Mavis = 产品级数字团队
 - Hermes = 可部署在 VPS 或云端、持续记住你与项目、并逐步学会流程的个人 / 团队操作代理
-
-![三大 Runtime 定位对比：Claude Code / Mavis / Hermes](/diagrams/02-runtime-comparison.png)
 
 ### 9.2 关键模块
 

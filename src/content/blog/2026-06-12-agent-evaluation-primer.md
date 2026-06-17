@@ -8,8 +8,6 @@ draft: false
 
 > 写给正在做 / 想做 Agent 落地的朋友。我尽量不用公式，但你需要的几个核心概念（bootstrap 置信区间、McNemar、LLM-as-a-judge、reward model）我会讲到能照着写的程度。
 
-![评测四本账：主指标、护栏、运营、步数效率](/diagrams/01-eval-ledgers.png)
-
 ---
 
 ## 0. 为什么不能直接把模型那一套评测搬过来

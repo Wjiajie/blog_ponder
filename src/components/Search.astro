@@ -179,9 +179,8 @@ const { variant } = Astro.props;
       const top = search.results.slice(0, 8);
       const detailed = await Promise.all(top.map((r) => r.data().catch(() => null)));
       const html = ['<ul class="search-list">'];
-      detailed.forEach((d, i) => {
+      detailed.forEach((d) => {
         if (!d) return;
-        const r = top[i];
         const title = (d.meta && (d.meta.title || d.meta['og:title'])) || d.excerpt || '(无标题)';
         const url = d.url || '#';
         const excerpt = d.excerpt || '';
@@ -448,12 +447,32 @@ const { variant } = Astro.props;
 
   /* Mobile variant — fixed in the top-right corner like the TOC FAB.
      Hidden on desktop. */
+  .search--mobile {
+    position: fixed;
+    top: var(--space-12);
+    right: calc(var(--space-4) + 52px);
+    z-index: 40;
+  }
+
   .search--mobile .search-trigger {
     width: 32px;
     height: 32px;
     padding: 0;
     justify-content: center;
+    color: var(--text-subtle);
+    background: transparent;
+    border-color: transparent;
+    opacity: 0.65;
   }
+
+  .search--mobile .search-trigger:hover,
+  .search--mobile .search-trigger:focus-visible {
+    color: var(--text);
+    background: var(--bg);
+    border-color: var(--border);
+    opacity: 1;
+  }
+
   .search--mobile .search-trigger-row,
   .search--mobile .search-kbd { display: none; }
 
@@ -462,5 +481,10 @@ const { variant } = Astro.props;
   }
   @media (max-width: 767px) {
     .search--desktop { display: none; }
+    .search-popover {
+      top: calc(var(--space-12) + 32px + var(--space-2));
+      width: calc(100vw - 24px);
+      max-height: calc(100vh - 96px);
+    }
   }
 </style>

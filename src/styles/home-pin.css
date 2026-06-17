@@ -4,24 +4,36 @@
    the CSS external). */
 
 .home-pin {
-  border-left: 2px solid currentColor;
-  padding: 0.5rem 0 0.5rem 0.9rem;
-  margin: 0 0 2rem 0;
+  border-left: 1px solid var(--border);
+  padding: 0.35rem 0 0.35rem 0.85rem;
+  margin: 0 0 var(--space-8) 0;
 }
 
 .home-pin .pin-label {
-  margin: 0 0 0.4rem 0;
-  font-size: 0.9rem;
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--fs-sm);
   color: var(--text-muted);
+}
+
+.home-pin .pin-label a {
+  margin-left: var(--space-2);
+  color: var(--text-muted);
+  text-decoration-color: var(--border);
+  text-underline-offset: 2px;
+}
+
+.home-pin .pin-label a:hover {
+  color: var(--text);
+  text-decoration-color: var(--text);
 }
 
 .home-pin .pin-list {
   margin: 0;
-  padding-left: 1.2rem;
-  font-size: 1rem;
+  padding-left: 1.05rem;
+  font-size: var(--fs-base);
   line-height: 1.6;
 }
 
 .home-pin .pin-list li + li {
-  margin-top: 0.15rem;
+  margin-top: 0.1rem;
 }
