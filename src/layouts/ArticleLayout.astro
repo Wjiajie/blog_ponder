@@ -581,4 +581,164 @@ const asideTitle = COPY.article.asideTitle;
   :global(.medium-zoom-image--opened) {
     z-index: 50;
   }
+
+  /* ============================================================
+     Responsive tables in article body
+     ============================================================
+     The hot-info daily report (and any future prose table) renders
+     5-7 column tables on desktop. On phones (< 640px) those tables
+     collapse to <50px per column, which is unusable.
+
+     The data-label is set by a small inline script at the bottom
+     of this layout (see "Mobile table hydration" below): on DOM
+     ready, it walks every <table> in .article-body, reads the
+     column header from <th>, and copies it onto each <td> as
+     data-label. Then this CSS rewrites the table to a stack of
+     cards: each row is a card, each cell is "label : value".
+
+     Desktop (>= 640px) is untouched — the table stays a real table.
+
+     The breakpoint is 640px (not the 767px used for layout) because
+     the 5-col "标题 / 来源 / 分类 / 时间 / 摘要" hot-info table
+     starts breaking around 640px, well before the sidebar hides. */
+  @media (max-width: 639px) {
+    .article-body table {
+      display: block;
+      width: 100%;
+      border: 0;
+      margin: var(--space-6) 0;
+    }
+
+    .article-body thead {
+      /* Column names render via td::before on each row. Hide the
+         header row entirely so it doesn't show as an empty card. */
+      display: none;
+    }
+
+    .article-body tbody,
+    .article-body tr {
+      display: block;
+      width: 100%;
+    }
+
+    .article-body tbody tr {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: var(--space-2) var(--space-3);
+      margin-bottom: var(--space-4);
+      background: var(--bg);
+    }
+
+    /* Last row gets no trailing gap before the next section. */
+    .article-body tbody tr:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-body tbody td {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      align-items: baseline;
+      gap: var(--space-3);
+      padding: var(--space-2) 0;
+      border-bottom: 1px dashed var(--border);
+      text-align: left;
+      font-size: var(--fs-sm);
+      line-height: 1.55;
+    }
+
+    .article-body tbody td:last-child {
+      border-bottom: 0;
+    }
+
+    /* The label comes from the <th> text, injected by the
+       hydration script. Muting it preserves the visual hierarchy
+       (label is metadata, value is the content). */
+    .article-body tbody td::before {
+      content: attr(data-label);
+      color: var(--text-muted);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* First column ("#") — narrow numeric id, no label needed */
+    .article-body tbody td:first-child {
+      grid-template-columns: 1fr;
+      padding-bottom: 0;
+      border-bottom: 0;
+      color: var(--text-subtle);
+      font-variant-numeric: tabular-nums;
+      font-size: var(--fs-xs);
+    }
+    .article-body tbody td:first-child::before {
+      content: "";
+    }
+
+    /* Long-link cells: keep the value on one line up to a sensible
+       point, then ellipsis. The lightbox won't reach into cards
+       (no <img>), so this is safe. */
+    .article-body tbody td a {
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 2px;
+    }
+    .article-body tbody td a:hover {
+      text-decoration-color: var(--text);
+    }
+  }
 </style>
+
+<script is:inline>
+  /* Mobile table hydration
+     ------------------------
+     Walks every <table> in .article-body, reads the column header
+     from <th>, and copies it onto each <td> as data-label. The CSS
+     in @media (max-width: 639px) above uses [data-label] to render
+     column names as a leading pseudo-element on each cell.
+
+     This runs once on load and again after any Astro view transition
+     (astro:page-load) so the cards stay in sync on client-side nav.
+
+     No-op for tables without <th> (rare, e.g. hand-written <tr><td>).
+     Safe to run on every page — it scopes to .article-body only. */
+  (function () {
+    function hydrateTables() {
+      var root = document.querySelector('.article-body');
+      if (!root) return;
+      var tables = root.querySelectorAll('table');
+      for (var i = 0; i < tables.length; i++) {
+        var t = tables[i];
+        var ths = t.querySelectorAll('thead th');
+        if (ths.length === 0) continue;
+        var labels = [];
+        for (var k = 0; k < ths.length; k++) {
+          labels.push((ths[k].textContent || '').trim());
+        }
+        var rows = t.querySelectorAll('tbody tr');
+        for (var r = 0; r < rows.length; r++) {
+          var tds = rows[r].querySelectorAll('td');
+          for (var c = 0; c < tds.length && c < labels.length; c++) {
+            if (labels[c] && !tds[c].getAttribute('data-label')) {
+              tds[c].setAttribute('data-label', labels[c]);
+            }
+          }
+        }
+      }
+    }
+    function init() {
+      hydrateTables();
+    }
+    document.addEventListener('astro:page-load', init);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
