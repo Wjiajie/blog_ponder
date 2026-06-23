@@ -177,6 +177,63 @@
     overflow-wrap: anywhere;
   }
 
+  /* Article body is the widest content surface in the app. Hot-info
+     daily reports embed markdown tables and inline links with long
+     URLs / @handles / hashes. The :lang(zh) keep-all rule above
+     shouldn't apply inside prose (it would let unbroken URL/handle
+     strings push the column past the viewport on phones). */
+  .article-body {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Inline links inside the article — long URLs/handles in hot-info
+     daily reports would otherwise push the column wider than the
+     viewport on phones. The two declarations cascade: overflow-wrap
+     only breaks at allowed break points, break-all forces break at
+     any character. We keep break-word (set above on .article-body)
+     as the soft default and turn on break-all only for <a> so the
+     URL strings actually wrap. The two rules do not stack because
+     they apply to different elements. */
+  .article-body a {
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  /* KaTeX dual output (HTML visual + MathML a11y fallback) — the
+     hot-info daily report sources contain $price and $4.4/百万 token
+     style inline currency, and remark-math picks them up as inline
+     math. The MathML <semantics>/<mrow> tree is unbroken by default
+     and pushes narrow <td> cells past the viewport on phones. The
+     HTML visual version (.katex-html) is what sighted users see;
+     MathML is a screen-reader fallback. Hidden MathML keeps the
+     visual rendering and table layout intact while removing the
+     invisible a11y duplicate. !important is needed because rehype-katex
+     inlines style="display: inline" on the MathML span. */
+  .article-body .katex-mathml {
+    display: none !important;
+  }
+
+  /* KaTeX .katex container — the visual version (.katex-html) is a
+     single inline span whose width is determined by the math content
+     (e.g. "4.4/百万 token" is ~890px in default KaTeX layout). On
+     narrow <td> cells inside mobile-card tables, this inline span
+     overflows its grid cell and pushes the whole table past the
+     viewport. Pin the container to its parent's width with horizontal
+     scroll on the math span itself, so the cell stays in place and
+     readers can scroll the formula laterally. */
+  .article-body .katex {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align: middle;
+  }
+  .article-body .katex-html {
+    display: inline-block;
+  }
+
   /* summary button on mobile menu — needs explicit focus style */
   .mobile-menu summary:focus-visible {
     outline: 2px solid var(--text);
