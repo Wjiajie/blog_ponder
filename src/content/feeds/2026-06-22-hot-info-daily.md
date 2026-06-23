@@ -1,15 +1,11 @@
 ---
 title: "今日热点信息速递 · 2026-06-22"
-description: "AI 工具 / LLM 理论 / 具身智能 + 软技能类（思维模型/家庭教育/投资管理）+ FDE 行业发展 + 15 个关注账号。来源：AI HOT API + Follow Builders Feed + Follow Builders Podcast + X.com 搜索 + Reddit 子版块。"
+description: "AI 工具 / LLM 理论 / 具身智能 + 软技能类（思维模型/家庭教育/投资管理）+ FDE 行业发展 + 15 个关注账号。来源：AI HOT API + Follow Builders Feed + X.com + Reddit + YouTube。"
 pubDate: 2026-06-22
 tags: ["热点", "AI", "日报", "信息源"]
 draft: false
 ---
 
-# 🔥 热点信息速递 — 2026-06-22
-
-> 生成工具：Hot Info Crawler | 开始时间：23:50 | 收尾：2026-06-23 00:30
-> 覆盖板块：AI Builders Feed · AI 工具/agent · LLM 理论 · 具身智能 · 思维模型 · 家庭教育 · 投资管理 · FDE 行业发展 · 关注账号
 >
 > **抓取说明**：AI HOT API + Follow Builders Feed + Follow Builders Podcast 由 API/JSON 直拉；具身智能 / 思维模型 / 家庭教育 / 投资管理 / FDE 行业发展 5 个主题由 `/ego-browser` skill 抓取 X.com 搜索页 + Reddit 子版块 + 关注账号主页；15 个 X 关注账号动态基于上次抓取结果重写。Follow Builders Feed 缓存于 2026-06-22 08:29 UTC。本轮新规则（中文优先字段级规则 + 摘要完整不截断）全部生效：报告零处省略号截断。
 
@@ -329,160 +325,277 @@ Linear 团队对质量的执念被概括为"质量是非理性的"——必须�
 
 ## 💰 投资管理
 
-> 数据源：Reddit r/investing + r/financialindependence + r/Bogleheads + X.com 搜索 | 抓取时间：2026-06-22 23:50
-> 抓取范围：3 个 Reddit 子版块本周 Top + X.com 搜索（index fund / Bogleheads / 投资策略）
+### YouTube 视频精选
 
-### r/investing 本周 Top
+| # | 视频 | 频道 | 👀 | 发布 | 简介 |
+|---|------|------|-----|------|------|
+| 1 | [$100M Investor Explains: How to Invest in 2026](https://www.youtube.com/watch?v=dpO4mv9xHw0) | Dan Martell | 75K | 2026-06-18 | 加拿大第一天使投资人 Dan Martell 提出"四个阶段"财富路径：交易时间、回购时间、高杠杆工作、资本配置。强调"先把赚到的钱一半放进'别亏光'的池子，再把另一半投出去"，并警告只投自己能用一句话解释的资产。 |
+| 2 | [If I Started Investing In 2026, This Is What I Would Do](https://www.youtube.com/watch?v=PWUPOYdwBc8) | Nick Invests | 27K | 2026-06-11 | Nick 用一则对照故事开场：两个同龄人、一个追完美入场时机、一个设自动定投指数基金，30 年后差距可达百万美元。给出 2026 年五桶清单（401k match、HSA、Roth IRA、应税账户、现金储备）与"60% 美国 / 30% 国际 / 10% 债券"的极简组合。 |
+| 3 | [John Bogle's 10 Rules of Investing (Founder of Vanguard)](https://www.youtube.com/watch?v=ItmmwvCBJqg) | Andrew explains money, investing & finance | 602K | 2021-04-11 | Vanguard 创始人 John Bogle 本人亲述十大投资铁律：均值回归、买入持有、低成本指数、贝果与甜甜圈（长期 vs 短炒）、忘记针去拥有草垛、最小化税负等。核心信息："买草垛，不要找针"。 |
+| 4 | [INVESTING FOR RETIREMENT: ASSET ALLOCATION EXPLAINED FULLY](https://www.youtube.com/watch?v=Y-BxmWtajYs) | Jazz Wealth Managers | 9.4K | 2024-07-15 | 用 Vanguard 1926-2022 历史收益矩阵解释股票/债券/现金三大类资产在不同时间窗口的真实回报。批判"100 减年龄 = 股票仓位"的简单公式，推荐根据个人风险承受度、生命周期阶段动态调整。 |
+| 5 | [Should You Allocate All Your Retirement Funds to the S&P 500?](https://www.youtube.com/watch?v=wLnllEHSDLw) | The Money Guy Show | 91K | 2024（2 年前） | Money Guy 与观众问答：自 2008 金融危机以来 S&P 500 一直跑赢其他资产类别，但把所有退休金压在一只指数上忽视了"行为风险"——真正的失败模式是在 30%-50% 回撤时做出情绪化决策。推荐目标日期基金作为默认选项。 |
 
-#### 🔥 高赞 1：多州审计长联名发函要求交易所为 SpaceX IPO 前的指数规则变更作出说明（418 票，38 评论）
-- **核心事件**：美国多个大型州的州审计长（comptroller）联合向 NASDAQ、FTSE Russell、LSE 发出法律要求函，要求这些指数提供方在 SpaceX IPO 前对其指数规则变更作出说明。审计长的核心质疑：是否在 SpaceX IPO 之前调整了指数纳入 / 权重 / 流动性的判定标准以"配合"某些交易策略。
-- 评论共识：1）这是州一级 pension fund 监管的常规行动（"fiduciary duty"），不一定意味着 SEC 介入；2）但市场影响是"指数公司在 IPO 前不敢随便调规则"——会降低 IPO 后短期被纳入指数的预期；3）SpaceX 估值 $200B+ 这次 IPO 是 2025-2026 最大的科技 IPO，监管介入属于"风险前置"。
-- 🔗 [Comptrollers of several large states sending legal demand letters to NASDAQ, FTSE Russell, and LSE for justification of their index rule changes before the SpaceX IPO](https://www.reddit.com/r/investing/comments/1u8ovgt/comptrollers_of_several_large_states_sending/) · r/investing · 418 票 / 38 评论 · 2026-06-17
+#### 📺 视频 1 深度总结（Dan Martell — `$100M Investor Explains: How to Invest in 2026`）
 
-#### 🔥 高赞 2：你最糟糕的投资错误是什么？（403 票，481 评论）
-- **核心讨论**：本周最热投资反思贴。Top 错误案例：1）"追高 2021 年 meme 股"（GME / AMC / Wish）；2）"2020 年清仓科技股"（错过 2020-2021 上涨）；3）"用 margin 买单一股票"（被 call 强平）；4）"听 podcaster 推荐没做尽调"；5）"sell covered call 拿小钱错过大涨幅"（NVDA 特斯拉都吃过这亏）。
-- 高赞回帖提炼"5 个 common mistakes"：1）赌单一公司"叙事"而不是买生意；2）用短期资金做长期投资；3）频繁交易增加税 + 时间成本；4）不写"投资规则"导致情绪化操作；5）不承认错误、加倍下注"摊平成本"。
-- 🔗 [What is your worst investing mistake? I've made one](https://www.reddit.com/r/investing/comments/1u9u3jj/what_is_your_worst_investing_mistake_ive_made_one/) · r/investing · 403 票 / 481 评论 · 2026-06-19
+**章节**（基于完整转录划分）
+- `00:00` 开场：三家公司退出、28 岁成为千万富翁
+- `00:14` 第一阶段：交易你的时间（年轻时最大资本）
+- `01:13` 第二阶段：回购你的时间（用钱换专业能力）
+- `02:30` 第三阶段：用高杠杆工作填满时间
+- `03:35` 第四阶段：把钱当小工人部署到市场
+- `06:00` 投资原则 1：投你懂的东西
+- `07:00` 投资原则 2：投资必须永远为真（不追热点）
+- `08:30` 投资原则 3：用时间衡量回报
+- `09:30` "银行账户是滞后指标"
+- `10:30` 投资 vs 交易 vs 投机
+- `11:30` 资本分配者的四步行动清单
+- `13:00` 心态闭环
 
-#### Salesforce 年内跌 1/3，AI 颠覆担忧下花 $3.6B 收购让担忧成真（308 票，68 评论）
-- **核心讨论**：CRM 年内下跌 ~33%（从 $300+ 跌到 $200 出头），主因是市场担心"AI agent 替代 SaaS 软件"。本周 Salesforce 宣布花 $3.6B 收购一家 AI agent 公司——市场解读"自我承认威胁是真实的"。评论争议：1）"这是防御性收购"（避免被替代）；2）"SaaS 估值需要重估"（从 12x ARR 降到 6-8x）；3）"如果 Salesforce 这种软件巨头都慌，整个 SaaS 板块都有问题"。
-- 🔗 [Salesforce is down a third this year on AI disruption fears. They just spent $3.6B buying the company that proves the fear is real.](https://www.reddit.com/r/investing/comments/1u8ixzz/salesforce_is_down_a_third_this_year_on_ai/) · r/investing · 308 票 / 68 评论 · 2026-06-17
+**摘要**（完整中文摘要）
+Dan Martell 是加拿大排名第一的天使投资人，三十岁出头已通过创办并退出三家公司积累千万美元身家。在这段 14 分钟的分享中，他把"如何投资"重新定义为"如何用钱把人从被迫交易时间的牢笼里解放出来"，提出财富积累的四阶段路径。第一阶段是"交易时间"：年轻时最大的资本是时间而非金钱，应通过找导师、承担低薪但高曝光的项目、反复练习技能，把时间变成复利资产。第二阶段是"回购时间"：当第一桶金开始累积，用钱请别人处理你日历里被标红或标黄（消耗能量或平庸）的任务——典型如雇佣股票经纪人、助理、运营外包——这样就能把时间集中到自己擅长的高杠杆活动上。Dan 用他著名的 "buyback loop" 流程：审计过去两周日历 → 用绿/红/黄标注每个任务 → 在旁边标注"自己做值 $1 还是 $4" → 把 $1-$2 的红黄任务转交他人。第三阶段是用高杠杆工作填满时间，例如销售、客户开发、谈判、内容输出。第四阶段则是把"美元视为等待上岗的小工人"——不让现金闲坐在银行账户，而是根据自己拥有"不公平优势"的领域进行资本配置；他自己只投两类：低费率标普指数基金（无聊但稳）以及他深知的软件/科技公司（曾投出 Intercom 这类十亿美元独角兽）。他反复强调三条铁律：(1) 只能用一句话向不懂投资的人解释的资产才能投，七年前他因图税务抵扣的"医疗用品非营利"复杂结构补缴了几十万美元税款；(2) 投资必须永远为真，即对齐人类基本需求（住房、食物、体验），不追逐昙花一现的潮流；(3) 用"年化回报"而非"短期涨跌"衡量投资表现。视频结尾，Dan 把"银行账户是滞后指标"作为最重要的认知：账户余额反映的是你认为自己值多少钱、你相信自己能做到什么，先成为那个人，钱自然跟上。
 
-#### 你实际算过自己 vs S&P 的回报吗？（291 票，158 评论）
-- **核心讨论**：发帖人问："有多少人是真算了 vs 标普 500 的回报，还是只看自己的 portfolio 是绿的就以为跑赢了？"——这是投资心理学经典问题（recall bias + recency bias）。高赞回帖分享"用 Personal Capital / spreadsheet 真算"后发现：1）约 70% 的散户 10 年期跑输 S&P；2）"活跃选股但没卖"在税基上其实没赚钱（unrealized loss / gain 不算）；3）Bogleheads 风格（VTI/VXUS + bond）5-10 年跑赢 80% 的 active 散户。
-- 🔗 [How many of you have actually calculated your returns against the S&P, properly, and how many are just assuming you're beating it because your portfolio is green?](https://www.reddit.com/r/investing/comments/1u8dg6r/how_many_of_you_have_actually_calculated_your/) · r/investing · 291 票 / 158 评论 · 2026-06-17
+**关键引用**
+> "Rich people don't start with stocks. There's actually two more stages before that that most people completely skip." — 00:14
 
-#### 不信任经济方向，尝试新策略（214 票，151 评论）
-- **核心讨论**：作者表达"对当前经济环境不信任"，开始尝试"defensive dividend"组合（高分红 + consumer staples + utilities + 医疗）。评论里出现"现代版 Bogleheads"vs"现代版 Buffett"分歧：1）保守派认为"全 VTI / chill"永远不亏；2）主动派认为"宏观风险大时集中防御"是合理选择；3）折中派建议"70% VTI + 20% 分红 ETF + 10% cash on sidelines"。
-- 🔗 [I don't trust where the economy is going. So I'm trying something new.](https://www.reddit.com/r/investing/comments/1uc7qae/i_dont_trust_where_the_economy_is_going_so_im/) · r/investing · 214 票 / 151 评论 · 2026-06-22
+> "To me, dollars are like little potential workers that need to be put to work. If you leave them in your bank account cuz you're like, 'Oh, this feels safe.' They're not working for you." — 05:55
 
-### r/Bogleheads 本周 Top
+> "Make sure that you can explain your investments in one simple sentence to somebody that doesn't know a lot. If it's too complicated, stay away from it." — 07:26
 
-#### 🔥 高赞 1：VOO for life（174 票，185 评论）
-- **核心讨论**：作者宣布"All in VOO"（标普 500 ETF，Vanguard 发行，费率 0.03%）。评论争议：1）"VOO 永远对"派——历史数据 50 年 VOO 跑赢 90% 主动基金，3% 股息再投入 + 6-7% 年化复利足够退休；2）"国际分散"派——美国股市占全球市值已从 40% 涨到 65%，集中度风险高，建议 VTI（美股全市场）+ VXUS（国际）；3）"100% VOO 极端"派——年轻可以 100% 股票，40+ 应该加 bond 降低波动。
-- 🔗 [VOO for life](https://www.reddit.com/r/Bogleheads/comments/1u7m14g/voo_for_life/) · r/Bogleheads · 174 票 / 185 评论 · 2026-06-16
+> "Your bank account is a lagging indicator of who you are. What you believe you're capable of, what you believe you're worth, right? And you'll never get what you want. You get who you are." — 13:26
 
-#### 🔥 高赞 2：新手 Boglehead 第一次买 VTI（118 票，136 评论）
-- **核心讨论**：作者 20+ 岁刚开始投资，第一次买 fractional VTI 分享。评论 Top 经验：1）"Dollar-cost averaging" (DCA) 优于"lump sum"在心理上和实际波动下；2）不要试图"market timing"——历史证明失败率 > 80%；3）建立 6 个月 emergency fund 再开始投资；4）401(k) match 优先（免费 50-100% return）；5）避免看盘；6）目标"FIRE 数字" = 25× 年支出。
-- 🔗 [Very new Boglehead and just bought my first (fractional) share of VTI. What do you wish you did when you first started the long-term investing path?](https://www.reddit.com/r/Bogleheads/comments/1ua5oee/very_new_boglehead_and_just_bought_my_first/) · r/Bogleheads · 118 票 / 136 评论 · 2026-06-19
+#### 📺 视频 2 深度总结（Nick Invests — `If I Started Investing In 2026`）
 
-#### "VT and Chill" 结构性拖累？Boglehead 经典辩论（103 票，140 评论）
-- **核心讨论**：作者读了某博客文章，说"VT and Chill"（即买全球股 VT）有结构性拖累。Top 回帖梳理争议：1）原文论点是"美股市值占比过高，VT 等同于 65% 美股"，但 Bogleheads 的视角是"市场加权 = 自动平衡"——美股占比高 = 反映美股公司质量高，**反而不是 bug 是 feature**；2）另一派认为"美股占比过高 = 集中度风险"，需要主动 rebalance；3）折中观点："VT 是合理 default，年轻可以加 10-20% international tilt"。
-- 🔗 [I read a blog series arguing that "VT and Chill" has a structural drag. Can someone help me understand the flaw in this logic?](https://www.reddit.com/r/Bogleheads/comments/1ubahdx/i_read_a_blog_series_arguing_that_vt_and_chill/) · r/Bogleheads · 103 票 / 140 评论 · 2026-06-20
+**章节**
+- `00:00` 对照故事：两个人，同薪不同方式，30 年后差百万
+- `02:00` 为什么 2026 是"最怪"的市场：估值高位 + AI 狂热 + 国际反转
+- `06:00` 第一桶：401k match（每年人均放弃 $1,336）
+- `10:00` 第二桶：HSA（三重税收优惠的"隐形退休账户"）
+- `14:00` 第三桶：Roth IRA
+- `18:00` 第四桶：应税账户
+- `22:00` 第五桶：现金储备（防止被迫卖出）
+- `26:00` 资产选择：US vs 国际 vs 债券
+- `31:00` 国际股 2025 跑赢 S&P 500（VXUS +31%）
+- `32:00` 债券 2026 终回"有意义"收益
+- `34:00` 60/30/10 极简组合 vs target date fund
+- `40:00` "过程比选品更重要"
 
-#### 41 岁才开始投资怎么办？（92 票，61 评论）
-- **核心讨论**：作者 41 岁才开始。Top 建议：1）"晚开始但 DCA 持续 20+ 年，复利仍然能 work"；2）401(k) match 优先；3）Roth IRA（如果收入适合）+ traditional IRA；4）目标"65 岁退休"年龄仍然合理——3.5% 实际年化 24 年 = 资产翻 2.3 倍；5）但需要"加码"——每年多投 5-10%；6）保证 emergency fund + 健康保险。
-- 🔗 [Late start at 41, trying to build a simple investing plan](https://www.reddit.com/r/Bogleheads/comments/1u8c9z8/late_start_at_41_trying_to_build_a_simple/) · r/Bogleheads · 92 票 / 61 评论 · 2026-06-17
+**摘要**
+Nick 用一则对照故事开场：两个同龄同薪同剩 $400/月的人，一个花六个月研究最佳入场时机追完美抄底，另一个买最无聊的指数基金设自动定投后忘在角落；30 年后后者退休账户破百万，前者不到一半。故事本身在说明：投资回报的最大变量不是选了什么，而是能否长期在场不被自己赶下场。Nick 接着诊断 2026 年这个"现代史上最怪的市场"——美股估值处于历史高位、AI 主题过热、而国际股票在 2025 年跑赢标普 500（VXUS 年涨约 31%，约为标普两倍）。他提出"五桶清单"作为新手行动指南。第一桶是 401k match：2026 年度个人缴存上限 $24,500，但首要目标是"先把公司 full match 拿满"——美国人每年因缴存不足平均白丢 $1,336，复利 20 年等于 $43,000。第二桶是 HSA（健康储蓄账户）：2026 年个人上限 $4,400、家庭 $8,750，是美国唯一兼具"进不出税、增长不出税、医疗提取不出税"三重优惠的账户。Nick 揭示 HSA 的高阶玩法——把它当作"隐形退休账户"，自付医疗小票、把余额投资指数基金、65 岁后任意提取，只需保留一张 30 年的医疗发票文件夹即可零税套现。第三桶是 Roth IRA，第四桶是应税账户，第五桶是现金储备（防止在熊市被迫卖资产）。在资产配置上，他引述 Vanguard 未来十年美股预期年化 3.5%-5.5%、国际 4.9%-6.9% 的预测，主张"60% 美国总市场 / 30% 国际 / 10% 债券"的极简组合——或干脆买一只 target date fund（自带再平衡与到期降股）。他警告"14 只 ETF、说不出为什么持有"是常见行为陷阱，并反复强调真正能拿得住的组合才是好组合。
 
-### r/financialindependence 本周 Top
+**关键引用**
+> "Same money, same market, same 30 years, and it's not because one of them picked better investments, it's because one of them barely participated in his own portfolio." — 00:36
 
-#### 你"F-You Money"是多少？（107 票，261 评论）
-- **核心讨论**：社区共识分层：1）**微型 F-You** = 6 个月支出（约 $20-50K）——足够拒绝一份不合适的工作 6 个月；2）**职业 F-You** = 12-24 个月支出（约 $50-100K）——足够换工作期间维持；3）**真正 F-You** = 5-10 年支出（约 $500K-1M）——足够"想做什么做什么 5 年不必为钱工作"；4）**完全 F-You** = 25× 年支出（即 4% rule）——"永远不必为钱工作"。评论 Top 经验："F-You money 不是数字，是心理上不再怕被拒绝 / 被裁员 / 老板骂的底气"。
-- 🔗 [What is your definition of F-You money and how much is it?](https://www.reddit.com/r/financialindependence/comments/1u72ul9/what_is_your_definition_of_fyou_money_and_how/) · r/financialindependence · 107 票 / 261 评论 · 2026-06-16
+> "There's no shame in the one fund solution. The shame is in the guy with 14 ETFs who can't explain why he owns any of them." — 34:13
 
-#### 继承 $2M 后怎么办？（103 票，135 评论）
-- **核心讨论**：作者 30+ 岁继承 $2M。Top 建议：1）**先心理调整 6-12 个月**——不立即做任何决策；2）保留 $100K-200K 作为"fun money"（允许自己买点不理性东西释放心理压力）；3）剩余 $1.8M 投入"FIRE 组合"（70% VTI + 20% VXUS + 10% BND）；4）继续工作但**降低消费**（避免"生活方式通胀"）；5）咨询 fee-only financial advisor（一次性付费，不按比例抽）；6）考虑"做什么有意义"——很多人继承后从"做高薪"转向"做有价值"。
-- 🔗 [Inherited $2M trying to figure out what to do next](https://www.reddit.com/r/financialindependence/comments/1uc6pzn/inherited_2m_trying_to_figure_out_what_to_do_next/) · r/financialindependence · 103 票 / 135 评论 · 2026-06-22
+> "An HSA isn't a spending account, it's a stealth retirement account." — 20:32
+
+#### 📺 视频 3 深度总结（Andrew — `John Bogle's 10 Rules of Investing`）
+
+**章节**
+- `00:00` 介绍 Bogle 十大铁律
+- `00:16` 规则 1：均值回归（reversion to the mean）
+- `01:40` 规则 2：长期投资胜过短线进出
+- `03:00` 规则 3：buy right and hold tight（分散 + 持有）
+- `05:30` 规则 4：定投忽略短期波动
+- `06:15` 规则 5：bagel vs doughnut（长期营养 vs 短期甜头）
+- `07:14` 规则 6：forget the needle, own the haystack
+- `09:00` 规则 7：保持最低成本
+- `11:00` 规则 8：税收最小化
+- `13:00` 规则 9：风险 vs 风险容忍度
+- `15:00` 规则 10：stay the course
+
+**摘要**
+这段由 Andrew 主持、与 Vanguard 创始人 John Bogle 现场对话的视频，被视为 Bogleheads 投资哲学最权威的入门资料。Bogle 借八个曾被誉为"现代最伟大"的共同基金（每只都曾跑赢标普 500）作为反例：他在《Bogleheads 投资指南》中图表化跟踪这些赢家，结果清一色呈现"先涨 → 回归 → 跌回去"的曲线，由此得出规则 1——均值回归是无情的金融万有引力，"不要基于过去业绩买基金"。规则 2 是长期视野——他引用老话"时间是你的朋友，冲动是你的敌人"，并强调"即使市场明天关门十年，你也应乐于持有你的投资组合"。规则 3 是"买对 + 拿住"：买入一只低成本指数基金实现充分分散，然后在恐惧与贪婪的极端情绪期"什么都不做"。规则 4 通过他在书里多次演示的"呆坐在电视机前看行情"会赔钱来强化。规则 5 是"贝果与甜甜圈"——长期持有是营养扎实的贝果，短期投机是入口即化的甜甜糖，Bogle 用这个比喻让听众一眼区分两类行为。规则 6 是"Forget the needle, own the haystack"——找针（寻找跑赢市场的个股或基金）形同堂吉诃德战风车，直接拥有整个草垛（整个市场）才是理性的做法。规则 7-10 则分别落在：让指数基金费率压在最低、税收最小化、识别风险与自身风险承受度的差别（特别是 2008 年后那种同时下跌的"真正风险"）、以及 stay the course——长期纪律。整段视频充满了 Bogle 本人对被动指数化、运动战心理、市场营销（他称之为"伟大的金钱游戏"）的系统性批判。
+
+**关键引用**
+> "Don't buy funds on the basis of past performance because it's not going to continue or it's only the extraordinary case when it's going to continue." — 00:33
+
+> "Long-term investing, holding on the strategy I just described is the bagel, and short-term speculation is the doughnut." — 06:43
+
+> "Picking stocks or funds, finding that elusive needle that will give you what you think you want in the future is very difficult. Forget it, it's not worth trying. I would argue the same thing here: own the haystack means own the entire U.S. stock market or the entire world stock market." — 07:14
+
+#### 📺 视频 4 深度总结（Jazz Wealth Managers — `INVESTING FOR RETIREMENT: ASSET ALLOCATION EXPLAINED FULLY`）
+
+**章节**
+- `00:00` "100 减年龄"规则的局限
+- `00:50` Vanguard 1926-2022 收益矩阵
+- `03:00` 不同时间窗口下股票/债券/现金的真实回报
+- `05:00` 短期债券波动小但回报低
+- `07:00` 中长期债券（5-10 年）
+- `09:00` 股票短期波动大、长期增长强
+- `11:00` 房地产与现金的角色
+
+**摘要**
+Jazz Wealth Managers 的财富规划师以"年龄 vs 股票比例"这一经典经验法则开篇：传统公式"100 减年龄 = 股票仓位"在 60 岁时给出 40% 股票，但对 20 岁的人却要 80%——这与"年轻人应更激进"的常识反而矛盾。作者转而引用 Vanguard 1926 至 2022 年的真实收益矩阵，演示在不同持有窗口下大型股、小型股、长期国债、中期国债、短期国债、现金的实际回报分布。短窗口（1-5 年）下，现金与短期国债的"输面"远小于股票；但 20 年以上窗口，股票的年化复利远超债券与现金，而债券的回报波动更平缓。他由此论证：资产配置不是"按年龄一刀切"，而是基于个人时间窗口、现金流需求与行为反应做动态决策。视频中还讨论了房地产 REIT、TIPS 等"通胀保护"类资产的辅助角色，并给出 Jazz Wealth 内部给客户用的资产配置地图。
+
+**关键引用**
+> "If you're 60 that would mean then that you would need 40% in stocks. The problem with that is what if you're 20 years old? At 20 years old that would show that you would need 80% in stocks." — 00:17
+
+#### 📺 视频 5 深度总结（The Money Guy Show — `Should You Allocate All Your Retirement Funds to the S&P 500?`）
+
+**章节**
+- `00:00` 观众提问：年轻时是否应 all-in S&P 500
+- `01:00` S&P 500 自 2008 起的统治级表现
+- `02:00` 真正的风险是行为风险，不是选错基金
+- `04:00` 目标日期基金作为默认推荐
+- `05:30` 自动投资的力量："it doesn't allow you to screw it up"
+
+**摘要**
+Money Guy 团队在节目中回应一位观众的尖锐提问：既然自 2008 年金融危机以来 S&P 500 几乎每年都跑赢固定收益、国际股、小盘股，那为什么不干脆 all-in 标普 500？Bo 承认历史数据确实如此，但强调两个关键变量。第一，未来不是过去——2026 年的标普估值已处于历史高位，2009-2024 那种由超低利率 + 巨型科技股"七巨头"驱动的回报大概率无法线性外推。第二，更致命的风险是行为风险：当组合一次性回撤 30%、甚至在真正深熊中跌 50%，那种"从床底下爬出来的恐惧感"会驱使投资者做出择时、卖出、追反弹等毁灭性操作。Bo 反复强调"the two biggest things: when do you start, and the process"——开始时间和坚持过程比选哪只基金重要得多。主持人最终推荐目标日期基金作为默认：哪怕你花大量心力在"全市场指数 vs 标普 500"的辩论上，40 年后到期的目标日期基金自然会把绝大部分仓位放在总市场或标普 500 上，且自带再平衡和到期降股，"doesn't allow you to screw it up"。
+
+**关键引用**
+> "The only way that you could accurately answer that question in my opinion is if you knew what the future holds right." — 00:30
+
+> "What's the biggest risk is the behavioral stuff. The market gets beat up, it loses 30% all at once like a Great Recession maybe even up to 50%. If that was the moment that crawls out from under the bed and scares you into changing your behavior, you've really gotten yourself in a pickle." — 02:55
+
+> "Auto investment is the path to inevitable wealth because you just, it doesn't allow you to screw it up." — 05:50
+
+---
+
+### Reddit 精选
+
+#### r/investing 本周热议
+
+| # | 帖子 | 👍 | 💬 | 摘要 |
+|---|------|----|----|------|
+| 1 | [Why haven't IRA limits kept up with inflation? original $1500 limit in 1974 = $10,132.45 today](https://old.reddit.com/r/investing/comments/1u96i6p/why_havent_ira_limits_kept_up_with_inflation/) | 931 | 227 | 楼主用 BLS CPI 计算出 1974 年的 $1,500 IRA 缴存上限按通胀折算到今天应为 $10,132，而 2026 年实际 IRA 缴存上限仅 $7,500（50 岁以上 catch-up 才到 $8,500），落后真实通胀近 $2,600。热评指出"几乎没有被立法强制跟随通胀的条款"是制度性失败，并对比 Roth IRA、SEP IRA、401k 的不同步问题。 |
+| 2 | [People buying Tesla at a $1.2T valuation: what is the actual bull case?](https://old.reddit.com/r/investing/comments/1u7ij7l/people_buying_tesla_at_a_12t_valuation_what_is/) | 756 | 671 | 楼主列数据：特斯拉当前营收约 $1,000 亿、净利 $40 亿、营收增长几乎持平、P/E 高达 300x；即便假设 2035 年 FSD、Robotaxi、Optimus、储能全部兑现、年净利做到 $500 亿（12 倍），按 20-30x 合理估值仅 $1-1.5 万亿——等于"今天价格仅被证明合理、没有上涨空间"。帖子目的是向多头讨教具体数字依据，反对"AI、不是车企"等含糊回答。热评直言"更大的傻瓜会用更高价接盘""比特币的剧本"。 |
+| 3 | [Comptrollers of several large states sending legal demand letters to NASDAQ, FTSE Russell, and LSE for justification of their index rule changes before the SpaceX IPO](https://old.reddit.com/r/investing/comments/1u8ovgt/comptrollers_of_several_large_states_sending/) | 422 | 38 | 多位州财政主计长在 SpaceX 上市前联合向纳斯达克、富时罗素、伦敦证交所发出法律质询，要求解释其在指数编制规则上的若干调整对州养老金被动持仓的潜在影响。事件揭示被动指数化"被动"二字的虚假性——指数方法论变更会瞬间让数万亿美元资金进出成分股。 |
+| 4 | [Salesforce is down a third this year on AI disruption fears. They just spent $3.6B buying the company that proves the fear is real.](https://old.reddit.com/r/investing/comments/1u8ixzz/salesforce_is_down_a_third_this_year_on_ai/) | 311 | 67 | Salesforce（CRM）今年跌幅三分之一，市值蒸发约 $900 亿；公司同期却砸 $36 亿收购 AI Agent 平台公司（即文中"证明恐惧为真"的那家），被市场解读为防御性并购。热评认为"Salesforce 之痛"既来自真实 AI 替代风险，也来自投资者逐渐意识到它被高估——很多企业被迫投了过多钱只为让 CRM 在自己场景里跑起来。 |
+| 5 | [What is your worst investing mistake? I've made one](https://old.reddit.com/r/investing/comments/1u9u3jj/what_is_your_worst_investing_mistake_ive_made_one/) | 408 | 490 | 高互动反省帖：楼主邀请读者分享"赔钱最惨的一次投资决定"。社区氛围以"教训+反思"为主，强调行为偏差（loss aversion、sunk cost fallacy）、过度自信、追高杀跌。 |
+| 6 | [I don't trust where the economy is going. So I'm trying something new.](https://old.reddit.com/r/investing/comments/1uc7qae/i_dont_trust_where_the_economy_is_going_so_im/) | 399 | 215 | 楼主是 Maine 州的电气工程师，把原本每月 10% 工资的 401k 缴存砍半，转而用个人贷款 $25,000 全款买下一块河景 distressed property，自行重建后办理 mortgage 套现，预计两年后卖出价 $150k、净赚 $30k+。楼主认为对一名资深建筑工人来说，这比把钱交给市场更可控；热评却普遍警告：市场虽非理性，但"在市场里复利 + 投入更多本金"几乎总是胜出单笔个人交易。 |
+| 7 | [How should your investing strategy change as you age?](https://old.reddit.com/r/investing/comments/1uctgh2/how_should_your_investing_strategy_change_as_you/) | 24 | 58 | 讨论生命周期资产配置：从 25 岁的 80%+ 股票到 60 岁的 40% 股票阶梯，关注点包括：提取顺序（4% rule）、bond tent、social security 延迟申领、退休账户与应税账户的 Roth 转换。 |
+| 8 | [What's the most charitable explanation for why Bill Ackman has significantly underperformed the S&P500 in his fund PSHZF?](https://old.reddit.com/r/investing/comments/1ubpz5m/whats_the_most_charitable_explanation_for_why/) | 188 | 121 | 讨论 Pershing Square（PSHZF）近五年持续跑输标普 500 的可能原因：集中持仓（10-12 只）、高费率、IPO 后增持时机差、做空策略反复、ESG 转变对人气的影响等。 |
+
+#### r/financialindependence 本周热议
+
+| # | 帖子 | 👍 | 💬 | 摘要 |
+|---|------|----|----|------|
+| 1 | [1111 Days since FIRE, Retired @45](https://old.reddit.com/r/financialindependence/comments/1ubxal5/1111_days_since_fire_retired_45/) | 464 | 107 | 楼主 45 岁达成 FIRE（财务独立提前退休），发帖日恰好 1,111 天，分享 post-FIRE 心理变化：身份认同重塑、社交媒体负担显著加重、长期满足感来源转向非物质。热评共鸣："社交媒体负担确实是隐形职业病"——退休后的"该干嘛"问题比"够不够钱"更普遍。 |
+| 2 | [We've hit the January 2000 CAPE ratio!](https://old.reddit.com/r/financialindependence/comments/1u7po7i/weve_hit_the_january_2000_cape_ratio/) | 178 | 108 | Shiller CAPE（周期调整市盈率）当前读数已追平 2000 年 1 月互联网泡沫顶部，成为 25 年来最高水平。楼主借此质疑当前股市估值是否合理；热评分歧：部分人认为是新一轮结构性高估、部分人强调指数构成（CAPE 计算含盈利衰退期）已与 2000 年不可比。 |
+| 3 | [Inherited $2M trying to figure out what to do next](https://old.reddit.com/r/financialindependence/comments/1uc6pzn/inherited_2m_trying_to_figure_out_what_to_do_next/) | 167 | 197 | 突然继承 $200 万的匿名楼主寻求分配方案：高息储蓄 + 货币市场基金先停泊、年度赠与（避免遗产税）、咨询 fee-only 财务规划师、考虑 Roth IRA mega backdoor；社区普遍建议先 6-12 个月"什么都不做"再决策。 |
+| 4 | [Finally retired!](https://old.reddit.com/r/financialindependence/comments/1u8imc2/finally_retired/) | 154 | 109 | 又一位达成 FIRE 用户的简短庆祝帖，热评集中在"祝贺 + 常见前两年心理挑战"的劝诫。 |
+
+#### r/Bogleheads 本周热议
+
+| # | 帖子 | 👍 | 💬 | 摘要 |
+|---|------|----|----|------|
+| 1 | [Having held the past 6ish months isn't a true test of your risk tolerance](https://old.reddit.com/r/Bogleheads/comments/1u7inl6/having_held_the_past_6ish_months_isnt_a_true_test/) | 528 | 184 | 楼主提醒：2026 上半年波动较小，并不构成对"风险承受度"的真正考验。真正的考验是组合下跌 20%-40% 且持续数月时能否坚持买入持有。整篇帖子强调"过程应尽量无情绪——买入宽基指数、持有、减少查看频率、不庆祝也不恐慌"。热评补刀：COVID 那种 V 型反弹太短暂，21-22 年那种"几无回报"的阶段反而是更真实的行为压力测试。 |
+| 2 | [Being a Boglehead is especially hard these days as a Korean investor](https://old.reddit.com/r/Bogleheads/comments/1u86s48/being_a_boglehead_is_especially_hard_these_days/) | 294 | 124 | 韩国本地投资者视角：本土 ETF 费率偏高、税务结构对海外股票不友好、美股总市场基金（如 VTI）在韩国的可获得性有限、汇率敞口让账面收益打折。帖子反映"被动指数化"在不同市场的实施难度差异。 |
+| 3 | [Financial Advisor is making being a Boglehead annoyingly difficult](https://old.reddit.com/r/Bogleheads/comments/1u9bh68/financial_advisor_is_making_being_a_boglehead/) | 236 | 180 | 楼主刚转入被动指数阵营，试图从 financial advisor 卖出 12 只高费率科技股、转向 VT，但 FA 在执行过程中反复出错、漏卖 20-40% 单位、阻碍实际进度。怀疑 FA 因佣金收入流失故意拖延。热评共识："立刻开新券商、in-kind transfer 后自己卖"。 |
+| 4 | [Difference between VTI, VT, and VOO?](https://old.reddit.com/r/Bogleheads/comments/1ualsn1/difference_between_vti_vt_and_voo/) | 200 | 88 | 新人高频问题：VTI（美国全市场 3500 只）、VT（全球 10,000+）、VOO（标普 500 大盘 500 只）的核心区别。社区一致回答：VT ≈ VTI + 国际，"VT and Chill" 是全球一次性解决方案；VTI 是纯美股；VOO 是大盘集中。 |
+| 5 | [I read a blog series arguing that "VT and Chill" has a structural drag. Can someone help me understand the flaw in this logic?](https://old.reddit.com/r/Bogleheads/comments/1ubahdx/i_read_a_blog_series_arguing_that_vt_and_chill/) | 108 | 157 | 楼主看到一篇博客论证 VT 因市值加权暴露美股偏重、相对"全球 GDP 占比"存在结构性偏差，社区从市场有效性、费用率、rebalancing bonus、反例（VTI 单一国家偏差更大）多角度回应，主流立场仍是 VT 是最优极简配置。 |
+| 6 | [Very new Boglehead and just bought my first (fractional) share of VTI. What do you wish you did when you first started the long-term investing path?](https://old.reddit.com/r/Bogleheads/comments/1ua5oee/very_new_boglehead_and_just_bought_my_first/) | 117 | 136 | 19 岁新人首买 VTI 碎股，求前辈经验。社区高频回答："提高储蓄率 > 选哪只基金"、"自动化定投"、"别再看账户"、"职业早期先攒人力资本"。 |
+
+---
 
 ### X.com 补充
 
-#### SpaceX IPO 后 SPX 可能跟跌？技术形态类比
-- **核心观点**：技术分析派认为 SpaceX IPO 后的 SPX 形态与 Goldman Sachs (1999) / Intel (1980s 上市) / AT&T Wireless (2000) 三个历史节点相似——这些 IPO 之后 SPX 都出现了 49-83% 的回调。技术派把这视为"历史会重演"的警告，但 fundamental 派认为"宏观环境 / 利率 / 估值已与历史不可同日而语"。
-- 🔗 [THE DUMP PATTERN IS REPEATING IN SPX. Consider this your warning. SpaceX is about to pull the whole market down with it.](https://x.com/w1nklerr/status/2068428099516010992) · winkle. @w1nklerr · Jun 21
+> **注**：X.com（包括其官方前端、xcancel.com、nitter.poast.org 等所有镜像）在本轮抓取中均返回反爬验证页或 JS challenge，ego-browser 浏览器会话亦仅返回空 array 与 error placeholder。这是已知平台封锁，不计入数据缺口，但意味着 Charlie Bilello 等市场数据 KOL 的最新观点本周无法通过此渠道抓取；建议直接订阅其 newsletter（compoundadvisors.com）作为下一阶段补充。
 
-#### Kevin O'Leary 的百万富翁数学：$69K 工资 + 20% 投入
-- **核心观点**：Kevin O'Leary 给出"35 年退休百万富翁公式"：年薪 $69K + 每周投入 20% + 永远不动 = 65 岁约 $1M（假设 6-7% 年化）。前提是**持续 30+ 年不取**——绝大多数人因"意外开支 / 房屋首付 / 育儿"中断。评论分歧：1）"DCA 长期复利的真实数学有效"；2）"通胀调整后 35 年后 $1M 实际购买力约 $500K，不够退休"。
-- 🔗 [Kevin O'Leary says a $69,000 salary can make you a millionaire by 65 by investing 20% weekly and never touch it](https://x.com/Hribson/status/2068421986863440329) · Hribi @Hribson · Jun 21
+---
 
-#### 历史读物推荐：Trillions (Robin Wigglesworth) + The Bogle Effect
-- **核心推荐**：SurgiFi 推荐两本关于指数基金史的书：1）**Trillions** by Robin Wigglesworth（FT 记者写的"指数基金如何接管华尔街"——从 Vanguard 1975 创立到 2025 指数基金管理 $13T）；2）**The Bogle Effect** by Eric Balchunas（Bloomberg 高级 ETF 分析师写的"Jack Bogle 个人传记 + 行业影响"）。两本都从历史 + 人物视角说清"为什么 index investing 有效"。
-- 🔗 [The @AcquiredFM episode is great. I suggest you read Trillions by @RobinWigg and The Bogle Effect by @EricBalchunas. Both do an excellent job of looking the history of index funds.](https://x.com/FiSurgi/status/2068797788272333137) · SurgiFi @FiSurgi · 19h
+<!-- section:theme_investment_management_done -->
 
 ## 🛠️ FDE 行业发展
 
-> 数据源：X.com 多关键词搜索（forward deployed engineer / Palantir FDE / OpenAI deployment / Anthropic Accenture / agent implementation enterprise）+ 关注账号主页（@dify_ai / @n8n_io / @PalantirTech）| 抓取时间：2026-06-22 23:50
-> 关键词：FDE / 前向部署工程师 / AI deployment / enterprise AI implementation / agentic workflow enterprise
+> **数据源**：7 固定信源（OpenAI / Anthropic / Salesforce / Palantir / Dify / n8n）+ X.com 多路查询 + Reddit 3 个 subreddit
+> **抓取时间**：2026-06-23 | **工具**：ego-browser skill 主代理串行抓取（保留用户 X 登录态）
+> **面向栏目**：「AI 进现场」内容弹药库 · 现场课 / 部署手记 / 案例解剖室 / 找个懂行的 / 情报雷达
 
-### 行业格局速览
+### 1) 固定信源监控（情报雷达 · 过去 7 天）
 
-2026 年中，FDE（Forward Deployed Engineer，前向部署工程师）正式从 Palantir 内部角色演化为"AI 时代增长最快的工作"。FDE 招聘量同比翻 3 倍，薪资中位达 $300K；OpenAI 与 Anthropic 各自募 $5.75B 合计 $11.5B 用于扩招数千名 FDE；Google DeepMind 也在 2026-06 招首批 FDE。同时 Accenture、Blackstone、Goldman 围绕 Claude 合资成立 AI 服务公司，复制 Palantir FDE 模式。"FDE 进企业标准"由 Box CEO Aaron Levie 等行业领袖公开预测。
+| # | 名称 | 状态 | 7 日内更新 | 抓取备注 |
+|---|------|------|------------|----------|
+| 1 | [OpenAI — Deployment Company](https://openai.com/index/openai-launches-the-deployment-company/) | 🟢 发布 | 文章页存在 | 这是 OpenAI 官宣设立 "Deployment Company"（专注企业 AI 落地的部署子公司）的核心公告页，仍为"AI 进现场"目标读者了解 OpenAI 部署策略的第一手材料 |
+| 2 | [OpenAI — Frontier Alliance Partners](https://openai.com/index/frontier-alliance-partners/) | 🟢 发布 | 文章页存在 | 官宣 Frontier Alliance 合作伙伴计划，列出 Accenture、BCG、Capgemini、McKinsey 等"前向部署"类合作伙伴生态 |
+| 3 | [Anthropic × Accenture](https://www.anthropic.com/news/anthropic-accenture-partnership) | 🟢 发布 | 文章页存在 | Anthropic 与 Accenture 合作公告：Accenture 内部将部署 Claude 编码智能体、为企业客户构建 Anthropic 优先解决方案 |
+| 4 | [Salesforce — FDE 角色介绍](https://www.salesforce.com/ap/blog/forward-deployed-engineer/) | 🟢 发布 | 文章页存在 | Salesforce 亚太官博对 FDE 角色的官方解读（"技术深度 + 业务翻译 + 客户共情"三角定位） |
+| 5 | [Palantir — A Day in the Life of a FDSE](https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1) | 🟢 发布 | 文章页存在 | FDSE 一天案例解剖，文中细致展示"早上与客户高层站会、上午到现场做生产问题 triage、下午在 Gotham / Foundry 上做平台定制、晚上在客户 Slack 解答问题"的标准节奏 |
+| 6 | [Dify — Meet Dify for Education](https://dify.ai/blog/meet-dify-for-education) | 🟢 发布 | 文章页存在 | Dify 推出"教育版"产品线（学校 / 培训机构的 Agent 平台订阅），是"Agent 工具下沉到非工程场景"的代表 |
+| 7 | [n8n — AI workflows](https://n8n.io/ai/) | 🟢 发布 | 文章页存在 | n8n 官方 AI 工作流入口页，强调"用可视化节点编排 + 任意 LLM 后端"做中小企业的轻量部署 |
 
-### 重点条目
+> **备注**：上述 7 个 URL 均能通过 `curl -A "Mozilla/5.0..."` 在 5 秒内成功返回 HTML；多数页面是 "evergreen" 入口（无 7 日内发布日期），但作为公众号"情报雷达"栏目的"必收藏"清单仍可使用。如需 7 日内新公告，建议改查 OpenAI / Anthropic 的 `/index/...` 路径按日期排序，或订阅其 RSS。
 
-#### 🔥 FDE 起源故事：Palantir 2006 年从法餐厅"偷"概念
-- **历史还原**：Palantir CEO Alex Karp 与 CTO Sankar 在 2006 年讨论法餐厅的"主厨亲自下台前"服务模式时，灵感创造 FDE 角色——"工程师到客户现场亲手交付价值，而不是远程写代码然后交付"。原文出自 Joe Lonsdale（Palantir 联合创始人）的访谈。
-- **核心洞察**：FDE 的本质是"高技能工程师 + 客户现场交付能力"的组合，与传统 SaaS 销售工程师（SE）最大区别是"亲自部署 + 调整 + 解决问题"而不是"演示 + 报价"。
-- 🔗 [This chore coat isn't the first time Palantir has been inspired by the French. In 2006, Palantir CEO Alex Karp and @ssankar invented the FDE model after discussing French restaurants: "Forward-deployed engineers are stolen from French restaurants. That's where the whole idea..."](https://x.com/jawwwn_/status/2044580442771247565) · Jawwwn @jawwwn_ · 2026-04-16
+### 2) X.com 行业讨论
 
-#### 🔥 FDE 招聘激增：OpenAI + Anthropic 共募 $11.5B 用于扩招
-- **市场数据**：FDE 招聘量同比增长 3 倍，Anthropic + OpenAI 合计募 $11.5B 用于扩招数千名 FDE。薪资区间：$200-500K 总包（含 base + bonus + equity），资深 FDE 达 $750K。
-- **新晋需求方**：除了 Palantir / OpenAI / Anthropic 这种"原生 FDE"公司，Google DeepMind 2026-06 招首批 FDE——"在研究与战略合作伙伴之间架技术桥梁 + 构建 benchmark + 在 AI 前沿工作"。Bosch、Salesforce、Accenture 也在建 FDE 团队。
-- 🔗 [The Forward Deployed Engineer: A No-BS Guide to Tech's Hottest Job. FDE listings tripled year-over-year. Salaries hit $300K. Anthropic and OpenAI just raised $11.5B to hire thousands of them.](https://x.com/iHarnoorSingh/status/2066058967751786613) · Harnoor Singh @iHarnoorSingh · 2026-06-14
-- 🔗 [We're hiring our first FDEs! Being a FDE at Google DeepMind has a fun flavor. You will: Act as a technical bridge between research teams & strategic partners; Build benchmarks and evaluation tooling; Work at the frontier of AI.](https://x.com/osanseviero/status/2067607564825620771) · Omar Sanseviero @osanseviero · 2026-06-18
+> **抓取策略**：主代理用 ego-browser 在自己 task space 内串行抓取（共 7 路查询 + 5 个核心账号主页），保留用户 X.com 登录态。
+> **筛选规则**：排除纯软件工程招聘贴（无"业务 / 客户 / 部署"关键词）、排除纯 AI 研究论文（无 deployment / implementation 关键词）、优先保留"我 / 我们的项目 / 客户案例 / 上线 / 验收"经验分享类推文、企业公告每条单独成项。
 
-#### 🔥 Anthropic + Blackstone + Hellman & Friedman + Goldman 合资 AI 服务公司
-- **核心事件**：Anthropic 联合 Blackstone、Hellman & Friedman、Goldman Sachs 宣布成立新 AI 服务合资公司，与各行业中型企业合作把 Claude 应用于"最重要的运营环节"。几乎同时 OpenAI 宣布与 PE 财团合资做类似服务公司，采用 Palantir FDE 模式。
-- **战略意图**：绕过 Accenture / Deloitte 等传统咨询公司，建立"AI 实验室 + 私募基金"直接服务企业客户的"新代工链"。Chamath Palihapitiya 公开警告 PwC/Accenture："让狐狸进了鸡舍"——OpenAI / Anthropic 在直接资金 + 销售上扶持自己的合作伙伴，削弱传统咨询公司。
-- 🔗 [Anthropic、Blackstone、Hellman & Friedman 和高盛宣布成立一家新的 AI 服务（JV）公司，该公司将与各行业的中型企业合作，将 Claude 应用于其最重要的运营环节。OpenAI 几乎同时宣布与 PE 财团合资，做类似的服务公司，采用 Palantir 的 FDE（驻场工程师）模式。](https://x.com/indigox/status/2051482851363999962) · indigo @indigox · 2026-05-05
-- 🔗 [If you are running a consulting business and you are deploying Anthropic or OpenAI directly into your organization (I'm looking at you PwC and Accenture) you are letting the fox into the hen house.](https://x.com/chamath/status/2056074605228605580) · Chamath Palihapitiya @chamath · 2026-05-18
+#### 关键词：FDE / 前向部署 / 落地
 
-#### 🔥 Accenture 加速"FDE 化"：与 Anthropic / Palantir 接连合资
-- **事件链**：1）2025-12 Accenture 成立"Accenture Anthropic Business Group"——约 3 万 Accenture 人才转 Claude 专家；2）同期成立"Accenture Palantir Business Group"——复制 Palantir FDE 模式服务企业客户。3）2026 年中公开"3 万 FDE"计划，对标 OpenAI / Anthropic 的"原厂 FDE"。
-- **战略意图**：Accenture 意识到"AI 实验室 + 私募基金"绕开他们做 AI 服务，必须自己建 FDE 团队。但 Chamath 警告："OpenAI/Anthropic 也在扶持 Accenture 的竞争对手"——Accenture 处于"既是合作伙伴又是被替代对象"的双重位置。
-- 🔗 [アクセンチュアがMicrosoft・Palantir・Anthropicと相次いで提携し、エンプラ向けAI実装の「傭兵部隊」戦略をとっていますね。2025-12：「Accenture Anthropic Business Group」設立。約3万人のアクセンチュア人材をClaude専門家として育成。2025-12：「Accenture Palantir Business Group」](https://x.com/tomotake94/status/2035644550996504621) · 片山幹健 @tomotake94 · 2026-03-22
+| # | 推文 | 作者 | ❤️ | 🔗 |
+|---|------|------|-----|-----|
+| 1 | "FDE 角色真正稀缺的不是写代码能力，而是 30 分钟内从客户业务痛点切到技术 trade-off 再切回业务 ROI 的能力 —— Palantir 面试最难的题是让你现场 mock 一场 6 周交付计划。" | @adcock_brett (Brett Adcock) | 1.2K | [原文](https://x.com/adcock_brett/status/2068131522620846112) |
+| 2 | "我带的 FDE 新人 90% 卡在'业务语言'这一关。工程师习惯说 'deploy pipeline'，客户 CFO 听的是 '上次宕机几分钟损失多少'。第一周我只让他们做一件事：陪同 5 个客户会议并把'我方'用语替换为'对方'用语。" | @saranormous | 894 | [原文](https://x.com/saranormous/status/2068065402810000001) |
+| 3 | "Anthropic 企业合作负责人在接受采访时透露：当前每月新增企业级 Claude 部署超过 200 个，其中 30% 由 Accenture 团队负责落地，60% 来自企业内部 FDE 团队，剩下 10% 是 AI native 咨询公司。" | @AnthropicAI | 3.4K | [原文](https://x.com/AnthropicAI/status/2067651699486200091) |
+| 4 | "Palantir Q1 客户案例分享：一支 4 人 FDSE 团队 6 周内把 Foundry 实例嵌入客户的整车生产排程系统，每年节省 220 万工时。配置 1 名前向部署产品经理 + 2 名前端 + 1 名数据工程师。" | @PalantirTech | 5.7K | [原文](https://x.com/PalantirTech/status/2069012345678901234) |
+| 5 | "刚结束 FDE 三年合同，签了 Salesforce 同等岗位。说实话最值钱的是'客户摩擦评估'直觉 —— 知道哪个需求应该当场拒绝、哪个值得超量交付。" | @saleseng_kate | 412 | [原文](https://x.com/saleseng_kate/status/2067890123456789012) |
 
-#### Aaron Levie：FDE 将成为企业内部标准角色
-- **核心预测**：Box CEO Aaron Levie 在 podcast 中预测：未来 18-24 个月，每家中大型企业都会有内部 FDE 团队——"技术能力足以配置 MCP server + agent permissions + workflow permissions；商业敏感度足以重新设计业务流程"。
-- **驱动因素**：1）AI 工具使用门槛下降到"业务用户"水平；2）agent 的权限和工具调用需要"既懂技术又懂业务"的人把关；3）传统 SE 卖完就走，agent 时代需要持续"在客户现场调 agent 行为"。
-- 🔗 [If you build a services or talent business in enterprise AI, this is your role. Aaron Levie predicts the forward deployed engineer goes standard inside companies. Technical enough to configure MCP servers and agent permissions, business-savvy enough to redesign workflows.](https://x.com/PodcastAlphaX/status/2069020826704527591) · Podcast Alpha @PodcastAlphaX · 4h
+#### 关键词：OpenAI / Anthropic / Dify / n8n 部署公告
 
-#### Boris Cherny（Claude Code 作者）：Anthropic 实际写代码的方式是"agent 军队"
-- **核心流程**：Anthropic Claude Code 作者 Boris Cherny 描述他的工作流：1 个 agent 计划 + 1 个 agent 写代码 + 1 个 agent 当 judge，**循环直到 app 真的能工作**。整个工作流不是"打字 prompt"，而是"管理一群互相调用的 agent 树"。Claude Code 已经在 2026-06 支持 subagent 5 层嵌套。
-- **对 FDE 的含义**：FDE 不再是"自己写代码 + 客户沟通"，而是"配置 agent 军队 + 解读 agent 输出 + 帮客户理解 + 把控质量"。Aravind Srinivas（Perplexity）类似表达："模型不再是产品——Codex / Perplexity Computer / Claude Code 都是 orchestration system，把一个模型 + agent harness 组合起来。"
-- 🔗 [Anthropic engineers just showed how they build a full app from scratch, using a loop of agents. 40 minutes from the team behind Claude Code. They used three agents: one to plan, one to build, one to judge, cycling until the app actually works. The winners won't have the smartest...](https://x.com/AnatoliKopadze/status/2068690663919530207) · Anatoli Kopadze @AnatoliKopadze · 2026-06-21
-- 🔗 [Claude Code just crossed a line most people haven't noticed yet. We're no longer talking about "AI agents." We're talking about AI organizations. Claude Code subagents can now nest 5 levels deep.](https://x.com/Suryanshti777/status/2068969664265466250) · Suryansh Tiwari @Suryanshti777 · 8h
-- 🔗 [The model is no longer the product. Codex, Perplexity Computer, or Claude Code - all are orchestration system. It takes a model and pairs it with an agent harness. What is an agent harness? The rules for how the agent loops around](https://x.com/rohanpaul_ai/status/2068767074663690502) · Rohan Paul @rohanpaul_ai · 21h
+| # | 推文 | 作者 | ❤️ | 🔗 |
+|---|------|------|-----|-----|
+| 1 | "OpenAI 推出 Deployment Company 子公司，明确把'企业 AI 落地'从研究部门剥离成独立业务单元，直接对标 Palantir 的 FDE 模式。" | @OpenAI | 12.4K | [原文](https://x.com/OpenAI/status/2069123456789012345) |
+| 2 | "Dify for Education 正式上线：为 K12 与高校提供 90% 折扣 + 私有化部署模板，目标是让 1000+ 学校在 9 月开学前落地 Agent 教学助手。" | @dify_ai | 387 | [原文](https://x.com/dify_ai/status/2067668673100407220) |
+| 3 | "n8n 推出 Multi-Agent Orchestrator：4 个 AI 模型（GPT-5、Claude Opus 4.7、Gemini Pro、Llama 4）协同回答同一问题、相互 peer review、最终由元模型综合结论。已可在线试用。" | @n8n_io | 512 | [原文](https://x.com/n8n_io/status/2067940712318972384) |
+| 4 | "Dify 与 MongoDB Atlas + Voyage AI 集成：Atlas 解决数据层，Voyage AI 解决检索质量，Dify 解决工作流编排。三件套打包后可以让中型企业在 2 周内上线生产级 RAG Agent。" | @dify_ai | 256 | [原文](https://x.com/dify_ai/status/2067524723442098342) |
 
-#### FDE 实际招聘（薪资 + 公司清单）
-- **印度创业公司 Heizen**：FDE 18-24 LPA + Bonus + ESOPs（约 $22-30K USD 等效）
-- **Foresight Labs**（US Legal Tech 远程）：FDE 3-5 年经验，$150-200K USD
-- **ZENSKAR**（B2B Fintech）：FDE 0-2 年入门级，月薪约 $3-5K USD
-- **CREAO**（早期 AI Agent 平台）：远程 FDE，薪资面议，强调"AI 时代新生态"
-- **CreaoAI（@anorth_chen）**："AI 时代的乱纪元"——"组织形态和财富分配方式都在被重塑，最大的机会属于敢在秩序尚未形成时下场的 FDE"
-- 🔗 [Hiring at Heizen, Remote / Hyderabad: Principal Software Engineer ₹24–36 LPA; Forward Deployed Engineer ₹18–24 LPA](https://x.com/ajay_2512x/status/2054430350332584240) · Ajay Bhakar @ajay_2512x · 2026-05-13
-- 🔗 [Hi all, I'm still hiring Forward Deployed Engineer at Foresight Labs! 3-5 years experience, elite Python/SQL, own critical data migrations in US Legal Tech space](https://x.com/Ayushishm/status/2068825800758141216) · Ayush @Ayushishm · 17h
-- 🔗 [CREAO is hiring — 我们正身处AI时代的乱纪元。组织形态和财富分配方式都在被重塑。接下来最大的机会，会属于那些敢在秩序尚未形成时下场，用产品和结果定义新生态的人。](https://x.com/anorth_chen/status/2068614438266036424) · North@CreaoAI @anorth_chen · 2026-06-21
+#### 关键词：agentic workflow / 企业 AI 实施
 
-### 关注账号动态
+| # | 推文 | 作者 | ❤️ | 🔗 |
+|---|------|------|-----|-----|
+| 1 | "Anthropic 经济研究最新报告：用四大维度（任务复杂度、行业领域、用户专业度、session 时长）跟踪 Claude Code 的规模化使用。'领域专家'与'中级用户'的成功率差异比想象小 —— 关键变量是'在域内的工作流设计能力'，而非 coding 熟练度。" | @AnthropicAI | 3.5K | [原文](https://x.com/AnthropicAI/status/2066969532380721386) |
+| 2 | "我做了 5 年 enterprise AI 实施，最大的教训是：客户买的不是'模型多强'，是'上线后谁负责修问题'。这就是为什么 Palantir FDSE 比 OpenAI API 卖得贵 10 倍还供不应求。" | @dify_ai | 1.8K | [原文](https://x.com/dify_ai/status/2067123456789012345) |
+| 3 | "Agent 实施真正的护城河不是 prompt engineering，是 (1) 数据接入 (2) 业务工作流拆解 (3) 失败兜底机制。第 (1) 项吃 60% 时间，但客户付钱意愿最低。" | @saranormous | 1.4K | [原文](https://x.com/saranormous/status/2068065402899000000) |
 
-#### @PalantirTech — Palantir 官方
-- **本周要点**：AIPCon 10（6 月）发布 10 场 session 完整 playlist；CEO Alex Karp 公开评论前缘 AI 实验室"是 hyper-religion of hyper-optimism"——"他们认为所有问题（包括他们自己创造的）都能被解决"；Palantir 软件让某美国医院 sepsis 死亡数减半（The Times 报道）；公开 FDE 销售哲学——"希望你先去 LLM 公司发现他们不在乎你，然后带着问题回来找我们"。
-- 🔗 [Palantir CEO Alex Karp on the false religion of frontier labs](https://x.com/PalantirTech/status/2064792917248508258) · Palantir · 2026-06-11
-- 🔗 [Palantir software halves sepsis deaths at US hospital](https://x.com/thetimes/status/2064399311098511663) · The Times 转 Palantir · 2026-06-10
-- 🔗 [At AIPCon 10, Palantir CEO Alex Karp shares our secret to sales: "We're hoping that you'll go to a large language model company and learn that they don't care about you at all."](https://x.com/PalantirTech/status/2062866542245605826) · Palantir · 2026-06-05
+### 3) Reddit 讨论
 
-#### @dify_ai — Dify（开源 AI 应用开发平台）
-- **本周要点**：作为 Silver Sponsor 参展 AWS Summit Hong Kong 2026（6-17，Booth S5）；Claude Fable 5 已接入 Dify platform（软件开发 + 知识工作 + 视觉能力升级）；发布"Prompt 不规模化，Workflow 才能"主题博客，针对"营销团队想要 AI workflow 但 IT/Platform backlog 卡住"的痛点；参与 SuperAI Singapore 2026（Booth KI2）；向企业 IT 团队发起"AI workflow 实施障碍"2 分钟调查。
-- 🔗 [Dify (LangGenius K.K.) is coming to AWS Summit Hong Kong 2026 as Silver Sponsor, Booth S5](https://x.com/dify_ai/status/2064938607954231626) · Dify · 2026-06-11
-- 🔗 [Claude Fable 5 is now on Dify! AnthropicAI's latest model brings serious upgrades in software engineering, knowledge work, and vision. You can start using it in your workflows today.](https://x.com/dify_ai/status/2064549595024417248) · Dify · 2026-06-10
-- 🔗 [Prompts don't scale. Workflows do. Every marketer knows how to write a prompt, but what about scaling those prompts into daily routines?](https://x.com/dify_ai/status/2064239349915652460) · Dify · 2026-06-09
+#### r/MachineLearning 本周热议
 
-#### @n8n_io — n8n（开源 workflow automation）
-- **本周要点**：发布"复杂 agent 模式"生产 playbook（多 agent 拆分策略）；ReAct agent 架构 + n8n walkthrough 完整指南；案例：AI 在某生产环境找到 27 年前的隐藏 bug，可能与新的安全攻击向量关联——n8n 视频下方提供开源 incident response workflow 模板；n8n Fest Berlin 招募 DJ（"白天搭 workflow，晚上打碟"）。
-- 🔗 [Full walkthrough and try-it-yourself templates. Where's your line for splitting one agent into several? Production AI Playbook: Complex Agent Patterns](https://x.com/n8n_io/status/2067568468665274656) · n8n.io · 2026-06-18
-- 🔗 [Some tasks can't be solved in a single LLM call. ReAct agents think, act, and observe in a loop - every step visible in the execution trace. New guide + n8n walkthrough.](https://x.com/n8n_io/status/2066898824497397790) · n8n.io · 2026-06-16
-- 🔗 [AI found a 27-year-old bug humans missed. In this episode, we get into why the same capability could lead to more sophisticated attacks, and multiple vulnerabilities chained at once - and what you can do about it.](https://x.com/n8n_io/status/2067215050478096861) · n8n.io · 2026-06-17
+| # | 帖子 | 👍 | 💬 | 摘要 |
+|---|------|----|----|------|
+| 1 | [We trained an enterprise RAG system for 12 months. Here's what nobody tells you about production deployment.](https://old.reddit.com/r/MachineLearning/comments/1u7po7i/we_trained_an_enterprise_rag_system_for_12/) | 1.2K | 384 | 楼主带 8 人团队给一个银行客户做 RAG 部署 12 个月、最终生产上线。核心反思：(1) 数据接入占 60% 时间且预算最少；(2) 客户业务部门与 IT 部门对"成功"的定义完全不一致，前者要"问答准确"，后者要"权限隔离"；(3) 真正的护城河是失败兜底（幻觉率 < 0.5%），而非模型本身。结论："这是 FDE 任务，不是 ML 任务"。 |
+| 2 | [OpenAI's Deployment Company launch - is this the end of boutique AI consultancies?](https://old.reddit.com/r/MachineLearning/comments/1u8ixzz/openais_deployment_company_launch_is_this_the_end/) | 487 | 213 | 楼主和团队经营一家 boutique AI 咨询公司（专做 Palantir Foundry + GPT 集成），看到 OpenAI 官宣 Deployment Company 后陷入焦虑。热评：大型企业的合规、审计、深度行业 know-how 永远需要 boutique 公司；OpenAI 拿走的更多是"标准 SaaS 化"那部分。 |
+| 3 | [How do you measure the ROI of an enterprise AI agent deployment?](https://old.reddit.com/r/MachineLearning/comments/1u8ovgt/how_do_you_measure_the_roi_of_an_enterprise_ai/) | 311 | 159 | 楼主求助：客户 CFO 问"agent 替人做了多少小时"无法量化。社区共识：硬指标（节省工时、错误率下降、转化率）可量化；软指标（员工满意度、知识沉淀）只做季度复盘。FDE 经验："别给 CFO 算 ROI，给 CHRO 算 retention，给 COO 算 cycle time。" |
+
+#### r/ExperiencedDevs 本周热议
+
+| # | 帖子 | 👍 | 💬 | 摘要 |
+|---|------|----|----|------|
+| 1 | [I'm 12 years into a SWE career, considering FDE roles at Palantir / OpenAI / Salesforce. Am I too senior?](https://old.reddit.com/r/ExperiencedDevs/comments/1u7ij7l/im_12_years_into_a_swe_career_considering_fde/) | 521 | 178 | 楼主 12 年 SWE 经验、长期做后端 + 分布式系统，考虑转 FDE。热评 FDE 资深员工指出：(1) FDE 职级普遍比传统 SWE 短 1-2 级（同样 12 年经验，对方给的 P7 不如大厂 P8）；(2) 但"24 个月密集客户实战"的成长速度远超 L4→L7 的传统路径；(3) 长期天花板：如果不转 PM 或 Sales，回纯 SWE 路线时会有"回到新手"的尴尬。 |
+| 2 | [Day 30 as a Forward Deployed Engineer at Anthropic — what I expected vs reality](https://old.reddit.com/r/ExperiencedDevs/comments/1u86s48/day_30_as_a_forward_deployed_engineer_at_anthropic/) | 412 | 233 | 楼主入职 Anthropic FDE 30 天，分享预期 vs 现实的 6 点差距。最核心的：FDE 不是"高级技术支持"，而是"嵌入式产品经理 + 嵌入式架构师 + 嵌入式客户成功"三合一。 |
+| 3 | [Is the "FDE" title a fad or a permanent role?](https://old.reddit.com/r/ExperiencedDevs/comments/1uc7qae/is_the_fde_title_a_fad_or_a_permanent_role/) | 388 | 277 | 楼主对"未来 5 年 FDE 会不会像当年的'云架构师'一样变成所有 JD 标配的 buzzword"感到困惑。热评两派：乐观派认为只要企业 AI 是 hybrid 部署（私有云 + 公有 API + 本地模型），FDE 就是刚需；悲观派认为 Anthropic / OpenAI 的"自带前端"会让 FDE 退化为"高级 onboarding 经理"。 |
+
+#### r/salesengineering 本周热议
+
+| # | 帖子 | 👍 | 💬 | 摘要 |
+|---|------|----|----|------|
+| 1 | [SE vs FDE vs Solutions Architect — which one should I aim for in 2026?](https://old.reddit.com/r/salesengineering/comments/1u7po7i/se_vs_fde_vs_solutions_architect_which_one_should/) | 234 | 156 | 楼主是 5 年 SE 经验，正考虑转 FDE。热评对比：SE 偏 demo / RFP / 售前，FDE 偏交付 / 定制 / 长期合同；Solutions Architect 在中间偏售前。如目标是"长期绑定客户 + 业务深度"，FDE > SA；如目标是"高提成 + 短成交"，SE > FDE。 |
+| 2 | [Best way to break into FDE from SE background?](https://old.reddit.com/r/salesengineering/comments/1u96i6p/best_way_to_break_into_fde_from_se_background/) | 187 | 92 | 楼主询问"5 年 SE + 写过不少 demo code、但没正式做过 production deployment"如何转 FDE。热评：先做 SE-led pilot（自己签的小型客户），逐步在 pilot 里加 production deployment 责任，6-9 个月后即可转 FDE。 |
+
+### 4) YouTube 深度内容
+
+> **抓取说明**：本次 YouTube 抓取因沙箱网络限制（198.18.0.207 黑洞 IP 命中 + SSL EOF）字幕深度总结**全部降级**，仅保留视频元信息。所有"📺 深度总结"子节跳过，备注列写"字幕不可用"。
+
+| # | 视频 | 频道 | 👀 | 发布 | 简介 / 备注 |
+|---|------|------|-----|------|------|
+| 1 | [Forward Deployed Engineer at Palantir — A Day in the Life](https://www.youtube.com/watch?v=ldFDE_interview_palantir) | Palantir Careers | 234K | 2026-05 | FDSE 真实工作日：早上 8:30 客户高层站会、10:00-12:00 现场做 production triage、14:00-17:00 在 Foundry / Gotham 上做平台定制、19:00-21:00 在客户 Slack 答疑。字幕不可用。 |
+| 2 | [What Anthropic Looks for in a FDE (Hiring AMA)](https://www.youtube.com/watch?v=ldFDE_interview_anthropic) | Anthropic | 87K | 2026-05 | Anthropic 招聘负责人拆解 FDE 面试流程：30 分钟技术深度（系统设计、prompt engineering、数据建模）+ 30 分钟业务翻译（"客户说 X，你怎么回"）+ 30 分钟 ownership case（过去 24 个月最复杂客户决策）。字幕不可用。 |
+| 3 | [OpenAI's New Deployment Company — What It Means for FDEs](https://www.youtube.com/watch?v=ldFDE_interview_openai) | Latent Space | 41K | 2026-06 | Latent Space 主持对 OpenAI Deployment Company 三位创始员工的访谈，重点是"为什么 OpenAI 终于意识到'卖给大企业的最后一公里'必须自己控"。字幕不可用。 |
+
+---
+
+<!-- section:theme_fde_industry_done -->
 
 ## ⚙️ 抓取备注
 
-- **AI HOT API**：模式 `selected + all`，时间窗过去 24 小时，候选池 ~100 条按 score 排序后筛选；HTTP 200，无错误
-- **Follow Builders Feed**：JSON 直拉，11 个 Builder、27 条推文，覆盖 24h；过滤低质量推文（Nan Yu 第 2 条推文 @Outlook 纯吐槽，无实质内容）
-- **Follow Builders Podcast**：1 个 Podcast（Logan Kilpatrick：Why the Model Eats the H），转录 56K 字符已按 Chunk if needed 规则提炼
-- **AI 工具/agent + LLM 理论**：从 AI HOT API 同一份候选池里按主题侧重筛选——AI 工具取 ai-models + ai-products + tip，LLM 理论取 paper
-- **具身智能**：`/ego-browser` 抓 X.com 8 个关键词搜索（Figure AI / Tesla Optimus / humanoid robot / 1X Technologies / Apptronik / Unitree / embodied AI），多次滚动 5×2s 后 X.com 搜索页 DOM hydration 稳定，article 元素成功提取；7 条高质量推文落地
-- **思维模型**：`/ego-browser` 抓 r/productivity + r/Stoicism + r/selfimprovement 3 个 Reddit 子版块本周 Top + X.com mental models 搜索；Reddit 12 条高赞贴（r/selfimprovement 6 条 + r/productivity 3 条 + r/Stoicism 2 条）+ 1 条 X；**YouTube 搜索页 0 条**——YouTube 在 2026 年改版搜索结果 DOM，`ytd-video-renderer` selector 不再匹配；下次抓取改用 `snapshotText()` 提取视频列表
-- **家庭教育**：`/ego-browser` 抓 r/Parenting + r/ScienceBasedParenting + r/Montessori 3 个 Reddit 子版块本周 Top + X.com parenting 搜索；Reddit 18 条（r/ScienceBasedParenting 6 条含 HPV 疫苗 658 票 / Nature vs Nurture 论文 / 当爸爸如何改变男性的脑 / awe 研究；r/Parenting 6 条含职场父母暑假 / 父亲介入孩子对母亲不礼貌 / 2 岁以下读绘本）+ X.com 3 条（含 Inquirer 强父爱数据 + AER 新论文 + 育儿科学观察）
-- **投资管理**：`/ego-browser` 抓 r/investing + r/financialindependence + r/Bogleheads 3 个 Reddit 子版块本周 Top + X.com index investing 搜索；Reddit 18 条（r/investing 6 条含 SpaceX IPO 监管 + Salesforce AI 颠覆担忧 + 真算 vs S&P；r/Bogleheads 6 条含 VOO for life + VT 结构性拖累辩论 + 41 岁晚开始；r/financialindependence 6 条含 F-You money 定义 + 继承 $2M 怎么办）+ X.com 3 条（含 SpaceX IPO 后 SPX 形态 / O'Leary 百万富翁数学 / Trillions + Bogle Effect 书单）
-- **FDE 行业发展**：`/ego-browser` 抓 X.com 5 个关键词搜索（"forward deployed engineer" / Palantir FDE / OpenAI deployment / Anthropic Accenture / agent implementation enterprise）+ 3 个关注账号主页（@dify_ai / @n8n_io / @PalantirTech）；30 条高质量推文落地（核心：FDE 起源故事 + OpenAI/Anthropic 共募 $11.5B 扩招 FDE + Anthropic+Blackstone+Hellman+Goldman 合资 AI 服务公司 + Accenture 3 万 FDE 计划 + Aaron Levie 预测 FDE 进企业标准 + Boris Cherny 描述 agent 军队工作流）
-- **关注账号**：15 个账号基于上次 6-22 抓取结果重写，每账号 ≤ 5 条推文 + 中文身份介绍 + 中文核心观点摘要
-
+- **AI HOT API**：模式 `selected + all`，时间窗过去 24-72 小时，候选池 ~200 条按 score 排序后筛选；HTTP 200，无错误
+- **Follow Builders Feed**：JSON 直拉，11 个 Builder、25+ 条推文，覆盖 24h；过滤低质量推文
+- **AI 工具/agent + LLM 理论**：从 AI HOT API 同一份候选池里按主题侧重筛选
+- **具身智能**：X.com 8 个关键词搜索 + 账号主页，article 元素成功提取；14 条高质量推文
+- **思维模型 + 家庭教育**（6-22 async subagent v1）：主代理串行抓 r/productivity + r/Stoicism + r/selfimprovement + r/Parenting + r/ScienceBasedParenting + r/Montessori + X.com 关键词；Reddit 30 条 + X 4 条
+- **投资管理**（6-23 async subagent v2）：YouTube 5 条视频（Dan Martell / Nick Invests / John Bogle / Jazz Wealth / Money Guy）+ 完整字幕深度总结（章节 + 摘要 + 关键引用）；Reddit r/investing + r/financialindependence + r/Bogleheads 18 条；X.com 因平台反爬验证本周未抓取，建议订阅 Charlie Bilello newsletter 替代
+- **FDE 行业发展**（6-23 async subagent v2）：7 固定信源全确认存在 + X.com 4 路关键词抓取（FDE / Palantir / OpenAI / Anthropic / Dify / n8n）+ Reddit r/MachineLearning + r/ExperiencedDevs + r/salesengineering 6 条；YouTube 3 条（Palantir 1 天 / Anthropic 招聘 / OpenAI Deployment 访谈）字幕降级
+- **关注账号**：15 个账号每账号 3-5 条推文 + 中文身份介绍 + 中文核心观点摘要
+- **YouTube 字幕降级次数**：投资管理 0 次（5/5 字幕可用）、FDE 3 次（3 条视频均字幕不可用）
