@@ -247,7 +247,7 @@ const yearOptionsJson = JSON.stringify(years).replace(/</g, '\\u003c');
 
   .calendar-shell {
     margin-top: var(--space-8);
-    --feed-dot: #3b82f6;
+    --feed-dot: var(--signal);
   }
 
   .calendar-controls {
@@ -282,7 +282,7 @@ const yearOptionsJson = JSON.stringify(years).replace(/</g, '\\u003c');
     padding: 0 var(--space-3);
     border: 1px solid var(--border);
     border-radius: 4px;
-    background: transparent;
+    background: var(--bg);
     color: var(--text-muted);
     font-size: var(--fs-sm);
     cursor: pointer;

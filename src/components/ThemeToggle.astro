@@ -48,7 +48,13 @@
 
   .theme-toggle:hover {
     color: var(--text);
-    border-color: var(--text);
+    border-color: var(--border);
+    background: var(--bg-muted);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 1px dotted var(--text-muted);
+    outline-offset: 2px;
   }
 
   .theme-toggle .icon-dark { display: none; }

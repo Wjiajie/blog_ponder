@@ -381,7 +381,7 @@ const items = headings.filter(
   .toc-link[data-active='true'] {
     color: var(--text);
     font-weight: 500;
-    border-left-color: var(--text);
+    border-left-color: var(--signal);
   }
   /* Depth-based indent */
   .toc-item--depth-2 .toc-link { padding-left: var(--space-3); }
@@ -435,8 +435,8 @@ const items = headings.filter(
     background: var(--bg-muted);
   }
   .toc-action:focus-visible {
-    outline: 2px solid var(--text);
-    outline-offset: 1px;
+    outline: 1px dotted var(--text-muted);
+    outline-offset: 2px;
   }
   .toc-action svg {
     flex: none;
@@ -557,7 +557,7 @@ const items = headings.filter(
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: var(--space-3) var(--space-4) var(--space-4);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--text) 10%, transparent);
   }
   .toc-popover[hidden] {
     display: none;

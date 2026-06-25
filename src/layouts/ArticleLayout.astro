@@ -287,6 +287,16 @@ const asideTitle = COPY.article.asideTitle;
     margin-bottom: var(--space-12);
   }
 
+  .article-header::after {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 1px;
+    margin-top: var(--space-4);
+    background: var(--signal);
+    opacity: 0.7;
+  }
+
   .article-title {
     /* Pin article H1 to 32px — independent of --fs-3xl which has been
        retuned smaller for non-article page heroes (see global.css). */
@@ -332,7 +342,7 @@ const asideTitle = COPY.article.asideTitle;
   }
 
   .article-body :global(h3) {
-    margin-top: var(--space-10);
+    margin-top: var(--space-8);
     margin-bottom: var(--space-3);
     /* Same rationale as h2 above: pin prose H3 to 20px. */
     font-size: 20px;

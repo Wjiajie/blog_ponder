@@ -215,7 +215,7 @@ const isArticlePage =
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 6px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--text) 10%, transparent);
     z-index: 50;
   }
 
@@ -282,7 +282,7 @@ const isArticlePage =
   }
 
   .mobile-menu-fab:focus-visible {
-    outline: 2px solid var(--text);
+    outline: 1px dotted var(--text-muted);
     outline-offset: 2px;
   }
 

@@ -4,6 +4,9 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/noto-serif-sc/400.css';
+@import '@fontsource/noto-serif-sc/500.css';
+@import '@fontsource/noto-serif-sc/700.css';
 
 /* ====================================================================
    Design tokens
@@ -11,14 +14,24 @@
 
 :root {
   /* Color system — light (rurikon scale, aligned with shud.in) */
-  --bg: #fcfcfc;
-  --bg-muted: #f7f7f8;
-  --border: #d8dbdf;
+  --bg: #fbfaf7;
+  --bg-muted: #f5f2ec;
+  --border: #ded8ce;
   --text: #3b4149;        /* rurikon-600 — slightly cooler than #1a1a1a */
   --text-muted: #697381;  /* rurikon-400 */
-  --text-subtle: #b3b9c1; /* rurikon-200 — date / anchor # */
+  --text-subtle: #aeb5be; /* rurikon-200 — date / anchor # */
   --accent: #3b4149;
-  --code-bg: #f4f4f5;
+  --signal: #9f6a08;
+  --signal-muted: #c9a45d;
+  --signal-pale: #efe3ca;
+  --code-bg: #f2eee7;
+  --pre-bg: #262a2f;
+  --pre-text: #f1ede7;
+
+  /* Font roles */
+  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-prose: "Noto Serif SC", "Songti SC", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Spacing (8px grid) */
   --space-1: 4px;
@@ -65,6 +78,11 @@
   --text-subtle: #5a6068;
   --accent: #d4d8de;
   --code-bg: #161618;
+  --signal: #b9934c;
+  --signal-muted: #7d6538;
+  --signal-pale: #241f16;
+  --pre-bg: #191b1f;
+  --pre-text: #e4e0da;
 }
 
 /* ====================================================================
@@ -89,6 +107,7 @@
 
   body {
     @apply font-sans;
+    font-family: var(--font-sans);
     background: var(--bg);
     color: var(--text);
     font-size: var(--fs-base);
@@ -128,6 +147,7 @@
 
   code {
     @apply font-mono;
+    font-family: var(--font-mono);
     font-size: 0.875em;
     background: var(--code-bg);
     padding: 0.15em 0.35em;
@@ -136,6 +156,7 @@
 
   pre {
     @apply font-mono;
+    font-family: var(--font-mono);
     font-size: var(--fs-sm);
     line-height: 1.65;
     background: var(--code-bg) !important;
@@ -153,11 +174,17 @@
   }
 
   blockquote {
-    border-left: 2px solid var(--border);
-    padding-left: var(--space-4);
+    border-left: 3px solid var(--signal);
+    padding: var(--space-3) var(--space-4);
     color: var(--text-muted);
-    font-style: italic;
+    background: color-mix(in srgb, var(--signal-pale) 46%, transparent);
+    border-radius: 0 6px 6px 0;
+    font-style: normal;
     margin: var(--space-6) 0;
+  }
+
+  blockquote p:last-child {
+    margin-bottom: 0;
   }
 
   /* Keyboard focus indicator (WCAG 2.4.7)
@@ -186,6 +213,70 @@
     min-width: 0;
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  .article-body,
+  .project-body,
+  .about {
+    font-family: var(--font-prose);
+    font-size: 16px;
+    line-height: 1.85;
+  }
+
+  .article-body h1,
+  .article-body h2,
+  .article-body h3,
+  .article-body h4,
+  .article-body h5,
+  .article-body h6,
+  .article-body table,
+  .project-body h1,
+  .project-body h2,
+  .project-body h3,
+  .project-body h4,
+  .project-body h5,
+  .project-body h6,
+  .project-body table,
+  .about h1,
+  .about h2,
+  .about h3,
+  .about h4,
+  .about h5,
+  .about h6 {
+    font-family: var(--font-sans);
+  }
+
+  .article-body code,
+  .article-body pre,
+  .project-body code,
+  .project-body pre,
+  .about code,
+  .about pre {
+    font-family: var(--font-mono);
+  }
+
+  .article-body h2::before,
+  .project-body h2::before,
+  .about h2::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    margin-bottom: var(--space-3);
+    background: var(--signal-muted);
+    opacity: 0.72;
+  }
+
+  .article-body pre,
+  .project-body pre {
+    background: var(--pre-bg) !important;
+    color: var(--pre-text);
+    border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  }
+
+  .article-body pre code,
+  .project-body pre code {
+    color: inherit;
   }
 
   /* Inline links inside the article — long URLs/handles in hot-info
@@ -236,7 +327,7 @@
 
   /* summary button on mobile menu — needs explicit focus style */
   .mobile-menu summary:focus-visible {
-    outline: 2px solid var(--text);
+    outline: 1px dotted var(--text-muted);
     outline-offset: 2px;
   }
 
@@ -331,6 +422,33 @@
     font-weight: 500;
     letter-spacing: 0;
     margin-bottom: var(--space-3);
+  }
+
+  .page-header::after,
+  .page-title::after,
+  .delba-hero::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--signal-muted);
+    opacity: 0.72;
+  }
+
+  .page-header::after {
+    margin-top: var(--space-4);
+  }
+
+  .page-title::after {
+    margin-top: var(--space-4);
+  }
+
+  .page-header .page-title::after {
+    display: none;
+  }
+
+  .delba-hero::before {
+    margin: 0 0 var(--space-6) 0;
   }
 
   /* Tag chip — 默认纯文本无边框 (spec §4 第 1 项)。
