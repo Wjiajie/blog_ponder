@@ -1,6 +1,6 @@
 ---
 title: "FDE-Journey · 转型博客与源码"
-summary: "你现在正在浏览的这个网站。它本身是 FDE 准备过程中的一部分——用 Astro + MDX 搭建的极简博客，内容包括 6 个月转型路径、随想、项目集合。"
+summary: "你现在正在浏览的这个网站。它本身是 FDE 准备过程中的一部分——用 Astro + MDX 搭建的极简博客，内容包括随想、项目集合与个人介绍。"
 status: "shipped"
 category: "Meta"
 stack: ["Astro 5", "Tailwind CSS", "MDX", "Shiki", "Vercel"]
@@ -14,7 +14,6 @@ order: 3
 
 ## 这个网站在做什么
 
-- **6 个月转型路径**：从「图形学 + AI」到「在教育场景里交付 AI 产品」的阶段化时间线
 - **随想**：FDE 准备过程中读到的、想到的、写下来的长文笔记
 - **项目集合**：把转型过程中产出的项目集中展示（你现在正在看的页面）
 - **关于**：自我介绍 + 联系方式
@@ -25,7 +24,7 @@ order: 3
 - **Tailwind + CSS 变量**——3 色 + 5 灰阶的克制配色，0 个 emoji / 0 张图 / 0 个装饰
 - **Shiki**——代码高亮与正文排版融为一体
 - **Vercel**——push 即部署，preview link 方便分享
-- **内容集合（content collections）**——所有页面（blog / projects / journey）都跑在同一个类型化 schema 上
+- **内容集合（content collections）**——随想、项目与页面内容都跑在类型化 schema 上
 
 ## 为什么它对 FDE 准备有意义
 

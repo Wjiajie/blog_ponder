@@ -36,13 +36,6 @@
   ],
   "shortcuts": [
     {
-      "name": "Journey",
-      "short_name": "Journey",
-      "description": "Open the 6-month FDE ramp-up roadmap",
-      "url": "/journey/",
-      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
-    },
-    {
       "name": "Thoughts",
       "short_name": "Thoughts",
       "description": "Read the latest notes and articles",

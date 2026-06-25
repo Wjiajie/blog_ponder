@@ -1,10 +1,10 @@
 // Site-wide constants — the single config file for identity and chrome.
-// All content lives in src/content/ (journey/, blog/, projects/, pages/).
+// All content lives in src/content/ (blog/, projects/, pages/).
 // All static UI copy lives in src/data/copy.json.
 
 export const SITE = {
   title: "jiajie个人博客",
-  vertical: "教育", // primary domain (shown in hero, about, journey)
+  vertical: "教育", // primary domain (shown in hero and about)
   targetCompany: "MiniMax", // goal employer (shown in hero)
   // Personal identity — change these once, propagates everywhere.
   author: "jiajie", // your name (shown in hero, about, posts byline)
@@ -18,7 +18,6 @@ export const SITE = {
 // Primary navigation (also rendered inside MobileHeader)
 export const NAV = [
   { href: "/", label: "首页" },
-  { href: "/journey/", label: "路径" },
   { href: "/projects/", label: "项目" },
   { href: "/blog/", label: "随想" },
   { href: "/feeds/", label: "热点" },
@@ -40,17 +39,10 @@ export const SOCIAL = [
   { label: "Email", href: "jiajiewu233@gmail.com" },
 ] as const;
 
-// Status visual metadata — one source of truth for both project cards
-// (projects collection) and the journey timeline. Adding a new status
-// value here also requires updating the matching schema enum in
+// Status visual metadata — one source of truth for project cards.
+// Adding a new status value here also requires updating the matching schema enum in
 // src/content/config.ts, but the type system will flag that drift.
 export const STATUS_META = {
-  // journey collection enum: 'done' | 'in-progress' | 'upcoming'
-  journey: {
-    done: { symbol: "✓", label: "已完成" },
-    "in-progress": { symbol: "◐", label: "进行中" },
-    upcoming: { symbol: "○", label: "待开始" },
-  },
   // projects collection enum: 'planning' | 'in-progress' | 'shipped' | 'archived'
   project: {
     planning: { symbol: "○", label: "规划中" },
@@ -64,10 +56,6 @@ export const STATUS_META = {
 // Add a new key when adding a new top-level page; the type system will keep
 // the consumer in sync.
 export const PAGE_META = {
-  journey: {
-    title: "路径",
-    description: "向 FDE 角色进发的 6 个月转型路线。",
-  },
   projects: {
     title: "项目",
     description: "围绕教育场景的 AI 项目集。",
@@ -90,7 +78,6 @@ export const PAGE_META = {
 // scattered across pages, components, and tag-link templates.
 export const ROUTES = {
   home: "/",
-  journey: "/journey/",
   projects: "/projects/",
   blog: "/blog/",
   blogTag: (tag: string) => `/blog/?tag=${encodeURIComponent(tag)}`,
@@ -148,10 +135,6 @@ export const COPY = {
       "3 个正在并行推进的项目，每一个都从「客户痛点」开始，到「可演示的工件」结束。",
     personalTitle: "随想",
     personalLede: "转型路上写下的笔记和复盘。",
-    journeyPreviewTitle: "路径",
-    journeyPreviewBodyTemplate:
-      "6 个月时间，从「图形学 + AI」到「在教育场景里交付 AI 产品」。{totalCount} 个阶段，{doneCount} 个已完成。",
-    journeyPreviewCta: "→ 查看完整时间线",
     aboutTitle: "About me",
     aboutBody: "图形学工程师，转型 AI 前向部署工程师中。",
     aboutLinksLabel: "在以下平台能找到我：",
@@ -165,11 +148,6 @@ export const COPY = {
   projects: {
     filterHintTemplate: "· 按 {category} 筛选",
     filterAllLabel: "全部",
-  },
-  journey: {
-    title: "FDE 转型路径",
-    introTemplate:
-      "6 个月时间，从「图形学 + AI」到「在教育场景里交付 AI 产品」。{totalCount} 个阶段，{doneCount} 个已完成。",
   },
   article: {
     asideTitle: "本文目录",
