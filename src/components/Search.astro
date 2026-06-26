@@ -7,8 +7,18 @@
 // static host.
 //
 // Behaviour:
-//   - Triggered by Cmd/Ctrl-K (or just `/`), the floating "搜索" button
-//     in the right rail, and the search input inside the mobile menu.
+//   - Triggered by Cmd/Ctrl-K (or just `/`), the "搜索" button in the
+//     right rail, and the search icon embedded in MobileHeader (mobile).
+//   - The mobile chrome used to render a second `<Search variant="mobile">`
+//     floating in the top-right corner. That copy was removed because the
+//     FAB-style icon kept showing up while the user was reading long
+//     articles, fighting the prose. The mobile trigger now lives inside
+//     the in-flow `<MobileHeader>` so it scrolls away with the rest of
+//     the header — search is reachable on phones, but only at the top.
+//   - The mobile header trigger is wired through a `[data-search-open]`
+//     delegated listener (see init() below) so this component doesn't
+//     have to know the header's DOM. Any element anywhere on the page
+//     can be made into a search trigger by adding that attribute.
 //   - ESC closes. Click outside closes.
 //   - The results panel reuses the shud.in dot-leader rhythm: title +
 //     leader + date. URL is shown as muted subtitle.
@@ -267,6 +277,22 @@ const { variant } = Astro.props;
           close(root);
         });
       });
+
+      // Delegated open trigger — any element with [data-search-open] on
+      // the page (most importantly the search icon inside MobileHeader)
+      // opens the first available popover. This lets the header stay
+      // structurally independent of the Search component; it only needs
+      // to render a button with the right attribute.
+      document.addEventListener('click', (e) => {
+        const opener = e.target && e.target.closest && e.target.closest('[data-search-open]');
+        if (!opener) return;
+        // If a search trigger or popover handled the click already, let
+        // that path run instead of double-opening.
+        if (e.target.closest && e.target.closest('[data-search-root]')) return;
+        e.preventDefault();
+        const firstRoot = roots[0];
+        if (firstRoot) open(firstRoot);
+      });
     }
 
     if (document.readyState === 'loading') {
@@ -445,12 +471,15 @@ const { variant } = Astro.props;
     text-underline-offset: 2px;
   }
 
-  /* Mobile variant — fixed in the top-right corner like the TOC FAB.
-     Hidden on desktop. */
+  /* Mobile variant — kept for backward compatibility. The base layout
+     used to instantiate `<Search variant="mobile" />` as a top-right
+     floating action button. That copy was removed; the mobile search
+     trigger is now embedded in MobileHeader and wired via
+     `[data-search-open]`. If anyone re-instantiates `variant="mobile"`
+     the rules below render it as a discreet inline icon (no fixed
+     positioning) so it never escapes the document flow again. */
   .search--mobile {
-    position: fixed;
-    top: var(--space-12);
-    right: calc(var(--space-4) + 52px);
+    display: inline-flex;
     z-index: 40;
   }
 

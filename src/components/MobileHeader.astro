@@ -15,47 +15,68 @@ const isArticlePage =
 
 <header class="mobile-header">
   <a href={ROUTES.home} class="mobile-mark">{SITE.title}</a>
-    <details class="mobile-menu">
-      <summary aria-label="切换菜单">
-      <svg
-        class="icon-menu"
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
-        aria-hidden="true"
+    <div class="mobile-header-actions">
+      <button
+        type="button"
+        class="mobile-header-search"
+        data-search-open
+        aria-label="搜索"
       >
-        <path d="M3 6h14M3 10h14M3 14h14" />
-      </svg>
-      <svg
-        class="icon-close"
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
-        aria-hidden="true"
-      >
-        <path d="M5 5l10 10M15 5L5 15" />
-      </svg>
-    </summary>
-    <nav class="mobile-nav" aria-label="主导航">
-      {isArticlePage && (
-        <a href="#top" data-back-to-top>↑ 回到顶部</a>
-      )}
-      {NAV.map((item) => (
-        <a
-          href={item.href}
-          class:list={[{ 'is-active': currentPath === item.href }]}
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
         >
-          {item.label}
-        </a>
-      ))}
-    </nav>
-  </details>
+          <circle cx="9" cy="9" r="5" />
+          <path d="M13 13l4 4" />
+        </svg>
+      </button>
+      <details class="mobile-menu">
+        <summary aria-label="切换菜单">
+        <svg
+          class="icon-menu"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <path d="M3 6h14M3 10h14M3 14h14" />
+        </svg>
+        <svg
+          class="icon-close"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <path d="M5 5l10 10M15 5L5 15" />
+        </svg>
+      </summary>
+      <nav class="mobile-nav" aria-label="主导航">
+        {isArticlePage && (
+          <a href="#top" data-back-to-top>↑ 回到顶部</a>
+        )}
+        {NAV.map((item) => (
+          <a
+            href={item.href}
+            class:list={[{ 'is-active': currentPath === item.href }]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </details>
+  </div>
 </header>
 
 <!--
@@ -166,6 +187,45 @@ const isArticlePage =
     font-size: var(--fs-lg);
     text-decoration: none;
     color: var(--text);
+  }
+
+  /* Right-side cluster: search + hamburger, both mobile-only. The
+     search trigger is in-flow (no fixed positioning) on purpose — the
+     previous revision floated it with `position: fixed` and the icon
+     followed the reader down the page, which is exactly the bug we
+     fixed. Now both icons live inside the header and scroll away
+     together. */
+  .mobile-header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .mobile-header-search {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: var(--text-subtle);
+    cursor: pointer;
+    border-radius: 4px;
+    -webkit-tap-highlight-color: transparent;
+    transition: color var(--t-base), background var(--t-base);
+  }
+
+  .mobile-header-search:hover,
+  .mobile-header-search:focus-visible {
+    color: var(--text);
+    background: var(--bg-muted);
+  }
+
+  .mobile-header-search:focus-visible {
+    outline: 1px dotted var(--text-muted);
+    outline-offset: -2px;
   }
 
   /* The <details> element becomes the popover anchor */
@@ -312,6 +372,10 @@ const isArticlePage =
   @media (max-width: 767px) {
     .mobile-header {
       display: flex;
+    }
+
+    .mobile-header-search {
+      display: inline-flex;
     }
 
     .mobile-menu-fab {

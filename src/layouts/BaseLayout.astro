@@ -132,16 +132,13 @@ const ogLocale = SITE.locale.replace('-', '_');
         </RightAside>}
       </div>
 
-      {/* Mobile floating search — sits next to the mobile header's
-          hamburger so search is reachable on phones even when the
-          right rail is hidden. Renders unconditionally (no hideSearch
-          opt-out): on mobile the right rail is gone anyway, so search
-          needs a permanent home. */}
-      <Search variant="mobile" />
-
-      <div class="theme-toggle-wrapper">
-        <ThemeToggle />
-      </div>
+      {/* Mobile search trigger — embedded inside <MobileHeader /> as an
+          in-flow icon so it scrolls away with the rest of the chrome.
+          Older revisions rendered a second `<Search variant="mobile" />`
+          here as a fixed top-right FAB. That copy was removed because
+          the FAB kept floating over the prose on long article pages,
+          fighting the reading layout. The header is now the single
+          source of mobile search reachability. */}
     </div>
   </body>
 </html>
